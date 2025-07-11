@@ -12,5 +12,8 @@
     "url": "https://github.com/elpicollon/elpicollon.github.io.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@measured/puck": "^0.19.2"
+  }
 }
