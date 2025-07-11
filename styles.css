@@ -439,7 +439,12 @@ h6 {
 /* About Section */
 .about-section {
   background: #121012;
-  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 80px 0;
 }
 
 .about-container {
