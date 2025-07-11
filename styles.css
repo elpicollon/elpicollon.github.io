@@ -218,7 +218,20 @@ h6 {
   align-items: center;
   align-self: center;
   justify-content: center;
-  padding: 0 60px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 991px) {
+  .hero-container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-container {
+    padding: 0 20px;
+  }
 }
 
 .hero-badges {
