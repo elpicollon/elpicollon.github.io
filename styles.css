@@ -630,6 +630,10 @@ h6 {
 .section-header {
   text-align: center;
   margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-self: stretch;
 }
 
 .section-title {
