@@ -549,7 +549,17 @@ h6 {
 /* Stats Section */
 .stats-section {
   background: #000;
-  padding: 64px 20px;
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+@media (max-width: 991px) {
+  .stats-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 .stats-container {
