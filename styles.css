@@ -242,7 +242,7 @@ h6 {
 
 .hero-subtitle {
   font-size: clamp(40px, 7vw, 115px);
-  font-weight: 700;
+  font-weight: 900;
   line-height: 1;
   background: linear-gradient(97deg, #2db354 10.74%, #905fda 90.77%);
   -webkit-background-clip: text;
