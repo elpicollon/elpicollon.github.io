@@ -565,10 +565,22 @@ h6 {
 .stats-container {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 80px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (max-width: 991px) {
+  .stats-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+  }
 }
 
 .stat-item {
