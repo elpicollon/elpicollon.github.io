@@ -233,21 +233,23 @@ h6 {
 }
 
 .hero-title {
-  font-size: clamp(32px, 5vw, 64px);
+  font-size: clamp(32px, 5vw, 60px);
   font-weight: 600;
   line-height: 1.2;
   color: #f5f5f5;
   margin-bottom: 16px;
+  width: 100%;
 }
 
 .hero-subtitle {
-  font-size: clamp(40px, 7vw, 115px);
-  font-weight: 900;
+  font-size: clamp(40px, 7vw, 110px);
+  font-weight: 700;
   line-height: 1;
   background: linear-gradient(97deg, #2db354 10.74%, #905fda 90.77%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  width: 100%;
 }
 
 .hero-description {
