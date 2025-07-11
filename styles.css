@@ -452,6 +452,13 @@ h6 {
   margin: 0 auto;
 }
 
+@media (max-width: 991px) {
+  .about-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
