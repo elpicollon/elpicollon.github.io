@@ -294,6 +294,22 @@ h6 {
   width: 100%;
 }
 
+@media (max-width: 991px) {
+  .hero-subtitle {
+    font-size: 72px;
+    line-height: 90px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-subtitle {
+    font-size: 72px;
+    height: auto;
+    flex-grow: 0;
+    line-height: 90px;
+  }
+}
+
 .hero-description {
   font-size: clamp(18px, 2vw, 24px);
   color: #dcdcdc;
