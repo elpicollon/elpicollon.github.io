@@ -269,6 +269,20 @@ h6 {
   width: 100%;
 }
 
+@media (max-width: 991px) {
+  .hero-title {
+    font-size: 48px;
+    line-height: 76px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 32px;
+    line-height: 76px;
+  }
+}
+
 .hero-subtitle {
   font-size: clamp(40px, 7vw, 110px);
   font-weight: 700;
