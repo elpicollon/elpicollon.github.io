@@ -622,6 +622,9 @@ h6 {
   align-self: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .section-header {
