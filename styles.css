@@ -234,10 +234,12 @@ h6 {
   background: rgba(139, 92, 246, 0.1);
   border: 1px solid #9f75df;
   border-radius: 9999px;
-  padding: 4px 16px;
+  padding: 2px 16px;
   color: #cfbaef;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
+  height: auto;
+  align-self: center;
 }
 
 .hero-heading {
@@ -382,14 +384,15 @@ h6 {
 .about-container {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 80px;
 }
 
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  gap: 80px;
+  justify-content: center;
   align-items: center;
+  margin: 0 60px;
 }
 
 .about-title {
@@ -404,6 +407,8 @@ h6 {
   color: #dcdcdc;
   line-height: 1.8;
   margin-bottom: 32px;
+  text-align: left;
+  align-self: stretch;
 }
 
 .about-features {
@@ -427,8 +432,9 @@ h6 {
 
 .about-image {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  width: auto;
+  align-self: stretch;
 }
 
 .profile-card {
@@ -438,8 +444,10 @@ h6 {
     rgba(168, 85, 247, 0.16) 100%
   );
   border-radius: 24px;
-  padding: 32px;
-  max-width: 400px;
+  padding: 24px;
+  width: auto;
+  height: auto;
+  align-self: center;
 }
 
 .profile-img {
@@ -498,9 +506,10 @@ h6 {
 }
 
 .portfolio-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 80px;
+  width: auto;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .section-header {
@@ -523,10 +532,12 @@ h6 {
 }
 
 .portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  display: flex;
   gap: 32px;
-  margin-bottom: 64px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 60px 64px;
 }
 
 .portfolio-card {
@@ -538,6 +549,7 @@ h6 {
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  width: 100%;
 }
 
 .portfolio-card:hover {
@@ -617,14 +629,17 @@ h6 {
 .services-container {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
   gap: 32px;
-  margin-bottom: 64px;
+  flex-direction: row;
+  margin: 0 60px 64px;
 }
 
 .service-card {
@@ -819,7 +834,6 @@ h6 {
 }
 
 .cta-container {
-  max-width: 800px;
   margin: 0 auto;
   text-align: center;
   padding: 0 24px;
@@ -830,6 +844,7 @@ h6 {
   font-weight: 700;
   color: #f5f5f5;
   margin-bottom: 16px;
+  width: 100%;
 }
 
 .cta-subtitle {
