@@ -1,5 +1,16 @@
 {
-  "dependencies": {
-    "@measured/puck": "^0.19.2"
-  }
+  "name": "code",
+  "version": "1.0.0",
+  "description": "First Site",
+  "main": "index.html",
+  "scripts": {
+    "serve": "python3 -m http.server 8080",
+    "start": "python3 -m http.server 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elpicollon/elpicollon.github.io.git"
+  },
+  "author": "",
+  "license": "ISC"
 }
