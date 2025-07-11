@@ -468,6 +468,13 @@ h6 {
   margin: 0 60px;
 }
 
+@media (max-width: 991px) {
+  .about-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .about-title {
   font-size: clamp(32px, 4vw, 48px);
   font-weight: 700;
