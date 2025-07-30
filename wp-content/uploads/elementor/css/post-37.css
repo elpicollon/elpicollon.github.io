@@ -12,7 +12,7 @@ body::before {
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(180deg, #120029 0%, #100018 100%);
+    background: linear-gradient(180deg, #200246 0%, #0E0015 100%);
     z-index: -3;
 }
 
