@@ -1,0 +1,51 @@
+:root{--page-title-display:none;}/* Start custom CSS *//* Fundo com gradiente customizado e estrelas animadas */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #120029 0%, #100018 100%);
+    z-index: -3;
+}
+
+/* Estrelas animadas com movimento sutil */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: 
+        radial-gradient(white 1px, transparent 0),
+        radial-gradient(white 1px, transparent 0),
+        radial-gradient(white 1px, transparent 0),
+        radial-gradient(white 1px, transparent 0);
+    background-size: 400px 400px, 600px 600px, 800px 800px, 1000px 1000px;
+    background-position: 
+        0 0, 
+        200px 200px,
+        400px 100px,
+        300px 300px;
+    animation: stars-move 60s linear infinite;
+    opacity: 0.4;
+    z-index: -2;
+    pointer-events: none;
+}
+
+@keyframes stars-move {
+    0% {
+        background-position: 
+            0 0, 
+            200px 200px,
+            400px 100px,
+            300px 300px;
+    }
+    100% {
+        background-position: 
+            1000px 1000px, 
+            1200px 1200px,
+            1400px 1100px,
+            1300px 1300px;
+    }
+}/* End custom CSS */
