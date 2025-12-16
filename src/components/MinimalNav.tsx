@@ -1,0 +1,142 @@
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import PicoloDesignLogo from '../imports/PicoloDesignLogo-9-474';
+
+export function MinimalNav() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { scrollY } = useScroll();
+
+  const backgroundColor = useTransform(
+    scrollY,
+    [0, 100],
+    ['rgba(255, 255, 255, 0.1)', 'rgba(255, 255, 255, 0.7)']
+  );
+
+  const blur = useTransform(
+    scrollY,
+    [0, 100],
+    ['blur(12px)', 'blur(24px)']
+  );
+
+  return (
+    <>
+      <motion.nav
+        className="fixed top-0 left-0 right-0 z-[100] px-3 pt-3 md:px-6 md:pt-6"
+      >
+        <motion.div
+          style={{
+            backgroundColor,
+            backdropFilter: blur,
+            WebkitBackdropFilter: blur,
+          }}
+          className="mx-auto rounded-full border border-white/40 shadow-lg shadow-black/5 ring-1 ring-white/50"
+        >
+          <div className="flex items-center justify-between px-4 py-2 md:px-6 md:py-4">
+            {/* Logo */}
+            <motion.a
+              href="#inicio"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="h-8 md:h-10 block"
+              style={{ width: 'auto', aspectRatio: '700/273' }}
+            >
+              <PicoloDesignLogo />
+            </motion.a>
+
+            {/* Desktop menu - Center */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2"
+            >
+              {[
+                { label: 'PROJETOS', href: '#projetos' },
+                { label: 'SOBRE', href: '#sobre' },
+                { label: 'CONTATO', href: '#contato' }
+              ].map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ y: -2 }}
+                  className="text-xs text-zinc-500 hover:text-black transition-colors tracking-wider"
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+            </motion.div>
+
+            {/* CTA Button - Desktop */}
+            <motion.a
+              href="#"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden md:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-zinc-800 transition-colors"
+            >
+              ENTRE EM CONTATO
+            </motion.a>
+
+            {/* Mobile menu button */}
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden text-black p-1"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </motion.button>
+          </div>
+        </motion.div>
+      </motion.nav>
+
+      {/* Mobile menu */}
+      <motion.div
+        initial={false}
+        animate={{
+          x: isOpen ? 0 : '100%',
+        }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className="fixed top-0 right-0 bottom-0 w-full md:hidden bg-white z-[110] flex flex-col justify-center items-center gap-8"
+      >
+        {[
+          { label: 'Início', href: '#inicio' },
+          { label: 'Projetos', href: '#projetos' },
+          { label: 'Sobre', href: '#sobre' },
+          { label: 'Contato', href: '#contato' }
+        ].map((item, index) => (
+          <motion.a
+            key={item.label}
+            href={item.href}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
+            transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
+            onClick={() => setIsOpen(false)}
+            className="text-4xl font-medium text-black hover:text-purple-600 transition-colors"
+          >
+            {item.label}
+          </motion.a>
+        ))}
+      </motion.div>
+
+      {/* Mobile menu overlay */}
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105] md:hidden"
+        />
+      )}
+    </>
+  );
+}
