@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
-import { Linkedin, Download, Award, Briefcase, Smile, Zap } from 'lucide-react';
+import { Linkedin, Award, Briefcase, Zap } from 'lucide-react';
 import imgEu1 from "../assets/image-rp.png";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
