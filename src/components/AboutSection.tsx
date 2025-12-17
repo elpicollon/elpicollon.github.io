@@ -1,9 +1,32 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { Linkedin, Download, Award, Briefcase, Smile, Zap } from 'lucide-react';
-import { Logos } from '../imports/1';
 import imgEu1 from "../assets/image-rp.png";
 import { ImageWithFallback } from './figma/ImageWithFallback';
+
+// Logo images from assets/logos
+import logo1 from '../assets/logos/1.png';
+import logo2 from '../assets/logos/2.png';
+import logo3 from '../assets/logos/3.png';
+import logo4 from '../assets/logos/4.png';
+import logo5 from '../assets/logos/5.png';
+import logo6 from '../assets/logos/6.png';
+import logo7 from '../assets/logos/7.png';
+import logo8 from '../assets/logos/8.png';
+import logo9 from '../assets/logos/9.png';
+import logo10 from '../assets/logos/10.png';
+import logo11 from '../assets/logos/11.png';
+import logo12 from '../assets/logos/12.png';
+import logo13 from '../assets/logos/13.png';
+import logo15 from '../assets/logos/15.png';
+import logo16 from '../assets/logos/16.png';
+import logo17 from '../assets/logos/17.png';
+import logo18 from '../assets/logos/18.png';
+
+const logoImages = [
+  logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9,
+  logo10, logo11, logo12, logo13, logo15, logo16, logo17, logo18
+];
 
 export function AboutSection() {
   const containerRef = useRef(null);
@@ -13,7 +36,7 @@ export function AboutSection() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  
+
   const stats = [
     {
       id: 1,
@@ -39,11 +62,11 @@ export function AboutSection() {
   ];
 
   return (
-    <section ref={containerRef} className="relative pt-16 pb-0 bg-[#f2f4f7] overflow-hidden z-40">
+    <section id="sobre" ref={containerRef} className="relative pt-16 pb-0 bg-[#f2f4f7] overflow-hidden z-40">
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
-          <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-purple-200/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-200/30 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-purple-200/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-200/30 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
       </div>
 
       <div className="px-6 md:px-12 relative z-10">
@@ -73,12 +96,12 @@ export function AboutSection() {
             className="h-[1px] bg-gradient-to-r from-purple-500 via-violet-500 to-transparent"
           />
         </motion.div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-center">
-          
+
           {/* Left: Text Content */}
           <div className="order-2 lg:order-1 lg:pr-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -86,7 +109,13 @@ export function AboutSection() {
             >
               <div className="space-y-6 text-zinc-600 text-lg leading-relaxed w-full">
                 <p>
-                  Designer estratégico com foco em UX e resultados de negócio, unindo visão analítica, metodologias ágeis e liderança colaborativa. Atuo com Design Systems, prototipação e validação de hipóteses, além da facilitação de workshops e a comunicação com stakeholders. Meu diferencial está na capacidade de resolver problemas complexos, integrar equipes e gerar valor real ao usuário por meio da inovação e performance.
+                  Designer de Produtos e Professor Universitário, graduado em Sistemas de Informação com especialização em Design Digital.
+                </p>
+                <p>
+                  Unindo tecnologia e negócios, projeto soluções para ecossistemas complexos com foco em escalabilidade e rigor técnico. Minha base em sistemas garante a viabilidade do projeto, facilitando o trabalho da engenharia e eliminando ruídos no desenvolvimento.
+                </p>
+                <p>
+                  Como educador, guio equipes com didática para transformar requisitos densos em experiências funcionais, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos.
                 </p>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3 mt-6">
                   {[
@@ -97,7 +126,7 @@ export function AboutSection() {
                     "Product Designer desde 2018",
                     "Desde 2014 atuando em Tecnologia"
                   ].map((item, index) => (
-                    <motion.li 
+                    <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -166,54 +195,54 @@ export function AboutSection() {
 
           {/* Right: Image/Visual */}
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <motion.div 
+            <motion.div
               style={{ y }}
               className="relative w-full max-w-xs aspect-[4/5]"
             >
-               {/* Decorative background blur */}
-               <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-[#9810fa33] to-[#155dfc33] rounded-[32px] blur-2xl" />
+              {/* Decorative background blur */}
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-[#9810fa33] to-[#155dfc33] rounded-[32px] blur-2xl" />
 
-               {/* Decorative rotated circle */}
-               <div className="absolute -top-12 left-1/2 w-[114px] h-[114px] border border-purple-200 rounded-full rotate-[78deg] -z-10" />
-               
-               <div className="relative h-full w-full rounded-[32px] overflow-hidden border border-zinc-200 bg-white shadow-2xl group">
-                 <div className="absolute inset-0">
-                   <ImageWithFallback
-                     src={imgEu1}
-                     alt="Rodrigo Picolo"
-                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                   />
-                 </div>
-                 
-                 {/* Gradient Overlay */}
-                 <motion.div 
-                   initial={{ opacity: 0 }}
-                   whileInView={{ opacity: 0.3 }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 1.5, ease: "easeOut" }}
-                   className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black z-10" 
-                 />
-                 
-                 {/* Glass Badge on Image */}
-                 <div className="absolute bottom-6 left-6 right-6 bg-white/20 backdrop-blur-md rounded-[14px] z-20 border border-white/30">
-                    <motion.a 
-                        href="https://www.linkedin.com/in/picolodesign/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-[14px] p-4 flex items-center justify-between hover:bg-[#0077b5]/90 transition-colors cursor-pointer group/link"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                    >
-                        <div>
-                            <p className="text-white font-bold text-lg leading-tight">Rodrigo Picolo</p>
-                            <p className="text-white/80 text-xs uppercase tracking-wider mt-0.5 group-hover/link:text-white">Conecte-se no Linkedin</p>
-                        </div>
-                        <div className="h-8 w-8 rounded-full bg-[#0077b5] border border-white/20 flex items-center justify-center text-white shrink-0">
-                            <Linkedin size={16} fill="currentColor" strokeWidth={0} />
-                        </div>
-                    </motion.a>
-                 </div>
-               </div>
+              {/* Decorative rotated circle */}
+              <div className="absolute -top-12 left-1/2 w-[114px] h-[114px] border border-purple-200 rounded-full rotate-[78deg] -z-10" />
+
+              <div className="relative h-full w-full rounded-[32px] overflow-hidden border border-zinc-200 bg-white shadow-2xl group">
+                <div className="absolute inset-0">
+                  <ImageWithFallback
+                    src={imgEu1}
+                    alt="Rodrigo Picolo"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+
+                {/* Gradient Overlay */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 0.3 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black z-10"
+                />
+
+                {/* Glass Badge on Image */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/20 backdrop-blur-md rounded-[14px] z-20 border border-white/30">
+                  <motion.a
+                    href="https://www.linkedin.com/in/picolodesign/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-[14px] p-4 flex items-center justify-between hover:bg-[#0077b5]/90 transition-colors cursor-pointer group/link"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div>
+                      <p className="text-white font-bold text-lg leading-tight">Rodrigo Picolo</p>
+                      <p className="text-white/80 text-xs uppercase tracking-wider mt-0.5 group-hover/link:text-white">Conecte-se no Linkedin</p>
+                    </div>
+                    <div className="h-8 w-8 rounded-full bg-[#0077b5] border border-white/20 flex items-center justify-center text-white shrink-0">
+                      <Linkedin size={16} fill="currentColor" strokeWidth={0} />
+                    </div>
+                  </motion.a>
+                </div>
+              </div>
             </motion.div>
           </div>
 
@@ -221,17 +250,36 @@ export function AboutSection() {
 
         {/* Carousel moved from MagneticButton */}
         <div className="w-full overflow-hidden mt-20 pb-20" style={{ WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)', maskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)' }}>
-          <motion.div 
-            className="flex gap-12"
+          <motion.div
+            className="flex gap-12 items-center"
             animate={{ x: "-50%" }}
             transition={{ duration: 40, ease: "linear", repeat: Infinity }}
             style={{ width: "fit-content" }}
           >
-            {[...Logos, ...Logos].map((Logo, index) => (
-              <div key={index} className="relative w-[240px] h-[110px] shrink-0 overflow-hidden grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                <div className="absolute top-0 left-0 origin-top-left" style={{ transform: 'scale(0.18)' }}>
-                  <Logo />
-                </div>
+            {[...logoImages, ...logoImages].map((logo, index) => (
+              <div
+                key={index}
+                className="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                style={{
+                  width: '180px',
+                  height: '80px',
+                  flexShrink: 0,
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <img
+                  src={logo}
+                  alt={`Logo ${index + 1}`}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                    display: 'block'
+                  }}
+                />
               </div>
             ))}
           </motion.div>

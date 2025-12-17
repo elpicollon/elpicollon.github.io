@@ -55,6 +55,7 @@ export function MinimalNav() {
               {[
                 { label: 'PROJETOS', href: '#projetos' },
                 { label: 'SOBRE', href: '#sobre' },
+                { label: 'EXPERTISE', href: '#expertise' },
                 { label: 'CONTATO', href: '#contato' }
               ].map((item, index) => (
                 <motion.a
@@ -111,6 +112,7 @@ export function MinimalNav() {
           { label: 'Início', href: '#inicio' },
           { label: 'Projetos', href: '#projetos' },
           { label: 'Sobre', href: '#sobre' },
+          { label: 'Expertise', href: '#expertise' },
           { label: 'Contato', href: '#contato' }
         ].map((item, index) => (
           <motion.a

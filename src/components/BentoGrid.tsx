@@ -53,7 +53,7 @@ export function BentoGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="sobre" ref={ref} className="py-32 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">
+    <section id="expertise" ref={ref} className="py-32 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#f2f4f7] via-purple-100/20 to-[#f2f4f7]" />
 
@@ -92,10 +92,10 @@ export function BentoGrid() {
               className="group relative bg-zinc-50 border border-zinc-200 rounded-3xl p-8 md:p-10 hover:bg-zinc-100 transition-all duration-500 overflow-hidden cursor-default"
             >
               {/* Animated Gradient Blob */}
-              <div 
-                className="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+              <div
+                className="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
               />
-              
+
               <div className="relative z-10 flex flex-col h-full">
                 <div className="mb-6 inline-flex p-3 rounded-2xl bg-white border border-zinc-200 group-hover:border-purple-500/30 group-hover:bg-purple-500/10 transition-all duration-500 w-fit">
                   <feature.icon className="w-8 h-8 text-zinc-500 group-hover:text-purple-600 transition-colors duration-500" />

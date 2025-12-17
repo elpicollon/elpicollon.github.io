@@ -1,8 +1,8 @@
 import { motion } from 'motion/react';
 
 const skills = [
-  'Product Design', 'Figma', 'Prototyping', 'User Research', 
-  'AI First Design', 'Wireframing', 'Design Systems', 'UI/UX Design', 
+  'Product Design', 'Figma', 'Prototyping', 'User Research',
+  'AI First Design', 'Wireframing', 'Design Systems', 'UI/UX Design',
   'Brand Identity'
 ];
 
@@ -27,8 +27,8 @@ export function MarqueeSection() {
             <span
               key={index}
               className="text-6xl md:text-8xl font-medium leading-tight cursor-pointer inline-block relative text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 animate-gradient-x bg-[length:200%_auto]"
-              style={{ 
-                fontFamily: 'var(--font-display)', 
+              style={{
+                fontFamily: 'var(--font-display)',
                 lineHeight: '1.2',
               }}
             >
