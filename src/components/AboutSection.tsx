@@ -2,7 +2,8 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { Linkedin, Download, Award, Briefcase, Smile, Zap } from 'lucide-react';
 import { Logos } from '../imports/1';
-import imgEu1 from "figma:asset/86c5576817c3134e84e9e3e13ae008ce43b91a20.png";
+import imgEu1 from "../assets/image-rp.png";
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function AboutSection() {
   const containerRef = useRef(null);
@@ -177,10 +178,10 @@ export function AboutSection() {
                
                <div className="relative h-full w-full rounded-[32px] overflow-hidden border border-zinc-200 bg-white shadow-2xl group">
                  <div className="absolute inset-0">
-                   <img 
-                     src={imgEu1} 
-                     alt="Rodrigo Picolo" 
-                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
+                   <ImageWithFallback
+                     src={imgEu1}
+                     alt="Rodrigo Picolo"
+                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                    />
                  </div>
                  
