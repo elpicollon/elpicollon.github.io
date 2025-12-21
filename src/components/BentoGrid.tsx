@@ -115,10 +115,11 @@ export function BentoGrid() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-              style={{ backgroundColor: "rgba(0,0,0,0)" }}
+              style={{ backgroundColor: "rgba(236,229,249,0)" }}
               whileHover={{
-                backgroundColor: "#ece5f9",
-                boxShadow: "inset 0 0 0 1px #d4c5ed"
+                backgroundColor: "rgba(236,229,249,1)",
+                boxShadow: "inset 0 0 0 1px #d4c5ed",
+                transition: { duration: 0.15 }
               }}
               className="group relative rounded-3xl p-6 md:p-8 cursor-pointer w-full h-full"
             >
