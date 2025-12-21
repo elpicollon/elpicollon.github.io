@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
-import { Linkedin, Award, Briefcase, Zap } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 import imgEu1 from "../assets/image-rp.png";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -36,30 +36,6 @@ export function AboutSection() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
-  const stats = [
-    {
-      id: 1,
-      number: "6+",
-      label: "Anos em UX",
-      icon: Briefcase,
-      color: "text-purple-400"
-    },
-    {
-      id: 2,
-      number: "50+",
-      label: "Projetos",
-      icon: Zap,
-      color: "text-violet-400"
-    },
-    {
-      id: 4,
-      number: "12+",
-      label: "Anos Tech",
-      icon: Award,
-      color: "text-indigo-400"
-    }
-  ];
 
   return (
     <section id="sobre" ref={containerRef} className="relative pt-16 pb-0 bg-[#f2f4f7] overflow-hidden z-40">
@@ -123,7 +99,7 @@ export function AboutSection() {
                     "Bacharel em Sistemas de Informação",
                     "Experiência com ERPs, SaaS, CRM & PLG",
                     "Professor Universitário",
-                    "Product Designer desde 2018",
+                    "Product Designer desde 2019",
                     "Desde 2014 atuando em Tecnologia"
                   ].map((item, index) => (
                     <motion.li
@@ -142,50 +118,6 @@ export function AboutSection() {
                     </motion.li>
                   ))}
                 </ul>
-              </div>
-
-              {/* Stats Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 mb-12">
-                {[
-                  ...stats,
-                  {
-                    id: 5,
-                    number: "100%",
-                    label: "SATISFAÇÃO",
-                    icon: ({ size, className }: { size?: number | string; className?: string }) => (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={size}
-                        height={size}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className={className}
-                      >
-                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                      </svg>
-                    ),
-                    color: "text-rose-500",
-                  },
-                ].map((stat, i) => (
-                  <motion.div
-                    key={stat.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex flex-col gap-2"
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <stat.icon size={18} className={stat.color} />
-                    </div>
-                    <span className="text-3xl md:text-4xl font-bold text-black tracking-tight">{stat.number}</span>
-                    <span className="text-xs uppercase tracking-wider text-zinc-500 font-medium">{stat.label}</span>
-                  </motion.div>
-                ))}
               </div>
 
               {/* Actions */}

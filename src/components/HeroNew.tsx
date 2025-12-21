@@ -18,17 +18,17 @@ export function HeroNew() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section 
-      id="inicio" 
-      ref={containerRef} 
+    <section
+      id="inicio"
+      ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] z-50 isolate mobile-tiny-fix"
     >
       {/* Background Waves - Restored as requested */}
       <div className="absolute inset-0 z-0">
-          <HeroParticleGrid />
-          
-          {/* Soft gradients for depth */}
-          <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
+        <HeroParticleGrid />
+
+        {/* Soft gradients for depth */}
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
       </div>
 
       <motion.div
@@ -45,15 +45,15 @@ export function HeroNew() {
           >
             {/* Title */}
             <div className="mt-24 mb-6 md:mb-10 overflow-hidden">
-                <div className="flex flex-col gap-2">
-                  <h1 className="text-5xl sm:text-7xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
-                    Experiências digitais
-                  </h1>
-                  
-                  <h1 className="text-5xl sm:text-7xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#a855f7] tracking-tight leading-[1.1]">
-                    de ponta a ponta!
-                  </h1>
-                </div>
+              <div className="flex flex-col gap-2">
+                <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
+                  Experiências digitais
+                </h1>
+
+                <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#a855f7] tracking-tight leading-[1.1]">
+                  de ponta a ponta!
+                </h1>
+              </div>
             </div>
 
             <motion.div
@@ -63,35 +63,35 @@ export function HeroNew() {
               viewport={{ once: true }}
               className="flex flex-wrap gap-4 items-center mb-16"
             >
-               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                 <span className="text-sm md:text-base font-medium text-slate-600">
-                   Product Designer Sênior
-                 </span>
-               </div>
-               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                 <span className="text-sm md:text-base font-medium text-slate-600">
-                   Especialista em Design Digital
-                 </span>
-               </div>
+              <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                <span className="text-sm md:text-base font-medium text-slate-600">
+                  Product Designer Sênior
+                </span>
+              </div>
+              <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                <span className="text-sm md:text-base font-medium text-slate-600">
+                  Especialista em Design Digital
+                </span>
+              </div>
             </motion.div>
 
             {/* Scroll Indicator - Matches reference */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 1 }}
               className="flex items-center gap-4"
             >
-                <div className="w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
-                    <motion.div 
-                        animate={{ y: [0, 12, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                        className="w-1.5 h-1.5 bg-slate-600 rounded-full"
-                    />
-                </div>
-                <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
-                    Scroll to explore
-                </span>
+              <div className="w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
+                <motion.div
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-1.5 h-1.5 bg-slate-600 rounded-full"
+                />
+              </div>
+              <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
+                Scroll to explore
+              </span>
             </motion.div>
           </motion.div>
 
@@ -139,14 +139,14 @@ export function HeroNew() {
                   transition={{ duration: 0.3 }}
                   className="flex flex-col items-center"
                 >
-                    <LayoutGrid size={28} className="text-white mb-2 opacity-80" />
-                    
-                    <span className="text-[10px] font-bold text-white/60 tracking-[0.2em] uppercase mb-1">
-                      Ver
-                    </span>
-                    <span className="text-xl font-bold text-white leading-none text-center">
-                      MEUS<br />PROJETOS
-                    </span>
+                  <LayoutGrid size={28} className="text-white mb-2 opacity-80" />
+
+                  <span className="text-[10px] font-bold text-white/60 tracking-[0.2em] uppercase mb-1">
+                    Ver
+                  </span>
+                  <span className="text-xl font-bold text-white leading-none text-center">
+                    MEUS<br />PROJETOS
+                  </span>
                 </motion.div>
               </div>
             </motion.a>
