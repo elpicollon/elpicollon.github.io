@@ -45,12 +45,12 @@ export function MinimalNav() {
               <PicoloDesignLogo />
             </motion.a>
 
-            {/* Desktop menu - Center */}
+            {/* Desktop menu - Center - only show on lg screens */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2"
+              className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2"
             >
               {[
                 { label: 'PROJETOS', href: '#projetos' },
@@ -72,7 +72,7 @@ export function MinimalNav() {
               ))}
             </motion.div>
 
-            {/* CTA Button - Desktop */}
+            {/* CTA Button - Desktop only on lg screens */}
             <motion.a
               href="#"
               initial={{ opacity: 0, x: 20 }}
@@ -80,18 +80,18 @@ export function MinimalNav() {
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden md:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-zinc-800 transition-colors"
+              className="hidden lg:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-zinc-800 transition-colors"
             >
               ENTRE EM CONTATO
             </motion.a>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button - show on mobile and tablet */}
             <motion.button
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-black p-1"
+              className="lg:hidden text-black p-1"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </motion.button>
@@ -106,7 +106,7 @@ export function MinimalNav() {
           x: isOpen ? 0 : '100%',
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="fixed top-0 right-0 bottom-0 w-full md:hidden bg-white z-[110] flex flex-col justify-center items-center gap-8"
+        className="fixed top-0 right-0 bottom-0 w-full lg:hidden bg-white z-[110] flex flex-col justify-center items-center gap-8"
       >
         {[
           { label: 'Início', href: '#inicio' },
@@ -136,7 +136,7 @@ export function MinimalNav() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105] md:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105] lg:hidden"
         />
       )}
     </>

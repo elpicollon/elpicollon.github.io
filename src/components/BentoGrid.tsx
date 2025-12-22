@@ -106,7 +106,7 @@ export function BentoGrid() {
         </motion.div>
 
         {/* Unified Bento Grid - Stats + Features */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
 
           {/* Stats Cards - First Row */}
           {stats.map((stat, i) => (
@@ -142,7 +142,7 @@ export function BentoGrid() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-              className="bento-feature-card group relative bg-zinc-50 border border-zinc-200 rounded-3xl p-8 md:p-10 hover:bg-zinc-100 transition-all duration-500 overflow-hidden cursor-default col-span-2 md:col-span-1"
+              className="bento-feature-card group relative bg-zinc-50 border border-zinc-200 rounded-3xl p-8 md:p-10 hover:bg-zinc-100 transition-all duration-500 overflow-hidden cursor-default col-span-2 md:col-span-2 lg:col-span-1"
             >
               {/* Animated Gradient Blob */}
               <div className="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

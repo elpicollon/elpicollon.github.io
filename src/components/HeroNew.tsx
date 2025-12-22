@@ -44,7 +44,7 @@ export function HeroNew() {
             viewport={{ once: true }}
           >
             {/* Title */}
-            <div className="mt-24 mb-6 md:mb-10 overflow-hidden">
+            <div className="hero-title-container mt-24 mb-6 md:mb-10 overflow-hidden">
               <div className="flex flex-col gap-2">
                 <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
                   Experiências digitais
@@ -82,11 +82,11 @@ export function HeroNew() {
               transition={{ delay: 1, duration: 1 }}
               className="flex items-center gap-4"
             >
-              <div className="w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
+              <div className="scroll-indicator w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
                 <motion.div
                   animate={{ y: [0, 12, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-1.5 h-1.5 bg-slate-600 rounded-full"
+                  className="scroll-indicator w-1.5 h-1.5 bg-slate-600 rounded-full"
                 />
               </div>
               <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
@@ -101,7 +101,7 @@ export function HeroNew() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="hidden md:flex items-center justify-center relative"
+            className="hero-projects-button hidden md:flex items-center justify-center relative"
           >
             <motion.a
               href="#projetos"

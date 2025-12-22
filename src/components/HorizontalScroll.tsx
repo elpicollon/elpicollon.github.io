@@ -76,23 +76,30 @@ export function HorizontalScroll() {
 
     const handleWheel = (e: WheelEvent) => {
       const rect = section.getBoundingClientRect();
+      const sectionHeight = rect.height;
+      const viewportHeight = window.innerHeight;
 
-      // Only handle wheel when section is in viewport
-      if (rect.top > 100 || rect.bottom < 100) return;
+      // Check if section is visible (at least 50% in viewport)
+      const visibleTop = Math.max(0, rect.top);
+      const visibleBottom = Math.min(viewportHeight, rect.bottom);
+      const visibleHeight = visibleBottom - visibleTop;
+      const isVisible = visibleHeight > sectionHeight * 0.3;
+
+      if (!isVisible) return;
 
       const scrollWidth = scrollContainer.scrollWidth;
       const viewportWidth = window.innerWidth;
-      const maxScroll = -(scrollWidth - viewportWidth);
+      const maxScroll = -(scrollWidth - viewportWidth + 48); // Account for padding
       const currentX = x.get();
 
       // Calculate new position
-      let newX = currentX - e.deltaY * 2;
+      let newX = currentX - e.deltaY * 1.5;
 
       // Clamp the value
       newX = Math.max(maxScroll, Math.min(0, newX));
 
-      // If we're at the limits, allow normal scroll
-      if ((currentX === 0 && e.deltaY < 0) || (currentX === maxScroll && e.deltaY > 0)) {
+      // If we're at the limits and trying to scroll further, allow vertical scroll
+      if ((currentX >= -1 && e.deltaY < 0) || (currentX <= maxScroll + 1 && e.deltaY > 0)) {
         return;
       }
 
@@ -129,16 +136,16 @@ export function HorizontalScroll() {
       ref={sectionRef}
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      className="relative h-screen bg-[#f2f4f7] z-0 isolate mb-32 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+      className="relative py-16 md:py-20 bg-[#f2f4f7] z-0 isolate mb-32 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
       aria-label="Galeria de projetos em destaque"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#f2f4f7] via-purple-100/40 to-[#f2f4f7] -z-10" />
 
       {/* Content wrapper */}
-      <div className="relative h-screen flex flex-col justify-center overflow-hidden">
+      <div className="relative flex flex-col overflow-hidden">
         {/* Title */}
-        <div className="px-6 md:px-12 pt-32 mb-20">
+        <div className="px-6 md:px-12 mb-6 md:mb-8">
           <motion.h2
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -158,7 +165,7 @@ export function HorizontalScroll() {
         </div>
 
         {/* Projects horizontal scroll */}
-        <div className="flex-1 flex items-center overflow-hidden">
+        <div className="flex items-center overflow-hidden">
           <motion.div
             ref={scrollContainerRef}
             style={{ x: smoothX }}
@@ -169,7 +176,11 @@ export function HorizontalScroll() {
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                className="relative flex-shrink-0 w-[80vw] md:w-[50vw] lg:w-[40vw] h-[65vh] group cursor-pointer"
+                className="relative flex-shrink-0 group cursor-pointer"
+                style={{
+                  width: 'clamp(300px, 70vw, 600px)',
+                  height: 'clamp(280px, 50vh, 380px)'
+                }}
                 whileHover={{ scale: 0.98 }}
                 transition={{ duration: 0.3 }}
               >
@@ -222,7 +233,13 @@ export function HorizontalScroll() {
             ))}
 
             {/* End card */}
-            <div className="flex-shrink-0 w-[80vw] md:w-[50vw] lg:w-[40vw] h-[65vh] rounded-3xl bg-gradient-to-br from-purple-50 to-white backdrop-blur-xl border border-purple-100 flex items-center justify-center shadow-lg">
+            <div
+              className="flex-shrink-0 rounded-3xl bg-gradient-to-br from-purple-50 to-white backdrop-blur-xl border border-purple-100 flex items-center justify-center shadow-lg"
+              style={{
+                width: 'clamp(300px, 70vw, 600px)',
+                height: 'clamp(280px, 50vh, 380px)'
+              }}
+            >
               <div className="text-center p-8">
                 <motion.h3
                   whileHover={{ scale: 1.05 }}
