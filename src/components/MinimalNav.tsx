@@ -2,10 +2,12 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import PicoloDesignLogo from '../imports/PicoloDesignLogo-9-474';
+import { useContactModal } from '../contexts/ContactModalContext';
 
 export function MinimalNav() {
   const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
+  const { openModal } = useContactModal();
 
   const backgroundColor = useTransform(
     scrollY,
@@ -73,17 +75,17 @@ export function MinimalNav() {
             </motion.div>
 
             {/* CTA Button - Desktop only on lg screens */}
-            <motion.a
-              href="#"
+            <motion.button
+              onClick={openModal}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden lg:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-zinc-800 transition-colors"
+              className="hidden lg:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-zinc-800 transition-colors cursor-pointer"
             >
               ENTRE EM CONTATO
-            </motion.a>
+            </motion.button>
 
             {/* Mobile menu button - show on mobile and tablet */}
             <motion.button
@@ -109,23 +111,36 @@ export function MinimalNav() {
         className="fixed top-0 right-0 bottom-0 w-full lg:hidden bg-white z-[110] flex flex-col justify-center items-center gap-8"
       >
         {[
-          { label: 'Início', href: '#inicio' },
-          { label: 'Projetos', href: '#projetos' },
-          { label: 'Sobre', href: '#sobre' },
-          { label: 'Expertise', href: '#expertise' },
-          { label: 'Contato', href: '#contato' }
+          { label: 'Início', href: '#inicio', isModal: false },
+          { label: 'Projetos', href: '#projetos', isModal: false },
+          { label: 'Sobre', href: '#sobre', isModal: false },
+          { label: 'Expertise', href: '#expertise', isModal: false },
+          { label: 'Contato', href: '#contato', isModal: true }
         ].map((item, index) => (
-          <motion.a
-            key={item.label}
-            href={item.href}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
-            transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
-            onClick={() => setIsOpen(false)}
-            className="text-4xl font-medium text-black hover:text-purple-600 transition-colors"
-          >
-            {item.label}
-          </motion.a>
+          item.isModal ? (
+            <motion.button
+              key={item.label}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
+              transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
+              onClick={() => { setIsOpen(false); openModal(); }}
+              className="text-4xl font-medium text-black hover:text-purple-600 transition-colors cursor-pointer"
+            >
+              {item.label}
+            </motion.button>
+          ) : (
+            <motion.a
+              key={item.label}
+              href={item.href}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
+              transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
+              onClick={() => setIsOpen(false)}
+              className="text-4xl font-medium text-black hover:text-purple-600 transition-colors"
+            >
+              {item.label}
+            </motion.a>
+          )
         ))}
       </motion.div>
 

@@ -1,17 +1,19 @@
 import { motion } from 'motion/react';
 import { Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
 import Logo1 from '../imports/Logo';
+import { useContactModal } from '../contexts/ContactModalContext';
 
 const socialLinks = [
   { icon: Github, label: 'GitHub', href: '#' },
   { icon: Linkedin, label: 'LinkedIn', href: '#' },
   { icon: Twitter, label: 'Twitter', href: '#' },
   { icon: Instagram, label: 'Instagram', href: '#' },
-  { icon: Mail, label: 'Email', href: 'mailto:hello@picolodesign.com' },
+  { icon: Mail, label: 'Email', href: 'mailto:contato@picolodesign.com.br' },
 ];
 
 export function FooterNew() {
   const currentYear = new Date().getFullYear();
+  const { openModal } = useContactModal();
 
   return (
     <footer className="relative bg-[#f2f4f7] border-t border-purple-200 overflow-hidden">
@@ -56,8 +58,7 @@ export function FooterNew() {
                 {[
                   { label: 'Início', href: '#inicio' },
                   { label: 'Projetos', href: '#projetos' },
-                  { label: 'Sobre', href: '#sobre' },
-                  { label: 'Contato', href: '#contato' }
+                  { label: 'Sobre', href: '#sobre' }
                 ].map((item) => (
                   <li key={item.label}>
                     <motion.a
@@ -69,6 +70,15 @@ export function FooterNew() {
                     </motion.a>
                   </li>
                 ))}
+                <li>
+                  <motion.button
+                    onClick={openModal}
+                    whileHover={{ x: 5 }}
+                    className="text-zinc-600 hover:text-purple-600 transition-colors inline-block cursor-pointer"
+                  >
+                    Contato
+                  </motion.button>
+                </li>
               </ul>
             </motion.div>
 
@@ -81,9 +91,9 @@ export function FooterNew() {
               <h4 className="text-black mb-6 font-medium">Conecte-se</h4>
               <ul className="space-y-3">
                 {[
-                  { 
-                    label: "WhatsApp", 
-                    href: "https://wa.me/", 
+                  {
+                    label: "WhatsApp",
+                    href: "https://wa.me/+5546988281914",
                     icon: ({ size, className }: { size?: number | string; className?: string }) => (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +107,7 @@ export function FooterNew() {
                       </svg>
                     )
                   },
-                  { label: "Email", href: "mailto:hello@picolodesign.com", icon: Mail },
+                  { label: "Email", href: "mailto:contato@picolodesign.com.br", icon: Mail },
                   { label: "Linkedin", href: "https://www.linkedin.com/in/picolodesign/", icon: Linkedin }
                 ].map((social) => (
                   <li key={social.label}>

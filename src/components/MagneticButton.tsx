@@ -1,15 +1,17 @@
 import { motion } from 'motion/react';
-import { Mail, ArrowUpRight } from 'lucide-react';
-import { Logos } from '../imports/1';
+import { Mail } from 'lucide-react';
 import { HeroParticleGrid } from './HeroParticleGrid';
+import { useContactModal } from '../contexts/ContactModalContext';
 
 export function MagneticButton() {
+  const { openModal } = useContactModal();
+
   return (
     <section id="contato" className="py-20 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">
       {/* Particles Background */}
       <div className="absolute inset-0 z-0">
-          <HeroParticleGrid />
-          <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
+        <HeroParticleGrid />
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
       </div>
 
       <div className="relative z-10">
@@ -50,7 +52,7 @@ export function MagneticButton() {
             viewport={{ once: true }}
             className="flex items-center justify-center relative"
           >
-            <div className="relative cursor-pointer group z-10 block">
+            <button onClick={openModal} className="relative cursor-pointer group z-10 block">
               {/* Dashed Ring - Outer */}
               <motion.div
                 animate={{
@@ -73,17 +75,17 @@ export function MagneticButton() {
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 to-transparent opacity-50 pointer-events-none" />
 
                 <motion.div className="flex flex-col items-center">
-                    <Mail size={28} className="text-white mb-2 opacity-80" />
-                    
-                    <span className="text-[10px] font-bold text-white/60 tracking-[0.2em] uppercase mb-1">
-                      FALE COMIGO
-                    </span>
-                    <span className="text-xl font-bold text-white leading-none text-center">
-                      ENTRE EM<br />CONTATO
-                    </span>
+                  <Mail size={28} className="text-white mb-2 opacity-80" />
+
+                  <span className="text-[10px] font-bold text-white/60 tracking-[0.2em] uppercase mb-1">
+                    FALE COMIGO
+                  </span>
+                  <span className="text-xl font-bold text-white leading-none text-center">
+                    ENTRE EM<br />CONTATO
+                  </span>
                 </motion.div>
               </motion.div>
-            </div>
+            </button>
           </motion.div>
         </div>
       </div>

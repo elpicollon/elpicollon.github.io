@@ -8,12 +8,16 @@ import { MarqueeSection } from './components/MarqueeSection';
 import { HorizontalScroll } from './components/HorizontalScroll';
 import { MagneticButton } from './components/MagneticButton';
 import { FooterNew } from './components/FooterNew';
+import { ContactModal } from './components/ContactModal';
+import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
 
-export default function App() {
+function AppContent() {
+  const { isOpen, closeModal } = useContactModal();
+
   useEffect(() => {
     // Hide default cursor on desktop
     document.body.style.cursor = 'none';
-    
+
     return () => {
       document.body.style.cursor = 'auto';
     };
@@ -23,7 +27,7 @@ export default function App() {
     <div className="min-h-screen bg-[#f2f4f7] overflow-x-hidden">
       <CustomCursor />
       <MinimalNav />
-      
+
       <main>
         <HeroNew />
         <HorizontalScroll />
@@ -32,8 +36,18 @@ export default function App() {
         <MagneticButton />
         <MarqueeSection />
       </main>
-      
+
       <FooterNew />
+
+      <ContactModal isOpen={isOpen} onClose={closeModal} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ContactModalProvider>
+      <AppContent />
+    </ContactModalProvider>
   );
 }
