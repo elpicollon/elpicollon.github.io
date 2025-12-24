@@ -2569,6 +2569,18 @@
     }
   }
 
+  @media (width >=64rem) {
+    .lg\:hidden {
+      display: none;
+    }
+  }
+
+  @media (width >=64rem) {
+    .lg\:flex {
+      display: flex;
+    }
+  }
+
   @keyframes gradient-x {
 
     0%,

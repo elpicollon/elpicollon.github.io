@@ -74,7 +74,7 @@ const features = [
 
 export function BentoGrid() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.05 });
 
   return (
     <section id="expertise" ref={ref} className="py-32 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">

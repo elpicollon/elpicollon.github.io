@@ -126,7 +126,7 @@ export function AboutSection() {
           </div>
 
           {/* Right: Image/Visual */}
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end mb-8 lg:mb-0">
             <motion.div
               style={{ y }}
               className="relative w-full max-w-xs aspect-[4/5]"
@@ -193,8 +193,8 @@ export function AboutSection() {
                 key={index}
                 className="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                 style={{
-                  width: '180px',
-                  height: '80px',
+                  width: '280px',
+                  height: '150px',
                   flexShrink: 0,
                   overflow: 'hidden',
                   display: 'flex',
