@@ -85,7 +85,7 @@ export function AboutSection() {
             >
               <div className="space-y-6 text-zinc-600 text-lg leading-relaxed w-full">
                 <p>
-                  Designer de Produtos e Professor Universitário, graduado em Sistemas de Informação com especialização em Design Digital.
+                  Designer de Produtos Digitais e Professor Universitário, graduado em Sistemas de Informação com especialização em Design Digital.
                 </p>
                 <p>
                   Unindo tecnologia e negócios, projeto soluções para ecossistemas complexos com foco em escalabilidade e rigor técnico. Minha base em sistemas garante a viabilidade do projeto, facilitando o trabalho da engenharia e eliminando ruídos no desenvolvimento.

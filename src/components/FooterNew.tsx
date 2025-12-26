@@ -1,15 +1,8 @@
 import { motion } from 'motion/react';
-import { Github, Linkedin, Twitter, Instagram, Mail } from 'lucide-react';
+import { Linkedin, Mail } from 'lucide-react';
 import Logo1 from '../imports/Logo';
 import { useContactModal } from '../contexts/ContactModalContext';
 
-const socialLinks = [
-  { icon: Github, label: 'GitHub', href: '#' },
-  { icon: Linkedin, label: 'LinkedIn', href: '#' },
-  { icon: Twitter, label: 'Twitter', href: '#' },
-  { icon: Instagram, label: 'Instagram', href: '#' },
-  { icon: Mail, label: 'Email', href: 'mailto:contato@picolodesign.com.br' },
-];
 
 export function FooterNew() {
   const currentYear = new Date().getFullYear();
@@ -58,7 +51,8 @@ export function FooterNew() {
                 {[
                   { label: 'Início', href: '#inicio' },
                   { label: 'Projetos', href: '#projetos' },
-                  { label: 'Sobre', href: '#sobre' }
+                  { label: 'Sobre', href: '#sobre' },
+                  { label: 'Expertise', href: '#expertise' },
                 ].map((item) => (
                   <li key={item.label}>
                     <motion.a
@@ -74,7 +68,7 @@ export function FooterNew() {
                   <motion.button
                     onClick={openModal}
                     whileHover={{ x: 5 }}
-                    className="text-zinc-600 hover:text-purple-600 transition-colors inline-block cursor-pointer"
+                    className="text-zinc-600 hover:text-purple-600 transition-colors inline-block cursor-pointer font-[inherit] text-left bg-transparent border-none p-0"
                   >
                     Contato
                   </motion.button>
@@ -137,15 +131,12 @@ export function FooterNew() {
           className="pt-8 border-t border-purple-200 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-zinc-500">
-            © {currentYear} Picolo Design. Todos os direitos reservados.
+            Picolo Design Digital & Consultoria. CNPJ: 42.054.838/0001-08
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-zinc-500 hover:text-purple-600 transition-colors">
-              Privacidade
-            </a>
-            <a href="#" className="text-zinc-500 hover:text-purple-600 transition-colors">
-              Termos
-            </a>
+            <p className="text-zinc-500">
+              © {currentYear} - Todos os direitos reservados.
+            </p>
           </div>
         </motion.div>
       </div>

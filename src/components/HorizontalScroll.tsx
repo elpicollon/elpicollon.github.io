@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ExternalLink } from 'lucide-react';
+import { useContactModal } from '../contexts/ContactModalContext';
 
 const projects = [
   {
@@ -51,6 +52,7 @@ export function HorizontalScroll() {
     mass: 0.5
   });
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const updateConstraints = () => {
@@ -245,14 +247,15 @@ export function HorizontalScroll() {
                   whileHover={{ scale: 1.05 }}
                   className="text-3xl md:text-5xl lg:text-6xl font-medium text-purple-900 mb-6"
                 >
-                  Mais projetos em breve
+                  Vamos criar algo incrível juntos?
                 </motion.h3>
                 <motion.button
+                  onClick={openModal}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-colors"
+                  className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-colors cursor-pointer"
                 >
-                  Ver Todos
+                  Entre em Contato
                 </motion.button>
               </div>
             </div>
