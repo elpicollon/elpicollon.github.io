@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { CustomCursor } from './components/CustomCursor';
 import { MinimalNav } from './components/MinimalNav';
 import { HeroNew } from './components/HeroNew';
@@ -10,6 +11,24 @@ import { MagneticButton } from './components/MagneticButton';
 import { FooterNew } from './components/FooterNew';
 import { ContactModal } from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
+import { TranscricoesInsightsIA } from './components/projects/TranscricoesInsightsIA';
+
+function HomePage() {
+  return (
+    <>
+      <MinimalNav />
+      <main>
+        <HeroNew />
+        <HorizontalScroll />
+        <AboutSection />
+        <BentoGrid />
+        <MagneticButton />
+        <MarqueeSection />
+      </main>
+      <FooterNew />
+    </>
+  );
+}
 
 function AppContent() {
   const { isOpen, closeModal } = useContactModal();
@@ -26,18 +45,11 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-[#f2f4f7] overflow-x-hidden">
       <CustomCursor />
-      <MinimalNav />
 
-      <main>
-        <HeroNew />
-        <HorizontalScroll />
-        <AboutSection />
-        <BentoGrid />
-        <MagneticButton />
-        <MarqueeSection />
-      </main>
-
-      <FooterNew />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projeto/transcricoes-insights-ia" element={<TranscricoesInsightsIA />} />
+      </Routes>
 
       <ContactModal isOpen={isOpen} onClose={closeModal} />
     </div>

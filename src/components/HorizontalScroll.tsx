@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ExternalLink } from 'lucide-react';
 import { useContactModal } from '../contexts/ContactModalContext';
@@ -7,10 +8,11 @@ import { useContactModal } from '../contexts/ContactModalContext';
 const projects = [
   {
     id: 1,
-    title: 'Modern UI Dashboard',
-    category: 'Web Design',
+    title: 'Transcrições & Insights com IA',
+    category: 'UX Design',
     year: '2024',
-    image: 'https://images.unsplash.com/photo-1684569547117-e2d19fc6d796?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBVSSUyMGRlc2lnbnxlbnwxfHx8fDE3NjE5MDI4NDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBSSUyMHRyYW5zY3JpcHRpb258ZW58MXx8fHwxNzAzNTk1MjE2fDA&ixlib=rb-4.0.3&q=80&w=1080',
+    link: '/projeto/transcricoes-insights-ia'
   },
   {
     id: 2,
@@ -175,17 +177,8 @@ export function HorizontalScroll() {
             dragConstraints={dragConstraints}
             className="flex gap-6 md:gap-8 px-6 md:px-12 will-change-transform cursor-grab active:cursor-grabbing"
           >
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                className="relative flex-shrink-0 group cursor-pointer"
-                style={{
-                  width: 'clamp(300px, 70vw, 600px)',
-                  height: 'clamp(280px, 50vh, 380px)'
-                }}
-                whileHover={{ scale: 0.98 }}
-                transition={{ duration: 0.3 }}
-              >
+            {projects.map((project, index) => {
+              const cardContent = (
                 <div className="relative w-full h-full rounded-3xl overflow-hidden">
                   {/* Image */}
                   <ImageWithFallback
@@ -231,8 +224,29 @@ export function HorizontalScroll() {
                     className="absolute inset-0 border-2 border-purple-500/50 rounded-3xl pointer-events-none"
                   />
                 </div>
-              </motion.div>
-            ))}
+              );
+
+              return (
+                <motion.div
+                  key={project.id}
+                  className="relative flex-shrink-0 group cursor-pointer"
+                  style={{
+                    width: 'clamp(300px, 70vw, 600px)',
+                    height: 'clamp(280px, 50vh, 380px)'
+                  }}
+                  whileHover={{ scale: 0.98 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {'link' in project && project.link ? (
+                    <Link to={project.link} className="block w-full h-full">
+                      {cardContent}
+                    </Link>
+                  ) : (
+                    cardContent
+                  )}
+                </motion.div>
+              );
+            })}
 
             {/* End card */}
             <div
