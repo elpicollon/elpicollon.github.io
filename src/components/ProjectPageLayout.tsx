@@ -204,15 +204,21 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.3, ease: 'easeOut' }}
                             >
-                                {activeSection?.subtitle && (
-                                    <span className="text-teal-600 text-sm font-medium tracking-wider uppercase mb-2 block">
-                                        {activeSection.subtitle}
-                                    </span>
+                                {/* Show subtitle and title for non-hero sections */}
+                                {activeIndex > 0 && (
+                                    <>
+                                        {activeSection?.subtitle && (
+                                            <span className="text-teal-600 text-sm font-medium tracking-wider uppercase mb-2 block">
+                                                {activeSection.subtitle}
+                                            </span>
+                                        )}
+                                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f172a] mb-6 leading-tight">
+                                            {activeSection?.title}
+                                        </h2>
+                                    </>
                                 )}
-                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f172a] mb-6 leading-tight">
-                                    {activeSection?.title}
-                                </h2>
-                                {activeSection?.leftContent}
+                                {/* Show leftContent only for hero section */}
+                                {activeIndex === 0 && activeSection?.leftContent}
                             </motion.div>
 
                             {/* Section Navigation - Now on the left side (hidden on hero) */}
@@ -223,7 +229,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                         flexDirection: 'column',
                                         alignItems: 'flex-start',
                                         gap: '0.75rem',
-                                        marginTop: '2.5rem',
+                                        marginTop: '1rem',
                                     }}
                                 >
                                     {/* Grouped navigation */}
@@ -262,9 +268,9 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                                         key={groupIndex}
                                                         onClick={() => navigateToSection(group.startIndex)}
                                                         style={{
-                                                            fontSize: '0.7rem',
+                                                            fontSize: '0.75rem',
                                                             fontWeight: 500,
-                                                            color: isActive ? '#0d9488' : 'rgba(100, 116, 139, 0.6)',
+                                                            color: isActive ? '#0d9488' : 'rgba(71, 85, 105, 0.9)',
                                                             textTransform: 'uppercase',
                                                             letterSpacing: '0.05em',
                                                             cursor: 'pointer',
@@ -282,7 +288,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                                         }}
                                                         onMouseLeave={(e) => {
                                                             if (!isActive) {
-                                                                e.currentTarget.style.color = 'rgba(100, 116, 139, 0.6)';
+                                                                e.currentTarget.style.color = 'rgba(71, 85, 105, 0.9)';
                                                                 e.currentTarget.style.background = 'transparent';
                                                             }
                                                         }}
@@ -359,11 +365,6 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                     justifyContent: 'center',
                                 }}
                             >
-                                {section.subtitle && (
-                                    <span className="text-teal-600 text-sm font-medium tracking-wider uppercase mb-2 block">
-                                        {section.subtitle}
-                                    </span>
-                                )}
                                 <h2 className="text-3xl font-bold text-[#0f172a] mb-4">
                                     {section.title}
                                 </h2>

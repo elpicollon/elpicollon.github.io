@@ -123,17 +123,14 @@ function ScrollProgress() {
 
 // Build sections array
 function buildSections(): ProjectSection[] {
-    // Overview cards como seções individuais
+    // Overview cards como seções individuais (4 seções)
+    const totalOverview = 4;
     const overviewSections: ProjectSection[] = [
         {
             id: 'resumo',
             title: 'Resumo',
-            subtitle: 'Visão Geral',
-            leftContent: (
-                <p className="text-zinc-600 leading-relaxed">
-                    Introdução ao projeto e contexto geral.
-                </p>
-            ),
+            subtitle: `Visão Geral • 1/${totalOverview}`,
+            leftContent: null,
             mockupContent: (
                 <SingleCard
                     title="Resumo"
@@ -146,12 +143,8 @@ function buildSections(): ProjectSection[] {
         {
             id: 'objetivo',
             title: 'Objetivo',
-            subtitle: 'Visão Geral',
-            leftContent: (
-                <p className="text-zinc-600 leading-relaxed">
-                    Meta principal do projeto.
-                </p>
-            ),
+            subtitle: `Visão Geral • 2/${totalOverview}`,
+            leftContent: null,
             mockupContent: (
                 <SingleCard
                     title="Objetivo"
@@ -164,12 +157,8 @@ function buildSections(): ProjectSection[] {
         {
             id: 'desafio',
             title: 'Desafio',
-            subtitle: 'Visão Geral',
-            leftContent: (
-                <p className="text-zinc-600 leading-relaxed">
-                    Problema a ser resolvido.
-                </p>
-            ),
+            subtitle: `Visão Geral • 3/${totalOverview}`,
+            leftContent: null,
             mockupContent: (
                 <SingleCard
                     title="Desafio"
@@ -182,12 +171,8 @@ function buildSections(): ProjectSection[] {
         {
             id: 'meu-papel',
             title: 'Meu Papel',
-            subtitle: 'Visão Geral',
-            leftContent: (
-                <p className="text-zinc-600 leading-relaxed">
-                    Minhas responsabilidades no projeto.
-                </p>
-            ),
+            subtitle: `Visão Geral • 4/${totalOverview}`,
+            leftContent: null,
             mockupContent: (
                 <SingleCard
                     title="Meu Papel"
@@ -209,15 +194,12 @@ function buildSections(): ProjectSection[] {
     ];
 
     // Processo de Pesquisa como seções individuais
+    const totalProcesso = projectData.processoPesquisa.length;
     const processoSections: ProjectSection[] = projectData.processoPesquisa.map((item, index) => ({
         id: `processo-${index}`,
         title: item.titulo,
-        subtitle: 'Processo de Pesquisa',
-        leftContent: (
-            <p className="text-zinc-600 leading-relaxed">
-                {item.descricao}
-            </p>
-        ),
+        subtitle: `Pesquisa • ${index + 1}/${totalProcesso}`,
+        leftContent: null,
         mockupContent: (
             <SingleCard
                 title={item.titulo}
@@ -229,15 +211,12 @@ function buildSections(): ProjectSection[] {
     }));
 
     // Descobertas como seções individuais
+    const totalDescobertas = projectData.descobertas.length;
     const descobertasSections: ProjectSection[] = projectData.descobertas.map((item, index) => ({
         id: `descoberta-${index}`,
         title: item.titulo,
-        subtitle: 'Descobertas',
-        leftContent: (
-            <p className="text-zinc-600 leading-relaxed">
-                {item.descricao}
-            </p>
-        ),
+        subtitle: `Descobertas • ${index + 1}/${totalDescobertas}`,
+        leftContent: null,
         mockupContent: (
             <SingleCard
                 title={item.titulo}
@@ -273,57 +252,55 @@ function buildSections(): ProjectSection[] {
     );
 
     // Resultados como seções individuais
+    const totalResultados = projectData.resultados.negativos.length + projectData.resultados.positivos.length;
+    let resultadoIndex = 0;
+
     const resultadosSections: ProjectSection[] = [
         // Negativos primeiro
-        ...projectData.resultados.negativos.map((item, index) => ({
-            id: `resultado-negativo-${index}`,
-            title: item.titulo,
-            subtitle: 'Resultados • Pontos de Atenção',
-            leftContent: (
-                <p className="text-zinc-600 leading-relaxed">
-                    {item.descricao}
-                </p>
-            ),
-            mockupContent: (
-                <SingleCard
-                    title={item.titulo}
-                    icon={<XCircle size={24} className="text-amber-400" />}
-                    content={<p>{item.descricao}</p>}
-                    number={String(index + 1).padStart(2, '0')}
-                />
-            )
-        })),
+        ...projectData.resultados.negativos.map((item) => {
+            resultadoIndex++;
+            return {
+                id: `resultado-negativo-${resultadoIndex}`,
+                title: 'Pontos de Atenção',
+                subtitle: `Resultados • ${resultadoIndex}/${totalResultados}`,
+                leftContent: null,
+                mockupContent: (
+                    <SingleCard
+                        title={item.titulo}
+                        icon={<XCircle size={24} className="text-amber-400" />}
+                        content={<p>{item.descricao}</p>}
+                        number={String(resultadoIndex).padStart(2, '0')}
+                    />
+                )
+            };
+        }),
         // Positivos
-        ...projectData.resultados.positivos.map((item, index) => ({
-            id: `resultado-positivo-${index}`,
-            title: item.titulo,
-            subtitle: 'Resultados • Conquistas',
-            leftContent: (
-                <p className="text-zinc-600 leading-relaxed">
-                    {item.descricao}
-                </p>
-            ),
-            mockupContent: (
-                <SingleCard
-                    title={item.titulo}
-                    icon={<CheckCircle2 size={24} className="text-emerald-400" />}
-                    content={<p>{item.descricao}</p>}
-                    number={String(index + 1).padStart(2, '0')}
-                />
-            )
-        }))
+        ...projectData.resultados.positivos.map((item) => {
+            resultadoIndex++;
+            return {
+                id: `resultado-positivo-${resultadoIndex}`,
+                title: 'Conquistas',
+                subtitle: `Resultados • ${resultadoIndex}/${totalResultados}`,
+                leftContent: null,
+                mockupContent: (
+                    <SingleCard
+                        title={item.titulo}
+                        icon={<CheckCircle2 size={24} className="text-emerald-400" />}
+                        content={<p>{item.descricao}</p>}
+                        number={String(resultadoIndex).padStart(2, '0')}
+                    />
+                )
+            };
+        })
     ];
 
     // Lições como seções individuais
+    const totalLicoes = projectData.licoes.length;
     const licoesSections: ProjectSection[] = projectData.licoes.map((item, index) => ({
         id: `licao-${index}`,
         title: item.categoria,
-        subtitle: 'Lições Aprendidas',
-        leftContent: (
-            <p className="text-zinc-600 leading-relaxed">
-                {item.descricao}
-            </p>
-        ),
+        subtitle: `Aprendizados • ${index + 1}/${totalLicoes}`,
+        leftContent: null,
         mockupContent: (
             <SingleCard
                 title={item.categoria}
@@ -361,7 +338,7 @@ function buildSections(): ProjectSection[] {
                         </h1>
                         <h1
                             className="font-bold tracking-tight leading-[1.05] whitespace-nowrap"
-                            style={{ fontSize: 'clamp(2.3rem, 4.5vw, 5rem)', color: '#0d9488' }}
+                            style={{ fontSize: 'clamp(2.3rem, 4.5vw, 5rem)', color: '#0d9488', marginTop: '-0.15em' }}
                         >
                             Insights com IA
                         </h1>
