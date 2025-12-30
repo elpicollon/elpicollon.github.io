@@ -353,12 +353,15 @@ function buildSections(): ProjectSection[] {
 
                     {/* Title */}
                     <div className="mb-8">
-                        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-[#0f172a] tracking-tight leading-[1.05] mb-2">
+                        <h1
+                            className="font-bold text-[#0f172a] tracking-tight leading-[1.05] whitespace-nowrap"
+                            style={{ fontSize: 'clamp(2.3rem, 4.5vw, 5rem)' }}
+                        >
                             Transcrições &
                         </h1>
                         <h1
-                            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1.05]"
-                            style={{ color: '#0d9488' }}
+                            className="font-bold tracking-tight leading-[1.05] whitespace-nowrap"
+                            style={{ fontSize: 'clamp(2.3rem, 4.5vw, 5rem)', color: '#0d9488' }}
                         >
                             Insights com IA
                         </h1>

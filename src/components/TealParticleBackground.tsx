@@ -88,7 +88,7 @@ export function TealParticleBackground() {
                 targetY = height / 2 + Math.cos(time * 0.3) * (height * 0.15);
             }
 
-            particles.forEach((p, index) => {
+            particles.forEach((p) => {
                 const dx = targetX - p.originX;
                 const dy = targetY - p.originY;
                 const dist = Math.sqrt(dx * dx + dy * dy);

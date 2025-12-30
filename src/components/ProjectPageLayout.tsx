@@ -201,10 +201,10 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                             height: '100vh',
                         }}
                     >
-                        {/* Left Side - Content */}
+                        {/* Left Side - Content + Section Navigation */}
                         <div
                             style={{
-                                width: '50%',
+                                width: '40%',
                                 height: '100%',
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -232,53 +232,26 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                     {activeSection?.leftContent}
                                 </motion.div>
                             </AnimatePresence>
-                        </div>
 
-                        {/* Right Side - Sticky MacBook */}
-                        <div
-                            style={{
-                                width: '50%',
-                                height: '100%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                paddingRight: '3rem',
-                                paddingLeft: '2rem',
-                            }}
-                        >
-                            <div style={{ width: '100%' }}>
-                                <RealisticMacBook>
-                                    <AnimatePresence mode="wait">
-                                        <motion.div
-                                            key={activeIndex}
-                                            initial={{ opacity: 0, scale: 0.95 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 1.05 }}
-                                            transition={{ duration: 0.4, ease: 'easeOut' }}
-                                        >
-                                            {activeSection?.mockupContent}
-                                        </motion.div>
-                                    </AnimatePresence>
-                                </RealisticMacBook>
-
-                                {/* Section Navigation */}
+                            {/* Section Navigation - Now on the left side (hidden on hero) */}
+                            {activeIndex > 0 && (
                                 <div
                                     style={{
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        alignItems: 'center',
+                                        alignItems: 'flex-start',
                                         gap: '0.75rem',
-                                        marginTop: '1.5rem',
+                                        marginTop: '2.5rem',
                                     }}
                                 >
                                     {/* Grouped navigation */}
                                     <div
                                         style={{
                                             display: 'flex',
-                                            gap: '1rem',
+                                            gap: '0.5rem',
                                             alignItems: 'center',
                                             flexWrap: 'wrap',
-                                            justifyContent: 'center',
+                                            justifyContent: 'flex-start',
                                         }}
                                     >
                                         {(() => {
@@ -287,7 +260,10 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                             let currentGroup = '';
 
                                             sections.forEach((section, index) => {
-                                                const group = section.group || section.subtitle?.split(' • ')[0] || 'Seção';
+                                                // Use "Início" for the first section, otherwise use group/subtitle
+                                                const group = index === 0 && !section.subtitle
+                                                    ? 'Início'
+                                                    : section.group || section.subtitle?.split(' • ')[0] || 'Seção';
                                                 if (group !== currentGroup) {
                                                     groups.push({ name: group, startIndex: index, count: 1 });
                                                     currentGroup = group;
@@ -296,73 +272,43 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                                 }
                                             });
 
-                                            return groups.map((group, groupIndex) => (
-                                                <div
-                                                    key={groupIndex}
-                                                    style={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        gap: '0.35rem',
-                                                    }}
-                                                >
-                                                    {/* Group label */}
-                                                    <span
+                                            return groups.map((group, groupIndex) => {
+                                                const isActive = activeIndex >= group.startIndex && activeIndex < group.startIndex + group.count;
+
+                                                return (
+                                                    <button
+                                                        key={groupIndex}
+                                                        onClick={() => navigateToSection(group.startIndex)}
                                                         style={{
-                                                            fontSize: '0.65rem',
+                                                            fontSize: '0.7rem',
                                                             fontWeight: 500,
-                                                            color: activeIndex >= group.startIndex && activeIndex < group.startIndex + group.count
-                                                                ? '#0d9488'
-                                                                : 'rgba(100, 116, 139, 0.6)',
+                                                            color: isActive ? '#0d9488' : 'rgba(100, 116, 139, 0.6)',
                                                             textTransform: 'uppercase',
                                                             letterSpacing: '0.05em',
-                                                            marginRight: '0.25rem',
                                                             cursor: 'pointer',
-                                                            transition: 'color 0.2s',
+                                                            transition: 'all 0.2s ease',
+                                                            background: isActive ? 'rgba(13, 148, 136, 0.1)' : 'transparent',
+                                                            border: 'none',
+                                                            padding: '0.4rem 0.75rem',
+                                                            borderRadius: '9999px',
                                                         }}
-                                                        onClick={() => navigateToSection(group.startIndex)}
+                                                        onMouseEnter={(e) => {
+                                                            if (!isActive) {
+                                                                e.currentTarget.style.color = '#0d9488';
+                                                                e.currentTarget.style.background = 'rgba(13, 148, 136, 0.05)';
+                                                            }
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            if (!isActive) {
+                                                                e.currentTarget.style.color = 'rgba(100, 116, 139, 0.6)';
+                                                                e.currentTarget.style.background = 'transparent';
+                                                            }
+                                                        }}
                                                     >
                                                         {group.name}
-                                                    </span>
-                                                    {/* Dots for this group */}
-                                                    {Array.from({ length: group.count }).map((_, dotIndex) => {
-                                                        const sectionIndex = group.startIndex + dotIndex;
-                                                        const isActive = activeIndex === sectionIndex;
-                                                        return (
-                                                            <button
-                                                                key={dotIndex}
-                                                                onClick={() => navigateToSection(sectionIndex)}
-                                                                title={sections[sectionIndex]?.title || `Seção ${sectionIndex + 1}`}
-                                                                style={{
-                                                                    width: isActive ? '1rem' : '0.4rem',
-                                                                    height: '0.4rem',
-                                                                    borderRadius: '9999px',
-                                                                    background: isActive
-                                                                        ? '#0d9488'
-                                                                        : activeIndex >= group.startIndex && activeIndex < group.startIndex + group.count
-                                                                            ? 'rgba(13, 148, 136, 0.4)'
-                                                                            : 'rgba(148, 163, 184, 0.4)',
-                                                                    border: 'none',
-                                                                    cursor: 'pointer',
-                                                                    transition: 'all 0.2s ease',
-                                                                    padding: 0,
-                                                                }}
-                                                                aria-label={sections[sectionIndex]?.title || `Go to section ${sectionIndex + 1}`}
-                                                            />
-                                                        );
-                                                    })}
-                                                    {/* Separator between groups */}
-                                                    {groupIndex < groups.length - 1 && (
-                                                        <span
-                                                            style={{
-                                                                width: '1px',
-                                                                height: '12px',
-                                                                background: 'rgba(148, 163, 184, 0.3)',
-                                                                marginLeft: '0.5rem',
-                                                            }}
-                                                        />
-                                                    )}
-                                                </div>
-                                            ));
+                                                    </button>
+                                                );
+                                            });
                                         })()}
                                     </div>
 
@@ -379,6 +325,35 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                         <span>↑↓ scroll</span>
                                     </div>
                                 </div>
+                            )}
+                        </div>
+
+                        {/* Right Side - Centered MacBook (larger) */}
+                        <div
+                            style={{
+                                width: '60%',
+                                height: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                paddingRight: '2rem',
+                                paddingLeft: '1rem',
+                            }}
+                        >
+                            <div style={{ width: '100%', maxWidth: '800px' }}>
+                                <RealisticMacBook>
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={activeIndex}
+                                            initial={{ opacity: 0, scale: 0.95 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 1.05 }}
+                                            transition={{ duration: 0.4, ease: 'easeOut' }}
+                                        >
+                                            {activeSection?.mockupContent}
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </RealisticMacBook>
                             </div>
                         </div>
                     </div>
