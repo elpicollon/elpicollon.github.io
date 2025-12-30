@@ -26,7 +26,8 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
     const [showScrollTop, setShowScrollTop] = useState(false);
     const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const isScrolling = useRef(false);
+    const lastScrollTime = useRef<number>(0);
+    const SCROLL_COOLDOWN = 1200; // ms between scroll navigations (covers full trackpad gesture with momentum)
 
     // Desktop detection
     useEffect(() => {
@@ -43,39 +44,30 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
 
     // Navigate to section
     const navigateToSection = useCallback((index: number) => {
-        if (index < 0 || index >= sections.length || isScrolling.current) return;
+        const now = Date.now();
+        const timeSinceLastScroll = now - lastScrollTime.current;
 
-        isScrolling.current = true;
+        if (index < 0 || index >= sections.length) return;
+        if (timeSinceLastScroll < SCROLL_COOLDOWN) return;
+
+        lastScrollTime.current = now;
         setActiveIndex(index);
         setShowFooter(false);
-
-        sectionRefs.current[index]?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-
-        // Reset scrolling flag after animation
-        setTimeout(() => {
-            isScrolling.current = false;
-        }, 600);
-    }, [sections.length]);
+    }, [sections.length, SCROLL_COOLDOWN]);
 
     // Navigate to footer
     const navigateToFooter = useCallback(() => {
-        if (isScrolling.current) return;
+        const now = Date.now();
+        if (now - lastScrollTime.current < SCROLL_COOLDOWN) return;
 
-        isScrolling.current = true;
+        lastScrollTime.current = now;
         setShowFooter(true);
 
         document.getElementById('project-footer')?.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         });
-
-        setTimeout(() => {
-            isScrolling.current = false;
-        }, 600);
-    }, []);
+    }, [SCROLL_COOLDOWN]);
 
     // Keyboard navigation
     useEffect(() => {
@@ -114,11 +106,9 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [activeIndex, isDesktop, sections.length, showFooter, footerContent, navigateToSection, navigateToFooter]);
 
-    // Wheel navigation with debounce
+    // Wheel navigation (throttle - immediate execution, then block)
     useEffect(() => {
         if (!isDesktop) return;
-
-        let wheelTimeout: NodeJS.Timeout;
 
         const handleWheel = (e: WheelEvent) => {
             // Don't block scrolling when footer is shown
@@ -135,24 +125,20 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
 
             e.preventDefault();
 
-            clearTimeout(wheelTimeout);
-            wheelTimeout = setTimeout(() => {
-                if (isScrolling.current) return;
-
-                if (e.deltaY > 0) {
-                    // Scroll down
-                    if (activeIndex < sections.length - 1) {
-                        navigateToSection(activeIndex + 1);
-                    } else if (!showFooter && footerContent) {
-                        navigateToFooter();
-                    }
-                } else if (e.deltaY < 0) {
-                    // Scroll up
-                    if (activeIndex > 0) {
-                        navigateToSection(activeIndex - 1);
-                    }
+            // Execute immediately - throttle check is done inside navigateToSection
+            if (e.deltaY > 0) {
+                // Scroll down
+                if (activeIndex < sections.length - 1) {
+                    navigateToSection(activeIndex + 1);
+                } else if (!showFooter && footerContent) {
+                    navigateToFooter();
                 }
-            }, 50);
+            } else if (e.deltaY < 0) {
+                // Scroll up
+                if (activeIndex > 0) {
+                    navigateToSection(activeIndex - 1);
+                }
+            }
         };
 
         const container = scrollContainerRef.current;
@@ -161,7 +147,6 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
         }
 
         return () => {
-            clearTimeout(wheelTimeout);
             if (container) {
                 container.removeEventListener('wheel', handleWheel);
             }
@@ -213,25 +198,22 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                 paddingRight: '2rem',
                             }}
                         >
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={activeIndex}
-                                    initial={{ opacity: 0, y: 40 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -40 }}
-                                    transition={{ duration: 0.5, ease: 'easeOut' }}
-                                >
-                                    {activeSection?.subtitle && (
-                                        <span className="text-teal-600 text-sm font-medium tracking-wider uppercase mb-2 block">
-                                            {activeSection.subtitle}
-                                        </span>
-                                    )}
-                                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f172a] mb-6 leading-tight">
-                                        {activeSection?.title}
-                                    </h2>
-                                    {activeSection?.leftContent}
-                                </motion.div>
-                            </AnimatePresence>
+                            <motion.div
+                                key={activeIndex}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, ease: 'easeOut' }}
+                            >
+                                {activeSection?.subtitle && (
+                                    <span className="text-teal-600 text-sm font-medium tracking-wider uppercase mb-2 block">
+                                        {activeSection.subtitle}
+                                    </span>
+                                )}
+                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f172a] mb-6 leading-tight">
+                                    {activeSection?.title}
+                                </h2>
+                                {activeSection?.leftContent}
+                            </motion.div>
 
                             {/* Section Navigation - Now on the left side (hidden on hero) */}
                             {activeIndex > 0 && (
@@ -342,17 +324,14 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                         >
                             <div style={{ width: '100%', maxWidth: '800px' }}>
                                 <RealisticMacBook>
-                                    <AnimatePresence mode="wait">
-                                        <motion.div
-                                            key={activeIndex}
-                                            initial={{ opacity: 0, scale: 0.95 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 1.05 }}
-                                            transition={{ duration: 0.4, ease: 'easeOut' }}
-                                        >
-                                            {activeSection?.mockupContent}
-                                        </motion.div>
-                                    </AnimatePresence>
+                                    <motion.div
+                                        key={activeIndex}
+                                        initial={{ opacity: 0, scale: 0.98 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                                    >
+                                        {activeSection?.mockupContent}
+                                    </motion.div>
                                 </RealisticMacBook>
                             </div>
                         </div>
@@ -481,6 +460,34 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                     </motion.button>
                 )}
             </AnimatePresence>
+
+            {/* Reading Progress Bar - Fixed at bottom */}
+            {isDesktop && !showFooter && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: '6px',
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        zIndex: 50,
+                    }}
+                >
+                    <motion.div
+                        style={{
+                            height: '100%',
+                            backgroundColor: '#0d9488',
+                            borderRadius: '0 2px 2px 0',
+                        }}
+                        initial={{ width: '0%' }}
+                        animate={{
+                            width: `${((activeIndex + 1) / sections.length) * 100}%`
+                        }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                    />
+                </div>
+            )}
         </div>
     );
 }
