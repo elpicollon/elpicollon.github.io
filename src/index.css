@@ -3021,7 +3021,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 @media (width >=1024px) {
@@ -3455,7 +3455,7 @@ body {
 /* ===== GLOBAL OVERFLOW FIX ===== */
 html,
 body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100vw !important;
 }
 

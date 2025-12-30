@@ -12,6 +12,7 @@ import { FooterNew } from './components/FooterNew';
 import { ContactModal } from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
 import { TranscricoesInsightsIA } from './components/projects/TranscricoesInsightsIA';
+import { ScrollToTop } from './components/ScrollToTop';
 
 function HomePage() {
   return (
@@ -26,6 +27,7 @@ function HomePage() {
         <MarqueeSection />
       </main>
       <FooterNew />
+      <ScrollToTop />
     </>
   );
 }
@@ -43,7 +45,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f2f4f7] overflow-x-hidden">
+    <div className="min-h-screen bg-[#f2f4f7]" style={{ overflowX: 'clip' }}>
       <CustomCursor />
 
       <Routes>
