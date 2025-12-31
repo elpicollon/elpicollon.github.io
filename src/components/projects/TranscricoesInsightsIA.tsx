@@ -54,30 +54,30 @@ const projectData = {
                 titulo: "Tela Inicial",
                 descricao: "Organização em duas abas — agendamentos futuros e realizados.",
                 imagens: [
-                    "/src/assets/projects/transcricoes-insights-ia/tela-inicial-1.png",
-                    "/src/assets/projects/transcricoes-insights-ia/tela-inicial-2.png"
+                    "/assets/projects/transcricoes-insights-ia/tela-inicial-1.png",
+                    "/assets/projects/transcricoes-insights-ia/tela-inicial-2.png"
                 ]
             },
             {
                 titulo: "Visualização das Gravações",
                 descricao: "Acesso simultâneo a gravação, transcrições, comentários e insights.",
                 imagens: [
-                    "/src/assets/projects/transcricoes-insights-ia/visualizacao-gravacoes-1.png",
-                    "/src/assets/projects/transcricoes-insights-ia/visualizacao-gravacoes-2.png"
+                    "/assets/projects/transcricoes-insights-ia/visualizacao-gravacoes-1.png",
+                    "/assets/projects/transcricoes-insights-ia/visualizacao-gravacoes-2.png"
                 ]
             },
             {
                 titulo: "Gravações de Áudio",
                 descricao: "Inclusão das gravações de ligações em áudio na mesma rotina visual.",
                 imagens: [
-                    "/src/assets/projects/transcricoes-insights-ia/gravacoes-audio-2.png"
+                    "/assets/projects/transcricoes-insights-ia/gravacoes-audio-2.png"
                 ]
             },
             {
                 titulo: "Email de Resumo",
                 descricao: "E-mail de resumo contendo informações-chave da reunião.",
                 imagens: [
-                    "/src/assets/projects/transcricoes-insights-ia/email-resumo-correto.png"
+                    "/assets/projects/transcricoes-insights-ia/email-resumo-correto.png"
                 ]
             }
         ]
