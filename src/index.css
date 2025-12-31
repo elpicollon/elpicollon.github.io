@@ -725,6 +725,10 @@
     bottom: calc(var(--spacing) * 6);
   }
 
+  .bottom-7 {
+    bottom: calc(var(--spacing) * 7);
+  }
+
   .bottom-\[0\.53\%\] {
     bottom: .53%;
   }
@@ -3497,4 +3501,47 @@ body {
   box-sizing: border-box !important;
   min-width: 0 !important;
   /* Prevent flex/grid items from overflowing */
+}
+
+/* ===== SECTION SELECTOR UTILITIES ===== */
+/* These classes are used dynamically and must be explicitly defined */
+.w-2 {
+  width: calc(var(--spacing) * 2);
+}
+
+.h-2 {
+  height: calc(var(--spacing) * 2);
+}
+
+.bg-slate-400 {
+  background-color: var(--color-slate-400);
+}
+
+.bg-teal-400 {
+  background-color: #2dd4bf;
+}
+
+.bg-teal-600 {
+  background-color: #0d9488;
+}
+
+.hover\:bg-teal-400:hover {
+  background-color: #2dd4bf;
+}
+
+/* Text-based section navigation utilities */
+.bg-slate-100 {
+  background-color: #f1f5f9;
+}
+
+.text-slate-600 {
+  color: var(--color-slate-600);
+}
+
+.hover\:bg-teal-100:hover {
+  background-color: #ccfbf1;
+}
+
+.hover\:text-teal-700:hover {
+  color: #0f766e;
 }

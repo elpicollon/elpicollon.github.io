@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, ReactNode, useCallback } from 'react';
+import { useEffect, useRef, useState, ReactNode, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import { RealisticMacBook } from './RealisticMacBook';
@@ -19,6 +19,80 @@ interface ProjectPageLayoutProps {
     footerContent?: ReactNode;
 }
 
+const TimelineItem = ({
+    group,
+    isActive,
+    isPast,
+    onClick
+}: {
+    group: { name: string; startIndex: number; count: number };
+    isActive: boolean;
+    isPast: boolean;
+    onClick: () => void;
+}) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <div
+            className="group relative flex items-center justify-center"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Animated Tooltip */}
+            <AnimatePresence>
+                {isHovered && (
+                    <motion.div
+                        initial={{ opacity: 0, x: -10, scale: 0.9 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: -10, scale: 0.9 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute left-full ml-5 px-3 py-1.5 rounded-md shadow-lg backdrop-blur-md text-xs font-semibold whitespace-nowrap pointer-events-none z-50 bg-slate-800 text-white shadow-slate-900/20"
+                    >
+                        <div className="absolute top-1/2 -left-1 -mt-1 w-2 h-2 rotate-45 bg-slate-800" />
+                        {group.name}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* The Dot */}
+            <button
+                onClick={onClick}
+                className="relative outline-none focus:outline-none"
+                aria-label={`Ir para ${group.name}`}
+            >
+                {/* Active Glow/Ring Effect */}
+                {isActive && (
+                    <motion.div
+                        layoutId="activeGlow"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1.5 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="absolute inset-0 rounded-full bg-teal-500/20"
+                    />
+                )}
+                {/* Core Dot */}
+                <motion.div
+                    animate={{
+                        scale: isActive ? 1.2 : 1,
+                        backgroundColor: isActive || isPast ? '#0d9488' : '#e2e8f0',
+                        borderColor: isActive ? '#ffffff' : 'transparent',
+                    }}
+                    style={{
+                        width: '10px',
+                        height: '100%',
+                        aspectRatio: '1',
+                        borderRadius: '50%',
+                        borderWidth: isActive ? '2px' : '0px',
+                        borderStyle: 'solid',
+                        boxShadow: isActive ? '0 0 0 2px #0d9488' : 'none',
+                    }}
+                    transition={{ duration: 0.3 }}
+                />
+            </button>
+        </div>
+    );
+};
+
 export function ProjectPageLayout({ sections, headerContent, footerContent }: ProjectPageLayoutProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isDesktop, setIsDesktop] = useState(false);
@@ -28,6 +102,26 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const lastScrollTime = useRef<number>(0);
     const SCROLL_COOLDOWN = 1200; // ms between scroll navigations (covers full trackpad gesture with momentum)
+
+    // Calculate section groups for timeline
+    const groups = useMemo(() => {
+        const g: { name: string; startIndex: number; count: number }[] = [];
+        let currentGroup = '';
+
+        sections.forEach((section, index) => {
+            const groupName = index === 0 && !section.subtitle
+                ? 'Início'
+                : section.group || section.subtitle?.split(' • ')[0] || 'Seção';
+
+            if (groupName !== currentGroup) {
+                g.push({ name: groupName, startIndex: index, count: 1 });
+                currentGroup = groupName;
+            } else {
+                g[g.length - 1].count++;
+            }
+        });
+        return g;
+    }, [sections]);
 
     // Desktop detection
     useEffect(() => {
@@ -176,6 +270,97 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                 </div>
             )}
 
+            {/* Fixed Bottom Section Navigation */}
+            {isDesktop && !showFooter && activeIndex > 0 && (
+                <div
+                    className="fixed bottom-6 left-1/2 z-40"
+                    style={{ transform: 'translateX(-50%)' }}
+                >
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, ease: 'easeOut' }}
+                        className="relative rounded-full backdrop-blur-md overflow-hidden"
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.85)',
+                            boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.5)',
+                        }}
+                    >
+                        {/* Progress Bar at Top */}
+                        <div
+                            className="absolute top-0 left-0 right-0"
+                            style={{ height: '3px', backgroundColor: 'rgba(148, 163, 184, 0.2)' }}
+                        >
+                            <motion.div
+                                style={{
+                                    height: '100%',
+                                    backgroundColor: '#0d9488',
+                                    borderRadius: '0 3px 3px 0',
+                                }}
+                                initial={{ width: '0%' }}
+                                animate={{
+                                    width: (() => {
+                                        if (groups.length <= 1) return '100%';
+
+                                        // Find active group index and progress within it
+                                        let activeGroupIndex = 0;
+                                        let progressInGroup = 0;
+
+                                        for (let i = 0; i < groups.length; i++) {
+                                            const g = groups[i];
+                                            if (activeIndex >= g.startIndex && activeIndex < g.startIndex + g.count) {
+                                                activeGroupIndex = i;
+                                                // Calculate internal progress (0 to 1) within this group
+                                                if (g.count > 1) {
+                                                    progressInGroup = (activeIndex - g.startIndex) / (g.count - 1);
+                                                } else {
+                                                    progressInGroup = 0;
+                                                }
+                                                break;
+                                            }
+                                        }
+
+                                        // Calculate progress to reach the CENTER of the active button
+                                        const padding = 7; // percentage from edges
+                                        const usableWidth = 100 - (padding * 2);
+                                        const stepSize = usableWidth / (groups.length - 1);
+
+                                        // Base progress = center of current button
+                                        // Add small micro-progress within the section (max 30% of stepSize)
+                                        const microProgress = progressInGroup * stepSize * 0.3;
+                                        const progress = padding + (activeGroupIndex * stepSize) + microProgress;
+
+                                        return `${Math.min(progress, 100)}%`;
+                                    })()
+                                }}
+                                transition={{ duration: 0.5, ease: 'easeOut' }}
+                            />
+                        </div>
+
+                        {/* Navigation Buttons */}
+                        <div className="flex gap-4 px-6 py-3 pt-4">
+                            {groups.map((group, i) => {
+                                const isActiveGroup = activeIndex >= group.startIndex && activeIndex < group.startIndex + group.count;
+                                return (
+                                    <button
+                                        key={i}
+                                        onClick={() => navigateToSection(group.startIndex)}
+                                        className="transition-all duration-300 cursor-pointer border-none text-sm font-medium px-4 py-2 rounded-full whitespace-nowrap"
+                                        style={{
+                                            backgroundColor: isActiveGroup ? '#0d9488' : 'transparent',
+                                            color: isActiveGroup ? '#ffffff' : '#64748b',
+                                        }}
+                                    >
+                                        {group.name}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </motion.div>
+                </div>
+            )}
+
             {/* Main Content Area */}
             <div className="relative z-10" style={{ height: isDesktop ? '100%' : 'auto' }}>
                 {isDesktop ? (
@@ -194,7 +379,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
-                                paddingLeft: '3rem',
+                                paddingLeft: '4rem',
                                 paddingRight: '2rem',
                             }}
                         >
@@ -217,103 +402,12 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                         </h2>
                                     </>
                                 )}
+
                                 {/* Show leftContent only for hero section */}
                                 {activeIndex === 0 && activeSection?.leftContent}
                             </motion.div>
 
-                            {/* Section Navigation - Now on the left side (hidden on hero) */}
-                            {activeIndex > 0 && (
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'flex-start',
-                                        gap: '0.75rem',
-                                        marginTop: '1rem',
-                                    }}
-                                >
-                                    {/* Grouped navigation */}
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            gap: '0.5rem',
-                                            alignItems: 'center',
-                                            flexWrap: 'wrap',
-                                            justifyContent: 'flex-start',
-                                        }}
-                                    >
-                                        {(() => {
-                                            // Group sections by their group property
-                                            const groups: { name: string; startIndex: number; count: number }[] = [];
-                                            let currentGroup = '';
-
-                                            sections.forEach((section, index) => {
-                                                // Use "Início" for the first section, otherwise use group/subtitle
-                                                const group = index === 0 && !section.subtitle
-                                                    ? 'Início'
-                                                    : section.group || section.subtitle?.split(' • ')[0] || 'Seção';
-                                                if (group !== currentGroup) {
-                                                    groups.push({ name: group, startIndex: index, count: 1 });
-                                                    currentGroup = group;
-                                                } else {
-                                                    groups[groups.length - 1].count++;
-                                                }
-                                            });
-
-                                            return groups.map((group, groupIndex) => {
-                                                const isActive = activeIndex >= group.startIndex && activeIndex < group.startIndex + group.count;
-
-                                                return (
-                                                    <button
-                                                        key={groupIndex}
-                                                        onClick={() => navigateToSection(group.startIndex)}
-                                                        style={{
-                                                            fontSize: '0.75rem',
-                                                            fontWeight: 500,
-                                                            color: isActive ? '#0d9488' : 'rgba(71, 85, 105, 0.9)',
-                                                            textTransform: 'uppercase',
-                                                            letterSpacing: '0.05em',
-                                                            cursor: 'pointer',
-                                                            transition: 'all 0.2s ease',
-                                                            background: isActive ? 'rgba(13, 148, 136, 0.1)' : 'transparent',
-                                                            border: 'none',
-                                                            padding: '0.4rem 0.75rem',
-                                                            borderRadius: '9999px',
-                                                        }}
-                                                        onMouseEnter={(e) => {
-                                                            if (!isActive) {
-                                                                e.currentTarget.style.color = '#0d9488';
-                                                                e.currentTarget.style.background = 'rgba(13, 148, 136, 0.05)';
-                                                            }
-                                                        }}
-                                                        onMouseLeave={(e) => {
-                                                            if (!isActive) {
-                                                                e.currentTarget.style.color = 'rgba(71, 85, 105, 0.9)';
-                                                                e.currentTarget.style.background = 'transparent';
-                                                            }
-                                                        }}
-                                                    >
-                                                        {group.name}
-                                                    </button>
-                                                );
-                                            });
-                                        })()}
-                                    </div>
-
-                                    {/* Navigation hint */}
-                                    <div
-                                        style={{
-                                            color: 'rgba(100, 116, 139, 0.5)',
-                                            fontSize: '0.7rem',
-                                            display: 'flex',
-                                            gap: '0.4rem',
-                                            alignItems: 'center',
-                                        }}
-                                    >
-                                        <span>↑↓ scroll</span>
-                                    </div>
-                                </div>
-                            )}
+                            {/* Section Navigation moved to sidebar timeline */}
                         </div>
 
                         {/* Right Side - Centered MacBook (larger) */}
@@ -330,14 +424,39 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                         >
                             <div style={{ width: '100%', maxWidth: '800px' }}>
                                 <RealisticMacBook>
-                                    <motion.div
-                                        key={activeIndex}
-                                        initial={{ opacity: 0, scale: 0.98 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                                    >
-                                        {activeSection?.mockupContent}
-                                    </motion.div>
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={activeIndex}
+                                            initial={{
+                                                opacity: 0,
+                                                y: 30,
+                                                scale: 0.95,
+                                                filter: 'blur(8px)'
+                                            }}
+                                            animate={{
+                                                opacity: 1,
+                                                y: 0,
+                                                scale: 1,
+                                                filter: 'blur(0px)'
+                                            }}
+                                            exit={{
+                                                opacity: 0,
+                                                y: -20,
+                                                scale: 1.02,
+                                                filter: 'blur(4px)'
+                                            }}
+                                            transition={{
+                                                duration: 0.5,
+                                                ease: [0.22, 1, 0.36, 1]
+                                            }}
+                                            style={{
+                                                width: '100%',
+                                                height: '100%',
+                                            }}
+                                        >
+                                            {activeSection?.mockupContent}
+                                        </motion.div>
+                                    </AnimatePresence>
                                 </RealisticMacBook>
                             </div>
                         </div>
@@ -454,7 +573,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
                             }
                         }}
-                        className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-white hover:text-teal-600 hover:border-teal-200 transition-all cursor-pointer"
+                        className="fixed bottom-7 right-6 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-white hover:text-teal-600 hover:border-teal-200 transition-all cursor-pointer"
                         aria-label="Voltar ao topo"
                     >
                         <ArrowUp size={20} />
@@ -462,33 +581,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                 )}
             </AnimatePresence>
 
-            {/* Reading Progress Bar - Fixed at bottom */}
-            {isDesktop && !showFooter && (
-                <div
-                    style={{
-                        position: 'fixed',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: '6px',
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                        zIndex: 50,
-                    }}
-                >
-                    <motion.div
-                        style={{
-                            height: '100%',
-                            backgroundColor: '#0d9488',
-                            borderRadius: '0 2px 2px 0',
-                        }}
-                        initial={{ width: '0%' }}
-                        animate={{
-                            width: `${((activeIndex + 1) / sections.length) * 100}%`
-                        }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                    />
-                </div>
-            )}
-        </div>
+
+        </div >
     );
 }
