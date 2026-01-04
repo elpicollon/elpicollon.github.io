@@ -166,12 +166,13 @@ export function ScrollCards({ cards, autoScroll = true, scrollInterval = 4000 }:
 // ============================================
 interface SingleCardProps {
     title: string;
+    subtitle?: string;
     content: ReactNode;
     icon?: ReactNode;
     number?: string;
 }
 
-export function SingleCard({ content, icon, number }: SingleCardProps) {
+export function SingleCard({ content, icon, number, subtitle }: SingleCardProps) {
     return (
         <div
             style={{
@@ -254,7 +255,7 @@ export function SingleCard({ content, icon, number }: SingleCardProps) {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            marginBottom: '2rem',
+                            marginBottom: subtitle ? '1rem' : '2rem',
                             color: '#14b8a6',
                             boxShadow: '0 8px 32px rgba(20, 184, 166, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)',
                             backdropFilter: 'blur(8px)',
@@ -266,6 +267,20 @@ export function SingleCard({ content, icon, number }: SingleCardProps) {
                     </div>
                 )}
 
+                {/* Subtitle - below icon */}
+                {subtitle && (
+                    <p
+                        style={{
+                            color: 'rgba(161, 161, 170, 0.9)',
+                            fontSize: '0.875rem',
+                            marginBottom: '1.5rem',
+                            fontWeight: 500,
+                        }}
+                    >
+                        {subtitle}
+                    </p>
+                )}
+
                 {/* Content - Larger and more prominent */}
                 <div
                     style={{
@@ -275,6 +290,7 @@ export function SingleCard({ content, icon, number }: SingleCardProps) {
                         fontWeight: 400,
                         maxWidth: '90%',
                         letterSpacing: '0.01em',
+                        textAlign: 'justify',
                     }}
                 >
                     {content}

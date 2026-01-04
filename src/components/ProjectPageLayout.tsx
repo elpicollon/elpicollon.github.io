@@ -8,6 +8,7 @@ export interface ProjectSection {
     id: string;
     title: string;
     subtitle?: string;
+    leftSubtitle?: string; // Subtitle shown below the title on the left side
     group?: string; // For grouping sections in navigation (e.g., 'Hero', 'Visão Geral', 'Protótipo')
     leftContent: ReactNode;
     mockupContent: ReactNode;
@@ -324,9 +325,14 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                                 {activeSection.subtitle}
                                             </span>
                                         )}
-                                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f172a] mb-6 leading-tight">
+                                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f172a] mb-2 leading-tight">
                                             {activeSection?.title}
                                         </h2>
+                                        {activeSection?.leftSubtitle && (
+                                            <p className="text-lg text-slate-500 mb-6">
+                                                {activeSection.leftSubtitle}
+                                            </p>
+                                        )}
                                     </>
                                 )}
 

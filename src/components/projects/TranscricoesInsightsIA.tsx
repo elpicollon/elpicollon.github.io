@@ -1,7 +1,7 @@
 import { motion, useScroll, useSpring } from 'motion/react';
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Sparkles, Target, Zap, Users, FileText, Layers, Share2, Clock, TrendingUp, Rocket, CheckCircle2, XCircle, Lightbulb, Eye, Search, Settings } from 'lucide-react';
+import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
 import { useContactModal } from '../../contexts/ContactModalContext';
@@ -11,40 +11,34 @@ import { SingleCard, SingleImage, PlaceholderContent } from '../MockupContentCom
 // Dados do projeto
 const projectData = {
     title: "Transcrições & Insights com IA",
-    category: "UX Design",
+    category: "Product Design",
     year: "2024",
 
-    resumo: "Neste projeto foi feito o redesign da funcionalidade voltada à gravação e transcrição automática de videoconferências. A ideia foi centralizar tudo em um só lugar — transcrições, comentários e os insights gerados por IA — facilitando a consulta e o uso desses dados no dia a dia das equipes.",
+    resumo: <>Redesign do ecossistema de videoconferências focado na centralização de gravações, transcrições e insights de IA.<br />O projeto automatizou a documentação pós-reunião, eliminando trabalho manual e transformando uma ferramenta operacional em um ativo estratégico de vendas, validado por alta adoção espontânea.</>,
 
-    objetivo: "Centralizar e otimizar o acesso a informações geradas em reuniões — como gravações, transcrições e insights por IA — reduzindo o tempo gasto na gestão e compartilhamento desses dados, melhorando a eficiência e o aproveitamento comercial do conteúdo.",
+    objetivo: <>Centralizar gravações, transcrições e insights de IA para eliminar a gestão manual e o ruído no compartilhamento de dados.<br />O foco foi transformar registros de reuniões em inteligência acionável para times de Vendas, Suporte e Produto, elevando a competitividade da ferramenta no mercado.</>,
 
-    desafio: "Transformar um processo fragmentado e pouco eficiente de gestão de reuniões — com gravações, transcrições e anotações dispersas — em uma experiência unificada, intuitiva e que economizasse tempo para os usuários.",
+    desafio: <>Arquitetar a unificação de múltiplas fontes de dados (vídeo, ligações e transcrições) que eram dispostos em diferentes locais, integrando um volume denso de informações em um fluxo único e performático, reduzindo a carga cognitiva do usuário sem comprometer experiência de uso e viabilidade técnica.</>,
 
     meuPapel: [
-        "Mapeamento de fricções com base em entrevistas, suporte e comportamento de uso",
-        "Benchmarking com Fireflies, tl;dv e outros players",
-        "Redefinição do fluxo de uso para acesso intuitivo",
-        "Criação de protótipos interativos",
-        "Colaboração contínua com engenharia",
-        "Validação com usuários"
+        <><span className="highlight-title">Discovery e Estratégia:</span> Diagnóstico de fricções e benchmarking competitivo para definição de requisitos.</>,
+        <><span className="highlight-title">Arquitetura e Interação:</span> Redesign da jornada para integrar vídeo e dados em um fluxo único.</>,
+        <><span className="highlight-title">Viabilidade Técnica:</span> Alinhamento com engenharia para implementação dos recursos de IA.</>,
+        <><span className="highlight-title">Validação e Refino:</span> Ajustes de usabilidade baseados em feedback qualitativo.</>,
     ],
 
     processoPesquisa: [
-        { titulo: "Visão Anterior", descricao: "Documentação da versão atual do produto para identificar pontos de fricção.", icon: Eye },
-        { titulo: "Levantamento de Dados", descricao: "Análise de dados provenientes dos setores de Suporte, Vendas e Pós-Vendas.", icon: Search },
-        { titulo: "Benchmarking", descricao: "Análise comparativa com Apollo, Fireflies, tl;dv e Bluedot.", icon: Layers },
-        { titulo: "Alinhamento com Engenharia", descricao: "Conexão constante entre Design e Desenvolvimento.", icon: Settings }
+        <><span className="highlight-title">Auditoria do Legado:</span> Análise heurística da versão anterior para mapear fricções e dívidas de experiência.</>,
+        <><span className="highlight-title">Dados Internos:</span> Cruzamento de chamados de Suporte e Vendas para validar dores reais e priorizar correções.</>,
+        <><span className="highlight-title">Benchmarking:</span> Estudo de padrões de interação em players como Apollo, Fireflies, tl;dv e Bluedot.</>,
+        <><span className="highlight-title">Viabilidade Técnica:</span> Validação precoce com engenharia para antecipar restrições e evitar retrabalho.</>,
     ],
 
     descobertas: [
-        { titulo: "Informações úteis", descricao: "Na versão anterior, não era possível acessar o conteúdo das gravações.", icon: FileText },
-        { titulo: "Integração eficiente", descricao: "Ligações de outras ferramentas não eram integradas.", icon: Layers },
-        { titulo: "Decisões estratégicas", descricao: "Dados de transcrição e insights não eram exibidos.", icon: Target },
-        { titulo: "Alinhamento prejudicado", descricao: "Não havia compartilhamento estruturado.", icon: Share2 },
-        { titulo: "Visibilidade centralizada", descricao: "Gestores tinham dificuldade para acompanhar negociações.", icon: Users },
-        { titulo: "Eficiência na operação", descricao: "Era necessário assistir à gravação completa.", icon: Clock },
-        { titulo: "Escalabilidade", descricao: "Era necessário abrir cada card individualmente.", icon: TrendingUp },
-        { titulo: "Efeito viral", descricao: "Gerar viralização entre participantes.", icon: Rocket }
+        <><span className="highlight-title">Acesso à Inteligência:</span> Transformar um simples "log de reunião" em um hub de conteúdo pesquisável (transcrição e IA), eliminando a necessidade de assistir ao vídeo completo.</>,
+        <><span className="highlight-title">Centralização da Verdade:</span> Unificar calls internas e externas em uma visualização única, removendo a fricção de buscar registros dentro de pipelines de vendas.</>,
+        <><span className="highlight-title">Desbloqueio de Colaboração:</span> Compartilhamento fácil para que a informação flua entre Vendas, Suporte e Produto sem barreiras manuais.</>,
+        <><span className="highlight-title">Estratégia de Viralização:</span> Envio automático de resumos como alavanca de Product-Led Growth, estimulando a adoção espontânea por novos usuários.</>,
     ],
 
     prototipo: {
@@ -85,22 +79,17 @@ const projectData = {
 
     resultados: {
         positivos: [
-            { titulo: "Redução do tempo de gestão", descricao: "Usuários acessam transcrições, gravações e insights em um único lugar." },
-            { titulo: "Adoção orgânica", descricao: "Redirecionamento automático ao término das reuniões." },
-            { titulo: "Aumento da satisfação", descricao: "Clientes passaram a usar a funcionalidade com frequência." },
-            { titulo: "Ganho de valor comercial", descricao: "Usada como recurso principal nas demonstrações." },
-            { titulo: "Simplificação do processo", descricao: "Melhoria em processos como vínculo com negócios." }
-        ],
-        negativos: [
-            { titulo: "Comparação de métricas", descricao: "Liberação controlada impossibilitou comparativos precisos." },
-            { titulo: "Ajustes pontuais", descricao: "Funcionalidade de compartilhamento precisou ser redesenhada." }
+            <><span className="highlight-title">Eficiência Operacional:</span> Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times.</>,
+            <><span className="highlight-title">Impacto Comercial:</span> A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes.</>,
+            <><span className="highlight-title">Growth e Adoção:</span> O redirecionamento automático pós-reunião impulsionou a descoberta orgânica da feature, integrando-a naturalmente ao fluxo diário sem custo de marketing.</>,
+            <><span className="highlight-title">Recuperação de Confiança:</span> Usuários detratores da versão anterior tornaram-se promotores da nova funcionalidade, validando a resolução das fricções críticas de usabilidade.</>,
         ]
     },
 
     licoes: [
-        { categoria: "Processo e Colaboração", descricao: "Colaboração entre Design e Engenharia desde o início foi essencial." },
-        { categoria: "Experiência do Usuário", descricao: "Testar e ajustar com base em feedback contínuo é fundamental." },
-        { categoria: "Métricas e Validação", descricao: "Acesso contínuo a métricas é crucial para validar decisões." }
+        <><span className="highlight-title">Shift-Left Dev:</span> A validação técnica na fase de ideação provou-se vital para calibração e eliminação de retrabalho.</>,
+        <><span className="highlight-title">Alavancas de Growth</span> O redirecionamento automático evidenciou que pequenas intervenções no fluxo podem gerar mais adoção orgânica do que grandes funcionalidades.</>,
+        <><span className="highlight-title">Dados como Premissa</span> A experiência reforçou que a definição de KPIs deve nascer junto com o projeto, garantindo a mensuração de sucesso no rollout.</>,
     ]
 };
 
@@ -178,7 +167,7 @@ function buildSections(): ProjectSection[] {
                     title="Meu Papel"
                     icon={<Users size={24} />}
                     content={
-                        <ul className="space-y-2">
+                        <ul className="space-y-5 text-left-list">
                             {projectData.meuPapel.map((item, i) => (
                                 <li key={i} className="flex items-start gap-2">
                                     <span className="text-teal-400 mt-1">•</span>
@@ -193,39 +182,80 @@ function buildSections(): ProjectSection[] {
         }
     ];
 
-    // Processo de Pesquisa como seções individuais
-    const totalProcesso = projectData.processoPesquisa.length;
-    const processoSections: ProjectSection[] = projectData.processoPesquisa.map((item, index) => ({
-        id: `processo-${index}`,
-        title: item.titulo,
-        subtitle: `Pesquisa • ${index + 1}/${totalProcesso}`,
+    // Processo de Pesquisa como uma única seção com bullet points
+    const processoSection: ProjectSection = {
+        id: 'processo-pesquisa',
+        title: 'Processo de Pesquisa',
+        subtitle: 'Pesquisa • 1/1',
         leftContent: null,
         mockupContent: (
             <SingleCard
-                title={item.titulo}
-                icon={<item.icon size={24} />}
-                content={<p>{item.descricao}</p>}
-                number={String(index + 1).padStart(2, '0')}
+                title="Processo de Pesquisa"
+                icon={<Search size={24} />}
+                content={
+                    <ul className="space-y-5 text-left-list">
+                        {projectData.processoPesquisa.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                                <span className="text-teal-400 mt-1">•</span>
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                }
+                number="01"
             />
         )
-    }));
+    };
 
-    // Descobertas como seções individuais
-    const totalDescobertas = projectData.descobertas.length;
-    const descobertasSections: ProjectSection[] = projectData.descobertas.map((item, index) => ({
-        id: `descoberta-${index}`,
-        title: item.titulo,
-        subtitle: `Descobertas • ${index + 1}/${totalDescobertas}`,
-        leftContent: null,
-        mockupContent: (
-            <SingleCard
-                title={item.titulo}
-                icon={<item.icon size={24} />}
-                content={<p>{item.descricao}</p>}
-                number={String(index + 1).padStart(2, '0')}
-            />
-        )
-    }));
+    // Descobertas divididas em duas seções com bullet points
+    const descobertasSections: ProjectSection[] = [
+        {
+            id: 'descobertas-1',
+            title: 'Descobertas & Definições',
+            subtitle: 'Descobertas • 1/2',
+            leftContent: null,
+            mockupContent: (
+                <SingleCard
+                    title="Descobertas"
+                    icon={<Lightbulb size={24} />}
+                    content={
+                        <ul className="space-y-5 text-left-list">
+                            {projectData.descobertas.slice(0, 2).map((item, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                    <span className="text-teal-400 mt-1">•</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    }
+                    number="01"
+                />
+            )
+        },
+        {
+            id: 'descobertas-2',
+            title: 'Descobertas & Definições',
+            subtitle: 'Descobertas • 2/2',
+            leftContent: null,
+            mockupContent: (
+                <SingleCard
+                    title="Descobertas"
+                    icon={<Lightbulb size={24} />}
+                    content={
+                        <ul className="space-y-5 text-left-list">
+                            {projectData.descobertas.slice(2, 4).map((item, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                    <span className="text-teal-400 mt-1">•</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    }
+                    number="02"
+                />
+            )
+        }
+    ];
 
     // Protótipo - uma seção por imagem (flatMap para expandir todas as imagens)
     const prototipoSections: ProjectSection[] = projectData.prototipo.telas.flatMap((tela, telaIndex) =>
@@ -251,65 +281,85 @@ function buildSections(): ProjectSection[] {
         })
     );
 
-    // Resultados como seções individuais
-    const totalResultados = projectData.resultados.negativos.length + projectData.resultados.positivos.length;
-    let resultadoIndex = 0;
-
+    // Resultados divididos em cards (Conquistas)
     const resultadosSections: ProjectSection[] = [
-        // Negativos primeiro
-        ...projectData.resultados.negativos.map((item) => {
-            resultadoIndex++;
-            return {
-                id: `resultado-negativo-${resultadoIndex}`,
-                title: 'Pontos de Atenção',
-                subtitle: `Resultados • ${resultadoIndex}/${totalResultados}`,
-                leftContent: null,
-                mockupContent: (
-                    <SingleCard
-                        title={item.titulo}
-                        icon={<XCircle size={24} className="text-amber-400" />}
-                        content={<p>{item.descricao}</p>}
-                        number={String(resultadoIndex).padStart(2, '0')}
-                    />
-                )
-            };
-        }),
-        // Positivos
-        ...projectData.resultados.positivos.map((item) => {
-            resultadoIndex++;
-            return {
-                id: `resultado-positivo-${resultadoIndex}`,
-                title: 'Conquistas',
-                subtitle: `Resultados • ${resultadoIndex}/${totalResultados}`,
-                leftContent: null,
-                mockupContent: (
-                    <SingleCard
-                        title={item.titulo}
-                        icon={<CheckCircle2 size={24} className="text-emerald-400" />}
-                        content={<p>{item.descricao}</p>}
-                        number={String(resultadoIndex).padStart(2, '0')}
-                    />
-                )
-            };
-        })
+        // Conquistas - Card 1 (2 primeiros)
+        {
+            id: 'resultados-positivos-1',
+            title: 'Resultados & Impacto',
+            subtitle: 'Resultados • 1/2',
+            leftSubtitle: 'Baseado em dados de indicadores qualitativos e padrões iniciais de adoção.',
+            leftContent: null,
+            mockupContent: (
+                <SingleCard
+                    title="Conquistas"
+                    icon={<CheckCircle2 size={24} className="text-emerald-400" />}
+                    content={
+                        <ul className="space-y-5 text-left-list">
+                            {projectData.resultados.positivos.slice(0, 2).map((item, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                    <span className="text-emerald-400 mt-1">•</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    }
+                    number="01"
+                />
+            )
+        },
+        // Conquistas - Card 2 (2 últimos)
+        {
+            id: 'resultados-positivos-2',
+            title: 'Resultados & Impacto',
+            subtitle: 'Resultados • 2/2',
+            leftSubtitle: 'Baseado em dados de indicadores qualitativos e padrões iniciais de adoção.',
+            leftContent: null,
+            mockupContent: (
+                <SingleCard
+                    title="Conquistas"
+                    icon={<CheckCircle2 size={24} className="text-emerald-400" />}
+                    content={
+                        <ul className="space-y-5 text-left-list">
+                            {projectData.resultados.positivos.slice(2, 4).map((item, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                    <span className="text-emerald-400 mt-1">•</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    }
+                    number="02"
+                />
+            )
+        }
     ];
 
-    // Lições como seções individuais
-    const totalLicoes = projectData.licoes.length;
-    const licoesSections: ProjectSection[] = projectData.licoes.map((item, index) => ({
-        id: `licao-${index}`,
-        title: item.categoria,
-        subtitle: `Aprendizados • ${index + 1}/${totalLicoes}`,
+    // Lições como uma única seção com bullet points
+    const licoesSection: ProjectSection = {
+        id: 'licoes',
+        title: 'Insights do Projeto',
+        subtitle: 'Insights • 1/1',
+        leftSubtitle: 'Principais lições estratégicas no processo de design.',
         leftContent: null,
         mockupContent: (
             <SingleCard
-                title={item.categoria}
+                title="Lições Aprendidas"
                 icon={<Lightbulb size={24} />}
-                content={<p>{item.descricao}</p>}
-                number={String(index + 1).padStart(2, '0')}
+                content={
+                    <ul className="space-y-5 text-left-list">
+                        {projectData.licoes.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                                <span className="text-teal-400 mt-1">•</span>
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                }
+                number="01"
             />
         )
-    }));
+    };
 
     return [
         // 1. Hero
@@ -388,16 +438,16 @@ function buildSections(): ProjectSection[] {
         },
         // 2-5. Overview (Resumo, Objetivo, Desafio, Meu Papel)
         ...overviewSections,
-        // 6-9. Processo de Pesquisa
-        ...processoSections,
-        // 10-17. Descobertas
+        // 6. Processo de Pesquisa
+        processoSection,
+        // 7-8. Descobertas
         ...descobertasSections,
         // 18-21. Protótipo
         ...prototipoSections,
         // 22-28. Resultados
         ...resultadosSections,
-        // 29-31. Lições
-        ...licoesSections
+        // Lições Aprendidas
+        licoesSection
     ];
 }
 

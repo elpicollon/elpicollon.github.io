@@ -549,6 +549,15 @@
 }
 
 @layer utilities {
+  .highlight-title {
+    font-weight: 600 !important;
+    color: #14b8a6 !important;
+  }
+
+  .text-left-list {
+    text-align: left !important;
+  }
+
   .pointer-events-none {
     pointer-events: none;
   }
