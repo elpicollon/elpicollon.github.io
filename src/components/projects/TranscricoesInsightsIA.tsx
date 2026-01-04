@@ -271,11 +271,8 @@ function buildSections(): ProjectSection[] {
                 id: `prototipo-${telaIndex}-${imagemIndex}`,
                 title: tela.titulo,
                 subtitle: `Protótipo • ${globalIndex}/${totalImagens}`,
-                leftContent: (
-                    <p className="text-zinc-600 leading-relaxed">
-                        {tela.descricao}
-                    </p>
-                ),
+                leftSubtitle: tela.descricao,
+                leftContent: null,
                 mockupContent: <SingleImage src={imagem} alt={`${tela.titulo} - Imagem ${imagemIndex + 1}`} />
             };
         })
