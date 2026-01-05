@@ -49,19 +49,19 @@ export function FooterNew() {
               <h4 className="text-black mb-6 font-medium">Navegação</h4>
               <ul className="space-y-3">
                 {[
-                  { label: 'Início', href: '#inicio' },
-                  { label: 'Projetos', href: '#projetos' },
-                  { label: 'Sobre', href: '#sobre' },
-                  { label: 'Expertise', href: '#expertise' },
+                  { label: 'Início', sectionId: 'inicio' },
+                  { label: 'Projetos', sectionId: 'projetos' },
+                  { label: 'Sobre', sectionId: 'sobre' },
+                  { label: 'Expertise', sectionId: 'expertise' },
                 ].map((item) => (
                   <li key={item.label}>
-                    <motion.a
-                      href={item.href}
+                    <motion.button
+                      onClick={() => document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' })}
                       whileHover={{ x: 5 }}
-                      className="text-zinc-600 hover:text-purple-600 transition-colors inline-block"
+                      className="text-zinc-600 hover:text-purple-600 transition-colors inline-block cursor-pointer font-[inherit] text-left bg-transparent border-none p-0"
                     >
                       {item.label}
-                    </motion.a>
+                    </motion.button>
                   </li>
                 ))}
                 <li>

@@ -1,18 +1,38 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import PicoloDesignLogo from '../imports/PicoloDesignLogo-9-474';
 import { useContactModal } from '../contexts/ContactModalContext';
+
+// Função para scroll suave até uma seção
+function scrollToSection(sectionId: string) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 
 export function MinimalNav() {
   const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
   const { openModal } = useContactModal();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Check if we're on the home page
   const isHomePage = location.pathname === '/';
+
+  // Função para navegar para home e scrollar para seção
+  const handleNavClick = (sectionId: string) => {
+    if (isHomePage) {
+      scrollToSection(sectionId);
+    } else {
+      navigate('/');
+      // Espera a navegação e então faz scroll
+      setTimeout(() => scrollToSection(sectionId), 100);
+    }
+  };
 
   const backgroundColor = useTransform(
     scrollY,
@@ -41,30 +61,16 @@ export function MinimalNav() {
         >
           <div className="flex items-center justify-between px-4 py-2 md:px-6 md:py-4">
             {/* Logo */}
-            {isHomePage ? (
-              <motion.a
-                href="#inicio"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="h-8 md:h-10 block"
-                style={{ width: 'auto', aspectRatio: '700/273' }}
-              >
-                <PicoloDesignLogo />
-              </motion.a>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="h-8 md:h-10 block"
-                style={{ width: 'auto', aspectRatio: '700/273' }}
-              >
-                <Link to="/#inicio">
-                  <PicoloDesignLogo />
-                </Link>
-              </motion.div>
-            )}
+            <motion.button
+              onClick={() => handleNavClick('inicio')}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="h-8 md:h-10 block cursor-pointer"
+              style={{ width: 'auto', aspectRatio: '700/273' }}
+            >
+              <PicoloDesignLogo />
+            </motion.button>
 
             {/* Desktop menu - Center - only show on lg screens */}
             <motion.div
@@ -74,39 +80,22 @@ export function MinimalNav() {
               className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2"
             >
               {[
-                { label: 'PROJETOS', href: '#projetos' },
-                { label: 'SOBRE', href: '#sobre' },
-                { label: 'EXPERTISE', href: '#expertise' },
-                { label: 'CONTATO', href: '#contato' }
+                { label: 'PROJETOS', sectionId: 'projetos' },
+                { label: 'SOBRE', sectionId: 'sobre' },
+                { label: 'EXPERTISE', sectionId: 'expertise' },
+                { label: 'CONTATO', sectionId: 'contato' }
               ].map((item, index) => (
-                isHomePage ? (
-                  <motion.a
-                    key={item.label}
-                    href={item.href}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                    whileHover={{ y: -2 }}
-                    className="text-xs text-zinc-500 hover:text-black transition-colors tracking-wider"
-                  >
-                    {item.label}
-                  </motion.a>
-                ) : (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                    whileHover={{ y: -2 }}
-                  >
-                    <Link
-                      to={`/${item.href}`}
-                      className="text-xs text-zinc-500 hover:text-black transition-colors tracking-wider"
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                )
+                <motion.button
+                  key={item.label}
+                  onClick={() => handleNavClick(item.sectionId)}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ y: -2 }}
+                  className="text-xs text-zinc-500 hover:text-black transition-colors tracking-wider cursor-pointer"
+                >
+                  {item.label}
+                </motion.button>
               ))}
             </motion.div>
 
@@ -147,11 +136,11 @@ export function MinimalNav() {
         className="fixed top-0 right-0 bottom-0 w-full lg:hidden bg-white z-[110] flex flex-col justify-center items-center gap-8"
       >
         {[
-          { label: 'Início', href: '#inicio', isModal: false },
-          { label: 'Projetos', href: '#projetos', isModal: false },
-          { label: 'Sobre', href: '#sobre', isModal: false },
-          { label: 'Expertise', href: '#expertise', isModal: false },
-          { label: 'Contato', href: '#contato', isModal: true }
+          { label: 'Início', sectionId: 'inicio', isModal: false },
+          { label: 'Projetos', sectionId: 'projetos', isModal: false },
+          { label: 'Sobre', sectionId: 'sobre', isModal: false },
+          { label: 'Expertise', sectionId: 'expertise', isModal: false },
+          { label: 'Contato', sectionId: 'contato', isModal: true }
         ].map((item, index) => (
           item.isModal ? (
             <motion.button
@@ -164,33 +153,17 @@ export function MinimalNav() {
             >
               {item.label}
             </motion.button>
-          ) : isHomePage ? (
-            <motion.a
+          ) : (
+            <motion.button
               key={item.label}
-              href={item.href}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
               transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
-              onClick={() => setIsOpen(false)}
-              className="text-4xl font-medium text-black hover:text-purple-600 transition-colors"
+              onClick={() => { setIsOpen(false); handleNavClick(item.sectionId); }}
+              className="text-4xl font-medium text-black hover:text-purple-600 transition-colors cursor-pointer"
             >
               {item.label}
-            </motion.a>
-          ) : (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
-              transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
-            >
-              <Link
-                to={`/${item.href}`}
-                onClick={() => setIsOpen(false)}
-                className="text-4xl font-medium text-black hover:text-purple-600 transition-colors"
-              >
-                {item.label}
-              </Link>
-            </motion.div>
+            </motion.button>
           )
         ))}
       </motion.div>

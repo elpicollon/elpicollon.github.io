@@ -103,8 +103,8 @@ export function HeroNew() {
             viewport={{ once: true }}
             className="hero-projects-button hidden md:flex items-center justify-center relative"
           >
-            <motion.a
-              href="#projetos"
+            <motion.button
+              onClick={() => document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' })}
               ref={buttonRef}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -149,7 +149,7 @@ export function HeroNew() {
                   </span>
                 </motion.div>
               </div>
-            </motion.a>
+            </motion.button>
           </motion.div>
         </div>
       </motion.div>
