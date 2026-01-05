@@ -14,7 +14,7 @@ export function HeroNew() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   return (
