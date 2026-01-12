@@ -1,14 +1,18 @@
-import { motion, useScroll, useSpring } from 'motion/react';
-import { useRef, useEffect } from 'react';
+import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate, useMotionValueEvent, AnimatePresence } from 'motion/react';
+import { useRef, useEffect, useState, ReactNode, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search } from 'lucide-react';
+import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
+import { TealParticleBackground } from '../TealParticleBackground';
+import { HeroParticleGrid } from '../HeroParticleGrid';
+import { RealisticMacBook } from '../RealisticMacBook';
 import { useContactModal } from '../../contexts/ContactModalContext';
-import { ProjectPageLayout, ProjectSection } from '../ProjectPageLayout';
-import { SingleCard, SingleImage, PlaceholderContent } from '../MockupContentComponents';
 
-// Dados do projeto
+// ============================================================================
+// PROJECT DATA
+// ============================================================================
+
 const projectData = {
     title: "Transcrições & Insights com IA",
     category: "Product Design",
@@ -21,28 +25,27 @@ const projectData = {
     desafio: <>Arquitetar a unificação de múltiplas fontes de dados (vídeo, ligações e transcrições) que eram dispostos em diferentes locais, integrando um volume denso de informações em um fluxo único e performático, reduzindo a carga cognitiva do usuário sem comprometer experiência de uso e viabilidade técnica.</>,
 
     meuPapel: [
-        <><span className="highlight-title">Discovery e Estratégia:</span> Diagnóstico de fricções e benchmarking competitivo para definição de requisitos.</>,
-        <><span className="highlight-title">Arquitetura e Interação:</span> Redesign da jornada para integrar vídeo e dados em um fluxo único.</>,
-        <><span className="highlight-title">Viabilidade Técnica:</span> Alinhamento com engenharia para implementação dos recursos de IA.</>,
-        <><span className="highlight-title">Validação e Refino:</span> Ajustes de usabilidade baseados em feedback qualitativo.</>,
+        { title: "Discovery e Estratégia", desc: "Diagnóstico de fricções e benchmarking competitivo para definição de requisitos." },
+        { title: "Arquitetura e Interação", desc: "Redesign da jornada para integrar vídeo e dados em um fluxo único." },
+        { title: "Viabilidade Técnica", desc: "Alinhamento com engenharia para implementação dos recursos de IA." },
+        { title: "Validação e Refino", desc: "Ajustes de usabilidade baseados em feedback qualitativo." },
     ],
 
     processoPesquisa: [
-        <><span className="highlight-title">Auditoria do Legado:</span> Análise heurística da versão anterior para mapear fricções e dívidas de experiência.</>,
-        <><span className="highlight-title">Dados Internos:</span> Cruzamento de chamados de Suporte e Vendas para validar dores reais e priorizar correções.</>,
-        <><span className="highlight-title">Benchmarking:</span> Estudo de padrões de interação em players como Apollo, Fireflies, tl;dv e Bluedot.</>,
-        <><span className="highlight-title">Viabilidade Técnica:</span> Validação precoce com engenharia para antecipar restrições e evitar retrabalho.</>,
+        { title: "Auditoria do Legado", desc: "Análise heurística da versão anterior para mapear fricções e dívidas de experiência." },
+        { title: "Dados Internos", desc: "Cruzamento de chamados de Suporte e Vendas para validar dores reais e priorizar correções." },
+        { title: "Benchmarking", desc: "Estudo de padrões de interação em players como Apollo, Fireflies, tl;dv e Bluedot." },
+        { title: "Viabilidade Técnica", desc: "Validação precoce com engenharia para antecipar restrições e evitar retrabalho." },
     ],
 
     descobertas: [
-        <><span className="highlight-title">Acesso à Inteligência:</span> Transformar um simples "log de reunião" em um hub de conteúdo pesquisável (transcrição e IA), eliminando a necessidade de assistir ao vídeo completo.</>,
-        <><span className="highlight-title">Centralização da Verdade:</span> Unificar calls internas e externas em uma visualização única, removendo a fricção de buscar registros dentro de pipelines de vendas.</>,
-        <><span className="highlight-title">Desbloqueio de Colaboração:</span> Compartilhamento fácil para que a informação flua entre Vendas, Suporte e Produto sem barreiras manuais.</>,
-        <><span className="highlight-title">Estratégia de Viralização:</span> Envio automático de resumos como alavanca de Product-Led Growth, estimulando a adoção espontânea por novos usuários.</>,
+        { title: "Acesso à Inteligência", desc: "Transformar um simples \"log de reunião\" em um hub de conteúdo pesquisável (transcrição e IA), eliminando a necessidade de assistir ao vídeo completo." },
+        { title: "Centralização da Verdade", desc: "Unificar calls internas e externas em uma visualização única, removendo a fricção de buscar registros dentro de pipelines de vendas." },
+        { title: "Desbloqueio de Colaboração", desc: "Compartilhamento fácil para que a informação flua entre Vendas, Suporte e Produto sem barreiras manuais." },
+        { title: "Estratégia de Viralização", desc: "Envio automático de resumos como alavanca de Product-Led Growth, estimulando a adoção espontânea por novos usuários." },
     ],
 
     prototipo: {
-        intro: "O protótipo final foi desenvolvido alinhado às expectativas dos stakeholders.",
         telas: [
             {
                 titulo: "Tela Inicial",
@@ -77,23 +80,24 @@ const projectData = {
         ]
     },
 
-    resultados: {
-        positivos: [
-            <><span className="highlight-title">Eficiência Operacional:</span> Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times.</>,
-            <><span className="highlight-title">Impacto Comercial:</span> A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes.</>,
-            <><span className="highlight-title">Growth e Adoção:</span> O redirecionamento automático pós-reunião impulsionou a descoberta orgânica da feature, integrando-a naturalmente ao fluxo diário sem custo de marketing.</>,
-            <><span className="highlight-title">Recuperação de Confiança:</span> Usuários detratores da versão anterior tornaram-se promotores da nova funcionalidade, validando a resolução das fricções críticas de usabilidade.</>,
-        ]
-    },
+    resultados: [
+        { title: "Eficiência Operacional", desc: "Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times." },
+        { title: "Impacto Comercial", desc: "A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes." },
+        { title: "Growth e Adoção", desc: "O redirecionamento automático pós-reunião impulsionou a descoberta orgânica da feature, integrando-a naturalmente ao fluxo diário sem custo de marketing." },
+        { title: "Recuperação de Confiança", desc: "Usuários detratores da versão anterior tornaram-se promotores da nova funcionalidade, validando a resolução das fricções críticas de usabilidade." },
+    ],
 
     licoes: [
-        <><span className="highlight-title">Shift-Left Dev:</span> A validação técnica na fase de ideação provou-se vital para calibração e eliminação de retrabalho.</>,
-        <><span className="highlight-title">Alavancas de Growth</span> O redirecionamento automático evidenciou que pequenas intervenções no fluxo podem gerar mais adoção orgânica do que grandes funcionalidades.</>,
-        <><span className="highlight-title">Dados como Premissa</span> A experiência reforçou que a definição de KPIs deve nascer junto com o projeto, garantindo a mensuração de sucesso no rollout.</>,
+        { title: "Shift-Left Dev", desc: "A validação técnica na fase de ideação provou-se vital para calibração e eliminação de retrabalho." },
+        { title: "Alavancas de Growth", desc: "O redirecionamento automático evidenciou que pequenas intervenções no fluxo podem gerar mais adoção orgânica do que grandes funcionalidades." },
+        { title: "Dados como Premissa", desc: "A experiência reforçou que a definição de KPIs deve nascer junto com o projeto, garantindo a mensuração de sucesso no rollout." },
     ]
 };
 
-// Scroll Progress Bar
+// ============================================================================
+// SCROLL PROGRESS BAR
+// ============================================================================
+
 function ScrollProgress() {
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
@@ -110,418 +114,836 @@ function ScrollProgress() {
     );
 }
 
-// Build sections array
-function buildSections(): ProjectSection[] {
-    // Overview cards como seções individuais (4 seções)
-    const totalOverview = 4;
-    const overviewSections: ProjectSection[] = [
-        {
-            id: 'resumo',
-            title: 'Resumo',
-            subtitle: `Visão Geral • 1/${totalOverview}`,
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Resumo"
-                    icon={<Sparkles size={24} />}
-                    content={<p>{projectData.resumo}</p>}
-                    number="01"
-                />
-            )
-        },
-        {
-            id: 'objetivo',
-            title: 'Objetivo',
-            subtitle: `Visão Geral • 2/${totalOverview}`,
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Objetivo"
-                    icon={<Target size={24} />}
-                    content={<p>{projectData.objetivo}</p>}
-                    number="02"
-                />
-            )
-        },
-        {
-            id: 'desafio',
-            title: 'Desafio',
-            subtitle: `Visão Geral • 3/${totalOverview}`,
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Desafio"
-                    icon={<Zap size={24} />}
-                    content={<p>{projectData.desafio}</p>}
-                    number="03"
-                />
-            )
-        },
-        {
-            id: 'meu-papel',
-            title: 'Meu Papel',
-            subtitle: `Visão Geral • 4/${totalOverview}`,
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Meu Papel"
-                    icon={<Users size={24} />}
-                    content={
-                        <ul className="space-y-5 text-left-list">
-                            {projectData.meuPapel.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <span className="text-teal-400 mt-1">•</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    }
-                    number="04"
-                />
-            )
-        }
-    ];
+// ============================================================================
+// ANIMATED COMPONENTS
+// ============================================================================
 
-    // Processo de Pesquisa como uma única seção com bullet points
-    const processoSection: ProjectSection = {
-        id: 'processo-pesquisa',
-        title: 'Processo de Pesquisa',
-        subtitle: 'Pesquisa • 1/1',
-        leftContent: null,
-        mockupContent: (
-            <SingleCard
-                title="Processo de Pesquisa"
-                icon={<Search size={24} />}
-                content={
-                    <ul className="space-y-5 text-left-list">
-                        {projectData.processoPesquisa.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                                <span className="text-teal-400 mt-1">•</span>
-                                <span>{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                }
-                number="01"
-            />
-        )
-    };
+// Big decorative number
+function BigNumber({ number, className = "" }: { number: string; className?: string }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-    // Descobertas divididas em duas seções com bullet points
-    const descobertasSections: ProjectSection[] = [
-        {
-            id: 'descobertas-1',
-            title: 'Descobertas & Definições',
-            subtitle: 'Descobertas • 1/2',
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Descobertas"
-                    icon={<Lightbulb size={24} />}
-                    content={
-                        <ul className="space-y-5 text-left-list">
-                            {projectData.descobertas.slice(0, 2).map((item, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <span className="text-teal-400 mt-1">•</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    }
-                    number="01"
-                />
-            )
-        },
-        {
-            id: 'descobertas-2',
-            title: 'Descobertas & Definições',
-            subtitle: 'Descobertas • 2/2',
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Descobertas"
-                    icon={<Lightbulb size={24} />}
-                    content={
-                        <ul className="space-y-5 text-left-list">
-                            {projectData.descobertas.slice(2, 4).map((item, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <span className="text-teal-400 mt-1">•</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    }
-                    number="02"
-                />
-            )
-        }
-    ];
-
-    // Protótipo - uma seção por imagem (flatMap para expandir todas as imagens)
-    const prototipoSections: ProjectSection[] = projectData.prototipo.telas.flatMap((tela, telaIndex) =>
-        tela.imagens.map((imagem, imagemIndex) => {
-            // Calcular índice global da imagem
-            const totalImagensBefore = projectData.prototipo.telas
-                .slice(0, telaIndex)
-                .reduce((acc, t) => acc + t.imagens.length, 0);
-            const globalIndex = totalImagensBefore + imagemIndex + 1;
-            const totalImagens = projectData.prototipo.telas.reduce((acc, t) => acc + t.imagens.length, 0);
-
-            return {
-                id: `prototipo-${telaIndex}-${imagemIndex}`,
-                title: tela.titulo,
-                subtitle: `Protótipo • ${globalIndex}/${totalImagens}`,
-                leftSubtitle: tela.descricao,
-                leftContent: null,
-                mockupContent: <SingleImage src={imagem} alt={`${tela.titulo} - Imagem ${imagemIndex + 1}`} />
-            };
-        })
+    return (
+        <motion.span
+            ref={ref}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 0.06, scale: 1 } : {}}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className={`absolute font-bold text-[12rem] md:text-[18rem] lg:text-[24rem] text-slate-900 select-none pointer-events-none leading-none ${className}`}
+            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+        >
+            {number}
+        </motion.span>
     );
-
-    // Resultados divididos em cards (Conquistas)
-    const resultadosSections: ProjectSection[] = [
-        // Conquistas - Card 1 (2 primeiros)
-        {
-            id: 'resultados-positivos-1',
-            title: 'Resultados & Impacto',
-            subtitle: 'Resultados • 1/2',
-            leftSubtitle: 'Baseado em dados de indicadores qualitativos e padrões iniciais de adoção.',
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Conquistas"
-                    icon={<CheckCircle2 size={24} className="text-emerald-400" />}
-                    content={
-                        <ul className="space-y-5 text-left-list">
-                            {projectData.resultados.positivos.slice(0, 2).map((item, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <span className="text-emerald-400 mt-1">•</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    }
-                    number="01"
-                />
-            )
-        },
-        // Conquistas - Card 2 (2 últimos)
-        {
-            id: 'resultados-positivos-2',
-            title: 'Resultados & Impacto',
-            subtitle: 'Resultados • 2/2',
-            leftSubtitle: 'Baseado em dados de indicadores qualitativos e padrões iniciais de adoção.',
-            leftContent: null,
-            mockupContent: (
-                <SingleCard
-                    title="Conquistas"
-                    icon={<CheckCircle2 size={24} className="text-emerald-400" />}
-                    content={
-                        <ul className="space-y-5 text-left-list">
-                            {projectData.resultados.positivos.slice(2, 4).map((item, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <span className="text-emerald-400 mt-1">•</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    }
-                    number="02"
-                />
-            )
-        }
-    ];
-
-    // Lições como uma única seção com bullet points
-    const licoesSection: ProjectSection = {
-        id: 'licoes',
-        title: 'Insights do Projeto',
-        subtitle: 'Insights • 1/1',
-        leftSubtitle: 'Principais lições estratégicas no processo de design.',
-        leftContent: null,
-        mockupContent: (
-            <SingleCard
-                title="Lições Aprendidas"
-                icon={<Lightbulb size={24} />}
-                content={
-                    <ul className="space-y-5 text-left-list">
-                        {projectData.licoes.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                                <span className="text-teal-400 mt-1">•</span>
-                                <span>{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                }
-                number="01"
-            />
-        )
-    };
-
-    return [
-        // 1. Hero
-        {
-            id: 'hero',
-            title: '',
-            subtitle: '',
-            leftContent: (
-                <div>
-                    {/* Back Button */}
-                    <Link
-                        to="/"
-                        className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-600 transition-colors group mb-8"
-                    >
-                        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="text-sm font-medium uppercase tracking-wider">Voltar</span>
-                    </Link>
-
-                    {/* Title */}
-                    <div className="mb-8">
-                        <h1
-                            className="font-bold text-[#0f172a] tracking-tight leading-[1.05] whitespace-nowrap"
-                            style={{ fontSize: 'clamp(2.3rem, 4.5vw, 5rem)' }}
-                        >
-                            Transcrições &
-                        </h1>
-                        <h1
-                            className="font-bold tracking-tight leading-[1.05] whitespace-nowrap"
-                            style={{ fontSize: 'clamp(2.3rem, 4.5vw, 5rem)', color: '#0d9488', marginTop: '-0.15em' }}
-                        >
-                            Insights com IA
-                        </h1>
-                    </div>
-
-                    {/* Tags */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        viewport={{ once: true }}
-                        className="flex flex-wrap gap-4 items-center mb-16"
-                    >
-                        <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                            <span className="text-sm md:text-base font-medium text-slate-600">
-                                Product Design
-                            </span>
-                        </div>
-                        <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                            <span className="text-sm md:text-base font-medium text-slate-600">
-                                2024
-                            </span>
-                        </div>
-                    </motion.div>
-
-                    {/* Scroll Indicator */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1, duration: 1 }}
-                        className="flex items-center gap-4"
-                    >
-                        <div className="w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
-                            <motion.div
-                                animate={{ y: [0, 12, 0] }}
-                                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                                className="w-1.5 h-1.5 bg-slate-600 rounded-full"
-                            />
-                        </div>
-                        <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
-                            Scroll to explore
-                        </span>
-                    </motion.div>
-                </div>
-            ),
-            mockupContent: <PlaceholderContent text="Imagem de capa do projeto" />
-        },
-        // 2-5. Overview (Resumo, Objetivo, Desafio, Meu Papel)
-        ...overviewSections,
-        // 6. Processo de Pesquisa
-        processoSection,
-        // 7-8. Descobertas
-        ...descobertasSections,
-        // 18-21. Protótipo
-        ...prototipoSections,
-        // 22-28. Resultados
-        ...resultadosSections,
-        // Lições Aprendidas
-        licoesSection
-    ];
 }
 
-export function TranscricoesInsightsIA() {
-    const { openModal } = useContactModal();
-    const containerRef = useRef<HTMLDivElement>(null);
+// Animated text reveal
+function RevealText({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-50px" });
 
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+            {children}
+        </motion.div>
+    );
+}
+
+// Staggered list
+function StaggeredList({ items, renderItem }: { items: { title: string; desc: string }[]; renderItem: (item: { title: string; desc: string }, index: number) => ReactNode }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+    return (
+        <div ref={ref} className="space-y-6">
+            {items.map((item, index) => (
+                <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
+                >
+                    {renderItem(item, index)}
+                </motion.div>
+            ))}
+        </div>
+    );
+}
+
+
+
+// Section wrapper - content-driven height
+// Section wrapper - content-driven height
+const ChapterSection = forwardRef<HTMLElement, { children: ReactNode; className?: string; id?: string }>(
+    ({ children, className = "", id }, ref) => {
+        return (
+            <section
+                ref={ref}
+                id={id}
+                className={`relative overflow-hidden py-section ${className}`}
+            >
+                {children}
+            </section>
+        );
+    }
+);
+ChapterSection.displayName = 'ChapterSection';
+
+// ============================================================================
+// PAGE SECTIONS
+// ============================================================================
+
+// Hero Section
+function HeroSection() {
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end start"]
+    });
+
+    const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+    const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+
+    // Mockup slide animation - slides right when scrolling down
+    // Maps scroll progress to X position: 0% at top, 80% when hero is scrolled out
+    const mockupXRaw = useTransform(scrollYProgress, [0, 1], [0, 80]);
+    // Use spring for smoother animation
+    const mockupXSpring = useSpring(mockupXRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
+    // Convert to percentage string for transform
+    const mockupX = useMotionTemplate`${mockupXSpring}%`;
+
+    return (
+        <section
+            ref={containerRef}
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] z-50 isolate mobile-tiny-fix pt-24 lg:pt-0"
+        >
+            {/* Background with particle effect */}
+            <div className="absolute inset-0 z-0">
+                <TealParticleBackground />
+                {/* Soft gradient for depth */}
+                <div className="absolute inset-0 bg-gradient-radial from-teal-500/5 via-transparent to-transparent pointer-events-none" />
+            </div>
+
+            {/* Content Container - Matching Home Structure */}
+            <div className="relative z-10 w-full px-6 md:px-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
+                    {/* Left Content */}
+                    <motion.div
+                        style={{ y, opacity, scale }}
+                        className="relative"
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            viewport={{ once: true }}
+                            className="flex flex-col items-start"
+                        >
+                            {/* Back Button */}
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
+                                className="relative lg:absolute lg:top-0 lg:left-0 z-20 mb-2 lg:mb-0"
+                            >
+                                <Link
+                                    to="/"
+                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-500 transition-colors group"
+                                >
+                                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                                    <span className="text-sm font-medium uppercase tracking-wider">Voltar</span>
+                                </Link>
+                            </motion.div>
+
+                            {/* Title */}
+                            <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
+                                <div className="flex flex-col gap-2">
+                                    <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
+                                        Transcrições &
+                                    </h1>
+                                    <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#14b8a6] to-[#0d9488] tracking-tight leading-[1.1]">
+                                        Insights com IA
+                                    </h1>
+                                </div>
+                            </div>
+
+                            {/* Tags */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                                viewport={{ once: true }}
+                                className="flex flex-wrap gap-4 items-center mb-16"
+                            >
+                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                                    <span className="text-sm md:text-base font-medium text-slate-600">
+                                        Product Design
+                                    </span>
+                                </div>
+                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                                    <span className="text-sm md:text-base font-medium text-slate-600">
+                                        2024
+                                    </span>
+                                </div>
+                            </motion.div>
+
+                            {/* Scroll Indicator */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1, duration: 1 }}
+                                className="flex items-center gap-4"
+                            >
+                                <div className="scroll-indicator w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
+                                    <motion.div
+                                        animate={{ y: [0, 12, 0] }}
+                                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                        className="scroll-indicator w-1.5 h-1.5 bg-slate-600 rounded-full"
+                                    />
+                                </div>
+                                <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
+                                    Scroll to explore
+                                </span>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Right Side - MacBook Mockup (extends beyond screen) */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="hidden lg:flex items-center relative"
+                        style={{ marginRight: '-15%', x: mockupX }}
+                    >
+                        <RealisticMacBook className="w-[110%] max-w-none">
+                            <div className="w-full h-full bg-gradient-to-br from-teal-600 to-teal-800 flex items-center justify-center">
+                                <div className="text-center text-white/60">
+                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-white/30 flex items-center justify-center">
+                                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <p className="text-sm">Imagem de capa do projeto</p>
+                                </div>
+                            </div>
+                        </RealisticMacBook>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+// Overview Section (Resumo, Objetivo, Desafio)
+function OverviewSection() {
+    return (
+        <ChapterSection id="overview" className="bg-white">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="01" className="-top-20 -left-10 md:-left-20" />
+
+                <div className="relative z-10">
+                    <RevealText>
+                        <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            Visão Geral
+                        </span>
+                    </RevealText>
+
+                    <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+                        {/* Left: Title */}
+                        <div>
+                            <RevealText delay={0.1}>
+                                <h2
+                                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-8"
+                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                >
+                                    O Projeto
+                                </h2>
+                            </RevealText>
+                            <RevealText delay={0.2}>
+                                <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full mb-8" />
+                            </RevealText>
+                            <RevealText delay={0.3}>
+                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+                                    {projectData.resumo}
+                                </p>
+                            </RevealText>
+                        </div>
+
+                        {/* Right: Cards */}
+                        <div className="space-y-8">
+                            <RevealText delay={0.4}>
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <Target className="w-6 h-6 text-teal-600" />
+                                        <h3 className="text-xl font-semibold text-slate-900">Objetivo</h3>
+                                    </div>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        {projectData.objetivo}
+                                    </p>
+                                </div>
+                            </RevealText>
+
+                            <RevealText delay={0.5}>
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <Zap className="w-6 h-6 text-amber-500" />
+                                        <h3 className="text-xl font-semibold text-slate-900">Desafio</h3>
+                                    </div>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        {projectData.desafio}
+                                    </p>
+                                </div>
+                            </RevealText>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// Role Section (Meu Papel)
+function RoleSection() {
+    return (
+        <ChapterSection id="role" className="bg-slate-50">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="02" className="-top-20 -right-10 md:-right-20" />
+
+                <div className="relative z-10 grid lg:grid-cols-2 gap-16 lg:gap-24">
+                    <div>
+                        <RevealText>
+                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Contribuição
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-8"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                Meu Papel
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                        </RevealText>
+                    </div>
+
+                    <div>
+                        <StaggeredList
+                            items={projectData.meuPapel}
+                            renderItem={(item) => (
+                                <div className="flex gap-6 items-start group">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center group-hover:bg-teal-500 transition-colors">
+                                        <Users className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-slate-900 text-lg mb-1">{item.title}</h3>
+                                        <p className="text-slate-600">{item.desc}</p>
+                                    </div>
+                                </div>
+                            )}
+                        />
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// Research Section
+function ResearchSection() {
+    return (
+        <ChapterSection id="research" className="bg-white">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="03" className="-top-20 -left-10 md:-left-20" />
+
+                <div className="relative z-10">
+                    <div className="lg:max-w-xl mb-10">
+                        <RevealText>
+                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Pesquisa
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                Processo de <br />Pesquisa
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                        </RevealText>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {projectData.processoPesquisa.map((item, index) => (
+                            <RevealText key={index} delay={0.2 + index * 0.1}>
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-teal-300 transition-colors group">
+                                    <div className="flex items-start gap-4">
+                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-teal-200 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                            {String(index + 1).padStart(2, '0')}
+                                        </span>
+                                        <div className="pt-2">
+                                            <h3 className="font-semibold text-slate-900 text-xl mb-2">{item.title}</h3>
+                                            <p className="text-slate-600">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </RevealText>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// Discoveries Section
+function DiscoveriesSection() {
+    return (
+        <ChapterSection id="discoveries" className="bg-slate-50">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="04" className="-top-20 -right-10 md:-right-20" />
+
+                <div className="relative z-10">
+                    <div className="text-center mb-10">
+                        <RevealText>
+                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Descobertas
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                Insights Principais
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full mx-auto" />
+                        </RevealText>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {projectData.descobertas.map((item, index) => (
+                            <RevealText key={index} delay={0.2 + index * 0.1}>
+                                <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-teal-300 transition-all group h-full shadow-sm hover:shadow-md">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <Lightbulb className="w-6 h-6 text-teal-600" />
+                                        <h3 className="font-semibold text-slate-900 text-xl">{item.title}</h3>
+                                    </div>
+                                    <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                                </div>
+                            </RevealText>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// Prototype Section with Sticky TV Effect
+function PrototypeSection() {
+    const containerRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
+
+    // Content data - Flattened to show every image as a distinct slide
+    const telas = projectData.prototipo.telas;
+    const allSlides = telas.flatMap(tela =>
+        tela.imagens.map((img, index) => ({
+            ...tela,
+            imagem: img,
+            // Add (X/Y) to title if multiple images
+            tituloDisplay: tela.imagens.length > 1 ? `${tela.titulo} (${index + 1}/${tela.imagens.length})` : tela.titulo
+        }))
+    );
+    const totalSlides = allSlides.length;
+
+    // State for current slide and transition effect
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isChangingChannel, setIsChangingChannel] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
+    // Map scroll progress to slide index - ensure one slide per scroll section
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        // Don't change slides while transitioning
+        if (isTransitioning) return;
+
+        // Calculate which slide should be active based on scroll
+        // Each slide gets an equal portion of the scroll range
+        const slideIndex = Math.floor(latest * totalSlides);
+        // Clamp index to valid range
+        const targetIndex = Math.min(Math.max(slideIndex, 0), totalSlides - 1);
+
+        if (targetIndex !== currentSlide) {
+            // Only allow moving one slide at a time
+            const direction = targetIndex > currentSlide ? 1 : -1;
+            const nextSlide = currentSlide + direction;
+            triggerChannelChange(nextSlide);
+        }
+    });
+
+    const triggerChannelChange = (newIndex: number) => {
+        if (isTransitioning) return;
+
+        setIsTransitioning(true);
+        setIsChangingChannel(true);
+
+        // Small delay to show static before switching content
+        setTimeout(() => {
+            setCurrentSlide(newIndex);
+            // Hide static after a short burst
+            setTimeout(() => {
+                setIsChangingChannel(false);
+                // Allow next transition after animation completes
+                setTimeout(() => {
+                    setIsTransitioning(false);
+                }, 200);
+            }, 200);
+        }, 100);
+    };
+
+    return (
+        <ChapterSection ref={containerRef} id="prototype" className="relative bg-gradient-to-br from-slate-900 to-slate-800 text-white min-h-[600vh] !overflow-visible">
+            {/* Sticky Container */}
+            <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden px-6 md:px-12 py-16 md:py-20">
+
+                {/* Big Number - Behind Mockup */}
+                <span
+                    className="absolute right-4 md:right-12 top-16 md:top-20 text-[12rem] md:text-[20rem] lg:text-[28rem] font-bold text-white/[0.03] leading-none select-none pointer-events-none z-0"
+                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                >
+                    05
+                </span>
+
+                {/* Vertical Title - Left Edge, rotated bottom-to-top */}
+                <span
+                    className="absolute left-4 md:left-8 lg:left-12 top-[100%] text-[5rem] md:text-[8rem] lg:text-[12rem] font-bold text-teal-400/20 leading-none select-none pointer-events-none z-5 whitespace-nowrap"
+                    style={{
+                        fontFamily: 'Space Grotesk, sans-serif',
+                        transform: 'translateY(-50%) rotate(-90deg)',
+                        transformOrigin: 'left center'
+                    }}
+                >
+                    Protótipo
+                </span>
+
+                {/* Central MacBook Mockup */}
+                <div className="relative z-10 w-full max-w-5xl flex-1 max-h-[calc(100vh-20rem)] flex items-center justify-center">
+                    <RealisticMacBook className="w-full h-full max-w-none shadow-2xl shadow-black/50">
+                        <div className="relative w-full h-full bg-black overflow-hidden group">
+                            {/* Screen Content */}
+                            <div className="absolute inset-0">
+                                {/* Current Image */}
+                                <img
+                                    src={allSlides[currentSlide].imagem}
+                                    alt={allSlides[currentSlide].titulo}
+                                    className={`w-full h-full object-contain transition-opacity duration-100 ${isChangingChannel ? 'opacity-50' : 'opacity-100'}`}
+                                />
+                            </div>
+
+                            {/* Static Noise Overlay (TV Glitch) */}
+                            <AnimatePresence>
+                                {isChangingChannel && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        className="absolute inset-0 z-20 pointer-events-none mix-blend-hard-light"
+                                    >
+                                        {/* CSS Noise Pattern Generation */}
+                                        <div className="w-full h-full bg-slate-900" style={{
+                                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
+                                            filter: 'contrast(150%) brightness(100%)',
+                                            backgroundSize: '200px 200px'
+                                        }} />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Title Overlay - Bottom Left Inside Mockup */}
+                            <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
+                                <AnimatePresence mode="wait">
+                                    {!isChangingChannel && (
+                                        <motion.div
+                                            key={currentSlide}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -20 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="relative p-4 md:p-6 lg:p-8"
+                                        >
+                                            {/* Localized Gradient Background - Only behind text */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent rounded-t-xl" />
+
+                                            <div className="relative">
+                                                <h3
+                                                    className="text-lg md:text-2xl lg:text-3xl font-bold text-white tracking-tight"
+                                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                                >
+                                                    {allSlides[currentSlide].tituloDisplay}
+                                                </h3>
+                                                <p className="text-slate-300 mt-1 md:mt-2 max-w-xl text-xs md:text-sm lg:text-base">
+                                                    {allSlides[currentSlide].descricao}
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
+                                {/* Progress Bar - Bottom of screen */}
+                                <div className="absolute bottom-0 left-0 right-0 z-50 h-1 bg-white/10">
+                                    <motion.div
+                                        className="h-full bg-gradient-to-r from-teal-400 to-teal-500"
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+                                        transition={{ duration: 0.3, ease: "easeOut" }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </RealisticMacBook>
+                </div>
+
+                {/* Navigation Buttons */}
+                <div className="relative z-20 flex items-center gap-4 mt-4 md:mt-6 flex-shrink-0">
+                    <button
+                        onClick={() => currentSlide > 0 && triggerChannelChange(currentSlide - 1)}
+                        disabled={currentSlide === 0 || isTransitioning}
+                        className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all ${currentSlide === 0 || isTransitioning
+                            ? 'border-white/20 text-white/20 cursor-not-allowed'
+                            : 'border-white/40 text-white/60 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/10'
+                            }`}
+                        aria-label="Slide anterior"
+                    >
+                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <span className="text-white/60 text-sm md:text-base font-medium min-w-[60px] text-center">
+                        {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
+                    </span>
+
+                    <button
+                        onClick={() => currentSlide < totalSlides - 1 && triggerChannelChange(currentSlide + 1)}
+                        disabled={currentSlide === totalSlides - 1 || isTransitioning}
+                        className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all ${currentSlide === totalSlides - 1 || isTransitioning
+                            ? 'border-white/20 text-white/20 cursor-not-allowed'
+                            : 'border-white/40 text-white/60 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/10'
+                            }`}
+                        aria-label="Próximo slide"
+                    >
+                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Scroll Hint */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.5 }}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-xs md:text-sm font-medium tracking-widest uppercase"
+                >
+                    Role para navegar
+                </motion.div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// Results Section
+function ResultsSection() {
+    return (
+        <ChapterSection id="results" className="bg-white">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="06" className="-top-20 -right-10 md:-right-20" />
+
+                <div className="relative z-10">
+                    <div className="lg:max-w-xl mb-10">
+                        <RevealText>
+                            <span className="text-emerald-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Resultados
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                Impacto do <br />Projeto
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full" />
+                        </RevealText>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {projectData.resultados.map((item, index) => (
+                            <RevealText key={index} delay={0.2 + index * 0.1}>
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 hover:border-emerald-300 transition-colors group h-full">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <CheckCircle2 className="w-6 h-6 text-emerald-500" />
+                                        <h3 className="font-semibold text-slate-900 text-xl">{item.title}</h3>
+                                    </div>
+                                    <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                                </div>
+                            </RevealText>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// Lessons Section
+function LessonsSection() {
+    return (
+        <ChapterSection id="lessons" className="bg-slate-50">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="07" className="-top-20 -left-10 md:-left-20" />
+
+                <div className="relative z-10">
+                    <div className="text-center mb-10">
+                        <RevealText>
+                            <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Aprendizados
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                Lições Aprendidas
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full mx-auto" />
+                        </RevealText>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {projectData.licoes.map((item, index) => (
+                            <RevealText key={index} delay={0.2 + index * 0.1}>
+                                <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-purple-300 transition-colors group text-center h-full">
+                                    <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 transition-colors">
+                                        <Sparkles className="w-7 h-7 text-purple-600 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <h3 className="font-semibold text-slate-900 text-xl mb-3">{item.title}</h3>
+                                    <p className="text-slate-600">{item.desc}</p>
+                                </div>
+                            </RevealText>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// CTA Section
+function CTASection() {
+    const { openModal } = useContactModal();
+
+    return (
+        <section className="py-32 px-6 md:px-12 bg-[#f8fafc] relative overflow-hidden flex items-center justify-center">
+            {/* Background Effects */}
+            <div className="absolute inset-0 z-0">
+                <HeroParticleGrid />
+                <div className="absolute inset-0 bg-gradient-radial from-violet-500/5 via-transparent to-transparent pointer-events-none" />
+            </div>
+
+            <div className="max-w-4xl mx-auto relative z-10 text-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="flex flex-col items-center gap-8"
+                >
+                    <div className="max-w-2xl">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                            Vamos criar algo incrível juntos?
+                        </h2>
+                        <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
+                            Se você gostou deste projeto e quer discutir como posso ajudar sua equipe, entre em contato!
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-center gap-6 mt-4">
+                        <motion.button
+                            onClick={openModal}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-all font-medium shadow-lg shadow-purple-300/50 whitespace-nowrap cursor-pointer"
+                        >
+                            Entre em Contato
+                        </motion.button>
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <Link
+                                to="/"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-4 text-purple-600 hover:text-purple-700 font-medium whitespace-nowrap"
+                            >
+                                <ArrowLeft size={18} />
+                                Voltar aos Projetos
+                            </Link>
+                        </motion.div>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
+export function TranscricoesInsightsIA() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const sections = buildSections();
+    return (
+        <div className="bg-white">
+            <ScrollProgress />
+            <MinimalNav />
 
-    // CTA e Footer fora do layout com MacBook
-    const footerContent = (
-        <>
-            {/* CTA Section */}
-            <section className="min-h-[calc(100vh-100px)] flex items-center justify-center py-20 px-6 md:px-12 bg-gradient-to-br from-purple-50 via-white to-violet-50 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-72 h-72 bg-purple-200 rounded-full blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2" />
-                <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-200 rounded-full blur-3xl opacity-30 translate-x-1/2 translate-y-1/2" />
-
-                <div className="max-w-6xl mx-auto relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                        className="flex flex-col lg:flex-row items-center justify-between gap-12 p-8 md:p-12 rounded-3xl bg-white/70 backdrop-blur-xl shadow-xl"
-                    >
-                        <div className="text-center lg:text-left max-w-xl">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-800 mb-4">
-                                Vamos criar algo incrível juntos?
-                            </h2>
-                            <p className="text-zinc-600 text-lg">
-                                Se você gostou deste projeto e quer discutir como posso ajudar sua equipe, entre em contato!
-                            </p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-4">
-                            <motion.button
-                                onClick={openModal}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-all font-medium shadow-lg shadow-purple-300 whitespace-nowrap cursor-pointer"
-                            >
-                                Entre em Contato
-                            </motion.button>
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Link
-                                    to="/"
-                                    className="inline-flex items-center justify-center gap-2 px-8 py-4 text-purple-600 rounded-full hover:bg-purple-50 transition-all font-medium whitespace-nowrap"
-                                >
-                                    <ArrowLeft size={18} />
-                                    Voltar aos Projetos
-                                </Link>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
+            <main>
+                <HeroSection />
+                <OverviewSection />
+                <RoleSection />
+                <ResearchSection />
+                <DiscoveriesSection />
+                <PrototypeSection />
+                <ResultsSection />
+                <LessonsSection />
+                <CTASection />
+            </main>
 
             <FooterNew />
-        </>
-    );
-
-    return (
-        <div ref={containerRef}>
-            <ScrollProgress />
-
-            <ProjectPageLayout
-                sections={sections}
-                headerContent={<MinimalNav />}
-                footerContent={footerContent}
-            />
         </div>
     );
 }

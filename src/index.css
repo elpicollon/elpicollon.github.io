@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
 
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 @layer properties {
@@ -560,6 +560,46 @@
 
   .pointer-events-none {
     pointer-events: none;
+  }
+
+  /* Project page utilities */
+  .min-h-hero {
+    min-height: 85vh;
+  }
+
+  .py-section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .bg-hero-gradient {
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  }
+
+  .pt-hero {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .hero-title-project {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+
+  @media (min-width: 640px) {
+    .hero-title-project {
+      font-size: 3.75rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-title-project {
+      font-size: 6rem;
+    }
+  }
+
+  .text-teal-500 {
+    color: #14b8a6;
   }
 
   .absolute {
