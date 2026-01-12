@@ -621,20 +621,20 @@ function PrototypeSection() {
 
     return (
         <ChapterSection ref={containerRef} id="prototype" className="relative bg-gradient-to-br from-slate-900 to-slate-800 text-white min-h-[600vh] !overflow-visible">
-            {/* Sticky Container */}
-            <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden px-6 md:px-12 py-16 md:py-20">
+            {/* Sticky Container - layout with proper spacing */}
+            <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden px-4 sm:px-6 md:px-12 pt-20 md:pt-24 pb-4 md:pb-6">
 
                 {/* Big Number - Behind Mockup */}
                 <span
-                    className="absolute right-4 md:right-12 top-16 md:top-20 text-[12rem] md:text-[20rem] lg:text-[28rem] font-bold text-white/[0.03] leading-none select-none pointer-events-none z-0"
+                    className="absolute right-2 sm:right-4 md:right-12 top-12 sm:top-16 md:top-20 text-[8rem] sm:text-[12rem] md:text-[20rem] lg:text-[28rem] font-bold text-white/[0.03] leading-none select-none pointer-events-none z-0"
                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                 >
                     05
                 </span>
 
-                {/* Vertical Title - Left Edge, rotated bottom-to-top */}
+                {/* Vertical Title - Left Edge, rotated */}
                 <span
-                    className="absolute left-4 md:left-8 lg:left-12 top-[100%] text-[5rem] md:text-[8rem] lg:text-[12rem] font-bold text-teal-400/20 leading-none select-none pointer-events-none z-5 whitespace-nowrap"
+                    className="absolute left-2 sm:left-4 md:left-8 lg:left-12 top-[100%] text-[3rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] font-bold text-teal-400/20 leading-none select-none pointer-events-none z-5 whitespace-nowrap"
                     style={{
                         fontFamily: 'Space Grotesk, sans-serif',
                         transform: 'translateY(-50%) rotate(-90deg)',
@@ -644,21 +644,39 @@ function PrototypeSection() {
                     Protótipo
                 </span>
 
-                {/* Central MacBook Mockup */}
-                <div className="relative z-10 w-full max-w-5xl flex-1 max-h-[calc(100vh-20rem)] flex items-center justify-center">
-                    <RealisticMacBook className="w-full h-full max-w-none shadow-2xl shadow-black/50">
-                        <div className="relative w-full h-full bg-black overflow-hidden group">
-                            {/* Screen Content */}
-                            <div className="absolute inset-0">
-                                {/* Current Image */}
-                                <img
-                                    src={allSlides[currentSlide].imagem}
-                                    alt={allSlides[currentSlide].titulo}
-                                    className={`w-full h-full object-contain transition-opacity duration-100 ${isChangingChannel ? 'opacity-50' : 'opacity-100'}`}
-                                />
-                            </div>
+                {/* Mobile Title - Above Mockup (visible only on mobile) */}
+                <AnimatePresence mode="wait">
+                    {!isChangingChannel && (
+                        <motion.div
+                            key={`mobile-title-${currentSlide}`}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3 }}
+                            className="sm:hidden w-full max-w-5xl px-2 mb-3"
+                        >
+                            <h3 className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                {allSlides[currentSlide].tituloDisplay}
+                            </h3>
+                            <p className="text-slate-400 mt-1 text-xs line-clamp-2">
+                                {allSlides[currentSlide].descricao}
+                            </p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
-                            {/* Static Noise Overlay (TV Glitch) */}
+                {/* Central MacBook Mockup - Responsive for all screen sizes */}
+                <div className="relative z-10 w-full max-w-6xl px-2 sm:px-0 mx-auto flex-1 flex items-center min-h-0">
+                    <RealisticMacBook className="w-full max-h-[calc(100vh-14rem)] shadow-2xl shadow-black/50">
+                        <div className="relative w-full aspect-[16/10] bg-black overflow-hidden">
+                            {/* Screen Content */}
+                            <img
+                                src={allSlides[currentSlide].imagem}
+                                alt={allSlides[currentSlide].titulo}
+                                className={`w-full h-full object-contain transition-opacity duration-100 ${isChangingChannel ? 'opacity-50' : 'opacity-100'}`}
+                            />
+
+                            {/* Static Noise Overlay */}
                             <AnimatePresence>
                                 {isChangingChannel && (
                                     <motion.div
@@ -667,7 +685,6 @@ function PrototypeSection() {
                                         exit={{ opacity: 0 }}
                                         className="absolute inset-0 z-20 pointer-events-none mix-blend-hard-light"
                                     >
-                                        {/* CSS Noise Pattern Generation */}
                                         <div className="w-full h-full bg-slate-900" style={{
                                             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
                                             filter: 'contrast(150%) brightness(100%)',
@@ -677,7 +694,7 @@ function PrototypeSection() {
                                 )}
                             </AnimatePresence>
 
-                            {/* Title Overlay - Bottom Left Inside Mockup */}
+                            {/* Title Overlay - Bottom */}
                             <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
                                 <AnimatePresence mode="wait">
                                     {!isChangingChannel && (
@@ -689,33 +706,28 @@ function PrototypeSection() {
                                             transition={{ duration: 0.3 }}
                                             className="relative p-4 md:p-6 lg:p-8"
                                         >
-                                            {/* Localized Gradient Background - Only behind text */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent rounded-t-xl" />
-
                                             <div className="relative">
-                                                <h3
-                                                    className="text-lg md:text-2xl lg:text-3xl font-bold text-white tracking-tight"
-                                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-                                                >
+                                                <h3 className="text-base md:text-2xl lg:text-3xl font-bold text-white tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                                     {allSlides[currentSlide].tituloDisplay}
                                                 </h3>
-                                                <p className="text-slate-300 mt-1 md:mt-2 max-w-xl text-xs md:text-sm lg:text-base">
+                                                <p className="text-slate-300 mt-1 md:mt-2 max-w-xl text-sm lg:text-base">
                                                     {allSlides[currentSlide].descricao}
                                                 </p>
                                             </div>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
+                            </div>
 
-                                {/* Progress Bar - Bottom of screen */}
-                                <div className="absolute bottom-0 left-0 right-0 z-50 h-1 bg-white/10">
-                                    <motion.div
-                                        className="h-full bg-gradient-to-r from-teal-400 to-teal-500"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
-                                        transition={{ duration: 0.3, ease: "easeOut" }}
-                                    />
-                                </div>
+                            {/* Progress Bar */}
+                            <div className="absolute bottom-0 left-0 right-0 z-50 h-1 bg-white/10">
+                                <motion.div
+                                    className="h-full bg-gradient-to-r from-teal-400 to-teal-500"
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+                                    transition={{ duration: 0.3, ease: "easeOut" }}
+                                />
                             </div>
                         </div>
                     </RealisticMacBook>
@@ -755,15 +767,6 @@ function PrototypeSection() {
                         </svg>
                     </button>
                 </div>
-
-                {/* Scroll Hint */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.5 }}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-xs md:text-sm font-medium tracking-widest uppercase"
-                >
-                    Role para navegar
-                </motion.div>
             </div>
         </ChapterSection>
     );

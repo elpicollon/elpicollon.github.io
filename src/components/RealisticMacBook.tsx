@@ -17,10 +17,9 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
             >
                 {/* Screen Assembly */}
                 <div
+                    className="p-1.5 sm:p-2 md:p-3 pb-0 sm:pb-0 md:pb-0 rounded-t-lg sm:rounded-t-xl md:rounded-t-2xl"
                     style={{
                         background: 'linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%)',
-                        borderRadius: '18px 18px 0 0',
-                        padding: '12px 12px 0 12px',
                         boxShadow: `
                             0 0 0 1px rgba(255,255,255,0.05),
                             0 -1px 0 1px rgba(0,0,0,0.8),
@@ -30,18 +29,18 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
                         position: 'relative',
                     }}
                 >
-                    {/* Top Bezel with Camera Notch */}
+                    {/* Top Bezel with Camera Notch - Hidden on mobile */}
                     <div
+                        className="hidden sm:flex"
                         style={{
                             position: 'absolute',
-                            top: '6px',
+                            top: '4px',
                             left: '50%',
                             transform: 'translateX(-50%)',
-                            width: '80px',
-                            height: '18px',
+                            width: '60px',
+                            height: '14px',
                             background: '#0d0d0d',
-                            borderRadius: '0 0 10px 10px',
-                            display: 'flex',
+                            borderRadius: '0 0 8px 8px',
                             alignItems: 'center',
                             justifyContent: 'center',
                             zIndex: 10,
@@ -50,8 +49,8 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
                         {/* Camera Lens */}
                         <div
                             style={{
-                                width: '6px',
-                                height: '6px',
+                                width: '5px',
+                                height: '5px',
                                 borderRadius: '50%',
                                 background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)',
                                 boxShadow: `
@@ -67,7 +66,7 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
                                     height: '2px',
                                     borderRadius: '50%',
                                     background: '#2a2a2a',
-                                    margin: '2px auto 0',
+                                    margin: '1px auto 0',
                                 }}
                             />
                         </div>
@@ -75,18 +74,17 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
 
                     {/* Screen Bezel Frame */}
                     <div
+                        className="p-0.5 rounded-md sm:rounded-lg"
                         style={{
                             background: '#0a0a0a',
-                            borderRadius: '8px',
-                            padding: '2px',
                             boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.03)',
                         }}
                     >
                         {/* Actual Screen Content Area */}
                         <div
+                            className="rounded sm:rounded-md"
                             style={{
                                 background: '#000',
-                                borderRadius: '6px',
                                 overflow: 'hidden',
                                 aspectRatio: '16/10',
                                 position: 'relative',
@@ -130,10 +128,9 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
                 >
                     {/* Hinge connector */}
                     <div
+                        className="h-1 sm:h-1.5 md:h-2 rounded-b sm:rounded-b-md"
                         style={{
                             background: 'linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%)',
-                            height: '8px',
-                            borderRadius: '0 0 4px 4px',
                             boxShadow: `
                                 0 2px 4px rgba(0,0,0,0.3),
                                 inset 0 1px 0 rgba(255,255,255,0.05)
@@ -143,11 +140,10 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
 
                     {/* Base/Keyboard area (truncated view) */}
                     <div
+                        className="h-2 sm:h-2.5 md:h-3 rounded-b-md sm:rounded-b-lg"
                         style={{
                             background: 'linear-gradient(180deg, #e0e0e0 0%, #c8c8c8 30%, #b0b0b0 100%)',
-                            height: '12px',
                             marginTop: '-1px',
-                            borderRadius: '0 0 8px 8px',
                             boxShadow: `
                                 0 4px 12px rgba(0,0,0,0.2),
                                 inset 0 1px 0 rgba(255,255,255,0.8),
@@ -158,15 +154,14 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
                     >
                         {/* Notch cutout in base */}
                         <div
+                            className="h-0.5 sm:h-1 rounded-b sm:rounded-b-md"
                             style={{
                                 position: 'absolute',
                                 top: 0,
                                 left: '50%',
                                 transform: 'translateX(-50%)',
                                 width: '25%',
-                                height: '4px',
                                 background: 'linear-gradient(180deg, #888 0%, #999 100%)',
-                                borderRadius: '0 0 4px 4px',
                             }}
                         />
                     </div>
@@ -175,3 +170,4 @@ export function RealisticMacBook({ children, className = '' }: RealisticMacBookP
         </div>
     );
 }
+
