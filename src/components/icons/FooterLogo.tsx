@@ -1,4 +1,4 @@
-import svgPaths from "./svg-o9k1ex2t9z";
+import svgPaths from "./footer-logo-paths";
 
 function Logo() {
   return (
