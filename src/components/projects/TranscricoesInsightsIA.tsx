@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
+import { ScrollToTop } from '../ScrollToTop';
 import { TealParticleBackground } from '../TealParticleBackground';
 import { HeroParticleGrid } from '../HeroParticleGrid';
 import { RealisticMacBook } from '../RealisticMacBook';
@@ -944,6 +945,7 @@ export function TranscricoesInsightsIA() {
             </main>
 
             <FooterNew />
+            <ScrollToTop />
         </div>
     );
 }
