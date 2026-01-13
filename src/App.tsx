@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { CustomCursor } from './components/CustomCursor';
 import { MinimalNav } from './components/MinimalNav';
 import { HeroNew } from './components/HeroNew';
@@ -15,6 +15,19 @@ import { TranscricoesInsightsIA } from './components/projects/TranscricoesInsigh
 import { ScrollToTop } from './components/ScrollToTop';
 
 function HomePage() {
+  const location = useLocation();
+
+  // Handle hash-based navigation (e.g., /#projetos from footer links)
+  useEffect(() => {
+    if (location.hash) {
+      const sectionId = location.hash.replace('#', '');
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [location.hash]);
+
   return (
     <>
       <MinimalNav />

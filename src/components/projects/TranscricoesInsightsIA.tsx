@@ -1,7 +1,7 @@
 import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate, useMotionValueEvent, AnimatePresence } from 'motion/react';
 import { useRef, useEffect, useState, ReactNode, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb } from 'lucide-react';
+import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, LayoutGrid, Settings, Brain, Database, Share2, TrendingUp, Gauge, BadgeDollarSign, Rocket, ShieldCheck, Code, BarChart3 } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
 import { ScrollToTop } from '../ScrollToTop';
@@ -344,65 +344,101 @@ function HeroSection() {
 
 // Overview Section (Resumo, Objetivo, Desafio)
 function OverviewSection() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
+
     return (
         <ChapterSection id="overview" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
                 <BigNumber number="01" className="-top-20 -left-10 md:-left-20" />
 
                 <div className="relative z-10">
-                    <RevealText>
-                        <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                            Visão Geral
-                        </span>
+                    {/* Section Header */}
+                    <div className="mb-16 md:mb-24">
+                        <RevealText>
+                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Visão Geral
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                O Projeto
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                        </RevealText>
+                    </div>
+
+                    {/* Resumo - Full Width Text */}
+                    <RevealText delay={0.3}>
+                        <div className="mb-16 md:mb-20">
+                            <p className="text-lg text-slate-600 leading-relaxed">
+                                {projectData.resumo}
+                            </p>
+                        </div>
                     </RevealText>
 
-                    <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-                        {/* Left: Title */}
-                        <div>
-                            <RevealText delay={0.1}>
-                                <h2
-                                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-8"
-                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-                                >
-                                    O Projeto
-                                </h2>
-                            </RevealText>
-                            <RevealText delay={0.2}>
-                                <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full mb-8" />
-                            </RevealText>
-                            <RevealText delay={0.3}>
-                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
-                                    {projectData.resumo}
+                    {/* Objetivo & Desafio - Staggered Cards */}
+                    <div ref={ref} className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                        {/* Objetivo Card */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 60 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                            className="group"
+                        >
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-teal-50 via-white to-teal-50/30 border border-teal-100 hover:border-teal-200 transition-all duration-500 hover:shadow-xl hover:shadow-teal-100/50">
+                                {/* Icon */}
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-teal-500/25">
+                                    <Target className="w-7 h-7 text-white" />
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                    Objetivo
+                                </h3>
+
+                                {/* Decorative Line */}
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-teal-400 to-transparent rounded-full mb-6" />
+
+                                {/* Content */}
+                                <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+                                    {projectData.objetivo}
                                 </p>
-                            </RevealText>
-                        </div>
+                            </div>
+                        </motion.div>
 
-                        {/* Right: Cards */}
-                        <div className="space-y-8">
-                            <RevealText delay={0.4}>
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <Target className="w-6 h-6 text-teal-600" />
-                                        <h3 className="text-xl font-semibold text-slate-900">Objetivo</h3>
-                                    </div>
-                                    <p className="text-slate-600 leading-relaxed">
-                                        {projectData.objetivo}
-                                    </p>
+                        {/* Desafio Card - Offset for visual interest */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 60 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                            className="md:mt-12 group"
+                        >
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-purple-50 via-white to-violet-50/30 border border-purple-100 hover:border-purple-200 transition-all duration-500 hover:shadow-xl hover:shadow-purple-100/50">
+                                {/* Icon */}
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-purple-500/25">
+                                    <Zap className="w-7 h-7 text-white" />
                                 </div>
-                            </RevealText>
 
-                            <RevealText delay={0.5}>
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <Zap className="w-6 h-6 text-amber-500" />
-                                        <h3 className="text-xl font-semibold text-slate-900">Desafio</h3>
-                                    </div>
-                                    <p className="text-slate-600 leading-relaxed">
-                                        {projectData.desafio}
-                                    </p>
-                                </div>
-                            </RevealText>
-                        </div>
+                                {/* Title */}
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                    Desafio
+                                </h3>
+
+                                {/* Decorative Line */}
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-purple-400 to-transparent rounded-full mb-6" />
+
+                                {/* Content */}
+                                <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+                                    {projectData.desafio}
+                                </p>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>
@@ -440,17 +476,21 @@ function RoleSection() {
                     <div>
                         <StaggeredList
                             items={projectData.meuPapel}
-                            renderItem={(item) => (
-                                <div className="flex gap-6 items-start group">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center group-hover:bg-teal-500 transition-colors">
-                                        <Users className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
+                            renderItem={(item, index) => {
+                                const icons = [Search, LayoutGrid, Settings, CheckCircle2];
+                                const IconComponent = icons[index] || Users;
+                                return (
+                                    <div className="flex gap-6 items-start group">
+                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center group-hover:bg-teal-500 transition-colors">
+                                            <IconComponent className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-1">{item.title}</h3>
+                                            <p className="text-base md:text-lg text-slate-600">{item.desc}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h3 className="font-semibold text-slate-900 text-lg mb-1">{item.title}</h3>
-                                        <p className="text-slate-600">{item.desc}</p>
-                                    </div>
-                                </div>
-                            )}
+                                );
+                            }}
                         />
                     </div>
                 </div>
@@ -495,8 +535,8 @@ function ResearchSection() {
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <div className="pt-2">
-                                            <h3 className="font-semibold text-slate-900 text-xl mb-2">{item.title}</h3>
-                                            <p className="text-slate-600">{item.desc}</p>
+                                            <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-2">{item.title}</h3>
+                                            <p className="text-base md:text-lg text-slate-600">{item.desc}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -537,17 +577,21 @@ function DiscoveriesSection() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
-                        {projectData.descobertas.map((item, index) => (
-                            <RevealText key={index} delay={0.2 + index * 0.1}>
-                                <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-teal-300 transition-all group h-full shadow-sm hover:shadow-md">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <Lightbulb className="w-6 h-6 text-teal-600" />
-                                        <h3 className="font-semibold text-slate-900 text-xl">{item.title}</h3>
+                        {projectData.descobertas.map((item, index) => {
+                            const icons = [Brain, Database, Share2, TrendingUp];
+                            const IconComponent = icons[index] || Lightbulb;
+                            return (
+                                <RevealText key={index} delay={0.2 + index * 0.1}>
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-teal-300 transition-all group h-full shadow-sm hover:shadow-md">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <IconComponent className="w-6 h-6 text-teal-600" />
+                                            <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
+                                        </div>
+                                        <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
                                     </div>
-                                    <p className="text-slate-600 leading-relaxed">{item.desc}</p>
-                                </div>
-                            </RevealText>
-                        ))}
+                                </RevealText>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -579,31 +623,78 @@ function PrototypeSection() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isChangingChannel, setIsChangingChannel] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [isProgrammaticScroll, setIsProgrammaticScroll] = useState(false);
+    const lastScrollProgress = useRef(0);
+    const scrollThreshold = 1 / (totalSlides * 2); // Threshold for triggering slide change
 
-    // Map scroll progress to slide index - ensure one slide per scroll section
+    // Use scroll direction to navigate slides (not absolute position)
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        // Don't change slides while transitioning
-        if (isTransitioning) return;
+        // Don't change slides while transitioning or during programmatic scroll
+        if (isTransitioning || isProgrammaticScroll) return;
 
-        // Calculate which slide should be active based on scroll
-        // Each slide gets an equal portion of the scroll range
-        const slideIndex = Math.floor(latest * totalSlides);
-        // Clamp index to valid range
-        const targetIndex = Math.min(Math.max(slideIndex, 0), totalSlides - 1);
+        const delta = latest - lastScrollProgress.current;
 
-        if (targetIndex !== currentSlide) {
-            // Only allow moving one slide at a time
-            const direction = targetIndex > currentSlide ? 1 : -1;
-            const nextSlide = currentSlide + direction;
-            triggerChannelChange(nextSlide);
+        // Only trigger if scroll delta exceeds threshold
+        if (Math.abs(delta) > scrollThreshold) {
+            lastScrollProgress.current = latest;
+
+            if (delta > 0 && currentSlide < totalSlides - 1) {
+                // Scrolling down - next slide
+                triggerChannelChange(currentSlide + 1, false);
+            } else if (delta < 0 && currentSlide > 0) {
+                // Scrolling up - previous slide
+                triggerChannelChange(currentSlide - 1, false);
+            }
         }
     });
 
-    const triggerChannelChange = (newIndex: number) => {
+    const triggerChannelChange = (newIndex: number, scrollToPosition = true) => {
         if (isTransitioning) return;
+        if (newIndex < 0 || newIndex >= totalSlides) return;
 
         setIsTransitioning(true);
         setIsChangingChannel(true);
+
+        // If triggered by button (scrollToPosition=true), try to scroll to matching position
+        if (scrollToPosition && containerRef.current) {
+            setIsProgrammaticScroll(true);
+
+            const container = containerRef.current;
+            const rect = container.getBoundingClientRect();
+            const scrollTop = window.scrollY;
+
+            // The scroll range is from when container top hits viewport top
+            // to when container bottom hits viewport bottom
+            const containerTop = scrollTop + rect.top;
+            const scrollRange = container.scrollHeight - window.innerHeight;
+
+            // Calculate target scroll position based on slide index
+            // Adding 0.5 to center the position within the slide's scroll range
+            const targetProgress = (newIndex + 0.5) / totalSlides;
+            const targetScrollY = containerTop + (scrollRange * targetProgress);
+
+            // Try to scroll to position
+            try {
+                window.scrollTo(0, targetScrollY);
+            } catch (e) {
+                // Ignore scroll errors on some mobile browsers
+            }
+
+            // CRITICAL: Update lastScrollProgress to the TARGET progress
+            // This ensures direction-based logic works from the new slide position
+            // even if scrollTo didn't fully succeed
+            lastScrollProgress.current = targetProgress;
+
+            // Reset flag after scroll completes
+            setTimeout(() => {
+                // Re-sync lastScrollProgress with actual scroll position
+                lastScrollProgress.current = scrollYProgress.get();
+                setIsProgrammaticScroll(false);
+            }, 200);
+        } else {
+            // Update last scroll progress to current position to prevent jumps
+            lastScrollProgress.current = scrollYProgress.get();
+        }
 
         // Small delay to show static before switching content
         setTimeout(() => {
@@ -622,7 +713,7 @@ function PrototypeSection() {
     return (
         <ChapterSection ref={containerRef} id="prototype" className="relative bg-gradient-to-br from-slate-900 to-slate-800 text-white min-h-[600vh] !overflow-visible">
             {/* Sticky Container - layout with proper spacing */}
-            <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden px-4 sm:px-6 md:px-12 pt-20 md:pt-24 pb-4 md:pb-6">
+            <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-12 pt-20 md:pt-24 pb-6 md:pb-8">
 
                 {/* Big Number - Behind Mockup */}
                 <span
@@ -634,7 +725,7 @@ function PrototypeSection() {
 
                 {/* Vertical Title - Left Edge, rotated */}
                 <span
-                    className="absolute left-2 sm:left-4 md:left-8 lg:left-12 top-[100%] text-[3rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] font-bold text-teal-400/20 leading-none select-none pointer-events-none z-5 whitespace-nowrap"
+                    className="absolute left-2 sm:left-4 md:left-8 lg:left-12 top-[101%] text-[3rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] font-bold text-teal-400/20 leading-none select-none pointer-events-none z-5 whitespace-nowrap"
                     style={{
                         fontFamily: 'Space Grotesk, sans-serif',
                         transform: 'translateY(-50%) rotate(-90deg)',
@@ -666,8 +757,8 @@ function PrototypeSection() {
                 </AnimatePresence>
 
                 {/* Central MacBook Mockup - Responsive for all screen sizes */}
-                <div className="relative z-10 w-full max-w-6xl px-2 sm:px-0 mx-auto flex-1 flex items-center min-h-0">
-                    <RealisticMacBook className="w-full max-h-[calc(100vh-14rem)] shadow-2xl shadow-black/50">
+                <div className="relative z-10 w-full max-w-6xl px-2 sm:px-0 mx-auto flex items-center">
+                    <RealisticMacBook className="w-full max-h-[calc(100vh-8rem)] shadow-2xl shadow-black/50">
                         <div className="relative w-full aspect-[16/10] bg-black overflow-hidden">
                             {/* Screen Content */}
                             <img
@@ -694,8 +785,8 @@ function PrototypeSection() {
                                 )}
                             </AnimatePresence>
 
-                            {/* Title Overlay - Bottom */}
-                            <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
+                            {/* Title Overlay - Bottom (text only) - Hidden on mobile/tablet */}
+                            <div className="hidden lg:block absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
                                 <AnimatePresence mode="wait">
                                     {!isChangingChannel && (
                                         <motion.div
@@ -708,10 +799,10 @@ function PrototypeSection() {
                                         >
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent rounded-t-xl" />
                                             <div className="relative">
-                                                <h3 className="text-base md:text-2xl lg:text-3xl font-bold text-white tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                                <h3 className="text-base md:text-2xl lg:text-3xl font-bold text-white tracking-tight pr-32 md:pr-40" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                                     {allSlides[currentSlide].tituloDisplay}
                                                 </h3>
-                                                <p className="text-slate-300 mt-1 md:mt-2 max-w-xl text-sm lg:text-base">
+                                                <p className="text-slate-300 mt-1 md:mt-2 max-w-xl text-sm lg:text-base pr-32 md:pr-40">
                                                     {allSlides[currentSlide].descricao}
                                                 </p>
                                             </div>
@@ -731,38 +822,73 @@ function PrototypeSection() {
                             </div>
                         </div>
                     </RealisticMacBook>
+
+                    {/* Navigation Buttons - Desktop: positioned absolutely on mockup */}
+                    <div className="hidden lg:flex absolute bottom-4 md:bottom-6 lg:bottom-8 right-4 md:right-6 lg:right-8 items-center gap-2 md:gap-4 z-50">
+                        <button
+                            onClick={() => currentSlide > 0 && triggerChannelChange(currentSlide - 1)}
+                            disabled={currentSlide === 0 || isTransitioning}
+                            className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all backdrop-blur-sm ${currentSlide === 0 || isTransitioning
+                                ? 'border-white/20 text-white/20 cursor-not-allowed bg-black/20'
+                                : 'border-white/40 text-white bg-black/40 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/20'
+                                }`}
+                            aria-label="Slide anterior"
+                        >
+                            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+
+                        <span className="text-white text-sm md:text-base font-medium min-w-[60px] text-center bg-black/40 backdrop-blur-sm px-3 py-2 rounded-full">
+                            {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
+                        </span>
+
+                        <button
+                            onClick={() => currentSlide < totalSlides - 1 && triggerChannelChange(currentSlide + 1)}
+                            disabled={currentSlide === totalSlides - 1 || isTransitioning}
+                            className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all backdrop-blur-sm ${currentSlide === totalSlides - 1 || isTransitioning
+                                ? 'border-white/20 text-white/20 cursor-not-allowed bg-black/20'
+                                : 'border-white/40 text-white bg-black/40 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/20'
+                                }`}
+                            aria-label="Próximo slide"
+                        >
+                            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
-                {/* Navigation Buttons */}
-                <div className="relative z-20 flex items-center gap-4 mt-4 md:mt-6 flex-shrink-0">
+                {/* Navigation Buttons - Mobile/Tablet: centered below mockup */}
+                <div className="lg:hidden flex items-center justify-center gap-4 mt-4 z-50">
                     <button
                         onClick={() => currentSlide > 0 && triggerChannelChange(currentSlide - 1)}
                         disabled={currentSlide === 0 || isTransitioning}
-                        className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all ${currentSlide === 0 || isTransitioning
+                        className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${currentSlide === 0 || isTransitioning
                             ? 'border-white/20 text-white/20 cursor-not-allowed'
-                            : 'border-white/40 text-white/60 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/10'
+                            : 'border-white/40 text-white hover:border-teal-400 hover:text-teal-400'
                             }`}
                         aria-label="Slide anterior"
                     >
-                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
 
-                    <span className="text-white/60 text-sm md:text-base font-medium min-w-[60px] text-center">
+                    <span className="text-white text-sm font-medium min-w-[50px] text-center">
                         {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
                     </span>
 
                     <button
                         onClick={() => currentSlide < totalSlides - 1 && triggerChannelChange(currentSlide + 1)}
                         disabled={currentSlide === totalSlides - 1 || isTransitioning}
-                        className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all ${currentSlide === totalSlides - 1 || isTransitioning
+                        className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${currentSlide === totalSlides - 1 || isTransitioning
                             ? 'border-white/20 text-white/20 cursor-not-allowed'
-                            : 'border-white/40 text-white/60 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/10'
+                            : 'border-white/40 text-white hover:border-teal-400 hover:text-teal-400'
                             }`}
                         aria-label="Próximo slide"
                     >
-                        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
@@ -800,17 +926,21 @@ function ResultsSection() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
-                        {projectData.resultados.map((item, index) => (
-                            <RevealText key={index} delay={0.2 + index * 0.1}>
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 hover:border-emerald-300 transition-colors group h-full">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <CheckCircle2 className="w-6 h-6 text-emerald-500" />
-                                        <h3 className="font-semibold text-slate-900 text-xl">{item.title}</h3>
+                        {projectData.resultados.map((item, index) => {
+                            const icons = [Gauge, BadgeDollarSign, Rocket, ShieldCheck];
+                            const IconComponent = icons[index] || CheckCircle2;
+                            return (
+                                <RevealText key={index} delay={0.2 + index * 0.1}>
+                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 hover:border-emerald-300 transition-colors group h-full">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <IconComponent className="w-6 h-6 text-emerald-500" />
+                                            <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
+                                        </div>
+                                        <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
                                     </div>
-                                    <p className="text-slate-600 leading-relaxed">{item.desc}</p>
-                                </div>
-                            </RevealText>
-                        ))}
+                                </RevealText>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -846,17 +976,21 @@ function LessonsSection() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6">
-                        {projectData.licoes.map((item, index) => (
-                            <RevealText key={index} delay={0.2 + index * 0.1}>
-                                <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-purple-300 transition-colors group text-center h-full">
-                                    <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 transition-colors">
-                                        <Sparkles className="w-7 h-7 text-purple-600 group-hover:text-white transition-colors" />
+                        {projectData.licoes.map((item, index) => {
+                            const icons = [Code, TrendingUp, BarChart3];
+                            const IconComponent = icons[index] || Sparkles;
+                            return (
+                                <RevealText key={index} delay={0.2 + index * 0.1}>
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-purple-300 transition-colors group text-center h-full">
+                                        <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 transition-colors">
+                                            <IconComponent className="w-7 h-7 text-purple-600 group-hover:text-white transition-colors" />
+                                        </div>
+                                        <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-3">{item.title}</h3>
+                                        <p className="text-base md:text-lg text-slate-600">{item.desc}</p>
                                     </div>
-                                    <h3 className="font-semibold text-slate-900 text-xl mb-3">{item.title}</h3>
-                                    <p className="text-slate-600">{item.desc}</p>
-                                </div>
-                            </RevealText>
-                        ))}
+                                </RevealText>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -888,7 +1022,7 @@ function CTASection() {
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                             Vamos criar algo incrível juntos?
                         </h2>
-                        <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
+                        <p className="text-lg text-slate-600 leading-relaxed">
                             Se você gostou deste projeto e quer discutir como posso ajudar sua equipe, entre em contato!
                         </p>
                     </div>

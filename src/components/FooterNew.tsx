@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Linkedin, Mail } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Logo1 from '../imports/Logo';
 import { useContactModal } from '../contexts/ContactModalContext';
 
@@ -7,6 +8,19 @@ import { useContactModal } from '../contexts/ContactModalContext';
 export function FooterNew() {
   const currentYear = new Date().getFullYear();
   const { openModal } = useContactModal();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavigation = (sectionId: string) => {
+    // Check if we're on the home page
+    if (location.pathname === '/') {
+      // We're on home, just scroll to section
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // We're on another page, navigate to home with hash
+      navigate(`/#${sectionId}`);
+    }
+  };
 
   return (
     <footer className="relative bg-[#f2f4f7] border-t border-purple-200 overflow-hidden">
@@ -56,7 +70,7 @@ export function FooterNew() {
                 ].map((item) => (
                   <li key={item.label}>
                     <motion.button
-                      onClick={() => document.getElementById(item.sectionId)?.scrollIntoView({ behavior: 'smooth' })}
+                      onClick={() => handleNavigation(item.sectionId)}
                       whileHover={{ x: 5 }}
                       className="text-zinc-600 hover:text-purple-600 transition-colors inline-block cursor-pointer font-[inherit] text-left bg-transparent border-none p-0"
                     >
