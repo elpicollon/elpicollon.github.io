@@ -86,7 +86,7 @@ export function HeroNew() {
                 <motion.div
                   animate={{ y: [0, 12, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="scroll-indicator w-1.5 h-1.5 bg-slate-600 rounded-full"
+                  className="w-1.5 h-1.5 bg-slate-600 rounded-full"
                 />
               </div>
               <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">

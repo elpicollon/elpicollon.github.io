@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -140,6 +140,12 @@
     animation: gradient-x 3s ease infinite;
   }
 
+  /* Section padding */
+  .py-section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
   .mobile-tiny-fix {
     @media (max-width: 768px) {
 
@@ -154,7 +160,7 @@
         gap: 0.5rem !important;
       }
 
-      & .rounded-full {
+      & .rounded-full:not(.scroll-indicator *):not(.scroll-indicator) {
         padding: 0.35rem 0.75rem !important;
       }
 

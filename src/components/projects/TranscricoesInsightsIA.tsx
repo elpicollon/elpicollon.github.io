@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate, useMotionValueEvent, AnimatePresence } from 'motion/react';
-import { useRef, useEffect, useState, ReactNode, forwardRef } from 'react';
+import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate } from 'motion/react';
+import { useRef, useEffect, ReactNode, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, LayoutGrid, Settings, Brain, Database, Share2, TrendingUp, Gauge, BadgeDollarSign, Rocket, ShieldCheck, Code, BarChart3 } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
@@ -50,33 +50,53 @@ const projectData = {
         telas: [
             {
                 titulo: "Tela Inicial",
-                descricao: "Organização em duas abas — agendamentos futuros e realizados.",
-                imagens: [
-                    "/assets/projects/transcricoes-insights-ia/tela-inicial-1.png",
-                    "/assets/projects/transcricoes-insights-ia/tela-inicial-2.png"
-                ]
+                descricao: "Interface construída sobre o Design System da Leads2b, assegurando consistência visual e reduzindo a curva de aprendizado do usuário.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/1.png"]
             },
             {
-                titulo: "Visualização das Gravações",
-                descricao: "Acesso simultâneo a gravação, transcrições, comentários e insights.",
-                imagens: [
-                    "/assets/projects/transcricoes-insights-ia/visualizacao-gravacoes-1.png",
-                    "/assets/projects/transcricoes-insights-ia/visualizacao-gravacoes-2.png"
-                ]
+                titulo: "Video & Transcrição",
+                descricao: "Visualização imersiva com painel lateral de dados. A estrutura sincroniza a reprodução do vídeo com a transcrição e insights de IA, centralizando todo o contexto da reunião em uma única view.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/2.png"]
             },
             {
-                titulo: "Gravações de Áudio",
-                descricao: "Inclusão das gravações de ligações em áudio na mesma rotina visual.",
-                imagens: [
-                    "/assets/projects/transcricoes-insights-ia/gravacoes-audio-2.png"
-                ]
+                titulo: "Smart Insights",
+                descricao: "Interface unificada que integra o player de vídeo e os Smart Insights. O layout permite consumo simultâneo de transcrições, comentários e insights de IA, eliminando a troca de abas e mantendo o foco no conteúdo.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/3.png"]
             },
             {
-                titulo: "Email de Resumo",
-                descricao: "E-mail de resumo contendo informações-chave da reunião.",
-                imagens: [
-                    "/assets/projects/transcricoes-insights-ia/email-resumo-correto.png"
-                ]
+                titulo: "Compartilhamento Ágil",
+                descricao: "Fluxo de envio otimizado para a inclusão rápida de múltiplos destinatários. A interface garante que o conhecimento gerado na reunião chegue às pessoas certas com poucos cliques, eliminando a necessidade de redigir e-mails.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/4.png"]
+            },
+            {
+                titulo: "Integrado ao Negócio",
+                descricao: "A interface vincula a execução da mídia diretamente aos dados do CRM (Deal, Responsável e Atividades). Isso garante rastreabilidade e centraliza ações operacionais eliminando a fragmentação do fluxo de trabalho.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/5.png"]
+            },
+            {
+                titulo: "Design = Conversão",
+                descricao: "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/6.png"]
+            },
+            {
+                titulo: "Insights = Conversão",
+                descricao: "Ferramenta de agendamento de atividades integrada à tela, reduzindo o time-to-action. O usuário pode agendar follow-ups no momento em que identifica uma oportunidade, eliminando a alternância entre abas e ferramentas de calendário externas.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/7.png"]
+            },
+            {
+                titulo: "Experiência Cross-Media",
+                descricao: "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/8.png"]
+            },
+            {
+                titulo: "Inteligência Contextualizada",
+                descricao: "Além do vínculo direto com o Deal, a interface exibe insights avançados da IA, como Análise de Sentimentos e Sugestão de Próximos Passos, transformando uma simples gravação em um painel estratégico de tomada de decisão.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/9.png"]
+            },
+            {
+                titulo: "Email Viral de Aquisição",
+                descricao: "E-mail de resumo como uma ferramenta de Product-Led Growth. Ao entregar valor imediato (insights e transcrição) para os clientes dos nossos clientes, utilizamos o acesso ao conteúdo completo como gatilho estratégico para atrair novos cadastros e expandir a base de usuários organicamente.",
+                imagens: ["/assets/projects/transcricoes-insights-ia/10.png"]
             }
         ]
     },
@@ -180,13 +200,14 @@ function StaggeredList({ items, renderItem }: { items: { title: string; desc: st
 
 // Section wrapper - content-driven height
 // Section wrapper - content-driven height
-const ChapterSection = forwardRef<HTMLElement, { children: ReactNode; className?: string; id?: string }>(
-    ({ children, className = "", id }, ref) => {
+const ChapterSection = forwardRef<HTMLElement, { children: ReactNode; className?: string; id?: string; style?: React.CSSProperties }>(
+    ({ children, className = "", id, style }, ref) => {
         return (
             <section
                 ref={ref}
                 id={id}
                 className={`relative overflow-hidden py-section ${className}`}
+                style={style}
             >
                 {children}
             </section>
@@ -289,6 +310,11 @@ function HeroSection() {
                                 </div>
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
+                                        Inteligência Artificial
+                                    </span>
+                                </div>
+                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                                    <span className="text-sm md:text-base font-medium text-slate-600">
                                         2024
                                     </span>
                                 </div>
@@ -305,7 +331,7 @@ function HeroSection() {
                                     <motion.div
                                         animate={{ y: [0, 12, 0] }}
                                         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                                        className="scroll-indicator w-1.5 h-1.5 bg-slate-600 rounded-full"
+                                        className="w-1.5 h-1.5 bg-slate-600 rounded-full"
                                     />
                                 </div>
                                 <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
@@ -324,15 +350,14 @@ function HeroSection() {
                         style={{ marginRight: '-15%', x: mockupX }}
                     >
                         <RealisticMacBook className="w-[110%] max-w-none">
-                            <div className="w-full h-full bg-gradient-to-br from-teal-600 to-teal-800 flex items-center justify-center">
-                                <div className="text-center text-white/60">
-                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-white/30 flex items-center justify-center">
-                                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <p className="text-sm">Imagem de capa do projeto</p>
-                                </div>
+                            <div className="w-full h-full bg-black overflow-hidden relative">
+                                <img
+                                    src="/assets/projects/transcricoes-insights-ia/cover.png"
+                                    alt="Capa do Projeto: Transcrições & Insights com IA"
+                                    className="w-full h-full object-cover"
+                                />
+                                {/* Overlay to match the design vibe */}
+                                <div className="absolute inset-0 bg-teal-500/10 mix-blend-overlay pointer-events-none" />
                             </div>
                         </RealisticMacBook>
                     </motion.div>
@@ -376,7 +401,7 @@ function OverviewSection() {
                     {/* Resumo - Full Width Text */}
                     <RevealText delay={0.3}>
                         <div className="mb-16 md:mb-20">
-                            <p className="text-lg text-slate-600 leading-relaxed">
+                            <p className="text-lg text-slate-600 leading-relaxed text-justify">
                                 {projectData.resumo}
                             </p>
                         </div>
@@ -406,7 +431,7 @@ function OverviewSection() {
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-teal-400 to-transparent rounded-full mb-6" />
 
                                 {/* Content */}
-                                <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+                                <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
                                     {projectData.objetivo}
                                 </p>
                             </div>
@@ -434,7 +459,7 @@ function OverviewSection() {
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-purple-400 to-transparent rounded-full mb-6" />
 
                                 {/* Content */}
-                                <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+                                <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
                                     {projectData.desafio}
                                 </p>
                             </div>
@@ -599,299 +624,91 @@ function DiscoveriesSection() {
     );
 }
 
-// Prototype Section with Sticky TV Effect
+// Prototype Section - Alternating Layout
 function PrototypeSection() {
-    const containerRef = useRef<HTMLElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
-
-    // Content data - Flattened to show every image as a distinct slide
     const telas = projectData.prototipo.telas;
-    const allSlides = telas.flatMap(tela =>
-        tela.imagens.map((img, index) => ({
-            ...tela,
-            imagem: img,
-            // Add (X/Y) to title if multiple images
-            tituloDisplay: tela.imagens.length > 1 ? `${tela.titulo} (${index + 1}/${tela.imagens.length})` : tela.titulo
-        }))
-    );
-    const totalSlides = allSlides.length;
-
-    // State for current slide and transition effect
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [isChangingChannel, setIsChangingChannel] = useState(false);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    const [isProgrammaticScroll, setIsProgrammaticScroll] = useState(false);
-    const lastScrollProgress = useRef(0);
-    const scrollThreshold = 1 / (totalSlides * 2); // Threshold for triggering slide change
-
-    // Use scroll direction to navigate slides (not absolute position)
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        // Don't change slides while transitioning or during programmatic scroll
-        if (isTransitioning || isProgrammaticScroll) return;
-
-        const delta = latest - lastScrollProgress.current;
-
-        // Only trigger if scroll delta exceeds threshold
-        if (Math.abs(delta) > scrollThreshold) {
-            lastScrollProgress.current = latest;
-
-            if (delta > 0 && currentSlide < totalSlides - 1) {
-                // Scrolling down - next slide
-                triggerChannelChange(currentSlide + 1, false);
-            } else if (delta < 0 && currentSlide > 0) {
-                // Scrolling up - previous slide
-                triggerChannelChange(currentSlide - 1, false);
-            }
-        }
-    });
-
-    const triggerChannelChange = (newIndex: number, scrollToPosition = true) => {
-        if (isTransitioning) return;
-        if (newIndex < 0 || newIndex >= totalSlides) return;
-
-        setIsTransitioning(true);
-        setIsChangingChannel(true);
-
-        // If triggered by button (scrollToPosition=true), try to scroll to matching position
-        if (scrollToPosition && containerRef.current) {
-            setIsProgrammaticScroll(true);
-
-            const container = containerRef.current;
-            const rect = container.getBoundingClientRect();
-            const scrollTop = window.scrollY;
-
-            // The scroll range is from when container top hits viewport top
-            // to when container bottom hits viewport bottom
-            const containerTop = scrollTop + rect.top;
-            const scrollRange = container.scrollHeight - window.innerHeight;
-
-            // Calculate target scroll position based on slide index
-            // Adding 0.5 to center the position within the slide's scroll range
-            const targetProgress = (newIndex + 0.5) / totalSlides;
-            const targetScrollY = containerTop + (scrollRange * targetProgress);
-
-            // Try to scroll to position
-            try {
-                window.scrollTo(0, targetScrollY);
-            } catch (e) {
-                // Ignore scroll errors on some mobile browsers
-            }
-
-            // CRITICAL: Update lastScrollProgress to the TARGET progress
-            // This ensures direction-based logic works from the new slide position
-            // even if scrollTo didn't fully succeed
-            lastScrollProgress.current = targetProgress;
-
-            // Reset flag after scroll completes
-            setTimeout(() => {
-                // Re-sync lastScrollProgress with actual scroll position
-                lastScrollProgress.current = scrollYProgress.get();
-                setIsProgrammaticScroll(false);
-            }, 200);
-        } else {
-            // Update last scroll progress to current position to prevent jumps
-            lastScrollProgress.current = scrollYProgress.get();
-        }
-
-        // Small delay to show static before switching content
-        setTimeout(() => {
-            setCurrentSlide(newIndex);
-            // Hide static after a short burst
-            setTimeout(() => {
-                setIsChangingChannel(false);
-                // Allow next transition after animation completes
-                setTimeout(() => {
-                    setIsTransitioning(false);
-                }, 200);
-            }, 200);
-        }, 100);
-    };
 
     return (
-        <ChapterSection ref={containerRef} id="prototype" className="relative bg-gradient-to-br from-slate-900 to-slate-800 text-white min-h-[600vh] !overflow-visible">
-            {/* Sticky Container - layout with proper spacing */}
-            <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-12 pt-20 md:pt-24 pb-6 md:pb-8">
+        <ChapterSection id="prototype" className="bg-white">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="05" className="-top-20 -right-10 md:-right-20" />
 
-                {/* Big Number - Behind Mockup */}
-                <span
-                    className="absolute right-2 sm:right-4 md:right-12 top-12 sm:top-16 md:top-20 text-[8rem] sm:text-[12rem] md:text-[20rem] lg:text-[28rem] font-bold text-white/[0.03] leading-none select-none pointer-events-none z-0"
-                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
-                >
-                    05
-                </span>
+                <div className="relative z-10">
+                    {/* Section Header */}
+                    <div className="lg:max-w-xl mb-16 md:mb-24">
+                        <RevealText>
+                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Protótipo
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                Telas do <br />Projeto
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                        </RevealText>
+                    </div>
 
-                {/* Vertical Title - Left Edge, rotated */}
-                <span
-                    className="absolute left-2 sm:left-4 md:left-8 lg:left-12 top-[101%] text-[3rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] font-bold text-teal-400/20 leading-none select-none pointer-events-none z-5 whitespace-nowrap"
-                    style={{
-                        fontFamily: 'Space Grotesk, sans-serif',
-                        transform: 'translateY(-50%) rotate(-90deg)',
-                        transformOrigin: 'left center'
-                    }}
-                >
-                    Protótipo
-                </span>
+                    {/* Alternating Screen Rows */}
+                    <div className="space-y-24 md:space-y-32">
+                        {telas.map((tela, index) => {
+                            const isEven = index % 2 === 0;
 
-                {/* Mobile Title - Above Mockup (visible only on mobile) */}
-                <AnimatePresence mode="wait">
-                    {!isChangingChannel && (
-                        <motion.div
-                            key={`mobile-title-${currentSlide}`}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.3 }}
-                            className="sm:hidden w-full max-w-5xl px-2 mb-3"
-                        >
-                            <h3 className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                {allSlides[currentSlide].tituloDisplay}
-                            </h3>
-                            <p className="text-slate-400 mt-1 text-xs line-clamp-2">
-                                {allSlides[currentSlide].descricao}
-                            </p>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                            return (
+                                <RevealText key={index} delay={0.1}>
+                                    <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center justify-center">
+                                        {/* Text Content - Shows first on mobile, order changes on desktop */}
+                                        <div className={`w-full md:w-[30%] flex-shrink-0 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
+                                            <div className="space-y-3 md:space-y-4">
+                                                {/* Number Badge */}
+                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 text-white font-bold text-base md:text-lg shadow-lg shadow-teal-500/25">
+                                                    {String(index + 1).padStart(2, '0')}
+                                                </div>
 
-                {/* Central MacBook Mockup - Responsive for all screen sizes */}
-                <div className="relative z-10 w-full max-w-6xl px-2 sm:px-0 mx-auto flex items-center">
-                    <RealisticMacBook className="w-full max-h-[calc(100vh-8rem)] shadow-2xl shadow-black/50">
-                        <div className="relative w-full aspect-[16/10] bg-black overflow-hidden">
-                            {/* Screen Content */}
-                            <img
-                                src={allSlides[currentSlide].imagem}
-                                alt={allSlides[currentSlide].titulo}
-                                className={`w-full h-full object-contain transition-opacity duration-100 ${isChangingChannel ? 'opacity-50' : 'opacity-100'}`}
-                            />
-
-                            {/* Static Noise Overlay */}
-                            <AnimatePresence>
-                                {isChangingChannel && (
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        className="absolute inset-0 z-20 pointer-events-none mix-blend-hard-light"
-                                    >
-                                        <div className="w-full h-full bg-slate-900" style={{
-                                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
-                                            filter: 'contrast(150%) brightness(100%)',
-                                            backgroundSize: '200px 200px'
-                                        }} />
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-
-                            {/* Title Overlay - Bottom (text only) - Hidden on mobile/tablet */}
-                            <div className="hidden lg:block absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
-                                <AnimatePresence mode="wait">
-                                    {!isChangingChannel && (
-                                        <motion.div
-                                            key={currentSlide}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -20 }}
-                                            transition={{ duration: 0.3 }}
-                                            className="relative p-4 md:p-6 lg:p-8"
-                                        >
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent rounded-t-xl" />
-                                            <div className="relative">
-                                                <h3 className="text-base md:text-2xl lg:text-3xl font-bold text-white tracking-tight pr-32 md:pr-40" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                                    {allSlides[currentSlide].tituloDisplay}
+                                                {/* Title */}
+                                                <h3
+                                                    className="text-xl md:text-3xl font-bold text-slate-900"
+                                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                                >
+                                                    {tela.titulo}
                                                 </h3>
-                                                <p className="text-slate-300 mt-1 md:mt-2 max-w-xl text-sm lg:text-base pr-32 md:pr-40">
-                                                    {allSlides[currentSlide].descricao}
+
+                                                {/* Decorative Line */}
+                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-teal-400 to-transparent rounded-full" />
+
+                                                {/* Description */}
+                                                <p className="text-sm md:text-lg text-slate-600 leading-relaxed">
+                                                    {tela.descricao}
                                                 </p>
                                             </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
+                                        </div>
 
-                            {/* Progress Bar */}
-                            <div className="absolute bottom-0 left-0 right-0 z-50 h-1 bg-white/10">
-                                <motion.div
-                                    className="h-full bg-gradient-to-r from-teal-400 to-teal-500"
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
-                                    transition={{ duration: 0.3, ease: "easeOut" }}
-                                />
-                            </div>
-                        </div>
-                    </RealisticMacBook>
-
-                    {/* Navigation Buttons - Desktop: positioned absolutely on mockup */}
-                    <div className="hidden lg:flex absolute bottom-4 md:bottom-6 lg:bottom-8 right-4 md:right-6 lg:right-8 items-center gap-2 md:gap-4 z-50">
-                        <button
-                            onClick={() => currentSlide > 0 && triggerChannelChange(currentSlide - 1)}
-                            disabled={currentSlide === 0 || isTransitioning}
-                            className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all backdrop-blur-sm ${currentSlide === 0 || isTransitioning
-                                ? 'border-white/20 text-white/20 cursor-not-allowed bg-black/20'
-                                : 'border-white/40 text-white bg-black/40 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/20'
-                                }`}
-                            aria-label="Slide anterior"
-                        >
-                            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-
-                        <span className="text-white text-sm md:text-base font-medium min-w-[60px] text-center bg-black/40 backdrop-blur-sm px-3 py-2 rounded-full">
-                            {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
-                        </span>
-
-                        <button
-                            onClick={() => currentSlide < totalSlides - 1 && triggerChannelChange(currentSlide + 1)}
-                            disabled={currentSlide === totalSlides - 1 || isTransitioning}
-                            className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all backdrop-blur-sm ${currentSlide === totalSlides - 1 || isTransitioning
-                                ? 'border-white/20 text-white/20 cursor-not-allowed bg-black/20'
-                                : 'border-white/40 text-white bg-black/40 hover:border-teal-400 hover:text-teal-400 hover:bg-teal-400/20'
-                                }`}
-                            aria-label="Próximo slide"
-                        >
-                            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
+                                        {/* Image - Shows second on mobile */}
+                                        <div className={`w-full ${index === 9 ? 'md:w-[50%]' : 'md:w-[70%]'} flex-shrink-0 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
+                                            <motion.div
+                                                whileHover={{ scale: 1.02 }}
+                                                transition={{ duration: 0.4, ease: "easeOut" }}
+                                                className="group"
+                                            >
+                                                <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
+                                                    <img
+                                                        src={tela.imagens[0]}
+                                                        alt={tela.titulo}
+                                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                                                    />
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                    </div>
+                                </RevealText>
+                            );
+                        })}
                     </div>
-                </div>
-
-                {/* Navigation Buttons - Mobile/Tablet: centered below mockup */}
-                <div className="lg:hidden flex items-center justify-center gap-4 mt-4 z-50">
-                    <button
-                        onClick={() => currentSlide > 0 && triggerChannelChange(currentSlide - 1)}
-                        disabled={currentSlide === 0 || isTransitioning}
-                        className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${currentSlide === 0 || isTransitioning
-                            ? 'border-white/20 text-white/20 cursor-not-allowed'
-                            : 'border-white/40 text-white hover:border-teal-400 hover:text-teal-400'
-                            }`}
-                        aria-label="Slide anterior"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-
-                    <span className="text-white text-sm font-medium min-w-[50px] text-center">
-                        {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
-                    </span>
-
-                    <button
-                        onClick={() => currentSlide < totalSlides - 1 && triggerChannelChange(currentSlide + 1)}
-                        disabled={currentSlide === totalSlides - 1 || isTransitioning}
-                        className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${currentSlide === totalSlides - 1 || isTransitioning
-                            ? 'border-white/20 text-white/20 cursor-not-allowed'
-                            : 'border-white/40 text-white hover:border-teal-400 hover:text-teal-400'
-                            }`}
-                        aria-label="Próximo slide"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
                 </div>
             </div>
         </ChapterSection>
@@ -901,7 +718,7 @@ function PrototypeSection() {
 // Results Section
 function ResultsSection() {
     return (
-        <ChapterSection id="results" className="bg-white">
+        <ChapterSection id="results" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
                 <BigNumber number="06" className="-top-20 -right-10 md:-right-20" />
 
@@ -951,7 +768,7 @@ function ResultsSection() {
 // Lessons Section
 function LessonsSection() {
     return (
-        <ChapterSection id="lessons" className="bg-slate-50">
+        <ChapterSection id="lessons" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
                 <BigNumber number="07" className="-top-20 -left-10 md:-left-20" />
 
