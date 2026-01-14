@@ -11,36 +11,23 @@ const projects = [
     title: 'Transcrições & Insights com IA',
     category: 'UX Design',
     year: '2024',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBSSUyMHRyYW5zY3JpcHRpb258ZW58MXx8fHwxNzAzNTk1MjE2fDA&ixlib=rb-4.0.3&q=80&w=1080',
+    image: '/assets/projects/transcricoes-insights-ia/cover.png',
+    gradient: 'linear-gradient(to bottom, #2F968C, #00463F)',
     link: '/projeto/transcricoes-insights-ia'
   },
   {
     id: 2,
-    title: 'Mobile Banking App',
-    category: 'Mobile Design',
-    year: '2024',
-    image: 'https://images.unsplash.com/photo-1658953229625-aad99d7603b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzYxODgwMjM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    title: 'Medical Office - Web App',
+    category: 'Product Design',
+    year: '2022',
+    comingSoon: true,
   },
   {
     id: 3,
-    title: 'Workspace Platform',
+    title: 'Importação de Empresas',
     category: 'Product Design',
-    year: '2023',
-    image: 'https://images.unsplash.com/photo-1548761013-f4c9d4f524ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9kdWN0JTIwZGVzaWduJTIwd29ya3NwYWNlfGVufDF8fHx8MTc2MTg1NzA0NHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-  },
-  {
-    id: 4,
-    title: 'Minimal Portfolio',
-    category: 'Web Design',
-    year: '2023',
-    image: 'https://images.unsplash.com/photo-1597534458220-9fb4969f2df5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwd2Vic2l0ZSUyMGRlc2lnbnxlbnwxfHx8fDE3NjE4MzYwNzB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-  },
-  {
-    id: 5,
-    title: 'E-commerce Platform',
-    category: 'Product Design',
-    year: '2023',
-    image: 'https://images.unsplash.com/photo-1642756063091-0b6abb1bf595?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwcHJvZHVjdCUyMGRlc2lnbnxlbnwxfHx8fDE3NjE4MTYwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    year: '2025',
+    comingSoon: true,
   },
 ];
 
@@ -169,7 +156,7 @@ export function HorizontalScroll() {
         </div>
 
         {/* Projects horizontal scroll */}
-        <div className="flex items-center overflow-hidden">
+        <div className="flex items-center overflow-visible pt-16">
           <motion.div
             ref={scrollContainerRef}
             style={{ x: smoothX }}
@@ -178,23 +165,65 @@ export function HorizontalScroll() {
             className="flex gap-6 md:gap-8 px-6 md:px-12 will-change-transform cursor-grab active:cursor-grabbing"
           >
             {projects.map((project, index) => {
+              const hasGradient = 'gradient' in project && project.gradient;
+              const isComingSoon = 'comingSoon' in project && project.comingSoon;
+
               const cardContent = (
-                <div className="relative w-full h-full rounded-3xl overflow-hidden">
-                  {/* Image */}
-                  <ImageWithFallback
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
+                <div className={`relative w-full h-full rounded-3xl ${hasGradient ? '' : 'overflow-hidden'}`}>
+                  {/* Background - Gradient, Coming Soon, or Image */}
+                  {isComingSoon ? (
+                    <>
+                      {/* Coming Soon Background - subtle colors */}
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-slate-400 via-slate-500 to-slate-600" />
+                      {/* Coming Soon Badge */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                          <span className="text-6xl md:text-7xl lg:text-8xl font-bold text-white/15 tracking-tight">
+                            EM BREVE
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  ) : hasGradient ? (
+                    <>
+                      {/* Gradient Background - with overflow hidden */}
+                      <div
+                        className="absolute inset-0 rounded-3xl overflow-hidden"
+                        style={{ background: project.gradient }}
+                      />
+                      {/* Centered image at bottom - can overflow the card on hover */}
+                      <div
+                        className="absolute inset-x-[5%] bottom-0 top-[10%] flex justify-center items-end pointer-events-none transition-all duration-500 ease-out group-hover:inset-x-[-10%] group-hover:top-[-15%] group-hover:scale-[1.05] origin-bottom"
+                      >
+                        <ImageWithFallback
+                          src={project.image!}
+                          alt={project.title}
+                          className="w-full h-full object-contain object-bottom"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Regular Image */}
+                      <ImageWithFallback
+                        src={project.image!}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </>
+                  )}
 
                   {/* Gradient overlay - Keep dark for text readability over images */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  <div className={`absolute inset-0 rounded-b-3xl ${hasGradient ? 'bg-gradient-to-t from-black/60 via-transparent to-transparent' : 'bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80'} transition-opacity duration-300`} />
 
                   {/* Content */}
                   <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
                     {/* Top - Number */}
                     <div className="flex justify-between items-start">
-                      <span className="text-5xl md:text-6xl font-medium text-white/30">
+                      <span
+                        className="text-5xl md:text-6xl font-medium text-white/30"
+                        style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
+                      >
                         {String(index + 1).padStart(2, '0')}
                       </span>
                       <motion.div
@@ -206,8 +235,8 @@ export function HorizontalScroll() {
                     </div>
 
                     {/* Bottom - Info */}
-                    <div>
-                      <p className="text-purple-300 mb-2 tracking-wider text-sm md:text-base">
+                    <div style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
+                      <p className={`${hasGradient ? 'text-teal-200' : 'text-purple-300'} mb-2 tracking-wider text-sm md:text-base`}>
                         {project.category} • {project.year}
                       </p>
                       <h3 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white">
@@ -221,7 +250,7 @@ export function HorizontalScroll() {
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 border-2 border-purple-500/50 rounded-3xl pointer-events-none"
+                    className={`absolute inset-0 border-2 ${hasGradient ? 'border-teal-400/50' : 'border-purple-500/50'} rounded-3xl pointer-events-none`}
                   />
                 </div>
               );
@@ -229,7 +258,7 @@ export function HorizontalScroll() {
               return (
                 <motion.div
                   key={project.id}
-                  className="relative flex-shrink-0 group cursor-pointer"
+                  className={`relative flex-shrink-0 group cursor-pointer ${hasGradient ? 'overflow-visible' : ''}`}
                   style={{
                     width: 'clamp(300px, 70vw, 600px)',
                     height: 'clamp(280px, 50vh, 380px)'
