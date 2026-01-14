@@ -734,7 +734,7 @@ function ResultsSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Impacto do <br />Projeto
+                                Impacto do Projeto
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -776,7 +776,7 @@ function LessonsSection() {
                     <div className="text-center mb-10">
                         <RevealText>
                             <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Aprendizados
+                                Análise Crítica
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -784,7 +784,7 @@ function LessonsSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Lições Aprendidas
+                                Insights e Reflexões
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -844,7 +844,7 @@ function CTASection() {
                         </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center gap-6 mt-4">
+                    <div className="flex flex-col items-center gap-4 mt-4">
                         <motion.button
                             onClick={openModal}
                             whileHover={{ scale: 1.05 }}
@@ -859,10 +859,10 @@ function CTASection() {
                         >
                             <Link
                                 to="/"
-                                className="inline-flex items-center justify-center gap-2 px-6 py-4 text-purple-600 hover:text-purple-700 font-medium whitespace-nowrap"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-purple-600 hover:text-purple-700 font-medium whitespace-nowrap"
                             >
                                 <ArrowLeft size={18} />
-                                Voltar aos Projetos
+                                Voltar
                             </Link>
                         </motion.div>
                     </div>
