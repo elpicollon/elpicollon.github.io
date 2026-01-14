@@ -101,6 +101,17 @@ const projectData = {
         ]
     },
 
+    handoff: {
+        titulo: "Design Handoff",
+        descricao: "Seguindo a técnica Shift-Left que preza pelo envolvimento da Engenharia desde a ideação para alinhar escopo, stack e prazos, eliminamos o risco de prototipar soluções inviáveis, garantimos fluidez do desenvolvimento e reduzimos drasticamente o ruído de comunicação durante o handoff.",
+        bullets: [
+            "Navegação: Frames agrupados por funcionalidade lógica",
+            "Consistência: Componentes locais isolados para facilitar manutenção",
+            "Semântica: Sistema de anotações visuais (Info, Atenção, Importante) e fluxogramas integrados para cobrir regras de negócio não visíveis no protótipo, minimizando dúvidas técnicas"
+        ],
+        imagem: "/assets/projects/transcricoes-insights-ia/handoff.gif"
+    },
+
     resultados: [
         { title: "Eficiência Operacional", desc: "Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times." },
         { title: "Impacto Comercial", desc: "A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes." },
@@ -715,12 +726,90 @@ function PrototypeSection() {
     );
 }
 
+// Handoff Section
+function HandoffSection() {
+    return (
+        <ChapterSection id="handoff" className="bg-slate-50">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="06" className="-top-20 -right-10 md:-right-20" />
+
+                <div className="relative z-10">
+                    {/* Section Header */}
+                    <div className="lg:max-w-xl mb-16 md:mb-24">
+                        <RevealText>
+                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Handoff
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                {projectData.handoff.titulo}
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                        </RevealText>
+                    </div>
+
+                    {/* Content - Text + Image */}
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-stretch">
+                        {/* Text */}
+                        <div className="w-full md:w-[35%] flex-shrink-0">
+                            <RevealText delay={0.3}>
+                                <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                                    {projectData.handoff.descricao}
+                                </p>
+                                <ul className="space-y-3">
+                                    {projectData.handoff.bullets.map((bullet, index) => {
+                                        const [title, ...rest] = bullet.split(': ');
+                                        const description = rest.join(': ');
+                                        return (
+                                            <li key={index} className="flex items-start gap-3">
+                                                <CheckCircle2 className="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" />
+                                                <span className="text-base text-slate-600">
+                                                    <strong className="font-semibold text-slate-700">{title}:</strong> {description}
+                                                </span>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </RevealText>
+                        </div>
+
+                        {/* Image */}
+                        <div className="w-full md:w-[65%] flex-shrink-0">
+                            <RevealText delay={0.4}>
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                    className="group"
+                                >
+                                    <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
+                                        <img
+                                            src={projectData.handoff.imagem}
+                                            alt={projectData.handoff.titulo}
+                                            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                                        />
+                                    </div>
+                                </motion.div>
+                            </RevealText>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
 // Results Section
 function ResultsSection() {
     return (
-        <ChapterSection id="results" className="bg-slate-50">
+        <ChapterSection id="results" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
-                <BigNumber number="06" className="-top-20 -right-10 md:-right-20" />
+                <BigNumber number="07" className="-top-20 -right-10 md:-right-20" />
 
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
@@ -748,9 +837,9 @@ function ResultsSection() {
                             const IconComponent = icons[index] || CheckCircle2;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 hover:border-emerald-300 transition-colors group h-full">
+                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-emerald-300 hover:bg-gradient-to-br hover:from-emerald-50 hover:to-white transition-all group h-full">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-emerald-500" />
+                                            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-emerald-500 transition-colors" />
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
                                         </div>
                                         <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
@@ -768,9 +857,9 @@ function ResultsSection() {
 // Lessons Section
 function LessonsSection() {
     return (
-        <ChapterSection id="lessons" className="bg-white">
+        <ChapterSection id="lessons" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
-                <BigNumber number="07" className="-top-20 -left-10 md:-left-20" />
+                <BigNumber number="08" className="-top-20 -left-10 md:-left-20" />
 
                 <div className="relative z-10">
                     <div className="text-center mb-10">
@@ -893,6 +982,7 @@ export function TranscricoesInsightsIA() {
                 <ResearchSection />
                 <DiscoveriesSection />
                 <PrototypeSection />
+                <HandoffSection />
                 <ResultsSection />
                 <LessonsSection />
                 <CTASection />
