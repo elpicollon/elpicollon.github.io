@@ -1,6 +1,10 @@
 # Dependências
 node_modules
 
+# Build output
+build
+dist
+
 # Arquivos de sistema
 .DS_Store
 src/.DS_Store
