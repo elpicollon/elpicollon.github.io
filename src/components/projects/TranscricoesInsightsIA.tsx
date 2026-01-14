@@ -69,7 +69,7 @@ const projectData = {
                 imagens: ["/assets/projects/transcricoes-insights-ia/4.png"]
             },
             {
-                titulo: "Integrado ao Negócio",
+                titulo: "Integração ao Deal",
                 descricao: "A interface vincula a execução da mídia diretamente aos dados do CRM (Deal, Responsável e Atividades). Isso garante rastreabilidade e centraliza ações operacionais eliminando a fragmentação do fluxo de trabalho.",
                 imagens: ["/assets/projects/transcricoes-insights-ia/5.png"]
             },
@@ -543,7 +543,7 @@ function ResearchSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Processo de <br />Pesquisa
+                                Processo de Pesquisa
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -593,7 +593,7 @@ function DiscoveriesSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Insights Principais
+                                Principais Insights
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -646,7 +646,7 @@ function PrototypeSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Telas do <br />Projeto
+                                Interface do Projeto
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
