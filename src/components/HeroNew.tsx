@@ -65,7 +65,12 @@ export function HeroNew() {
             >
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                 <span className="text-sm md:text-base font-medium text-slate-600">
-                  Product Designer Sênior
+                  Product Designer
+                </span>
+              </div>
+              <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                <span className="text-sm md:text-base font-medium text-slate-600">
+                  Professor
                 </span>
               </div>
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">

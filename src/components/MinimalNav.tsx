@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import PicoloDesignLogo from '../imports/PicoloDesignLogo-9-474';
 import { useContactModal } from '../contexts/ContactModalContext';
@@ -92,7 +92,7 @@ export function MinimalNav() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                   whileHover={{ y: -2 }}
-                  className="text-xs text-zinc-500 hover:text-black transition-colors tracking-wider cursor-pointer"
+                  className="text-xs text-slate-600 hover:bg-purple-900 hover:text-white font-medium transition-all tracking-wider cursor-pointer px-4 py-2 rounded-full"
                 >
                   {item.label}
                 </motion.button>
@@ -107,7 +107,7 @@ export function MinimalNav() {
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden lg:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-zinc-800 transition-colors cursor-pointer"
+              className="hidden lg:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-purple-900 transition-colors cursor-pointer"
             >
               ENTRE EM CONTATO
             </motion.button>

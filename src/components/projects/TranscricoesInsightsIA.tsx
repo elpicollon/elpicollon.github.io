@@ -69,11 +69,6 @@ const projectData = {
                 imagens: ["/assets/projects/transcricoes-insights-ia/4.png"]
             },
             {
-                titulo: "Integração ao Deal",
-                descricao: "A interface vincula a execução da mídia diretamente aos dados do CRM (Deal, Responsável e Atividades). Isso garante rastreabilidade e centraliza ações operacionais eliminando a fragmentação do fluxo de trabalho.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/5.png"]
-            },
-            {
                 titulo: "Design = Conversão",
                 descricao: "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade.",
                 imagens: ["/assets/projects/transcricoes-insights-ia/6.png"]
@@ -87,11 +82,6 @@ const projectData = {
                 titulo: "Experiência Cross-Media",
                 descricao: "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem.",
                 imagens: ["/assets/projects/transcricoes-insights-ia/8.png"]
-            },
-            {
-                titulo: "Inteligência Contextualizada",
-                descricao: "Além do vínculo direto com o Deal, a interface exibe insights avançados da IA, como Análise de Sentimentos e Sugestão de Próximos Passos, transformando uma simples gravação em um painel estratégico de tomada de decisão.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/9.png"]
             },
             {
                 titulo: "Email Viral de Aquisição",
@@ -700,7 +690,7 @@ function PrototypeSection() {
                                         </div>
 
                                         {/* Image - Shows second on mobile */}
-                                        <div className={`w-full ${index === 9 ? 'md:w-[50%]' : 'md:w-[70%]'} flex-shrink-0 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
+                                        <div className={`w-full ${index === 7 ? 'md:w-[50%]' : 'md:w-[70%]'} flex-shrink-0 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
                                             <motion.div
                                                 whileHover={{ scale: 1.02 }}
                                                 transition={{ duration: 0.4, ease: "easeOut" }}
