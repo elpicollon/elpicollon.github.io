@@ -193,7 +193,7 @@ export function HorizontalScroll() {
                       />
                       {/* Centered image at bottom - can overflow the card on hover */}
                       <div
-                        className="absolute inset-x-[5%] bottom-0 top-[10%] flex justify-center items-end pointer-events-none transition-all duration-500 ease-out group-hover:inset-x-[-10%] group-hover:top-[-15%] group-hover:scale-[1.05] origin-bottom"
+                        className="absolute inset-x-[5%] bottom-0 top-0 md:top-[10%] flex justify-center items-end pointer-events-none transition-all duration-500 ease-out group-hover:inset-x-[-10%] group-hover:top-[-15%] group-hover:scale-[1.05] origin-bottom"
                       >
                         <ImageWithFallback
                           src={project.image!}
@@ -261,7 +261,7 @@ export function HorizontalScroll() {
                   className={`relative flex-shrink-0 group cursor-pointer ${hasGradient ? 'overflow-visible' : ''}`}
                   style={{
                     width: 'clamp(300px, 70vw, 600px)',
-                    height: 'clamp(280px, 50vh, 380px)'
+                    height: 'clamp(220px, 35vh, 380px)'
                   }}
                   whileHover={{ scale: 0.98 }}
                   transition={{ duration: 0.3 }}
@@ -282,7 +282,7 @@ export function HorizontalScroll() {
               className="flex-shrink-0 rounded-3xl bg-gradient-to-br from-purple-50 to-white backdrop-blur-xl border border-purple-100 flex items-center justify-center shadow-lg"
               style={{
                 width: 'clamp(300px, 70vw, 600px)',
-                height: 'clamp(280px, 50vh, 380px)'
+                height: 'clamp(220px, 35vh, 380px)'
               }}
             >
               <div className="text-center p-8">
