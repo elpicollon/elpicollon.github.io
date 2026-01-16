@@ -12,6 +12,9 @@ import { FooterNew } from './components/FooterNew';
 import { ContactModal } from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
 import { TranscricoesInsightsIA } from './components/projects/TranscricoesInsightsIA';
+import { MedicalOffice } from './components/projects/MedicalOffice';
+import { ImportacaoEmpresas } from './components/projects/ImportacaoEmpresas';
+import { AboutPage } from './components/pages/AboutPage';
 import { ScrollToTop } from './components/ScrollToTop';
 
 function HomePage() {
@@ -64,6 +67,9 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projeto/transcricoes-insights-ia" element={<TranscricoesInsightsIA />} />
+        <Route path="/projeto/medical-office" element={<MedicalOffice />} />
+        <Route path="/projeto/importacao-empresas" element={<ImportacaoEmpresas />} />
+        <Route path="/sobre" element={<AboutPage />} />
       </Routes>
 
       <ContactModal isOpen={isOpen} onClose={closeModal} />

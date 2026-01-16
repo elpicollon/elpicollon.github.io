@@ -1,7 +1,50 @@
 import { useEffect, useRef } from 'react';
 
-export function TealParticleBackground() {
+// Predefined color palettes
+const COLOR_PALETTES = {
+    purple: [
+        { r: 216, g: 180, b: 254 },  // purple-300
+        { r: 192, g: 132, b: 252 },  // purple-400
+        { r: 168, g: 85, b: 247 },   // purple-500
+        { r: 147, g: 51, b: 234 },   // purple-600
+    ],
+    teal: [
+        { r: 94, g: 234, b: 212 },   // teal-300
+        { r: 45, g: 212, b: 191 },   // teal-400
+        { r: 20, g: 184, b: 166 },   // teal-500
+        { r: 13, g: 148, b: 136 },   // teal-600
+    ],
+    blue: [
+        { r: 147, g: 197, b: 253 },  // blue-300
+        { r: 96, g: 165, b: 250 },   // blue-400
+        { r: 64, g: 136, b: 255 },   // #4088FF
+        { r: 37, g: 99, b: 235 },    // blue-600
+    ],
+    navy: [
+        { r: 99, g: 143, b: 191 },   // Lighter navy
+        { r: 55, g: 104, b: 156 },   // Medium navy
+        { r: 2, g: 55, b: 109 },     // #02376D
+        { r: 1, g: 35, b: 70 },      // Darker navy
+    ],
+};
+
+type ColorPreset = keyof typeof COLOR_PALETTES;
+
+interface ParticleBackgroundProps {
+    /**
+     * Color preset or custom color array
+     * Presets: 'purple', 'teal', 'blue', 'navy'
+     */
+    color?: ColorPreset | { r: number; g: number; b: number }[];
+}
+
+export function ParticleBackground({ color = 'purple' }: ParticleBackgroundProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    // Determine color palette
+    const particleColors = typeof color === 'string'
+        ? COLOR_PALETTES[color]
+        : color;
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -68,14 +111,6 @@ export function TealParticleBackground() {
 
         let time = 0;
 
-        // Teal color palette: teal-300 (#5eead4) to teal-500 (#14b8a6)
-        const tealColors = [
-            { r: 94, g: 234, b: 212 },  // teal-300
-            { r: 45, g: 212, b: 191 },  // teal-400
-            { r: 20, g: 184, b: 166 },  // teal-500
-            { r: 13, g: 148, b: 136 },  // teal-600 (for depth)
-        ];
-
         const animate = () => {
             ctx.clearRect(0, 0, width, height);
             time += 0.005;
@@ -109,11 +144,11 @@ export function TealParticleBackground() {
 
                 // Pick color based on position for gradient effect
                 const colorIndex = Math.floor((p.originY / height) * 3.99);
-                const color = tealColors[colorIndex];
+                const particleColor = particleColors[colorIndex];
 
                 ctx.beginPath();
                 ctx.arc(p.originX, p.originY, 1.8 * scale, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+                ctx.fillStyle = `rgba(${particleColor.r}, ${particleColor.g}, ${particleColor.b}, ${alpha})`;
                 ctx.fill();
             });
 
@@ -128,18 +163,18 @@ export function TealParticleBackground() {
             window.removeEventListener('mousemove', handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [particleColors]);
 
     return (
         <>
-            {/* Base background - same as original page */}
+            {/* Base background */}
             <div
                 className="absolute inset-0"
                 style={{
                     background: '#f2f4f7'
                 }}
             />
-            {/* Particle canvas with teal gradient bubbles */}
+            {/* Particle canvas */}
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 pointer-events-none opacity-60"

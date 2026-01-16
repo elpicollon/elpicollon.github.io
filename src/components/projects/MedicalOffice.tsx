@@ -1,7 +1,7 @@
 import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate } from 'motion/react';
 import { useRef, useEffect, ReactNode, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, LayoutGrid, Settings, Brain, Database, Share2, TrendingUp, Gauge, BadgeDollarSign, Rocket, ShieldCheck, Code, BarChart3 } from 'lucide-react';
+import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, Settings, Share2, Gauge, ShieldCheck, Code, Palette, Layout, Smartphone, FileCheck, Layers, Compass, ClipboardList, PenTool } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
 import { ScrollToTop } from '../ScrollToTop';
@@ -15,104 +15,94 @@ import { useContactModal } from '../../contexts/ContactModalContext';
 // ============================================================================
 
 const projectData = {
-    title: "Transcrições & Insights com IA",
-    category: "Product Design",
-    year: "2024",
+    title: "Redesign Medical Office",
+    category: "UX Design",
+    year: "2021",
 
-    resumo: <>Redesign do ecossistema de videoconferências focado na centralização de gravações, transcrições e insights de IA.<br />O projeto automatizou a documentação pós-reunião, eliminando trabalho manual e transformando uma ferramenta operacional em um ativo estratégico de vendas, validado por alta adoção espontânea.</>,
+    resumo: <>Redesign UI/UX da plataforma web Medical Office, que conecta profissionais de saúde sem espaço próprio a clínicas com capacidade ociosa.<br />O objetivo principal foi redesenhar a interface, torná-la responsiva e aprimorar a usabilidade, mantendo uma experiência familiar para os usuários já existentes. O processo incluiu um workshop de Lean Inception, definição de visão do produto, criação de personas e mapeamento de jornadas do usuário.</>,
 
-    objetivo: <>Centralizar gravações, transcrições e insights de IA para eliminar a gestão manual e o ruído no compartilhamento de dados.<br />O foco foi transformar registros de reuniões em inteligência acionável para times de Vendas, Suporte e Produto, elevando a competitividade da ferramenta no mercado.</>,
+    objetivo: <>A Medical Office é uma plataforma web que conecta profissionais de saúde iniciantes que não possuem espaço físico para atuação, com proprietários de consultórios que possuem espaços ociosos.<br />Dessa forma, busca suprir a demanda de múltiplos profissionais, viabilizando a geração de renda aos proprietários através do aluguel, ao mesmo tempo que permite aos profissionais iniciantes atuarem em um espaço totalmente equipado.</>,
 
-    desafio: <>Arquitetar a unificação de múltiplas fontes de dados (vídeo, ligações e transcrições) que eram dispostos em diferentes locais, integrando um volume denso de informações em um fluxo único e performático, reduzindo a carga cognitiva do usuário sem comprometer experiência de uso e viabilidade técnica.</>,
+    desafio: <>Redesenhar a ferramenta tornando-a mais moderna e responsiva, facilitando o uso e mantendo o feeling já adquirido pelos usuários. O redesign precisava equilibrar inovação com familiaridade, garantindo que a transição fosse suave para a base de usuários existente.</>,
 
     meuPapel: [
-        { title: "Discovery e Estratégia", desc: "Diagnóstico de fricções e benchmarking competitivo para definição de requisitos." },
-        { title: "Arquitetura e Interação", desc: "Redesign da jornada para integrar vídeo e dados em um fluxo único." },
-        { title: "Viabilidade Técnica", desc: "Alinhamento com engenharia para implementação dos recursos de IA." },
-        { title: "Validação e Refino", desc: "Ajustes de usabilidade baseados em feedback qualitativo." },
+        { title: "Lean Inception", desc: "Participação no workshop colaborativo para alinhar o MVP com stakeholders e equipe de desenvolvimento." },
+        { title: "Pesquisa & Discovery", desc: "Criação de Matriz CSD, personas e mapeamento de jornadas do usuário." },
+        { title: "Design de Interface", desc: "Atuação como designer único após a inception, criando protótipos de alta fidelidade." },
+        { title: "Handoff Colaborativo", desc: "Trabalho integrado com a equipe de desenvolvimento desde a concepção." },
     ],
 
     processoPesquisa: [
-        { title: "Auditoria do Legado", desc: "Análise heurística da versão anterior para mapear fricções e dívidas de experiência." },
-        { title: "Dados Internos", desc: "Cruzamento de chamados de Suporte e Vendas para validar dores reais e priorizar correções." },
-        { title: "Benchmarking", desc: "Estudo de padrões de interação em players como Apollo, Fireflies, tl;dv e Bluedot." },
-        { title: "Viabilidade Técnica", desc: "Validação precoce com engenharia para antecipar restrições e evitar retrabalho." },
+        { title: "Lean Inception", desc: "Workshop colaborativo com 2 Designers, 2 Desenvolvedores, COO, CTO e 3 fundadores para definir o MVP." },
+        { title: "Matriz CSD", desc: "Levantamento de Certezas, Suposições e Dúvidas para alinhamento da equipe sobre o produto." },
+        { title: "Visão do Produto", desc: "Definição do que o produto é, não é, faz e não faz para evitar ambiguidades e definir escopo." },
+        { title: "Personas", desc: "Criação de três perfis de usuário: Administrador, Locador e Locatário, com suas necessidades específicas." },
     ],
 
     descobertas: [
-        { title: "Acesso à Inteligência", desc: "Transformar um simples \"log de reunião\" em um hub de conteúdo pesquisável (transcrição e IA), eliminando a necessidade de assistir ao vídeo completo." },
-        { title: "Centralização da Verdade", desc: "Unificar calls internas e externas em uma visualização única, removendo a fricção de buscar registros dentro de pipelines de vendas." },
-        { title: "Desbloqueio de Colaboração", desc: "Compartilhamento fácil para que a informação flua entre Vendas, Suporte e Produto sem barreiras manuais." },
-        { title: "Estratégia de Viralização", desc: "Envio automático de resumos como alavanca de Product-Led Growth, estimulando a adoção espontânea por novos usuários." },
+        { title: "Benchmarking", desc: "Análise de plataformas como Airbnb, Booking e QuintoAndar para identificar padrões de mercado e reduzir fricções." },
+        { title: "Fluxos de Usuário", desc: "Criação de fluxogramas detalhados indicando o caminho desde o ponto inicial até o objetivo final de cada jornada." },
+        { title: "Débito Técnico", desc: "Identificação de limitações técnicas que impactaram o redesign, exigindo ajustes no escopo de algumas rotinas." },
+        { title: "Cadastro Problemático", desc: "O fluxo anterior era moroso com formulário extenso; implementamos processo passo a passo mais intuitivo." },
     ],
 
     prototipo: {
         telas: [
             {
-                titulo: "Tela Inicial",
-                descricao: "Interface construída sobre o Design System da Leads2b, assegurando consistência visual e reduzindo a curva de aprendizado do usuário.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/1.png"]
+                titulo: "Landing Page",
+                descricao: "A landing page foi reformulada com base nas diretrizes definidas pelos stakeholders, mantendo o estilo visual desejado pelos fundadores sem comprometer os padrões do style guide nem os critérios de usabilidade.",
+                imagens: ["/assets/projects/medical-office/1.png"]
             },
             {
-                titulo: "Video & Transcrição",
-                descricao: "Visualização imersiva com painel lateral de dados. A estrutura sincroniza a reprodução do vídeo com a transcrição e insights de IA, centralizando todo o contexto da reunião em uma única view.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/2.png"]
+                titulo: "Plataforma Web",
+                descricao: "Algumas limitações de débito técnico impactaram o redesign. Por isso, determinadas rotinas passaram por ajustes visuais para alinhar com o novo padrão, enquanto outras puderam ser totalmente reconstruídas.",
+                imagens: ["/assets/projects/medical-office/2.png"]
             },
             {
-                titulo: "Smart Insights",
-                descricao: "Interface unificada que integra o player de vídeo e os Smart Insights. O layout permite consumo simultâneo de transcrições, comentários e insights de IA, eliminando a troca de abas e mantendo o foco no conteúdo.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/3.png"]
+                titulo: "Cadastro de Espaços",
+                descricao: "Implementamos um fluxo de cadastro passo a passo, mais intuitivo e visualmente agradável. Essa abordagem trouxe leveza a uma etapa naturalmente mais densa, tornando o processo mais claro para o usuário.",
+                imagens: ["/assets/projects/medical-office/3.png"]
             },
             {
-                titulo: "Compartilhamento Ágil",
-                descricao: "Fluxo de envio otimizado para a inclusão rápida de múltiplos destinatários. A interface garante que o conhecimento gerado na reunião chegue às pessoas certas com poucos cliques, eliminando a necessidade de redigir e-mails.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/4.png"]
+                titulo: "Templates de Email",
+                descricao: "Desenvolvemos templates de e-mail personalizados para os três tipos de usuários. Todos os eventos que demandam interação passaram a seguir um padrão de comunicação, fortalecendo a identidade da marca.",
+                imagens: ["/assets/projects/medical-office/4.png"]
             },
             {
-                titulo: "Design = Conversão",
-                descricao: "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/6.png"]
+                titulo: "Plataforma Mobile",
+                descricao: "Grande parte da versão anterior não era responsiva. Com o redesign, todo o layout foi projetado com foco na responsividade, garantindo experiência consistente independentemente do dispositivo.",
+                imagens: ["/assets/projects/medical-office/5.png"]
             },
             {
-                titulo: "Insights = Conversão",
-                descricao: "Ferramenta de agendamento de atividades integrada à tela, reduzindo o time-to-action. O usuário pode agendar follow-ups no momento em que identifica uma oportunidade, eliminando a alternância entre abas e ferramentas de calendário externas.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/7.png"]
-            },
-            {
-                titulo: "Experiência Cross-Media",
-                descricao: "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/8.png"]
-            },
-            {
-                titulo: "Email Viral de Aquisição",
-                descricao: "E-mail de resumo como uma ferramenta de Product-Led Growth. Ao entregar valor imediato (insights e transcrição) para os clientes dos nossos clientes, utilizamos o acesso ao conteúdo completo como gatilho estratégico para atrair novos cadastros e expandir a base de usuários organicamente.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/10.png"]
+                titulo: "Style Guide",
+                descricao: "Foi criado um style guide componentizado, pensado para facilitar tanto a criação quanto a manutenção futura da interface, seguindo diretrizes definidas com o time de marketing.",
+                imagens: ["/assets/projects/medical-office/6.png"]
             }
         ]
     },
 
     handoff: {
-        titulo: "Design Handoff",
-        descricao: "Seguindo a técnica Shift-Left que preza pelo envolvimento da Engenharia desde a ideação para alinhar escopo, stack e prazos, eliminamos o risco de prototipar soluções inviáveis, garantimos fluidez do desenvolvimento e reduzimos drasticamente o ruído de comunicação durante o handoff.",
+        titulo: "Handoff Design-Dev",
+        descricao: "Atuamos de forma colaborativa desde as etapas iniciais de prototipação, definindo um escopo viável com base na stack tecnológica e no tempo disponível para o projeto. Eventuais limitações técnicas eram identificadas e ajustadas ainda na fase de prototipação.",
         bullets: [
-            "Navegação: Frames agrupados por funcionalidade lógica",
-            "Consistência: Componentes locais isolados para facilitar manutenção",
-            "Semântica: Sistema de anotações visuais (Info, Atenção, Importante) e fluxogramas integrados para cobrir regras de negócio não visíveis no protótipo, minimizando dúvidas técnicas"
+            "Colaboração: Envolvimento da engenharia desde a fase de ideação",
+            "Viabilidade: Apenas rotinas viáveis e refinadas encaminhadas para desenvolvimento",
+            "Comunicação: Processo promove integração fluida entre designers e desenvolvedores"
         ],
-        imagem: "/assets/projects/transcricoes-insights-ia/handoff.gif"
+        imagem: "/assets/projects/medical-office/handoff.png"
     },
 
     resultados: [
-        { title: "Eficiência Operacional", desc: "Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times." },
-        { title: "Impacto Comercial", desc: "A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes." },
-        { title: "Growth e Adoção", desc: "O redirecionamento automático pós-reunião impulsionou a descoberta orgânica da feature, integrando-a naturalmente ao fluxo diário sem custo de marketing." },
-        { title: "Recuperação de Confiança", desc: "Usuários detratores da versão anterior tornaram-se promotores da nova funcionalidade, validando a resolução das fricções críticas de usabilidade." },
+        { title: "Responsividade Total", desc: "Toda a plataforma passou a funcionar perfeitamente em dispositivos móveis, resolvendo uma das principais limitações da versão anterior." },
+        { title: "Experiência Otimizada", desc: "O novo fluxo de cadastro passo a passo reduziu significativamente a fricção e abandono durante o registro de consultórios." },
+        { title: "Identidade Visual", desc: "Templates de email e style guide criaram um padrão de comunicação consistente, fortalecendo a marca." },
+        { title: "Longevidade do Design", desc: "A plataforma segue em funcionamento até hoje com o mesmo visual de 2021, validando a robustez do design implementado." },
     ],
 
     licoes: [
-        { title: "Shift-Left Dev", desc: "A validação técnica na fase de ideação provou-se vital para calibração e eliminação de retrabalho." },
-        { title: "Alavancas de Growth", desc: "O redirecionamento automático evidenciou que pequenas intervenções no fluxo podem gerar mais adoção orgânica do que grandes funcionalidades." },
-        { title: "Dados como Premissa", desc: "A experiência reforçou que a definição de KPIs deve nascer junto com o projeto, garantindo a mensuração de sucesso no rollout." },
+        { title: "Design Adaptável", desc: "Considerar futuras modificações e expansões faz parte do planejamento de qualquer redesign - o design deve ser um organismo vivo." },
+        { title: "Colaboração Early", desc: "O envolvimento precoce da engenharia garantiu que apenas soluções viáveis fossem prototipadas, eliminando retrabalho." },
+        { title: "Concessões Estratégicas", desc: "Algumas concessões de design foram necessárias para atender aos stakeholders, sem comprometer usabilidade." },
     ]
 };
 
@@ -130,7 +120,7 @@ function ScrollProgress() {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-teal-300 origin-left z-50"
+            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-300 origin-left z-50"
             style={{ scaleX }}
         />
     );
@@ -248,9 +238,9 @@ function HeroSection() {
         >
             {/* Background with particle effect */}
             <div className="absolute inset-0 z-0">
-                <ParticleBackground color="teal" />
+                <ParticleBackground color="blue" />
                 {/* Soft gradient for depth */}
-                <div className="absolute inset-0 bg-gradient-radial from-teal-500/5 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Content Container - Matching Home Structure */}
@@ -277,7 +267,7 @@ function HeroSection() {
                             >
                                 <Link
                                     to="/"
-                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-500 transition-colors group"
+                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group"
                                 >
                                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                                     <span className="text-sm font-medium uppercase tracking-wider">Voltar</span>
@@ -288,10 +278,10 @@ function HeroSection() {
                             <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
                                 <div className="flex flex-col gap-2">
                                     <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
-                                        Transcrições &
+                                        Redesign
                                     </h1>
-                                    <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#14b8a6] to-[#0d9488] tracking-tight leading-[1.1]">
-                                        Insights com IA
+                                    <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#4088FF] to-[#2563eb] tracking-tight leading-[1.1]">
+                                        Medical Office
                                     </h1>
                                 </div>
                             </div>
@@ -306,17 +296,17 @@ function HeroSection() {
                             >
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
-                                        Product Design
+                                        UX Design
                                     </span>
                                 </div>
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
-                                        Inteligência Artificial
+                                        UI Design
                                     </span>
                                 </div>
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
-                                        2024
+                                        2021
                                     </span>
                                 </div>
                             </motion.div>
@@ -353,12 +343,12 @@ function HeroSection() {
                         <RealisticMacBook className="w-[110%] max-w-none">
                             <div className="w-full h-full bg-black overflow-hidden relative">
                                 <img
-                                    src="/assets/projects/transcricoes-insights-ia/cover.png"
-                                    alt="Capa do Projeto: Transcrições & Insights com IA"
+                                    src="/assets/projects/medical-office/cover.png"
+                                    alt="Capa do Projeto: Redesign Medical Office"
                                     className="w-full h-full object-cover"
                                 />
                                 {/* Overlay to match the design vibe */}
-                                <div className="absolute inset-0 bg-teal-500/10 mix-blend-overlay pointer-events-none" />
+                                <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay pointer-events-none" />
                             </div>
                         </RealisticMacBook>
                     </motion.div>
@@ -382,7 +372,7 @@ function OverviewSection() {
                     {/* Section Header */}
                     <div className="mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
                                 Visão Geral
                             </span>
                         </RevealText>
@@ -395,7 +385,7 @@ function OverviewSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -417,19 +407,19 @@ function OverviewSection() {
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="group"
                         >
-                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-teal-50 via-white to-teal-50/30 border border-teal-100 hover:border-teal-200 transition-all duration-500 hover:shadow-xl hover:shadow-teal-100/50">
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-blue-50 via-white to-blue-50/30 border border-blue-100 hover:border-blue-200 transition-all duration-500 hover:shadow-xl hover:shadow-blue-100/50">
                                 {/* Icon */}
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-teal-500/25">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-blue-500/25">
                                     <Target className="w-7 h-7 text-white" />
                                 </div>
 
                                 {/* Title */}
                                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                    Objetivo
+                                    Visão Geral
                                 </h3>
 
                                 {/* Decorative Line */}
-                                <div className="w-12 h-0.5 bg-gradient-to-r from-teal-400 to-transparent rounded-full mb-6" />
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-blue-400 to-transparent rounded-full mb-6" />
 
                                 {/* Content */}
                                 <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
@@ -482,7 +472,7 @@ function RoleSection() {
                 <div className="relative z-10 grid lg:grid-cols-2 gap-16 lg:gap-24">
                     <div>
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
                                 Contribuição
                             </span>
                         </RevealText>
@@ -495,7 +485,7 @@ function RoleSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -503,12 +493,12 @@ function RoleSection() {
                         <StaggeredList
                             items={projectData.meuPapel}
                             renderItem={(item, index) => {
-                                const icons = [Search, LayoutGrid, Settings, CheckCircle2];
+                                const icons = [Users, Search, PenTool, FileCheck];
                                 const IconComponent = icons[index] || Users;
                                 return (
                                     <div className="flex gap-6 items-start group">
-                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center group-hover:bg-teal-500 transition-colors">
-                                            <IconComponent className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
+                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center group-hover:bg-blue-500 transition-colors">
+                                            <IconComponent className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-1">{item.title}</h3>
@@ -535,8 +525,8 @@ function ResearchSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Pesquisa
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Descoberta & Definição
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -548,16 +538,16 @@ function ResearchSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
                         </RevealText>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
                         {projectData.processoPesquisa.map((item, index) => (
                             <RevealText key={index} delay={0.2 + index * 0.1}>
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-teal-300 transition-colors group">
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-blue-300 transition-colors group">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-teal-200 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-blue-200 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <div className="pt-2">
@@ -585,7 +575,7 @@ function DiscoveriesSection() {
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
                                 Descobertas
                             </span>
                         </RevealText>
@@ -598,19 +588,19 @@ function DiscoveriesSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto" />
                         </RevealText>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                         {projectData.descobertas.map((item, index) => {
-                            const icons = [Brain, Database, Share2, TrendingUp];
+                            const icons = [Compass, Layers, Settings, ClipboardList];
                             const IconComponent = icons[index] || Lightbulb;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-teal-300 transition-all group h-full shadow-sm hover:shadow-md">
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-blue-300 transition-all group h-full shadow-sm hover:shadow-md">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-teal-600" />
+                                            <IconComponent className="w-6 h-6 text-blue-600" />
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
                                         </div>
                                         <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
@@ -638,7 +628,7 @@ function PrototypeSection() {
                     {/* Section Header */}
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
                                 Protótipo
                             </span>
                         </RevealText>
@@ -651,7 +641,7 @@ function PrototypeSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -667,7 +657,7 @@ function PrototypeSection() {
                                         <div className={`w-full md:w-[30%] flex-shrink-0 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
                                             <div className="space-y-3 md:space-y-4">
                                                 {/* Number Badge */}
-                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 text-white font-bold text-base md:text-lg shadow-lg shadow-teal-500/25">
+                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white font-bold text-base md:text-lg shadow-lg shadow-blue-500/25">
                                                     {String(index + 1).padStart(2, '0')}
                                                 </div>
 
@@ -680,7 +670,7 @@ function PrototypeSection() {
                                                 </h3>
 
                                                 {/* Decorative Line */}
-                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-teal-400 to-transparent rounded-full" />
+                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-blue-400 to-transparent rounded-full" />
 
                                                 {/* Description */}
                                                 <p className="text-sm md:text-lg text-slate-600 leading-relaxed">
@@ -690,7 +680,7 @@ function PrototypeSection() {
                                         </div>
 
                                         {/* Image - Shows second on mobile */}
-                                        <div className={`w-full ${index === 7 ? 'md:w-[50%]' : 'md:w-[70%]'} flex-shrink-0 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
+                                        <div className={`w-full md:w-[70%] flex-shrink-0 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
                                             <motion.div
                                                 whileHover={{ scale: 1.02 }}
                                                 transition={{ duration: 0.4, ease: "easeOut" }}
@@ -727,7 +717,7 @@ function HandoffSection() {
                     {/* Section Header */}
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
                                 Handoff
                             </span>
                         </RevealText>
@@ -740,7 +730,7 @@ function HandoffSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -758,7 +748,7 @@ function HandoffSection() {
                                         const description = rest.join(': ');
                                         return (
                                             <li key={index} className="flex items-start gap-3">
-                                                <CheckCircle2 className="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" />
+                                                <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
                                                 <span className="text-base text-slate-600">
                                                     <strong className="font-semibold text-slate-700">{title}:</strong> {description}
                                                 </span>
@@ -823,7 +813,7 @@ function ResultsSection() {
 
                     <div className="grid md:grid-cols-2 gap-6">
                         {projectData.resultados.map((item, index) => {
-                            const icons = [Gauge, BadgeDollarSign, Rocket, ShieldCheck];
+                            const icons = [Smartphone, Gauge, Palette, ShieldCheck];
                             const IconComponent = icons[index] || CheckCircle2;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
@@ -873,7 +863,7 @@ function LessonsSection() {
 
                     <div className="grid md:grid-cols-3 gap-6">
                         {projectData.licoes.map((item, index) => {
-                            const icons = [Code, TrendingUp, BarChart3];
+                            const icons = [Layout, Code, Share2];
                             const IconComponent = icons[index] || Sparkles;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
@@ -955,7 +945,7 @@ function CTASection() {
 // MAIN COMPONENT
 // ============================================================================
 
-export function TranscricoesInsightsIA() {
+export function MedicalOffice() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

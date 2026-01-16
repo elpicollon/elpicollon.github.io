@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import PicoloDesignLogo from '../imports/PicoloDesignLogo-9-474';
 import { useContactModal } from '../contexts/ContactModalContext';
@@ -80,22 +80,39 @@ export function MinimalNav() {
               className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2"
             >
               {[
-                { label: 'PROJETOS', sectionId: 'projetos' },
-                { label: 'SOBRE', sectionId: 'sobre' },
-                { label: 'EXPERTISE', sectionId: 'expertise' },
-                { label: 'CONTATO', sectionId: 'contato' }
+                { label: 'PROJETOS', sectionId: 'projetos', isLink: false },
+                { label: 'EXPERTISE', sectionId: 'expertise', isLink: false },
+                { label: 'TRAJETÓRIA', path: '/sobre', isLink: true },
+                { label: 'CONTATO', sectionId: 'contato', isLink: false }
               ].map((item, index) => (
-                <motion.button
-                  key={item.label}
-                  onClick={() => handleNavClick(item.sectionId)}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ y: -2 }}
-                  className="text-xs text-slate-600 hover:bg-purple-900 hover:text-white font-medium transition-all tracking-wider cursor-pointer px-4 py-2 rounded-full"
-                >
-                  {item.label}
-                </motion.button>
+                item.isLink ? (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                    whileHover={{ y: -2 }}
+                  >
+                    <Link
+                      to={item.path!}
+                      className="text-xs text-slate-600 hover:bg-purple-900 hover:text-white font-medium transition-all tracking-wider cursor-pointer px-4 py-2 rounded-full block"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.button
+                    key={item.label}
+                    onClick={() => handleNavClick(item.sectionId!)}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                    whileHover={{ y: -2 }}
+                    className="text-xs text-slate-600 hover:bg-purple-900 hover:text-white font-medium transition-all tracking-wider cursor-pointer px-4 py-2 rounded-full"
+                  >
+                    {item.label}
+                  </motion.button>
+                )
               ))}
             </motion.div>
 
@@ -136,11 +153,11 @@ export function MinimalNav() {
         className="fixed top-0 right-0 bottom-0 w-full lg:hidden bg-white z-[110] flex flex-col justify-center items-center gap-8"
       >
         {[
-          { label: 'Início', sectionId: 'inicio', isModal: false },
-          { label: 'Projetos', sectionId: 'projetos', isModal: false },
-          { label: 'Sobre', sectionId: 'sobre', isModal: false },
-          { label: 'Expertise', sectionId: 'expertise', isModal: false },
-          { label: 'Contato', sectionId: 'contato', isModal: true }
+          { label: 'Início', sectionId: 'inicio', isModal: false, isLink: false },
+          { label: 'Projetos', sectionId: 'projetos', isModal: false, isLink: false },
+          { label: 'Expertise', sectionId: 'expertise', isModal: false, isLink: false },
+          { label: 'Trajetória', path: '/sobre', isModal: false, isLink: true },
+          { label: 'Contato', sectionId: 'contato', isModal: true, isLink: false }
         ].map((item, index) => (
           item.isModal ? (
             <motion.button
@@ -153,13 +170,28 @@ export function MinimalNav() {
             >
               {item.label}
             </motion.button>
+          ) : item.isLink ? (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
+              transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
+            >
+              <Link
+                to={item.path!}
+                onClick={() => setIsOpen(false)}
+                className="text-4xl font-medium text-black hover:text-purple-600 transition-colors cursor-pointer block"
+              >
+                {item.label}
+              </Link>
+            </motion.div>
           ) : (
             <motion.button
               key={item.label}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
               transition={{ duration: 0.3, delay: isOpen ? index * 0.1 : 0 }}
-              onClick={() => { setIsOpen(false); handleNavClick(item.sectionId); }}
+              onClick={() => { setIsOpen(false); handleNavClick(item.sectionId!); }}
               className="text-4xl font-medium text-black hover:text-purple-600 transition-colors cursor-pointer"
             >
               {item.label}

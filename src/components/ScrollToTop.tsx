@@ -28,7 +28,7 @@ export function ScrollToTop() {
                     exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.2 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-white hover:text-teal-600 hover:border-teal-200 transition-all cursor-pointer"
+                    className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-white hover:text-purple-600 hover:border-purple-200 transition-all cursor-pointer"
                     aria-label="Voltar ao topo"
                 >
                     <ArrowUp size={20} />
