@@ -6,9 +6,8 @@ import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
 import { ScrollToTop } from '../ScrollToTop';
 import { ParticleBackground } from '../ParticleBackground';
-import { HeroParticleGrid } from '../HeroParticleGrid';
 import { RealisticMacBook } from '../RealisticMacBook';
-import { useContactModal } from '../../contexts/ContactModalContext';
+import { ProjectCTAFooter } from './ProjectCTAFooter';
 
 // ============================================================================
 // PROJECT DATA
@@ -884,63 +883,6 @@ function LessonsSection() {
     );
 }
 
-// CTA Section
-function CTASection() {
-    const { openModal } = useContactModal();
-
-    return (
-        <section className="py-32 px-6 md:px-12 bg-[#f8fafc] relative overflow-hidden flex items-center justify-center">
-            {/* Background Effects */}
-            <div className="absolute inset-0 z-0">
-                <HeroParticleGrid />
-                <div className="absolute inset-0 bg-gradient-radial from-violet-500/5 via-transparent to-transparent pointer-events-none" />
-            </div>
-
-            <div className="max-w-4xl mx-auto relative z-10 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="flex flex-col items-center gap-8"
-                >
-                    <div className="max-w-2xl">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                            Vamos criar algo incrível juntos?
-                        </h2>
-                        <p className="text-lg text-slate-600 leading-relaxed">
-                            Se você gostou deste projeto e quer discutir como posso ajudar sua equipe, entre em contato!
-                        </p>
-                    </div>
-
-                    <div className="flex flex-col items-center gap-4 mt-4">
-                        <motion.button
-                            onClick={openModal}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-all font-medium shadow-lg shadow-purple-300/50 whitespace-nowrap cursor-pointer"
-                        >
-                            Entre em Contato
-                        </motion.button>
-                        <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Link
-                                to="/"
-                                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-purple-600 hover:text-purple-700 font-medium whitespace-nowrap"
-                            >
-                                <ArrowLeft size={18} />
-                                Voltar
-                            </Link>
-                        </motion.div>
-                    </div>
-                </motion.div>
-            </div>
-        </section>
-    );
-}
-
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
@@ -965,7 +907,8 @@ export function MedicalOffice() {
                 <HandoffSection />
                 <ResultsSection />
                 <LessonsSection />
-                <CTASection />
+
+                <ProjectCTAFooter />
             </main>
 
             <FooterNew />
