@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
-import { Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Linkedin, ArrowRight } from 'lucide-react';
 import imgEu1 from "../assets/image-rp.png";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -85,39 +86,53 @@ export function AboutSection() {
             >
               <div className="space-y-6 text-zinc-600 text-lg leading-relaxed w-full">
                 <p>
-                  Designer de Produtos Digitais e Professor Universitário, graduado em Sistemas de Informação com especialização em Design Digital.
+                  Product Designer com mais de <strong className="text-zinc-900">12 anos em tecnologia</strong> e <strong className="text-zinc-900">7 anos em UX</strong>, unindo design centrado no usuário com uma base sólida em sistemas de informação para criar experiências digitais que impulsionam resultados de negócio.
                 </p>
-                <p>
-                  Unindo tecnologia e negócios, projeto soluções para ecossistemas complexos com foco em escalabilidade e rigor técnico. Minha base em sistemas garante a viabilidade do projeto, facilitando o trabalho da engenharia e eliminando ruídos no desenvolvimento.
-                </p>
-                <p>
-                  Como educador, guio equipes com didática para transformar requisitos densos em experiências funcionais, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos.
-                </p>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3 mt-6">
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8">
                   {[
                     "Especialista em Design Digital",
                     "Bacharel em Sistemas de Informação",
-                    "Experiência com ERPs, SaaS, CRM & PLG",
+                    "Experiência com ERP, SaaS, CRM & PLG",
                     "Professor Universitário",
-                    "Product Designer desde 2019",
-                    "Desde 2014 atuando em Tecnologia"
+                    "Palestrante",
+                    "Aprimoramento Contínuo",
+                    "Inteligência Artificial como aliada",
+                    "Decisões baseadas em dados"
                   ].map((item, index) => (
                     <motion.li
                       key={index}
-                      initial={{ opacity: 0, x: -10 }}
+                      initial={{ opacity: 0, x: -15 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center gap-2 text-zinc-600 text-base"
+                      transition={{ delay: index * 0.08, duration: 0.4 }}
+                      viewport={{ once: true }}
+                      className="flex items-start gap-3 text-zinc-600 group"
                     >
-                      <span className="text-purple-600 shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <span className="w-5 h-5 rounded-full bg-gradient-to-br from-purple-500 to-violet-500 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm shadow-purple-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       </span>
-                      {item}
+                      <span className="text-base group-hover:text-zinc-900 transition-colors duration-200">{item}</span>
                     </motion.li>
                   ))}
                 </ul>
+
+                {/* CTA to AboutPage */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true }}
+                  className="mt-8"
+                >
+                  <Link
+                    to="/sobre"
+                    className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 text-white font-medium rounded-full hover:from-purple-700 hover:to-violet-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 group"
+                  >
+                    Conheça minha trajetória
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                </motion.div>
               </div>
 
               {/* Actions */}

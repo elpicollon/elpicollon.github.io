@@ -5,7 +5,7 @@ import { Sparkles, Zap, Target, Layers, Palette, Mic, Award, Briefcase, Heart, S
 const stats = [
   {
     id: 1,
-    number: "6+",
+    number: "7+",
     label: "Anos em UX",
     icon: Briefcase,
   },

@@ -8,7 +8,13 @@ import {
     Award,
     MapPin,
     Building2,
-    Sparkles
+    Sparkles,
+    Lightbulb,
+    Users,
+    Target,
+    Layers,
+    Code,
+    Mic
 } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
@@ -293,7 +299,7 @@ function TimelineCard({ item, index, isLeft }: { item: TimelineItem; index: numb
 
 function Timeline({ items }: { items: TimelineItem[] }) {
     return (
-        <div className="relative">
+        <div className="relative max-w-4xl mx-auto">
             {/* Vertical Line */}
             <div className="absolute left-[7px] md:left-1/2 md:-translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-300 via-violet-200 to-slate-200" />
 
@@ -309,6 +315,169 @@ function Timeline({ items }: { items: TimelineItem[] }) {
                 ))}
             </div>
         </div>
+    );
+}
+
+// ============================================================================
+// QUEM SOU SECTION
+// ============================================================================
+
+const highlightCards = [
+    {
+        icon: Target,
+        title: "Foco em Resultados",
+        description: "Design centrado no usuário que impulsiona métricas de negócio tangíveis",
+        color: "purple"
+    },
+    {
+        icon: Layers,
+        title: "Sistemas Complexos",
+        description: "Especialista em ERP, SaaS, CRM e estratégias de Product-Led Growth",
+        color: "violet"
+    },
+    {
+        icon: Users,
+        title: "Liderança & Colaboração",
+        description: "Facilitação de workshops, gestão de times e comunicação com stakeholders",
+        color: "purple"
+    },
+    {
+        icon: Code,
+        title: "Base Técnica Sólida",
+        description: "Conhecimento em linguagens de programação, HTML/CSS e banco de dados para entregas viáveis",
+        color: "violet"
+    },
+    {
+        icon: Lightbulb,
+        title: "Resolução de Problemas",
+        description: "Transformo requisitos densos em experiências funcionais e escaláveis",
+        color: "purple"
+    },
+    {
+        icon: Mic,
+        title: "Educador & Palestrante",
+        description: "Professor universitário e palestrante em eventos de tecnologia",
+        color: "violet"
+    }
+];
+
+function HighlightCard({ item, index }: { item: typeof highlightCards[0]; index: number }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-30px" });
+    const Icon = item.icon;
+
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className={`group relative bg-white rounded-2xl p-6 border border-slate-200 hover:border-${item.color}-300 hover:shadow-xl hover:shadow-${item.color}-100/30 transition-all duration-300`}
+        >
+            {/* Icon */}
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-${item.color}-100 text-${item.color}-600 group-hover:scale-110 transition-transform duration-300`}>
+                <Icon size={24} />
+            </div>
+
+            {/* Content */}
+            <h4 className="text-lg font-bold text-slate-900 mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                {item.title}
+            </h4>
+            <p className="text-slate-600 text-sm leading-relaxed">
+                {item.description}
+            </p>
+        </motion.div>
+    );
+}
+
+function QuemSouSection() {
+    return (
+        <section className="py-20 md:py-32 bg-white px-6 md:px-12">
+            <div>
+                {/* Header */}
+                <div className="mb-16">
+                    <RevealText>
+                        <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            Quem Sou
+                        </span>
+                    </RevealText>
+                    <RevealText delay={0.1}>
+                        <h2
+                            className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                        >
+                            Design que conecta <br className="hidden md:block" />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500">
+                                tecnologia e negócios
+                            </span>
+                        </h2>
+                    </RevealText>
+                    <RevealText delay={0.2}>
+                        <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full" />
+                    </RevealText>
+                </div>
+
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
+                    {/* Left: Introduction Text */}
+                    <RevealText delay={0.3}>
+                        <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
+                            <p>
+                                Com mais de <strong className="text-slate-900">12 anos em tecnologia</strong> e <strong className="text-slate-900">7 anos como Product Designer</strong>, sou especialista em Design Digital para plataformas web, mobile e aplicativos. Minha paixão é criar experiências digitais impactantes que atendam às necessidades dos usuários e impulsionem resultados de negócio.
+                            </p>
+                            <p>
+                                Meu perfil é <strong className="text-slate-900">analítico, proativo e orientado a resultados</strong>, com domínio em pesquisa de usuário, prototipagem de alta fidelidade e Design Systems. Atuo em ambientes ágeis com Scrum e Kanban, e sou <strong className="text-slate-900">facilitador certificado em Lean Inception</strong>.
+                            </p>
+                            <p>
+                                Meu diferencial está na capacidade de resolver problemas complexos e atuar como <strong className="text-slate-900">elo facilitador entre equipes</strong>, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos.
+                            </p>
+                        </div>
+                    </RevealText>
+
+                    {/* Right: Achievement Highlights */}
+                    <RevealText delay={0.4}>
+                        <div className="bg-gradient-to-br from-purple-50 via-white to-violet-50 rounded-3xl p-8 border border-purple-100">
+                            <h3 className="text-xl font-bold text-slate-900 mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                Destaques da Trajetória
+                            </h3>
+                            <ul className="space-y-4">
+                                {[
+                                    "🏆 1º lugar no Hackathon da Educação - Feira Inventum 2019",
+                                    "🎓 Professor Universitário em UX/UI Design",
+                                    "🎤 Palestrante em eventos como DevConference e Viasoft Connect",
+                                    "📜 16 certificações em Design, Liderança e Produto",
+                                    "🚀 Experiência com ERPs, SaaS, CRM e PLG"
+                                ].map((item, index) => (
+                                    <motion.li
+                                        key={index}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: 0.5 + index * 0.1 }}
+                                        viewport={{ once: true }}
+                                        className="flex items-start gap-3 text-slate-700"
+                                    >
+                                        <span className="text-lg">{item.substring(0, 2)}</span>
+                                        <span>{item.substring(3)}</span>
+                                    </motion.li>
+                                ))}
+                            </ul>
+                        </div>
+                    </RevealText>
+                </div>
+
+                {/* Competency Cards */}
+                <RevealText delay={0.5}>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                        O que me define
+                    </h3>
+                </RevealText>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {highlightCards.map((item, index) => (
+                        <HighlightCard key={index} item={item} index={index} />
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 }
 
@@ -503,29 +672,8 @@ function HeroSection() {
                                 transition={{ duration: 0.8, delay: 0.4 }}
                                 className="text-lg md:text-xl text-slate-600 max-w-xl mb-8"
                             >
-                                +12 anos de experiência em tecnologia, combinando design de produtos digitais com uma base sólida em sistemas de informação.
+                                Conheça minha jornada profissional, formação acadêmica e as certificações que moldam minha atuação.
                             </motion.p>
-
-                            {/* Stats */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.5 }}
-                                className="flex flex-wrap gap-6"
-                            >
-                                {[
-                                    { value: "12+", label: "Anos em Tech" },
-                                    { value: "6+", label: "Anos em UX" },
-                                    { value: "16", label: "Certificações" }
-                                ].map((stat, index) => (
-                                    <div key={index} className="text-center">
-                                        <div className="text-3xl md:text-4xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                            {stat.value}
-                                        </div>
-                                        <div className="text-sm text-slate-500 font-medium">{stat.label}</div>
-                                    </div>
-                                ))}
-                            </motion.div>
                         </motion.div>
                     </motion.div>
 
@@ -593,6 +741,9 @@ export function AboutPage() {
 
             {/* Hero */}
             <HeroSection />
+
+            {/* Quem Sou */}
+            <QuemSouSection />
 
             {/* Palestras & Eventos */}
             <section className="py-20 md:py-32 bg-slate-50 px-6 md:px-12">

@@ -81,8 +81,8 @@ export function MinimalNav() {
             >
               {[
                 { label: 'PROJETOS', sectionId: 'projetos', isLink: false },
+                { label: 'SOBRE', path: '/sobre', isLink: true },
                 { label: 'EXPERTISE', sectionId: 'expertise', isLink: false },
-                { label: 'TRAJETÓRIA', path: '/sobre', isLink: true },
                 { label: 'CONTATO', sectionId: 'contato', isLink: false }
               ].map((item, index) => (
                 item.isLink ? (
@@ -155,8 +155,8 @@ export function MinimalNav() {
         {[
           { label: 'Início', sectionId: 'inicio', isModal: false, isLink: false },
           { label: 'Projetos', sectionId: 'projetos', isModal: false, isLink: false },
+          { label: 'Sobre', path: '/sobre', isModal: false, isLink: true },
           { label: 'Expertise', sectionId: 'expertise', isModal: false, isLink: false },
-          { label: 'Trajetória', path: '/sobre', isModal: false, isLink: true },
           { label: 'Contato', sectionId: 'contato', isModal: true, isLink: false }
         ].map((item, index) => (
           item.isModal ? (
