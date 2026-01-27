@@ -7,7 +7,7 @@ export function MagneticButton() {
   const { openModal } = useContactModal();
 
   return (
-    <section id="contato" className="py-20 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">
+    <section id="contato" className="py-32 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">
       {/* Particles Background */}
       <div className="absolute inset-0 z-0">
         <HeroParticleGrid />

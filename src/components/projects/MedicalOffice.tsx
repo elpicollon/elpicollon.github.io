@@ -34,8 +34,10 @@ const projectData = {
     processoPesquisa: [
         { title: "Lean Inception", desc: "Workshop colaborativo com 2 Designers, 2 Desenvolvedores, COO, CTO e 3 fundadores para definir o MVP." },
         { title: "Matriz CSD", desc: "Levantamento de Certezas, Suposições e Dúvidas para alinhamento da equipe sobre o produto." },
+        { title: "Visão Atual", desc: "Documentação da plataforma existente para entender pontos de fricção e identificar oportunidades de melhoria." },
         { title: "Visão do Produto", desc: "Definição do que o produto é, não é, faz e não faz para evitar ambiguidades e definir escopo." },
         { title: "Personas", desc: "Criação de três perfis de usuário: Administrador, Locador e Locatário, com suas necessidades específicas." },
+        { title: "Sequenciamento", desc: "Priorização de funcionalidades por importância, valor de negócio e viabilidade técnica para criar uma sequência lógica de desenvolvimento." },
     ],
 
     descobertas: [
@@ -46,6 +48,7 @@ const projectData = {
     ],
 
     prototipo: {
+        intro: "O protótipo final foi desenvolvido considerando a responsividade, os anseios dos stakeholders, os insights obtidos a partir de um benchmarking detalhado e o atendimento às principais heurísticas de usabilidade.",
         telas: [
             {
                 titulo: "Landing Page",
@@ -102,6 +105,13 @@ const projectData = {
         { title: "Design Adaptável", desc: "Considerar futuras modificações e expansões faz parte do planejamento de qualquer redesign - o design deve ser um organismo vivo." },
         { title: "Colaboração Early", desc: "O envolvimento precoce da engenharia garantiu que apenas soluções viáveis fossem prototipadas, eliminando retrabalho." },
         { title: "Concessões Estratégicas", desc: "Algumas concessões de design foram necessárias para atender aos stakeholders, sem comprometer usabilidade." },
+    ],
+
+    ferramentas: [
+        { name: "Figma", desc: "Prototipagem em alta fidelidade" },
+        { name: "Photoshop", desc: "Manipulação de imagens" },
+        { name: "Miro", desc: "Lean Inception e fluxogramas" },
+        { name: "Jira", desc: "Gerenciamento e handoff" },
     ]
 };
 
@@ -295,12 +305,12 @@ function HeroSection() {
                             >
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
-                                        UX Design
+                                        UX/UI Design
                                     </span>
                                 </div>
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
-                                        UI Design
+                                        Web & Mobile
                                     </span>
                                 </div>
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
@@ -640,7 +650,12 @@ function PrototypeSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mb-6" />
+                        </RevealText>
+                        <RevealText delay={0.3}>
+                            <p className="text-lg text-slate-600 leading-relaxed">
+                                {projectData.prototipo.intro}
+                            </p>
                         </RevealText>
                     </div>
 
@@ -883,6 +898,60 @@ function LessonsSection() {
     );
 }
 
+// Tools Section
+function ToolsSection() {
+    const toolIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
+        'Figma': PenTool,
+        'Photoshop': Palette,
+        'Miro': Layout,
+        'Jira': ClipboardList
+    };
+
+    return (
+        <ChapterSection id="tools" className="bg-white">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <div className="relative z-10">
+                    <div className="text-center mb-12">
+                        <RevealText>
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                Ferramentas
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
+                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            >
+                                Softwares Utilizados
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto" />
+                        </RevealText>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {projectData.ferramentas.map((tool, index) => {
+                            const IconComponent = toolIcons[tool.name] || Settings;
+                            return (
+                                <RevealText key={index} delay={0.2 + index * 0.1}>
+                                    <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors group text-center h-full">
+                                        <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition-colors">
+                                            <IconComponent className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
+                                        </div>
+                                        <h3 className="font-semibold text-slate-900 text-lg mb-1">{tool.name}</h3>
+                                        <p className="text-sm text-slate-500">{tool.desc}</p>
+                                    </div>
+                                </RevealText>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
@@ -903,6 +972,7 @@ export function MedicalOffice() {
                 <RoleSection />
                 <ResearchSection />
                 <DiscoveriesSection />
+                <ToolsSection />
                 <PrototypeSection />
                 <HandoffSection />
                 <ResultsSection />

@@ -36,11 +36,11 @@ function HomePage() {
       <MinimalNav />
       <main>
         <HeroNew />
+        <MarqueeSection />
         <HorizontalScroll />
         <AboutSection />
         <BentoGrid />
         <MagneticButton />
-        <MarqueeSection />
       </main>
       <FooterNew />
       <ScrollToTop />

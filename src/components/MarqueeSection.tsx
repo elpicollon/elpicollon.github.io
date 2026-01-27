@@ -1,9 +1,8 @@
 import { motion } from 'motion/react';
 
 const skills = [
-  'Product Design', 'Figma', 'Prototyping', 'User Research',
-  'AI First Design', 'Wireframing', 'Design Systems', 'UI/UX Design',
-  'Brand Identity'
+  'Product Design', 'Prototyping', 'AI First Design', 'Wireframing',
+  'User Research', 'Design Systems', 'UI/UX Design', 'Brand Identity'
 ];
 
 export function MarqueeSection() {

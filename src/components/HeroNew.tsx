@@ -1,10 +1,12 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useState } from 'react';
-import { LayoutGrid } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { useRef, useState, useCallback } from 'react';
 import { HeroParticleGrid } from './HeroParticleGrid';
+import { GeometricCarousel, carouselItems } from './GeometricCarousel';
 
 export function HeroNew() {
   const containerRef = useRef(null);
+  const [currentGradient, setCurrentGradient] = useState(carouselItems[0].gradient);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -14,8 +16,9 @@ export function HeroNew() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const handleGradientChange = useCallback((gradient: string[]) => {
+    setCurrentGradient(gradient);
+  }, []);
 
   return (
     <section
@@ -23,6 +26,21 @@ export function HeroNew() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] z-50 isolate mobile-tiny-fix"
     >
+      {/* Dynamic Gradient Background - Full height with reveal transition */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentGradient.join('-')}
+          className="hero-gradient-bg"
+          initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
+          animate={{ clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)' }}
+          exit={{ clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)' }}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          style={{
+            background: `linear-gradient(135deg, ${currentGradient[0]} 0%, ${currentGradient[1]} 100%)`,
+          }}
+        />
+      </AnimatePresence>
+
       {/* Background Waves - Restored as requested */}
       <div className="absolute inset-0 z-0">
         <HeroParticleGrid />
@@ -100,61 +118,15 @@ export function HeroNew() {
             </motion.div>
           </motion.div>
 
-          {/* Right - Magnetic button - Matches reference style */}
+          {/* Right - Geometric Image Carousel */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="hero-projects-button hidden md:flex items-center justify-center relative"
+            className="hidden lg:flex items-center justify-center relative"
           >
-            <motion.button
-              onClick={() => document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' })}
-              ref={buttonRef}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              className="relative cursor-pointer group z-10 block"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {/* Dashed Ring - Outer */}
-              <motion.div
-                animate={{
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                className="absolute inset-0 -m-8 border border-dashed border-purple-300 rounded-full pointer-events-none"
-              />
-
-              {/* Main Button Circle */}
-              <div
-                className="relative w-56 h-56 rounded-full bg-gradient-to-br from-[#6d28d9] to-[#4c1d95] shadow-[0_20px_50px_rgba(109,40,217,0.5)] flex flex-col items-center justify-center gap-1 z-10 overflow-hidden"
-              >
-                {/* Inner Glow */}
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 to-transparent opacity-50 pointer-events-none" />
-
-                <motion.div
-                  animate={{
-                    y: isHovered ? -5 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center"
-                >
-                  <LayoutGrid size={28} className="text-white mb-2 opacity-80" />
-
-                  <span className="text-[10px] font-bold text-white/60 tracking-[0.2em] uppercase mb-1">
-                    Ver
-                  </span>
-                  <span className="text-xl font-bold text-white leading-none text-center">
-                    MEUS<br />PROJETOS
-                  </span>
-                </motion.div>
-              </div>
-            </motion.button>
+            <GeometricCarousel onGradientChange={handleGradientChange} />
           </motion.div>
         </div>
       </motion.div>
