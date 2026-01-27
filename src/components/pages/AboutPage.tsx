@@ -106,8 +106,8 @@ const educationData = [
     },
     {
         period: "2012 – 2013",
-        degree: "Curso Técnico em Tecnologia da Informação",
-        institution: "Senai Paraná",
+        degree: "Curso Técnico em Informática",
+        institution: "SENAI Paraná",
         type: "education" as const
     }
 ];
