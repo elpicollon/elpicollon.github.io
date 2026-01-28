@@ -149,7 +149,7 @@ export function FooterNew() {
           </p>
           <div className="flex gap-6">
             <p className="text-zinc-500">
-              Planejado e desenvolvido por mim, com auxílio de IA - Todos os direitos reservados.
+              Feito com 😡 por mim. Todos os direitos reservados.
             </p>
           </div>
         </motion.div>
