@@ -11,15 +11,15 @@ const stats = [
   },
   {
     id: 2,
-    number: "50+",
-    label: "Projetos",
-    icon: Zap,
-  },
-  {
-    id: 3,
     number: "12+",
     label: "Anos Tech",
     icon: Award,
+  },
+  {
+    id: 3,
+    number: "50+",
+    label: "Projetos",
+    icon: Zap,
   },
   {
     id: 4,

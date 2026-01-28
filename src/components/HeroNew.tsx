@@ -32,13 +32,16 @@ export function HeroNew() {
           key={currentGradient.join('-')}
           className="hero-gradient-bg"
           initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
-          animate={{ clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)' }}
-          exit={{ clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)' }}
+          animate={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
+          exit={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           style={{
             background: `linear-gradient(135deg, ${currentGradient[0]} 0%, ${currentGradient[1]} 100%)`,
           }}
-        />
+        >
+          {/* Inner shadow overlay - inside the animated container */}
+          <div className="hero-diagonal-shadow" />
+        </motion.div>
       </AnimatePresence>
 
       {/* Background Waves - Restored as requested */}

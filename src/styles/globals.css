@@ -231,8 +231,32 @@
     right: 0;
     bottom: 0;
     width: 30%;
-    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 0% 100%);
     z-index: 1;
+  }
+
+  /* Inner shadow overlay on the diagonal edge */
+  .hero-diagonal-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.15) 10%,
+      rgba(0, 0, 0, 0.05) 20%,
+      transparent 40%
+    );
+    pointer-events: none;
+  }
+
+  /* Hide on mobile */
+  @media (max-width: 1023px) {
+    .hero-diagonal-shadow {
+      display: none;
+    }
   }
 
   /* Dynamic Gradient Carousel Styles */
