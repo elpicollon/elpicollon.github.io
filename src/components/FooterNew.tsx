@@ -145,11 +145,11 @@ export function FooterNew() {
           className="pt-8 border-t border-purple-200 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-zinc-500">
-            Picolo Design Digital & Consultoria. CNPJ: 42.054.838/0001-08
+            © {currentYear} - Picolo Design Digital & Consultoria | CNPJ: 42.054.838/0001-08
           </p>
           <div className="flex gap-6">
             <p className="text-zinc-500">
-              © {currentYear} - Todos os direitos reservados.
+              Planejado e desenvolvido por mim, com auxílio de IA - Todos os direitos reservados.
             </p>
           </div>
         </motion.div>

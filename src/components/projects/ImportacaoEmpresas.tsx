@@ -8,6 +8,7 @@ import { ScrollToTop } from '../ScrollToTop';
 import { ParticleBackground } from '../ParticleBackground';
 import { RealisticMacBook } from '../RealisticMacBook';
 import { ProjectCTAFooter } from './ProjectCTAFooter';
+import { AudioMiniPlayer } from '../AudioMiniPlayer';
 
 // ============================================================================
 // PROJECT DATA
@@ -865,6 +866,7 @@ export function ImportacaoEmpresas() {
             </main>
 
             <FooterNew />
+            <AudioMiniPlayer />
             <ScrollToTop />
         </div>
     );
