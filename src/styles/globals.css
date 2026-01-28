@@ -313,11 +313,15 @@
     gap: 0.75rem;
     padding: 0.5rem 1rem 0.5rem 0.5rem;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(229, 231, 235, 1);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   .audio-mini-player:hover {
@@ -422,9 +426,29 @@
     @apply border-border outline-ring/50;
   }
 
+  /* Safari scroll optimization */
+  html {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Improve Safari scroll performance */
+    overflow-x: hidden;
+  }
+
+  /* GPU acceleration for fixed/animated elements */
+  .fixed,
+  [style*="position: fixed"],
+  [style*="transform"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   h1,

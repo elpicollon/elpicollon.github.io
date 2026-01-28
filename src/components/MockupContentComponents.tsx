@@ -145,6 +145,7 @@ export function ScrollCards({ cards, autoScroll = true, scrollInterval = 4000 }:
                     <button
                         key={index}
                         onClick={() => handleDotClick(index)}
+                        aria-label={`Ir para card ${index + 1}`}
                         style={{
                             width: activeCard === index ? '1.5rem' : '0.5rem',
                             height: '0.5rem',
@@ -337,6 +338,7 @@ export function SingleImage({ src, alt = 'Imagem' }: SingleImageProps) {
             <img
                 src={src}
                 alt={alt}
+                loading="lazy"
                 style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
@@ -427,6 +429,7 @@ export function ImageCarousel({ images, autoPlay = true, interval = 3000 }: Imag
                 <>
                     <button
                         onClick={goPrev}
+                        aria-label="Slide anterior"
                         style={{
                             position: 'absolute',
                             left: '0.5rem',
@@ -451,6 +454,7 @@ export function ImageCarousel({ images, autoPlay = true, interval = 3000 }: Imag
                     </button>
                     <button
                         onClick={goNext}
+                        aria-label="Próximo slide"
                         style={{
                             position: 'absolute',
                             right: '0.5rem',
@@ -492,6 +496,7 @@ export function ImageCarousel({ images, autoPlay = true, interval = 3000 }: Imag
                         <button
                             key={index}
                             onClick={() => goTo(index)}
+                            aria-label={`Ir para slide ${index + 1}`}
                             style={{
                                 width: currentIndex === index ? '1.5rem' : '0.5rem',
                                 height: '0.5rem',

@@ -5,7 +5,7 @@ import { Linkedin, ArrowRight } from 'lucide-react';
 import imgEu1 from "../assets/image-rp.png";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-// Logo images from assets/logos
+// Logo images from assets/logos with company names
 import logo1 from '../assets/logos/1.png';
 import logo2 from '../assets/logos/2.png';
 import logo3 from '../assets/logos/3.png';
@@ -25,8 +25,23 @@ import logo17 from '../assets/logos/17.png';
 import logo18 from '../assets/logos/18.png';
 
 const logoImages = [
-  logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9,
-  logo10, logo11, logo12, logo13, logo15, logo16, logo17, logo18
+  { src: logo1, alt: 'Logo Lojhan' },
+  { src: logo2, alt: 'Logo Itt' },
+  { src: logo3, alt: 'Logo INDT' },
+  { src: logo4, alt: 'Logo InoBram' },
+  { src: logo5, alt: 'Logo THDFM' },
+  { src: logo6, alt: 'Logo Autêntica' },
+  { src: logo7, alt: 'Logo Gattini' },
+  { src: logo8, alt: 'Logo Marcelle Calegari' },
+  { src: logo9, alt: 'Logo UniMater' },
+  { src: logo10, alt: 'Logo Prepel' },
+  { src: logo11, alt: 'Logo Coffbox' },
+  { src: logo12, alt: 'Logo Alex Mamed' },
+  { src: logo13, alt: 'Logo Lequipe' },
+  { src: logo15, alt: 'Logo Super Anos 80' },
+  { src: logo16, alt: 'Logo Leads2b' },
+  { src: logo17, alt: 'Logo Sisand' },
+  { src: logo18, alt: 'Logo Viasoft' }
 ];
 
 export function AboutSection() {
@@ -218,8 +233,9 @@ export function AboutSection() {
                 }}
               >
                 <img
-                  src={logo}
-                  alt={`Logo ${index + 1}`}
+                  src={logo.src}
+                  alt={logo.alt}
+                  loading="lazy"
                   style={{
                     maxWidth: '100%',
                     maxHeight: '100%',

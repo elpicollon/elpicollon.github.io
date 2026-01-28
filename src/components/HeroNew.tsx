@@ -66,15 +66,14 @@ export function HeroNew() {
           >
             {/* Title */}
             <div className="hero-title-container mt-24 mb-6 md:mb-10 overflow-hidden">
-              <div className="flex flex-col gap-2">
-                <h1 className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
+              <h1 className="flex flex-col gap-2">
+                <span className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
                   Experiências digitais
-                </h1>
-
-                <h1 className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#a855f7] tracking-tight leading-[1.1]">
+                </span>
+                <span className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#a855f7] tracking-tight leading-[1.1]">
                   de ponta a ponta!
-                </h1>
-              </div>
+                </span>
+              </h1>
             </div>
 
             <motion.div

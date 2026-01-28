@@ -264,14 +264,14 @@ function HeroSection() {
 
                             {/* Title */}
                             <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
-                                <div className="flex flex-col gap-2">
-                                    <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
+                                <h1 className="flex flex-col gap-2">
+                                    <span className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
                                         Importação de
-                                    </h1>
-                                    <h1 className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#02376D] to-[#0458a8] tracking-tight leading-[1.1]">
+                                    </span>
+                                    <span className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#02376D] to-[#0458a8] tracking-tight leading-[1.1]">
                                         Empresas
-                                    </h1>
-                                </div>
+                                    </span>
+                                </h1>
                             </div>
 
                             {/* Tags */}
@@ -334,6 +334,7 @@ function HeroSection() {
                                     src="/assets/projects/importacao-empresas/cover.png"
                                     alt="Capa do Projeto: Importação de Empresas"
                                     className="w-full h-full object-cover"
+                                    loading="eager"
                                 />
                                 <div className="absolute inset-0 bg-indigo-700/10 mix-blend-overlay pointer-events-none" />
                             </div>
@@ -648,6 +649,7 @@ function PrototypeSection() {
                                                         src={tela.imagens[0]}
                                                         alt={tela.titulo}
                                                         className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                                                        loading="lazy"
                                                     />
                                                 </div>
                                             </motion.div>
@@ -725,6 +727,7 @@ function HandoffSection() {
                                             src={projectData.handoff.imagem}
                                             alt={projectData.handoff.titulo}
                                             className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                                            loading="lazy"
                                         />
                                     </div>
                                 </motion.div>

@@ -3,18 +3,18 @@ import { useState, useEffect, useRef } from 'react';
 
 // Images from carousel folder with their associated gradient colors
 const carouselItems = [
-    { src: '/assets/carousel/1-picolo.png', gradient: ['#22143C', '#4A208A'] },
-    { src: '/assets/carousel/2-Leads1.png', gradient: ['#2A645E', '#55CABE'] },
-    { src: '/assets/carousel/3-Lojhan.png', gradient: ['#121F2B', '#083968'] },
-    { src: '/assets/carousel/4-MedOfc.png', gradient: ['#3066BF', '#4088FF'] },
-    { src: '/assets/carousel/5-iconvia.png', gradient: ['#731F1F', '#CB2E2E'] },
-    { src: '/assets/carousel/6-Sponte.png', gradient: ['#005C7F', '#00A5E5'] },
-    { src: '/assets/carousel/7-Marcelle.png', gradient: ['#772717', '#B04530'] },
-    { src: '/assets/carousel/8-Rubi.png', gradient: ['#2D2159', '#E91E63'] },
-    { src: '/assets/carousel/9-Gattini.png', gradient: ['#214E71', '#357BB6'] },
-    { src: '/assets/carousel/10-Autentica.png', gradient: ['#1F4E56', '#46C0D2'] },
-    { src: '/assets/carousel/11-MedPlus.png', gradient: ['#895CC3', '#523273'] },
-    { src: '/assets/carousel/12-Mada.png', gradient: ['#ECCEA9', '#FFF3C4'] },
+    { src: '/assets/carousel/1-picolo.png', gradient: ['#22143C', '#4A208A'], alt: 'Projeto de identidade visual Picolo Design' },
+    { src: '/assets/carousel/2-Leads1.png', gradient: ['#2A645E', '#55CABE'], alt: 'Projeto Leads2b - Plataforma de vendas B2B' },
+    { src: '/assets/carousel/3-Lojhan.png', gradient: ['#121F2B', '#083968'], alt: 'Projeto Lojhan - Identidade visual' },
+    { src: '/assets/carousel/4-MedOfc.png', gradient: ['#3066BF', '#4088FF'], alt: 'Projeto Medical Office - Locação de clínicas' },
+    { src: '/assets/carousel/5-iconvia.png', gradient: ['#731F1F', '#CB2E2E'], alt: 'Projeto Iconvia - Ícones para ERP' },
+    { src: '/assets/carousel/6-Sponte.png', gradient: ['#005C7F', '#00A5E5'], alt: 'Projeto Sponte - Sistema de gestão escolar' },
+    { src: '/assets/carousel/7-Marcelle.png', gradient: ['#772717', '#B04530'], alt: 'Projeto Marcelle - Identidade visual' },
+    { src: '/assets/carousel/8-Rubi.png', gradient: ['#2D2159', '#E91E63'], alt: 'Projeto Rubi - Plataforma digital' },
+    { src: '/assets/carousel/9-Gattini.png', gradient: ['#214E71', '#357BB6'], alt: 'Projeto Gattini - Identidade Visual' },
+    { src: '/assets/carousel/10-Autentica.png', gradient: ['#1F4E56', '#46C0D2'], alt: 'Projeto Autêntica - Branding e identidade' },
+    { src: '/assets/carousel/11-MedPlus.png', gradient: ['#895CC3', '#523273'], alt: 'Projeto MedPlus - Sistema de saúde' },
+    { src: '/assets/carousel/12-Mada.png', gradient: ['#ECCEA9', '#FFF3C4'], alt: 'Projeto Mada - Identidade Visual' },
 ];
 // Export the items so HeroNew can access the gradient colors
 export { carouselItems };
@@ -101,7 +101,7 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
                     >
                         <img
                             src={currentItem.src}
-                            alt="Portfolio showcase"
+                            alt={currentItem.alt}
                             className="carousel-floating-image"
                         />
                     </motion.div>

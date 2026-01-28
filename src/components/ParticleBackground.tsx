@@ -58,6 +58,13 @@ export function ParticleBackground({ color = 'purple' }: ParticleBackgroundProps
         let height = window.innerHeight;
         let isMobile = window.innerWidth < 1024;
 
+        // Detect Safari for performance optimizations
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+        // Reduce animation frequency on Safari/mobile for better scroll performance
+        let frameCount = 0;
+        const frameSkip = isSafari || isMobile ? 2 : 1; // Skip every other frame on Safari/mobile
+
         // Mouse state
         const mouse = { x: -1000, y: -1000 };
 
@@ -76,12 +83,12 @@ export function ParticleBackground({ color = 'purple' }: ParticleBackgroundProps
         };
 
         window.addEventListener('resize', handleResize);
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
         handleResize();
 
-        // Particle settings
-        const spacing = 40;
+        // Particle settings - use larger spacing on mobile/Safari for fewer particles
+        const spacing = isMobile || isSafari ? 50 : 40;
         const particles: { x: number; y: number; originX: number; originY: number }[] = [];
 
         const initParticles = () => {
@@ -112,8 +119,16 @@ export function ParticleBackground({ color = 'purple' }: ParticleBackgroundProps
         let time = 0;
 
         const animate = () => {
+            frameCount++;
+
+            // Skip frames on Safari/mobile for better performance
+            if (frameCount % frameSkip !== 0) {
+                animationFrameId = requestAnimationFrame(animate);
+                return;
+            }
+
             ctx.clearRect(0, 0, width, height);
-            time += 0.005;
+            time += 0.005 * frameSkip; // Compensate for skipped frames
 
             let targetX = mouse.x;
             let targetY = mouse.y;

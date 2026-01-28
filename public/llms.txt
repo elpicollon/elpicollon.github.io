@@ -1,0 +1,41 @@
+# Picolo Design Digital
+
+> Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI, Product Design e interfaces que encantam.
+
+## Sobre
+
+Rodrigo Picolo é um Designer Digital brasileiro com mais de 10 anos de experiência em UX/UI Design, Product Design e consultoria em design. Especializado em criar interfaces intuitivas e experiências digitais memoráveis para empresas inovadoras.
+
+## Serviços
+
+- **UX Design**: Pesquisa, wireframes, protótipos, testes de usabilidade
+- **UI Design**: Design de interfaces, sistemas de design, design responsivo
+- **Product Design**: Estratégia de produto, design de features, iteração
+- **Consultoria**: Auditorias de UX, mentoria, workshops
+
+## Projetos em Destaque
+
+### Transcrições & Insights com IA
+Redesign de ecossistema de videoconferências focado na centralização de gravações, transcrições e insights de IA. O projeto automatizou a documentação pós-reunião.
+
+### Medical Office
+Sistema de gestão para consultórios médicos com foco em usabilidade e eficiência operacional.
+
+### Importação de Empresas
+Plataforma de importação de dados empresariais com interface intuitiva e fluxos otimizados.
+
+## Contato
+
+- Website: https://picolodesign.com.br/
+- LinkedIn: https://www.linkedin.com/in/picolodesign/
+- Localização: Brasil
+
+## Expertise
+
+- UX/UI Design
+- Product Design
+- Design Systems
+- Prototipagem
+- Pesquisa com Usuários
+- Acessibilidade Digital
+- Design Responsivo

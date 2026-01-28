@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="content-language" content="pt-BR" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EEXLG6QY6S"></script>
@@ -26,13 +28,24 @@
       }
     }(window.location))
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="color-scheme" content="light" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Performance: DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+
+  <!-- Favicon & Icons -->
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
 
   <!-- SEO Meta Tags -->
   <title>Picolo Design Digital | UX/UI Designer</title>
@@ -42,26 +55,114 @@
     content="UX Design, UI Design, Product Design, Designer Digital, Portfolio, Rodrigo Picolo, Picolo Design" />
   <meta name="author" content="Rodrigo Picolo" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://elpicollon.github.io/" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://picolodesign.com.br/" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://elpicollon.github.io/" />
+  <meta property="og:url" content="https://picolodesign.com.br/" />
   <meta property="og:title" content="Picolo Design Digital | UX/UI Designer" />
   <meta property="og:description"
     content="Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI, Product Design e interfaces que encantam." />
-  <meta property="og:image" content="https://elpicollon.github.io/og-image.png" />
+  <meta property="og:image" content="https://picolodesign.com.br/og-image.png" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Picolo Design Digital" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://elpicollon.github.io/" />
+  <meta name="twitter:url" content="https://picolodesign.com.br/" />
   <meta name="twitter:title" content="Picolo Design Digital | UX/UI Designer" />
   <meta name="twitter:description"
     content="Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI, Product Design e interfaces que encantam." />
-  <meta name="twitter:image" content="https://elpicollon.github.io/og-image.png" />
+  <meta name="twitter:image" content="https://picolodesign.com.br/og-image.png" />
+  <meta name="twitter:creator" content="@picolodesign" />
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#F2F4F7" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1a2e" />
+  <meta name="msapplication-TileColor" content="#F2F4F7" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://picolodesign.com.br/#person",
+        "name": "Rodrigo Picolo",
+        "jobTitle": "UX/UI Designer",
+        "description": "Product Designer com mais de 12 anos em tecnologia e 7 anos em UX, especializado em criar experiências digitais que impulsionam resultados de negócio.",
+        "url": "https://picolodesign.com.br/",
+        "image": "https://picolodesign.com.br/assets/image-rp.png",
+        "sameAs": [
+          "https://www.linkedin.com/in/picolodesign/"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Picolo Design Digital"
+        },
+        "knowsAbout": ["UX Design", "UI Design", "Product Design", "Design Systems", "User Research"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://picolodesign.com.br/#website",
+        "url": "https://picolodesign.com.br/",
+        "name": "Picolo Design Digital",
+        "description": "Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI",
+        "author": {"@id": "https://picolodesign.com.br/#person"},
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "ItemList",
+        "name": "Projetos em Destaque",
+        "description": "Portfólio de projetos de UX/UI Design",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "CreativeWork",
+              "name": "Transcrições & Insights com IA",
+              "description": "Sistema de transcrição automática e geração de insights utilizando inteligência artificial para otimizar processos de vendas B2B.",
+              "url": "https://picolodesign.com.br/projeto/transcricoes-insights-ia",
+              "author": {"@id": "https://picolodesign.com.br/#person"},
+              "dateCreated": "2024",
+              "keywords": ["UX Design", "IA", "B2B", "SaaS"]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "CreativeWork",
+              "name": "Medical Office",
+              "description": "Redesign completo de sistema de gestão para clínicas médicas, focando em usabilidade e eficiência.",
+              "url": "https://picolodesign.com.br/projeto/medical-office",
+              "author": {"@id": "https://picolodesign.com.br/#person"},
+              "dateCreated": "2022",
+              "keywords": ["Product Design", "Healthcare", "Web App"]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "CreativeWork",
+              "name": "Importação de Empresas",
+              "description": "Feature de importação em massa de dados empresariais para plataforma de vendas B2B.",
+              "url": "https://picolodesign.com.br/projeto/importacao-empresas",
+              "author": {"@id": "https://picolodesign.com.br/#person"},
+              "dateCreated": "2025",
+              "keywords": ["Product Design", "B2B", "Data Import"]
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
