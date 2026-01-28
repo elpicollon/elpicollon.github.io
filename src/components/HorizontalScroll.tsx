@@ -11,6 +11,7 @@ const projects = [
     title: 'Transcrições & Insights com IA',
     category: 'UX Design',
     year: '2024',
+    comingSoon: false,
     image: '/assets/projects/transcricoes-insights-ia/card-home.png',
     gradient: 'linear-gradient(to bottom, #2F968C, #00463F)',
     link: '/projeto/transcricoes-insights-ia'
