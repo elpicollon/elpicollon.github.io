@@ -15,12 +15,12 @@ export function LanguageSwitcher({ onLanguageChange }: LanguageSwitcherProps = {
     };
 
     return (
-        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm">
+        <div className="flex items-center gap-1 md:gap-1 px-2 md:px-2 py-1.5 md:py-1 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm">
             <motion.button
                 onClick={() => handleLanguageChange('pt-BR')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 ${language === 'pt-BR'
+                className={`px-3 md:px-2 py-1.5 md:py-1 text-sm md:text-xs font-medium rounded-full transition-all duration-200 ${language === 'pt-BR'
                     ? 'bg-black text-white shadow-sm'
                     : 'text-slate-600 hover:text-purple-600'
                     }`}
@@ -33,7 +33,7 @@ export function LanguageSwitcher({ onLanguageChange }: LanguageSwitcherProps = {
                 onClick={() => handleLanguageChange('en-US')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-2 py-1 text-xs font-medium rounded-full transition-all duration-200 ${language === 'en-US'
+                className={`px-3 md:px-2 py-1.5 md:py-1 text-sm md:text-xs font-medium rounded-full transition-all duration-200 ${language === 'en-US'
                     ? 'bg-black text-white shadow-sm'
                     : 'text-slate-600 hover:text-purple-600'
                     }`}
