@@ -1,0 +1,914 @@
+{
+    "nav": {
+        "home": "Início",
+        "projects": "Projetos",
+        "about": "Sobre",
+        "expertise": "Expertise",
+        "contact": "Contato",
+        "getInTouch": "ENTRE EM CONTATO",
+        "menu": {
+            "projects": "PROJETOS",
+            "about": "SOBRE",
+            "expertise": "EXPERTISE",
+            "contact": "CONTATO"
+        }
+    },
+    "hero": {
+        "title1": "Experiências digitais",
+        "title2": "de ponta a ponta!",
+        "tags": {
+            "productDesigner": "Product Designer",
+            "professor": "Professor",
+            "specialist": "Especialista em Design Digital"
+        },
+        "scrollIndicator": "Scroll to explore"
+    },
+    "about": {
+        "sectionTitle": "Sobre",
+        "description": "Product Designer com mais de <strong class=\"text-zinc-900\">12 anos em tecnologia</strong> e <strong class=\"text-zinc-900\">7 anos em UX</strong>, unindo design centrado no usuário com uma base sólida em sistemas de informação para criar experiências digitais que impulsionam resultados de negócio.",
+        "skills": [
+            "Especialista em Design Digital",
+            "Bacharel em Sistemas de Informação",
+            "Experiência com ERP, SaaS, CRM & PLG",
+            "Professor Universitário",
+            "Palestrante",
+            "Aprimoramento Contínuo",
+            "Inteligência Artificial como aliada",
+            "Decisões baseadas em dados"
+        ],
+        "cta": "Conheça minha trajetória",
+        "linkedinCta": "Conecte-se no Linkedin"
+    },
+    "horizontalScroll": {
+        "sectionTitle": "Projetos",
+        "viewProject": "Ver projeto",
+        "comingSoon": "EM BREVE",
+        "ctaTitle": "Vamos criar algo incrível juntos?",
+        "ctaDescription": "Vamos conversar sobre como posso ajudar a transformar suas ideias em experiências digitais memoráveis.",
+        "ctaButton": "Iniciar conversa",
+        "projectCards": [
+            {
+                "id": 1,
+                "title": "Transcrições & Insights com IA",
+                "category": "UX Design",
+                "year": "2024"
+            },
+            {
+                "id": 2,
+                "title": "Medical Office - Web App",
+                "category": "Product Design",
+                "year": "2022"
+            },
+            {
+                "id": 3,
+                "title": "Importação de Empresas",
+                "category": "Product Design",
+                "year": "2025"
+            }
+        ]
+    },
+    "expertise": {
+        "sectionTitle": "Expertise",
+        "stats": {
+            "yearsUX": "Anos em UX",
+            "yearsTech": "Anos Tech",
+            "projects": "Projetos",
+            "satisfaction": "Satisfação"
+        },
+        "features": {
+            "innovativeDesign": {
+                "title": "Design Inovador",
+                "description": "Soluções visuais que quebram paradigmas"
+            },
+            "uxDesign": {
+                "title": "UX Design",
+                "description": "Decisões baseadas em dados"
+            },
+            "uiDesign": {
+                "title": "UI Design",
+                "description": "Interfaces que encantam"
+            },
+            "prototyping": {
+                "title": "Prototipagem",
+                "description": "Validação rápida de conceitos"
+            },
+            "designSystems": {
+                "title": "Design Systems",
+                "description": "Escalabilidade e consistência"
+            },
+            "designOps": {
+                "title": "DesignOps",
+                "description": "Processos e ferramentas de design"
+            },
+            "visualIdentity": {
+                "title": "Identidades Visuais",
+                "description": "Marcas memoráveis e consistentes"
+            },
+            "speaking": {
+                "title": "Palestras & Eventos",
+                "description": "Compartilhando conhecimento"
+            }
+        }
+    },
+    "magneticButton": {
+        "title": {
+            "line1": "Vamos Criar",
+            "line2": "Juntos"
+        },
+        "description": "Transformo ideias complexas em experiências digitais completas, de ponta a ponta.",
+        "buttonLabel": "FALE COMIGO",
+        "buttonText": "ENTRE EM\nCONTATO"
+    },
+    "contactModal": {
+        "title": "Vamos conversar?",
+        "subtitle": "Escolha a melhor forma de contato",
+        "linkedin": {
+            "title": "LinkedIn",
+            "description": "Conecte-se profissionalmente"
+        },
+        "whatsapp": {
+            "title": "WhatsApp",
+            "description": "Resposta rápida"
+        },
+        "email": {
+            "title": "Email",
+            "description": "contato@picolodesign.com.br"
+        }
+    },
+    "footer": {
+        "tagline": "Desde 2014 oferecendo serviços de design digital com criatividade, qualidade e preço justo.",
+        "navigation": "Navegação",
+        "connect": "Conecte-se",
+        "navItems": {
+            "home": "Início",
+            "projects": "Projetos",
+            "about": "Sobre",
+            "expertise": "Expertise",
+            "contact": "Contato"
+        },
+        "madeWith": "Feito com 😡 por mim. Todos os direitos reservados.",
+        "copyright": "© {year} - Picolo Design Digital & Consultoria | CNPJ: 42.054.838/0001-08"
+    },
+    "projectCTA": {
+        "copyright": "© Picolo Design Digital - Todos os direitos reservados.",
+        "disclaimer": "É proibida qualquer reprodução, total ou parcial, cópia ou divulgação deste conteúdo sem expressa autorização do autor.",
+        "title": "Vamos criar algo incrível juntos?",
+        "description": "Se você gostou deste projeto e quer discutir como posso ajudar sua equipe, entre em contato!",
+        "contactButton": "Entre em Contato",
+        "backButton": "Voltar"
+    },
+    "contact": {
+        "title": "Vamos conversar?",
+        "subtitle": "Estou disponível para novos projetos e oportunidades.",
+        "name": "Nome",
+        "email": "E-mail",
+        "message": "Mensagem",
+        "send": "Enviar mensagem"
+    },
+    "common": {
+        "loading": "Carregando...",
+        "readMore": "Saiba mais",
+        "close": "Fechar",
+        "backToProjects": "Voltar",
+        "current": "Atual",
+        "scroll": "Scroll",
+        "back": "Voltar",
+        "backToTop": "Voltar ao topo"
+    },
+    "accessibility": {
+        "languageSwitcher": {
+            "switchToEnglish": "Mudar para Inglês",
+            "switchToPortuguese": "Idioma selecionado: Português"
+        },
+        "closeMenu": "Fechar menu",
+        "previousSlide": "Slide anterior",
+        "nextSlide": "Próximo slide",
+        "backToTop": "Voltar ao topo",
+        "projectGallery": "Galeria de projetos em destaque"
+    },
+    "audioPlayer": {
+        "pause": "Pausar áudio",
+        "play": "Reproduzir áudio",
+        "labelDesktop": "Ouça aqui um breve resumo deste case!",
+        "labelMobile": "Ouça um breve resumo!"
+    },
+    "marquee": {
+        "skills": [
+            "Product Design",
+            "Prototyping",
+            "AI First Design",
+            "Wireframing",
+            "User Research",
+            "Design Systems",
+            "UI/UX Design",
+            "Brand Identity"
+        ]
+    },
+    "aboutPage": {
+        "hero": {
+            "title1": "Minha",
+            "title2": "Trajetória",
+            "subtitle": "Conheça minha jornada profissional, formação acadêmica e as certificações que moldam minha atuação."
+        },
+        "quemSou": {
+            "label": "Quem Sou",
+            "title1": "Design que conecta",
+            "title2": "tecnologia e negócios",
+            "intro": [
+                "Com mais de <strong class=\"text-slate-900\">12 anos em tecnologia</strong> e <strong class=\"text-slate-900\">7 anos como Product Designer</strong>, sou especialista em Design Digital para plataformas web, mobile e aplicativos. Minha paixão é criar experiências digitais impactantes que atendam às necessidades dos usuários e impulsionem resultados de negócio.",
+                "Meu perfil é <strong class=\"text-slate-900\">analítico, proativo e orientado a resultados</strong>, com domínio em pesquisa de usuário, prototipagem de alta fidelidade e Design Systems. Atuo em ambientes ágeis com Scrum e Kanban, e sou <strong class=\"text-slate-900\">facilitador certificado em Lean Inception</strong>.",
+                "Meu diferencial está na capacidade de resolver problemas complexos e atuar como <strong class=\"text-slate-900\">elo facilitador entre equipes</strong>, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos."
+            ],
+            "highlightsTitle": "Destaques da Trajetória",
+            "highlights": [
+                "🏆 1º lugar no Hackathon da Educação - Feira Inventum 2019",
+                "🎓 Professor Universitário em UX/UI Design",
+                "🎤 Palestrante em eventos como DevConference e Viasoft Connect",
+                "📜 16 certificações em Design, Liderança e Produto",
+                "🚀 Experiência com ERPs, SaaS, CRM e PLG"
+            ],
+            "definesMe": "O que me define"
+        },
+        "highlightCards": [
+            {
+                "title": "Foco em Resultados",
+                "description": "Design centrado no usuário que impulsiona métricas de negócio tangíveis"
+            },
+            {
+                "title": "Sistemas Complexos",
+                "description": "Especialista em ERP, SaaS, CRM e estratégias de Product-Led Growth"
+            },
+            {
+                "title": "Liderança & Colaboração",
+                "description": "Facilitação de workshops, gestão de times e comunicação com stakeholders"
+            },
+            {
+                "title": "Base Técnica Sólida",
+                "description": "Conhecimento em linguagens de programação, HTML/CSS e banco de dados para entregas viáveis"
+            },
+            {
+                "title": "Resolução de Problemas",
+                "description": "Transformo requisitos densos em experiências funcionais e escaláveis"
+            },
+            {
+                "title": "Educador & Palestrante",
+                "description": "Professor universitário e palestrante em eventos de tecnologia"
+            }
+        ],
+        "sections": {
+            "eventsLabel": "Conhecimento Aplicado",
+            "eventsTitle": "Palestras & Eventos",
+            "experienceLabel": "Experiência",
+            "experienceTitle": "Carreira Profissional",
+            "educationLabel": "Educação",
+            "educationTitle": "Formação Acadêmica",
+            "certificationsLabel": "Certificações",
+            "certificationsTitle": "Desenvolvimento Contínuo"
+        },
+        "experience": [
+            {
+                "period": "Fev 2014 – Atual",
+                "role": "Fundador",
+                "company": "Picolo Design Digital",
+                "location": "Remoto",
+                "current": true
+            },
+            {
+                "period": "Ago 2025 – Atual",
+                "role": "Product Designer",
+                "company": "Sisand",
+                "location": "Remoto",
+                "current": true
+            },
+            {
+                "period": "Jul 2025 – Atual",
+                "role": "Professor Universitário",
+                "company": "Centro Universitário Mater Dei (Unimater)",
+                "location": "Pato Branco, PR",
+                "current": true
+            },
+            {
+                "period": "Ago 2022 – Abr 2025",
+                "role": "Senior Product Designer",
+                "company": "Leads2b",
+                "location": "Remoto"
+            },
+            {
+                "period": "Mai 2021 – Ago 2022",
+                "role": "Product Designer",
+                "company": "INDT - Instituto de Desenvolvimento Tecnológico",
+                "location": "Remoto"
+            },
+            {
+                "period": "Fev 2020 – Jun 2021",
+                "role": "Analista UX",
+                "company": "Sponte - Software de Gestão Escolar",
+                "location": "Pato Branco, PR"
+            },
+            {
+                "period": "Out 2016 – Jan 2020",
+                "role": "Analista de Requisitos",
+                "company": "VIASOFT",
+                "location": "Pato Branco, PR"
+            },
+            {
+                "period": "Fev 2014 – Set 2016",
+                "role": "Analista de Suporte",
+                "company": "VIASOFT",
+                "location": "Pato Branco, PR"
+            }
+        ],
+        "education": [
+            {
+                "period": "2018 – 2020",
+                "degree": "Pós-graduação em Design Digital e Multimídia",
+                "institution": "Estácio"
+            },
+            {
+                "period": "2014 – 2017",
+                "degree": "Bacharelado em Sistemas de Informação",
+                "institution": "Faculdade Mater Dei (Unimater)"
+            },
+            {
+                "period": "2012 – 2013",
+                "degree": "Curso Técnico em Informática",
+                "institution": "SENAI Paraná"
+            }
+        ],
+        "certifications": [
+            {
+                "name": "Product Delivery & Scrum",
+                "org": "Bruna Fonseca",
+                "year": "2025"
+            },
+            {
+                "name": "IA/UX Lab Workshop",
+                "org": "UX Unicórnio",
+                "year": "2025"
+            },
+            {
+                "name": "UX Metrics",
+                "org": "PunkMetrics",
+                "year": "2025"
+            },
+            {
+                "name": "Product Design 4.0",
+                "org": "BTX Consultoria",
+                "year": "2025"
+            },
+            {
+                "name": "Liderança em Design",
+                "org": "BTX Consultoria",
+                "year": "2025"
+            },
+            {
+                "name": "Formação em Liderança",
+                "org": "Escola Conquer",
+                "year": "2023"
+            },
+            {
+                "name": "Métricas de Negócios Digitais",
+                "org": "PM3",
+                "year": "2023"
+            },
+            {
+                "name": "Product Design 2.0 - PLG",
+                "org": "BTX Consultoria",
+                "year": "2022"
+            },
+            {
+                "name": "Design System Specialist",
+                "org": "Meiuca",
+                "year": "2022"
+            },
+            {
+                "name": "Certified Lean Inception Facilitator",
+                "org": "Caroli.org",
+                "year": "2021"
+            },
+            {
+                "name": "Avaliação de Usabilidade",
+                "org": "UFRGS",
+                "year": "2021"
+            },
+            {
+                "name": "Scrum Foundation & DevOps",
+                "org": "Certiprof",
+                "year": "2020"
+            }
+        ],
+        "events": [
+            {
+                "title": "Processo de Redesign Petroshow PDV",
+                "subtitle": "DevConference - 2018"
+            },
+            {
+                "title": "Workshop Fundamentos de Prototipagem",
+                "subtitle": "Sponte/Medplus - 2020"
+            },
+            {
+                "title": "UX Design: Na Prática, a Teoria é Outra!",
+                "subtitle": "Unimater - 2022"
+            },
+            {
+                "title": "Design Thinking: MeetUp",
+                "subtitle": "Viasoft - 2019"
+            },
+            {
+                "title": "Design Thinking: Seu aliado no desenvolvimento",
+                "subtitle": "Viasoft Connect - 2019"
+            }
+        ],
+        "cta": {
+            "title": "Vamos trabalhar juntos?",
+            "description": "Estou disponível para novos projetos e oportunidades de colaboração.",
+            "contactButton": "Entre em Contato",
+            "backButton": "Voltar"
+        }
+    },
+    "projectPage": {
+        "sections": {
+            "summary": "Resumo",
+            "goal": "Objetivo",
+            "challenge": "Desafio",
+            "role": "Meu Papel",
+            "research": "Processo de Pesquisa",
+            "discoveries": "Descobertas",
+            "prototype": "Protótipo",
+            "handoff": "Design Handoff",
+            "results": "Resultados",
+            "lessons": "Lições Aprendidas"
+        }
+    },
+    "projects": {
+        "transcricoesIA": {
+            "title": "Transcrições & Insights com IA",
+            "category": "Product Design",
+            "year": "2024",
+            "resumo": "Redesign do ecossistema de videoconferências focado na centralização de gravações, transcrições e insights de IA.<br />O projeto automatizou a documentação pós-reunião, eliminando trabalho manual e transformando uma ferramenta operacional em um ativo estratégico de vendas, validado por alta adoção espontânea.",
+            "objetivo": "Centralizar gravações, transcrições e insights de IA para eliminar a gestão manual e o ruído no compartilhamento de dados.<br />O foco foi transformar registros de reuniões em inteligência acionável para times de Vendas, Suporte e Produto, elevando a competitividade da ferramenta no mercado.",
+            "desafio": "Arquitetar a unificação de múltiplas fontes de dados (vídeo, ligações e transcrições) que eram dispostos em diferentes locais, integrando um volume denso de informações em um fluxo único e performático, reduzindo a carga cognitiva do usuário sem comprometer experiência de uso e viabilidade técnica.",
+            "meuPapel": [
+                {
+                    "title": "Discovery e Estratégia",
+                    "desc": "Diagnóstico de fricções e benchmarking competitivo para definição de requisitos."
+                },
+                {
+                    "title": "Arquitetura e Interação",
+                    "desc": "Redesign da jornada para integrar vídeo e dados em um fluxo único."
+                },
+                {
+                    "title": "Viabilidade Técnica",
+                    "desc": "Alinhamento com engenharia para implementação dos recursos de IA."
+                },
+                {
+                    "title": "Validação e Refino",
+                    "desc": "Ajustes de usabilidade baseados em feedback qualitativo."
+                }
+            ],
+            "processoPesquisa": [
+                {
+                    "title": "Auditoria do Legado",
+                    "desc": "Análise heurística da versão anterior para mapear fricções e dívidas de experiência."
+                },
+                {
+                    "title": "Dados Internos",
+                    "desc": "Cruzamento de chamados de Suporte e Vendas para validar dores reais e priorizar correções."
+                },
+                {
+                    "title": "Benchmarking",
+                    "desc": "Estudo de padrões de interação em players como Apollo, Fireflies, tl;dv e Bluedot."
+                },
+                {
+                    "title": "Viabilidade Técnica",
+                    "desc": "Validação precoce com engenharia para antecipar restrições e evitar retrabalho."
+                }
+            ],
+            "descobertas": [
+                {
+                    "title": "Acesso à Inteligência",
+                    "desc": "Transformar um simples \"log de reunião\" em um hub de conteúdo pesquisável (transcrição e IA), eliminando a necessidade de assistir ao vídeo completo."
+                },
+                {
+                    "title": "Centralização da Verdade",
+                    "desc": "Unificar calls internas e externas em uma visualização única, removendo a fricção de buscar registros dentro de pipelines de vendas."
+                },
+                {
+                    "title": "Desbloqueio de Colaboração",
+                    "desc": "Compartilhamento fácil para que a informação flua entre Vendas, Suporte e Produto sem barreiras manuais."
+                },
+                {
+                    "title": "Estratégia de Viralização",
+                    "desc": "Envio automático de resumos como alavanca de Product-Led Growth, estimulando a adoção espontânea por novos usuários."
+                }
+            ],
+            "prototipo": {
+                "telas": [
+                    {
+                        "titulo": "Tela Inicial",
+                        "descricao": "Interface construída sobre o Design System da Leads2b, assegurando consistência visual e reduzindo a curva de aprendizado do usuário."
+                    },
+                    {
+                        "titulo": "Video & Transcrição",
+                        "descricao": "Visualização imersiva com painel lateral de dados. A estrutura sincroniza a reprodução do vídeo com a transcrição e insights de IA, centralizando todo o contexto da reunião em uma única view."
+                    },
+                    {
+                        "titulo": "Smart Insights",
+                        "descricao": "Interface unificada que integra o player de vídeo e os Smart Insights. O layout permite consumo simultâneo de transcrições, comentários e insights de IA, eliminando a troca de abas e mantendo o foco no conteúdo."
+                    },
+                    {
+                        "titulo": "Compartilhamento Ágil",
+                        "descricao": "Fluxo de envio otimizado para a inclusão rápida de múltiplos destinatários. A interface garante que o conhecimento gerado na reunião chegue às pessoas certas com poucos cliques, eliminando a necessidade de redigir e-mails."
+                    },
+                    {
+                        "titulo": "Design = Conversão",
+                        "descricao": "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade."
+                    },
+                    {
+                        "titulo": "Insights = Conversão",
+                        "descricao": "Ferramenta de agendamento de atividades integrada à tela, reduzindo o time-to-action. O usuário pode agendar follow-ups no momento em que identifica uma oportunidade, eliminando a alternância entre abas e ferramentas de calendário externas."
+                    },
+                    {
+                        "titulo": "Experiência Cross-Media",
+                        "descricao": "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem."
+                    },
+                    {
+                        "titulo": "Email Viral de Aquisição",
+                        "descricao": "E-mail de resumo como uma ferramenta de Product-Led Growth. Ao entregar valor imediato (insights e transcrição) para os clientes dos nossos clientes, utilizamos o acesso ao conteúdo completo como gatilho estratégico para atrair novos cadastros e expandir a base de usuários organicamente."
+                    }
+                ]
+            },
+            "handoff": {
+                "titulo": "Design Handoff",
+                "descricao": "Seguindo a técnica Shift-Left que preza pelo envolvimento da Engenharia desde a ideação para alinhar escopo, stack e prazos, eliminamos o risco de prototipar soluções inviáveis, garantimos fluidez do desenvolvimento e reduzimos drasticamente o ruído de comunicação durante o handoff.",
+                "bullets": [
+                    "Navegação: Frames agrupados por funcionalidade lógica",
+                    "Consistência: Componentes locais isolados para facilitar manutenção",
+                    "Semântica: Sistema de anotações visuais (Info, Atenção, Importante) e fluxogramas integrados para cobrir regras de negócio não visíveis no protótipo, minimizando dúvidas técnicas"
+                ]
+            },
+            "resultados": [
+                {
+                    "title": "Eficiência Operacional",
+                    "desc": "Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times."
+                },
+                {
+                    "title": "Impacto Comercial",
+                    "desc": "A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes."
+                },
+                {
+                    "title": "Growth e Adoção",
+                    "desc": "O redirecionamento automático pós-reunião impulsionou a descoberta orgânica da feature, integrando-a naturalmente ao fluxo diário sem custo de marketing."
+                },
+                {
+                    "title": "Recuperação de Confiança",
+                    "desc": "Usuários detratores da versão anterior tornaram-se promotores da nova funcionalidade, validando a resolução das fricções críticas de usabilidade."
+                }
+            ],
+            "licoes": [
+                {
+                    "title": "Shift-Left Dev",
+                    "desc": "A validação técnica na fase de ideação provou-se vital para calibração e eliminação de retrabalho."
+                },
+                {
+                    "title": "Alavancas de Growth",
+                    "desc": "O redirecionamento automático evidenciou que pequenas intervenções no fluxo podem gerar mais adoção orgânica do que grandes funcionalidades."
+                },
+                {
+                    "title": "Dados como Premissa",
+                    "desc": "A experiência reforçou que a definição de KPIs deve nascer junto com o projeto, garantindo a mensuração de sucesso no rollout."
+                }
+            ],
+            "ui": {
+                "backButton": "Voltar",
+                "aiTag": "Inteligência Artificial",
+                "scrollToExplore": "Scroll to explore",
+                "heroTitle": {
+                    "line1": "Transcrições &",
+                    "line2": "Insights com IA"
+                },
+                "sections": {
+                    "overview": {
+                        "label": "Visão Geral",
+                        "title": "O Projeto",
+                        "objetivo": "Objetivo",
+                        "desafio": "Desafio"
+                    },
+                    "role": {
+                        "label": "Contribuição",
+                        "title": "Meu Papel"
+                    },
+                    "research": {
+                        "label": "Pesquisa",
+                        "title": "Processo de Pesquisa"
+                    },
+                    "discoveries": {
+                        "label": "Descobertas",
+                        "title": "Principais Insights"
+                    },
+                    "prototype": {
+                        "label": "Protótipo",
+                        "title": "Interface do Projeto"
+                    },
+                    "handoff": {
+                        "label": "Handoff"
+                    },
+                    "results": {
+                        "label": "Resultados",
+                        "title": "Impacto do Projeto"
+                    },
+                    "lessons": {
+                        "label": "Análise Crítica",
+                        "title": "Insights e Reflexões"
+                    }
+                },
+                "heroAlt": "Capa do Projeto: Transcrições & Insights com IA"
+            }
+        },
+        "medicalOffice": {
+            "title": "Redesign Medical Office",
+            "category": "UX Design",
+            "year": "2021",
+            "resumo": "Redesign UI/UX da plataforma web Medical Office, que conecta profissionais de saúde sem espaço próprio a clínicas com capacidade ociosa.<br />O objetivo principal foi redesenhar a interface, torná-la responsiva e aprimorar a usabilidade, mantendo uma experiência familiar para os usuários já existentes. O processo incluiu um workshop de Lean Inception, definição de visão do produto, criação de personas e mapeamento de jornadas do usuário.",
+            "objetivo": "A Medical Office é uma plataforma web que conecta profissionais de saúde iniciantes que não possuem espaço físico para atuação, com proprietários de consultórios que possuem espaços ociosos.<br />Dessa forma, busca suprir a demanda de múltiplos profissionais, viabilizando a geração de renda aos proprietários através do aluguel, ao mesmo tempo que permite aos profissionais iniciantes atuarem em um espaço totalmente equipado.",
+            "desafio": "Redesenhar a ferramenta tornando-a mais moderna e responsiva, facilitando o uso e mantendo o feeling já adquirido pelos usuários. O redesign precisava equilibrar inovação com familiaridade, garantindo que a transição fosse suave para a base de usuários existente.",
+            "meuPapel": [
+                {
+                    "title": "Lean Inception",
+                    "desc": "Participação no workshop colaborativo para alinhar o MVP com stakeholders e equipe de desenvolvimento."
+                },
+                {
+                    "title": "Pesquisa & Discovery",
+                    "desc": "Criação de Matriz CSD, personas e mapeamento de jornadas do usuário."
+                },
+                {
+                    "title": "Design de Interface",
+                    "desc": "Atuação como designer único após a inception, criando protótipos de alta fidelidade."
+                },
+                {
+                    "title": "Handoff Colaborativo",
+                    "desc": "Trabalho integrado com a equipe de desenvolvimento desde a concepção."
+                }
+            ],
+            "processoPesquisa": [
+                {
+                    "title": "Lean Inception",
+                    "desc": "Workshop colaborativo com 2 Designers, 2 Desenvolvedores, COO, CTO e 3 fundadores para definir o MVP."
+                },
+                {
+                    "title": "Matriz CSD",
+                    "desc": "Levantamento de Certezas, Suposições e Dúvidas para alinhamento da equipe sobre o produto."
+                },
+                {
+                    "title": "Visão Atual",
+                    "desc": "Documentação da plataforma existente para entender pontos de fricção e identificar oportunidades de melhoria."
+                },
+                {
+                    "title": "Visão do Produto",
+                    "desc": "Definição do que o produto é, não é, faz e não faz para evitar ambiguidades e definir escopo."
+                },
+                {
+                    "title": "Personas",
+                    "desc": "Criação de três perfis de usuário: Administrador, Locador e Locatário, com suas necessidades específicas."
+                },
+                {
+                    "title": "Sequenciamento",
+                    "desc": "Priorização de funcionalidades por importância, valor de negócio e viabilidade técnica para criar uma sequência lógica de desenvolvimento."
+                }
+            ],
+            "descobertas": [
+                {
+                    "title": "Benchmarking",
+                    "desc": "Análise de plataformas como Airbnb, Booking e QuintoAndar para identificar padrões de mercado e reduzir fricções."
+                },
+                {
+                    "title": "Fluxos de Usuário",
+                    "desc": "Criação de fluxogramas detalhados indicando o caminho desde o ponto inicial até o objetivo final de cada jornada."
+                },
+                {
+                    "title": "Débito Técnico",
+                    "desc": "Identificação de limitações técnicas que impactaram o redesign, exigindo ajustes no escopo de algumas rotinas."
+                },
+                {
+                    "title": "Cadastro Problemático",
+                    "desc": "O fluxo anterior era moroso com formulário extenso; implementamos processo passo a passo mais intuitivo."
+                }
+            ],
+            "prototipo": {
+                "intro": "O protótipo final foi desenvolvido considerando a responsividade, os anseios dos stakeholders, os insights obtidos a partir de um benchmarking detalhado e o atendimento às principais heurísticas de usabilidade.",
+                "telas": [
+                    {
+                        "titulo": "Landing Page",
+                        "descricao": "A landing page foi reformulada com base nas diretrizes definidas pelos stakeholders, mantendo o estilo visual desejado pelos fundadores sem comprometer os padrões do style guide nem os critérios de usabilidade."
+                    },
+                    {
+                        "titulo": "Plataforma Web",
+                        "descricao": "Algumas limitações de débito técnico impactaram o redesign. Por isso, determinadas rotinas passaram por ajustes visuais para alinhar com o novo padrão, enquanto outras puderam ser totalmente reconstruídas."
+                    },
+                    {
+                        "titulo": "Cadastro de Espaços",
+                        "descricao": "Implementamos um fluxo de cadastro passo a passo, mais intuitivo e visualmente agradável. Essa abordagem trouxe leveza a uma etapa naturalmente mais densa, tornando o processo mais claro para o usuário."
+                    },
+                    {
+                        "titulo": "Templates de Email",
+                        "descricao": "Desenvolvemos templates de e-mail personalizados para os três tipos de usuários. Todos os eventos que demandam interação passaram a seguir um padrão de comunicação, fortalecendo a identidade da marca."
+                    },
+                    {
+                        "titulo": "Plataforma Mobile",
+                        "descricao": "Grande parte da versão anterior não era responsiva. Com o redesign, todo o layout foi projetado com foco na responsividade, garantindo experiência consistente independentemente do dispositivo."
+                    },
+                    {
+                        "titulo": "Style Guide",
+                        "descricao": "Foi criado um style guide componentizado, pensado para facilitar tanto a criação quanto a manutenção futura da interface, seguindo diretrizes definidas com o time de marketing."
+                    }
+                ]
+            },
+            "handoff": {
+                "titulo": "Handoff Design-Dev",
+                "descricao": "Atuamos de forma colaborativa desde as etapas iniciais de prototipação, definindo um escopo viável com base na stack tecnológica e no tempo disponível para o projeto. Eventuais limitações técnicas eram identificadas e ajustadas ainda na fase de prototipação.",
+                "bullets": [
+                    "Colaboração: Envolvimento da engenharia desde a fase de ideação",
+                    "Viabilidade: Apenas rotinas viáveis e refinadas encaminhadas para desenvolvimento",
+                    "Comunicação: Processo promove integração fluida entre designers e desenvolvedores"
+                ]
+            },
+            "resultados": [
+                {
+                    "title": "Responsividade Total",
+                    "desc": "Toda a plataforma passou a funcionar perfeitamente em dispositivos móveis, resolvendo uma das principais limitações da versão anterior."
+                },
+                {
+                    "title": "Experiência Otimizada",
+                    "desc": "O novo fluxo de cadastro passo a passo reduziu significativamente a fricção e abandono durante o registro de consultórios."
+                },
+                {
+                    "title": "Identidade Visual",
+                    "desc": "Templates de email e style guide criaram um padrão de comunicação consistente, fortalecendo a marca."
+                },
+                {
+                    "title": "Longevidade do Design",
+                    "desc": "A plataforma segue em funcionamento até hoje com o mesmo visual de 2021, validando a robustez do design implementado."
+                }
+            ],
+            "licoes": [
+                {
+                    "title": "Design Adaptável",
+                    "desc": "Considerar futuras modificações e expansões faz parte do planejamento de qualquer redesign - o design deve ser um organismo vivo."
+                },
+                {
+                    "title": "Colaboração Early",
+                    "desc": "O envolvimento precoce da engenharia garantiu que apenas soluções viáveis fossem prototipadas, eliminando retrabalho."
+                },
+                {
+                    "title": "Concessões Estratégicas",
+                    "desc": "Algumas concessões de design foram necessárias para atender aos stakeholders, sem comprometer usabilidade."
+                }
+            ],
+            "ferramentas": [
+                {
+                    "name": "Figma",
+                    "desc": "Prototipagem em alta fidelidade"
+                },
+                {
+                    "name": "Photoshop",
+                    "desc": "Manipulação de imagens"
+                },
+                {
+                    "name": "Miro",
+                    "desc": "Lean Inception e fluxogramas"
+                },
+                {
+                    "name": "Jira",
+                    "desc": "Gerenciamento e handoff"
+                }
+            ]
+        },
+        "importacaoEmpresas": {
+            "title": "Importação de Empresas",
+            "category": "UX Design",
+            "year": "2024",
+            "resumo": "Este projeto busca aprimorar a funcionalidade de \"Sinalização de Empresas\" dentro da plataforma Econodata, um trabalho realizado como parte de um teste técnico para Product Designer.<br />O objetivo central é otimizar a experiência do usuário, lidando com desafios significativos que impactavam diretamente a eficiência operacional.",
+            "objetivo": "Evoluir a plataforma melhorando a experiência do usuário na funcionalidade de \"Sinalização de empresas\", como parte de um teste técnico para Product Designer na Econodata.<br />A proposta visa uma rotina mais fluida e intuitiva, que não só atenda às necessidades dos usuários, mas também supere as limitações técnicas existentes.",
+            "desafio": "Melhorar a experiência do usuário na funcionalidade de Sinalização de Empresas, com foco em suprir dores recorrentes que impactam diretamente a eficiência do processo.<br />Os principais problemas identificados incluem: perda de tempo com limpeza e validação manual de listas, dados duplicados ou desatualizados que geram retrabalho.",
+            "meuPapel": [
+                {
+                    "title": "Levantamento de Problemas",
+                    "desc": "Identificação das dores da funcionalidade atual através de análise heurística e testes na plataforma."
+                },
+                {
+                    "title": "Benchmarking",
+                    "desc": "Estudo de concorrentes e players de mercado para mapear boas práticas e oportunidades de melhoria."
+                },
+                {
+                    "title": "Análise Técnica",
+                    "desc": "Avaliação das limitações técnicas da rotina atual e propostas para superá-las."
+                },
+                {
+                    "title": "Design da Solução",
+                    "desc": "Proposição de nova rotina contemplando objetivos do negócio e solicitações dos usuários."
+                }
+            ],
+            "processoPesquisa": [
+                {
+                    "title": "Visão Anterior",
+                    "desc": "Teste e documentação do produto atual para análise aprofundada da experiência existente e identificação de pontos de fricção."
+                },
+                {
+                    "title": "Matriz CSD",
+                    "desc": "Aplicação da ferramenta para identificar Certezas, Suposições e Dúvidas, assegurando visão unificada da equipe."
+                },
+                {
+                    "title": "Benchmarking",
+                    "desc": "Análise comparativa detalhada com concorrentes para mapear oportunidades de melhoria significativas."
+                },
+                {
+                    "title": "Wireframes",
+                    "desc": "Desenvolvimento de wireframes para validar a solução antes do protótipo de alta fidelidade."
+                }
+            ],
+            "descobertas": [
+                {
+                    "title": "Validação de Listas",
+                    "desc": "Necessidade de detecção automática de duplicados e enriquecimento de dados com base em CNPJ, domínio ou e-mail."
+                },
+                {
+                    "title": "Dados Inconsistentes",
+                    "desc": "Pré-validação necessária antes da importação, mostrando dados incorretos e duplicados para ação do usuário."
+                },
+                {
+                    "title": "Sinalização de Duplicados",
+                    "desc": "Integração para marcar automaticamente empresas já abordadas ou clientes com tags e alertas visuais."
+                },
+                {
+                    "title": "Mapeamento de Colunas",
+                    "desc": "Preview automático com sugestão inteligente de colunas e validação visual antes da confirmação."
+                }
+            ],
+            "prototipo": {
+                "telas": [
+                    {
+                        "titulo": "Tela Inicial",
+                        "descricao": "Modernização mantendo o padrão visual da plataforma, com adição de histórico de ações para maior transparência, exibindo quem realizou cada importação e quando."
+                    },
+                    {
+                        "titulo": "Seleção do Arquivo",
+                        "descricao": "Processo de importação reformulado para ocorrer em modal, concentrando a atenção do usuário e dividido em três etapas para um fluxo mais didático e guiado."
+                    },
+                    {
+                        "titulo": "Configurações",
+                        "descricao": "Mapeamento automático das colunas com base nos títulos ou padrão dos dados, reduzindo erros e adicionando opção de sinalizar empresas já clientes."
+                    },
+                    {
+                        "titulo": "Validação",
+                        "descricao": "Totalizadores de linhas e erros permitindo visualizar quantidade de registros a serem importados, com pré-visualização das inconsistências."
+                    },
+                    {
+                        "titulo": "Flexibilidade",
+                        "descricao": "Modal permite execução do processo a partir de outras telas como Empresas, facilitando a operação e aplicação de filtros por tag no mesmo contexto."
+                    }
+                ]
+            },
+            "handoff": {
+                "titulo": "Design Handoff",
+                "descricao": "O arquivo foi estruturado para garantir entendimento coeso e acessível a todos os perfis envolvidos. Dentro do Figma, as etapas foram divididas em páginas: Pesquisa, Benchmarking, Fluxo, Wireframes e Protótipo.",
+                "bullets": [
+                    "Organização: Frames agrupados em seções conforme suas funcionalidades",
+                    "Componentização: Elementos reutilizados organizados na lateral esquerda do arquivo",
+                    "Comunicação: Estrutura que contribui para eficiência entre equipes e minimiza dúvidas"
+                ]
+            },
+            "resultados": [
+                {
+                    "title": "Fluxo Otimizado",
+                    "desc": "Modal de importação dividido em etapas claras, tornando o processo mais intuitivo e reduzindo a curva de aprendizado."
+                },
+                {
+                    "title": "Redução de Erros",
+                    "desc": "Mapeamento automático de colunas e validação prévia eliminam erros comuns no processo de importação."
+                },
+                {
+                    "title": "Maior Transparência",
+                    "desc": "Histórico de ações permite rastrear quem realizou cada importação e quando, aumentando a accountability."
+                },
+                {
+                    "title": "Experiência Unificada",
+                    "desc": "Possibilidade de executar importação a partir de diferentes contextos da plataforma sem perder o foco."
+                }
+            ],
+            "licoes": [
+                {
+                    "title": "Processo de UX",
+                    "desc": "Com mais tempo, poderiam ser incluídas personas, jornadas de usuário e pesquisas diretas com usuários reais."
+                },
+                {
+                    "title": "Métricas de Sucesso",
+                    "desc": "Definir métricas claras como redução do tempo de tarefa, satisfação do usuário e diminuição da taxa de erros."
+                },
+                {
+                    "title": "Validação com Usuários",
+                    "desc": "Ideal seria disponibilizar o projeto para testes de usabilidade e obter feedback da equipe de produto."
+                }
+            ]
+        }
+    }
+}

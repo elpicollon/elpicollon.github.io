@@ -2,6 +2,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, Linkedin, MessageCircle, Mail, ArrowRight } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
+import { useTranslation } from '../hooks/useTranslation';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -34,6 +36,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             });
         };
     }, [isOpen]);
+
+    const { t } = useTranslation();
+    const { language } = useLanguage();
+
+    // Dynamic LinkedIn URL based on language
+    const linkedinUrl = language === 'en-US'
+        ? 'https://www.linkedin.com/in/picolodesign/?locale=en_US'
+        : 'https://www.linkedin.com/in/picolodesign/';
 
     // Close modal on Escape key
     useEffect(() => {
@@ -81,7 +91,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                             <div className="p-6 pb-4">
                                 <div className="flex items-start justify-between mb-2">
                                     <h2 className="text-3xl font-bold text-zinc-900">
-                                        Vamos conversar?
+                                        {t('contactModal.title')}
                                     </h2>
                                     <motion.button
                                         onClick={onClose}
@@ -93,7 +103,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     </motion.button>
                                 </div>
                                 <p className="text-zinc-500 text-sm">
-                                    Escolha a melhor forma de contato
+                                    {t('contactModal.subtitle')}
                                 </p>
 
                                 {/* Gradient line */}
@@ -104,7 +114,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                             <div className="px-6 space-y-3" style={{ paddingBottom: '48px' }}>
                                 {/* LinkedIn */}
                                 <motion.a
-                                    href="https://www.linkedin.com/in/picolodesign/"
+                                    href={linkedinUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     initial={{ opacity: 0, y: 10 }}
@@ -122,10 +132,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     </div>
                                     <div className="flex-1">
                                         <h3 className="text-base font-semibold text-zinc-900 group-hover:text-sky-600 transition-colors">
-                                            LinkedIn
+                                            {t('contactModal.linkedin.title')}
                                         </h3>
                                         <p className="text-sm text-zinc-500">
-                                            Conecte-se profissionalmente
+                                            {t('contactModal.linkedin.description')}
                                         </p>
                                     </div>
                                     <div className="w-8 h-8 rounded-full bg-zinc-100 group-hover:bg-zinc-200 flex items-center justify-center transition-all duration-200 group-hover:translate-x-1">
@@ -153,10 +163,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     </div>
                                     <div className="flex-1">
                                         <h3 className="text-base font-semibold text-zinc-900 group-hover:text-emerald-500 transition-colors">
-                                            WhatsApp
+                                            {t('contactModal.whatsapp.title')}
                                         </h3>
                                         <p className="text-sm text-zinc-500">
-                                            Resposta rápida
+                                            {t('contactModal.whatsapp.description')}
                                         </p>
                                     </div>
                                     <div className="w-8 h-8 rounded-full bg-zinc-100 group-hover:bg-zinc-200 flex items-center justify-center transition-all duration-200 group-hover:translate-x-1">
@@ -184,10 +194,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     </div>
                                     <div className="flex-1">
                                         <h3 className="text-base font-semibold text-zinc-900 group-hover:text-violet-600 transition-colors">
-                                            Email
+                                            {t('contactModal.email.title')}
                                         </h3>
                                         <p className="text-sm text-zinc-500">
-                                            contato@picolodesign.com.br
+                                            {t('contactModal.email.description')}
                                         </p>
                                     </div>
                                     <div className="w-8 h-8 rounded-full bg-zinc-100 group-hover:bg-zinc-200 flex items-center justify-center transition-all duration-200 group-hover:translate-x-1">

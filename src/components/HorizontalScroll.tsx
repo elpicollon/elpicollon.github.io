@@ -1,36 +1,10 @@
 import { motion, useMotionValue, useSpring } from 'motion/react';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ExternalLink } from 'lucide-react';
 import { useContactModal } from '../contexts/ContactModalContext';
-
-const projects = [
-  {
-    id: 1,
-    title: 'Transcrições & Insights com IA',
-    category: 'UX Design',
-    year: '2024',
-    comingSoon: false,
-    image: '/assets/projects/transcricoes-insights-ia/card-home.png',
-    gradient: 'linear-gradient(to bottom, #2F968C, #00463F)',
-    link: '/projeto/transcricoes-insights-ia'
-  },
-  {
-    id: 2,
-    title: 'Medical Office - Web App',
-    category: 'Product Design',
-    year: '2022',
-    comingSoon: true,
-  },
-  {
-    id: 3,
-    title: 'Importação de Empresas',
-    category: 'Product Design',
-    year: '2025',
-    comingSoon: true,
-  },
-];
+import { useTranslation } from '../hooks/useTranslation';
 
 export function HorizontalScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -43,6 +17,35 @@ export function HorizontalScroll() {
   });
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const { openModal } = useContactModal();
+  const { t } = useTranslation();
+
+  // Visual data that doesn't need translation
+  const projectVisuals = useMemo(() => [
+    {
+      id: 1,
+      comingSoon: false,
+      image: '/assets/projects/transcricoes-insights-ia/card-home.png',
+      gradient: 'linear-gradient(to bottom, #2F968C, #00463F)',
+      link: '/projeto/transcricoes-insights-ia'
+    },
+    {
+      id: 2,
+      comingSoon: true,
+    },
+    {
+      id: 3,
+      comingSoon: true,
+    },
+  ], []);
+
+  const translatedCards = t<any[]>('horizontalScroll.projectCards') || [];
+  const projects = useMemo(() =>
+    translatedCards.length > 0 ? translatedCards.map((project, index) => ({
+      ...project,
+      ...projectVisuals[index]
+    })) : projectVisuals,
+    [translatedCards, projectVisuals]
+  );
 
   useEffect(() => {
     const updateConstraints = () => {
@@ -50,7 +53,6 @@ export function HorizontalScroll() {
         const scrollWidth = scrollContainerRef.current.scrollWidth;
         const viewportWidth = window.innerWidth;
         // Constraints: right is 0 (start), left is negative (scroll distance)
-        // Add some buffer for overscroll feel or just precise? Precise is better for carousel.
         setDragConstraints({ left: -(scrollWidth - viewportWidth), right: 0 });
       }
     };
@@ -58,7 +60,7 @@ export function HorizontalScroll() {
     updateConstraints();
     window.addEventListener('resize', updateConstraints);
     return () => window.removeEventListener('resize', updateConstraints);
-  }, []);
+  }, [projects]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -129,7 +131,7 @@ export function HorizontalScroll() {
       tabIndex={0}
       onKeyDown={handleKeyDown}
       className="relative py-16 md:py-20 bg-[#f2f4f7] z-0 isolate mb-32 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-      aria-label="Galeria de projetos em destaque"
+      aria-label={t('accessibility.projectGallery')}
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#f2f4f7] via-purple-100/40 to-[#f2f4f7] -z-10" />
@@ -145,7 +147,7 @@ export function HorizontalScroll() {
             viewport={{ once: true }}
             className="text-6xl md:text-8xl font-medium text-black"
           >
-            Projetos
+            {t('horizontalScroll.sectionTitle')}
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}
@@ -180,7 +182,7 @@ export function HorizontalScroll() {
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
                           <span className="text-6xl md:text-7xl lg:text-8xl font-bold text-white/15 tracking-tight">
-                            EM BREVE
+                            {t('horizontalScroll.comingSoon')}
                           </span>
                         </div>
                       </div>
@@ -291,7 +293,7 @@ export function HorizontalScroll() {
                   whileHover={{ scale: 1.05 }}
                   className="text-3xl md:text-5xl lg:text-6xl font-medium text-purple-900 mb-6"
                 >
-                  Vamos criar algo incrível juntos?
+                  {t('horizontalScroll.ctaTitle')}
                 </motion.h3>
                 <motion.button
                   onClick={openModal}
@@ -299,7 +301,7 @@ export function HorizontalScroll() {
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-colors cursor-pointer"
                 >
-                  Entre em Contato
+                  {t('nav.getInTouch')}
                 </motion.button>
               </div>
             </div>

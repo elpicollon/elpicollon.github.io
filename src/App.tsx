@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { CustomCursor } from './components/CustomCursor';
 import { MinimalNav } from './components/MinimalNav';
@@ -11,11 +11,13 @@ import { MagneticButton } from './components/MagneticButton';
 import { FooterNew } from './components/FooterNew';
 import { ContactModal } from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
-import { TranscricoesInsightsIA } from './components/projects/TranscricoesInsightsIA';
-import { MedicalOffice } from './components/projects/MedicalOffice';
-import { ImportacaoEmpresas } from './components/projects/ImportacaoEmpresas';
-import { AboutPage } from './components/pages/AboutPage';
 import { ScrollToTop } from './components/ScrollToTop';
+
+// Lazy load project pages for code-splitting
+const TranscricoesInsightsIA = lazy(() => import('./components/projects/TranscricoesInsightsIA').then(m => ({ default: m.TranscricoesInsightsIA })));
+const MedicalOffice = lazy(() => import('./components/projects/MedicalOffice').then(m => ({ default: m.MedicalOffice })));
+const ImportacaoEmpresas = lazy(() => import('./components/projects/ImportacaoEmpresas').then(m => ({ default: m.ImportacaoEmpresas })));
+const AboutPage = lazy(() => import('./components/pages/AboutPage').then(m => ({ default: m.AboutPage })));
 
 function HomePage() {
   const location = useLocation();
@@ -64,13 +66,22 @@ function AppContent() {
     <div className="min-h-screen bg-[#f2f4f7]" style={{ overflowX: 'clip' }}>
       <CustomCursor />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projeto/transcricoes-insights-ia" element={<TranscricoesInsightsIA />} />
-        <Route path="/projeto/medical-office" element={<MedicalOffice />} />
-        <Route path="/projeto/importacao-empresas" element={<ImportacaoEmpresas />} />
-        <Route path="/sobre" element={<AboutPage />} />
-      </Routes>
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-600">Carregando...</p>
+          </div>
+        </div>
+      }>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projeto/transcricoes-insights-ia" element={<TranscricoesInsightsIA />} />
+          <Route path="/projeto/medical-office" element={<MedicalOffice />} />
+          <Route path="/projeto/importacao-empresas" element={<ImportacaoEmpresas />} />
+          <Route path="/sobre" element={<AboutPage />} />
+        </Routes>
+      </Suspense>
 
       <ContactModal isOpen={isOpen} onClose={closeModal} />
     </div>

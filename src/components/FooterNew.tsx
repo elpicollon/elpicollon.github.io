@@ -3,6 +3,8 @@ import { Linkedin, Mail } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Logo1 from '../imports/Logo';
 import { useContactModal } from '../contexts/ContactModalContext';
+import { useTranslation } from '../hooks/useTranslation';
+import { useLanguage } from '../contexts/LanguageContext';
 
 
 export function FooterNew() {
@@ -10,6 +12,13 @@ export function FooterNew() {
   const { openModal } = useContactModal();
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
+  const { language } = useLanguage();
+
+  // Dynamic LinkedIn URL based on language
+  const linkedinUrl = language === 'en-US'
+    ? 'https://www.linkedin.com/in/picolodesign/?locale=en_US'
+    : 'https://www.linkedin.com/in/picolodesign/';
 
   const handleNavigation = (sectionId: string) => {
     // Check if we're on the home page
@@ -41,7 +50,7 @@ export function FooterNew() {
               <Logo1 />
             </div>
             <p className="text-xl text-zinc-600 mb-8 max-w-lg">
-              Desde 2014 oferecendo serviços de design digital com criatividade, qualidade e preço justo.
+              {t('footer.tagline')}
             </p>
             <motion.div
               initial={{ width: 0 }}
@@ -60,13 +69,13 @@ export function FooterNew() {
               transition={{ duration: 0.8, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-black mb-6 font-medium">Navegação</h4>
+              <h4 className="text-black mb-6 font-medium">{t('footer.navigation')}</h4>
               <ul className="space-y-3">
                 {[
-                  { label: 'Início', sectionId: 'inicio' },
-                  { label: 'Projetos', sectionId: 'projetos' },
-                  { label: 'Sobre', sectionId: 'sobre' },
-                  { label: 'Expertise', sectionId: 'expertise' },
+                  { label: t('footer.navItems.home'), sectionId: 'inicio' },
+                  { label: t('footer.navItems.projects'), sectionId: 'projetos' },
+                  { label: t('footer.navItems.about'), sectionId: 'sobre' },
+                  { label: t('footer.navItems.expertise'), sectionId: 'expertise' },
                 ].map((item) => (
                   <li key={item.label}>
                     <motion.button
@@ -84,7 +93,7 @@ export function FooterNew() {
                     whileHover={{ x: 5 }}
                     className="text-zinc-600 hover:text-purple-600 transition-colors inline-block cursor-pointer font-[inherit] text-left bg-transparent border-none p-0"
                   >
-                    Contato
+                    {t('footer.navItems.contact')}
                   </motion.button>
                 </li>
               </ul>
@@ -96,7 +105,7 @@ export function FooterNew() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-black mb-6 font-medium">Conecte-se</h4>
+              <h4 className="text-black mb-6 font-medium">{t('footer.connect')}</h4>
               <ul className="space-y-3">
                 {[
                   {
@@ -116,7 +125,7 @@ export function FooterNew() {
                     )
                   },
                   { label: "Email", href: "mailto:contato@picolodesign.com.br", icon: Mail },
-                  { label: "Linkedin", href: "https://www.linkedin.com/in/picolodesign/", icon: Linkedin }
+                  { label: "Linkedin", href: linkedinUrl, icon: Linkedin }
                 ].map((social) => (
                   <li key={social.label}>
                     <motion.a
@@ -145,11 +154,11 @@ export function FooterNew() {
           className="pt-8 border-t border-purple-200 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-zinc-500">
-            © {currentYear} - Picolo Design Digital & Consultoria | CNPJ: 42.054.838/0001-08
+            {t('footer.copyright', { year: currentYear.toString() })}
           </p>
           <div className="flex gap-6">
             <p className="text-zinc-500">
-              Feito com 😡 por mim. Todos os direitos reservados.
+              {t('footer.madeWith')}
             </p>
           </div>
         </motion.div>

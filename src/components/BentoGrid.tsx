@@ -1,80 +1,82 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
 import { Sparkles, Zap, Target, Layers, Palette, Mic, Award, Briefcase, Heart, Settings2, PenTool } from 'lucide-react';
-
-const stats = [
-  {
-    id: 1,
-    number: "7+",
-    label: "Anos em UX",
-    icon: Briefcase,
-  },
-  {
-    id: 2,
-    number: "12+",
-    label: "Anos Tech",
-    icon: Award,
-  },
-  {
-    id: 3,
-    number: "50+",
-    label: "Projetos",
-    icon: Zap,
-  },
-  {
-    id: 4,
-    number: "100%",
-    label: "Satisfação",
-    icon: Heart,
-  }
-];
-
-const features = [
-  {
-    icon: Sparkles,
-    title: 'Design Inovador',
-    description: 'Soluções visuais que quebram paradigmas',
-  },
-  {
-    icon: Target,
-    title: 'UX Design',
-    description: 'Decisões baseadas em dados',
-  },
-  {
-    icon: Palette,
-    title: 'UI Design',
-    description: 'Interfaces que encantam',
-  },
-  {
-    icon: Zap,
-    title: 'Prototipagem',
-    description: 'Validação rápida de conceitos',
-  },
-  {
-    icon: Layers,
-    title: 'Design Systems',
-    description: 'Escalabilidade e consistência',
-  },
-  {
-    icon: Settings2,
-    title: 'DesignOps',
-    description: 'Processos e ferramentas de design',
-  },
-  {
-    icon: PenTool,
-    title: 'Identidades Visuais',
-    description: 'Marcas memoráveis e consistentes',
-  },
-  {
-    icon: Mic,
-    title: 'Palestras & Eventos',
-    description: 'Compartilhando conhecimento',
-  },
-];
+import { useTranslation } from '../hooks/useTranslation';
 
 export function BentoGrid() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.05 });
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      id: 1,
+      number: "7+",
+      label: t('expertise.stats.yearsUX'),
+      icon: Briefcase,
+    },
+    {
+      id: 2,
+      number: "12+",
+      label: t('expertise.stats.yearsTech'),
+      icon: Award,
+    },
+    {
+      id: 3,
+      number: "50+",
+      label: t('expertise.stats.projects'),
+      icon: Zap,
+    },
+    {
+      id: 4,
+      number: "100%",
+      label: t('expertise.stats.satisfaction'),
+      icon: Heart,
+    }
+  ];
+
+  const features = [
+    {
+      icon: Sparkles,
+      title: t('expertise.features.innovativeDesign.title'),
+      description: t('expertise.features.innovativeDesign.description'),
+    },
+    {
+      icon: Target,
+      title: t('expertise.features.uxDesign.title'),
+      description: t('expertise.features.uxDesign.description'),
+    },
+    {
+      icon: Palette,
+      title: t('expertise.features.uiDesign.title'),
+      description: t('expertise.features.uiDesign.description'),
+    },
+    {
+      icon: Zap,
+      title: t('expertise.features.prototyping.title'),
+      description: t('expertise.features.prototyping.description'),
+    },
+    {
+      icon: Layers,
+      title: t('expertise.features.designSystems.title'),
+      description: t('expertise.features.designSystems.description'),
+    },
+    {
+      icon: Settings2,
+      title: t('expertise.features.designOps.title'),
+      description: t('expertise.features.designOps.description'),
+    },
+    {
+      icon: PenTool,
+      title: t('expertise.features.visualIdentity.title'),
+      description: t('expertise.features.visualIdentity.description'),
+    },
+    {
+      icon: Mic,
+      title: t('expertise.features.speaking.title'),
+      description: t('expertise.features.speaking.description'),
+    },
+  ];
 
   return (
     <section id="expertise" ref={ref} className="py-32 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">
@@ -95,7 +97,7 @@ export function BentoGrid() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-6xl md:text-8xl font-medium text-black mb-6"
           >
-            Expertise
+            {t('expertise.sectionTitle')}
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}

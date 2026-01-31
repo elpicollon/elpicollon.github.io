@@ -1,6 +1,7 @@
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 // ============================================
 // ScrollCards - Cards com scroll vertical interno
@@ -363,6 +364,7 @@ interface ImageCarouselProps {
 export function ImageCarousel({ images, autoPlay = true, interval = 3000 }: ImageCarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (autoPlay && images.length > 1) {
@@ -429,7 +431,7 @@ export function ImageCarousel({ images, autoPlay = true, interval = 3000 }: Imag
                 <>
                     <button
                         onClick={goPrev}
-                        aria-label="Slide anterior"
+                        aria-label={t('accessibility.previousSlide')}
                         style={{
                             position: 'absolute',
                             left: '0.5rem',
@@ -454,7 +456,7 @@ export function ImageCarousel({ images, autoPlay = true, interval = 3000 }: Imag
                     </button>
                     <button
                         onClick={goNext}
-                        aria-label="Próximo slide"
+                        aria-label={t('accessibility.nextSlide')}
                         style={{
                             position: 'absolute',
                             right: '0.5rem',

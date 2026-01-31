@@ -4,6 +4,8 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import PicoloDesignLogo from '../imports/PicoloDesignLogo-9-474';
 import { useContactModal } from '../contexts/ContactModalContext';
+import { LanguageSwitcher } from './LanguageSwitcher';
+import { useTranslation } from '../hooks/useTranslation';
 
 // Função para scroll suave até uma seção
 function scrollToSection(sectionId: string) {
@@ -22,6 +24,7 @@ export function MinimalNav() {
 
   // Check if we're on the home page
   const isHomePage = location.pathname === '/';
+  const { t } = useTranslation();
 
   // Função para navegar para home e scrollar para seção
   const handleNavClick = (sectionId: string) => {
@@ -80,10 +83,10 @@ export function MinimalNav() {
               className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2"
             >
               {[
-                { label: 'PROJETOS', sectionId: 'projetos', isLink: false },
-                { label: 'SOBRE', path: '/sobre', isLink: true },
-                { label: 'EXPERTISE', sectionId: 'expertise', isLink: false },
-                { label: 'CONTATO', sectionId: 'contato', isLink: false }
+                { label: t('nav.menu.projects'), sectionId: 'projetos', isLink: false },
+                { label: t('nav.menu.about'), path: '/sobre', isLink: true },
+                { label: t('nav.menu.expertise'), sectionId: 'expertise', isLink: false },
+                { label: t('nav.menu.contact'), sectionId: 'contato', isLink: false }
               ].map((item, index) => (
                 item.isLink ? (
                   <motion.div
@@ -116,18 +119,21 @@ export function MinimalNav() {
               ))}
             </motion.div>
 
-            {/* CTA Button - Desktop only on lg screens */}
-            <motion.button
-              onClick={openModal}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="hidden lg:flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-purple-900 transition-colors cursor-pointer"
-            >
-              ENTRE EM CONTATO
-            </motion.button>
+            {/* CTA Button and Language Switcher - Desktop only on lg screens */}
+            <div className="hidden lg:flex items-center gap-3">
+              <LanguageSwitcher />
+              <motion.button
+                onClick={openModal}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center justify-center bg-black text-white px-6 h-10 rounded-full text-xs tracking-wider hover:bg-purple-900 transition-colors cursor-pointer"
+              >
+                {t('nav.getInTouch')}
+              </motion.button>
+            </div>
 
             {/* Mobile menu button - show on mobile and tablet */}
             <motion.button
@@ -150,14 +156,31 @@ export function MinimalNav() {
           x: isOpen ? 0 : '100%',
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="fixed top-0 right-0 bottom-0 w-full lg:hidden bg-white z-[110] flex flex-col justify-center items-center gap-8"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+        }}
+        className="fixed top-0 right-0 bottom-0 w-full lg:hidden z-[110] flex flex-col justify-center items-center gap-8 border-l border-white/40 shadow-lg shadow-black/5"
       >
+        {/* Close button - X at top right */}
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isOpen ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => setIsOpen(false)}
+          className="absolute top-6 right-6 p-2 text-black hover:text-purple-600 transition-colors"
+          aria-label={t('accessibility.closeMenu')}
+        >
+          <X size={28} />
+        </motion.button>
+
         {[
-          { label: 'Início', sectionId: 'inicio', isModal: false, isLink: false },
-          { label: 'Projetos', sectionId: 'projetos', isModal: false, isLink: false },
-          { label: 'Sobre', path: '/sobre', isModal: false, isLink: true },
-          { label: 'Expertise', sectionId: 'expertise', isModal: false, isLink: false },
-          { label: 'Contato', sectionId: 'contato', isModal: true, isLink: false }
+          { label: t('nav.home'), sectionId: 'inicio', isModal: false, isLink: false },
+          { label: t('nav.projects'), sectionId: 'projetos', isModal: false, isLink: false },
+          { label: t('nav.about'), path: '/sobre', isModal: false, isLink: true },
+          { label: t('nav.expertise'), sectionId: 'expertise', isModal: false, isLink: false },
+          { label: t('nav.contact'), sectionId: 'contato', isModal: true, isLink: false }
         ].map((item, index) => (
           item.isModal ? (
             <motion.button
@@ -198,6 +221,16 @@ export function MinimalNav() {
             </motion.button>
           )
         ))}
+
+        {/* Language Switcher - Mobile */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
+          transition={{ duration: 0.3, delay: isOpen ? 0.5 : 0 }}
+          className="mt-4"
+        >
+          <LanguageSwitcher onLanguageChange={() => setIsOpen(false)} />
+        </motion.div>
       </motion.div>
 
       {/* Mobile menu overlay */}

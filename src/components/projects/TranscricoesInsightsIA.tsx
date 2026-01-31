@@ -9,112 +9,111 @@ import { ParticleBackground } from '../ParticleBackground';
 import { RealisticMacBook } from '../RealisticMacBook';
 import { ProjectCTAFooter } from './ProjectCTAFooter';
 import { AudioMiniPlayer } from '../AudioMiniPlayer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useTranslation } from '../../hooks/useTranslation';
 
 // ============================================================================
-// PROJECT DATA
+// PROJECT DATA - using translations
 // ============================================================================
 
-const projectData = {
-    title: "Transcrições & Insights com IA",
-    category: "Product Design",
-    year: "2024",
+function useProjectData() {
+    const { translations } = useLanguage();
+    const p = translations.projects?.transcricoesIA;
 
-    resumo: <>Redesign do ecossistema de videoconferências focado na centralização de gravações, transcrições e insights de IA.<br />O projeto automatizou a documentação pós-reunião, eliminando trabalho manual e transformando uma ferramenta operacional em um ativo estratégico de vendas, validado por alta adoção espontânea.</>,
-
-    objetivo: <>Centralizar gravações, transcrições e insights de IA para eliminar a gestão manual e o ruído no compartilhamento de dados.<br />O foco foi transformar registros de reuniões em inteligência acionável para times de Vendas, Suporte e Produto, elevando a competitividade da ferramenta no mercado.</>,
-
-    desafio: <>Arquitetar a unificação de múltiplas fontes de dados (vídeo, ligações e transcrições) que eram dispostos em diferentes locais, integrando um volume denso de informações em um fluxo único e performático, reduzindo a carga cognitiva do usuário sem comprometer experiência de uso e viabilidade técnica.</>,
-
-    meuPapel: [
-        { title: "Discovery e Estratégia", desc: "Diagnóstico de fricções e benchmarking competitivo para definição de requisitos." },
-        { title: "Arquitetura e Interação", desc: "Redesign da jornada para integrar vídeo e dados em um fluxo único." },
-        { title: "Viabilidade Técnica", desc: "Alinhamento com engenharia para implementação dos recursos de IA." },
-        { title: "Validação e Refino", desc: "Ajustes de usabilidade baseados em feedback qualitativo." },
-    ],
-
-    processoPesquisa: [
-        { title: "Auditoria do Legado", desc: "Análise heurística da versão anterior para mapear fricções e dívidas de experiência." },
-        { title: "Dados Internos", desc: "Cruzamento de chamados de Suporte e Vendas para validar dores reais e priorizar correções." },
-        { title: "Benchmarking", desc: "Estudo de padrões de interação em players como Apollo, Fireflies, tl;dv e Bluedot." },
-        { title: "Viabilidade Técnica", desc: "Validação precoce com engenharia para antecipar restrições e evitar retrabalho." },
-    ],
-
-    descobertas: [
-        { title: "Acesso à Inteligência", desc: "Transformar um simples \"log de reunião\" em um hub de conteúdo pesquisável (transcrição e IA), eliminando a necessidade de assistir ao vídeo completo." },
-        { title: "Centralização da Verdade", desc: "Unificar calls internas e externas em uma visualização única, removendo a fricção de buscar registros dentro de pipelines de vendas." },
-        { title: "Desbloqueio de Colaboração", desc: "Compartilhamento fácil para que a informação flua entre Vendas, Suporte e Produto sem barreiras manuais." },
-        { title: "Estratégia de Viralização", desc: "Envio automático de resumos como alavanca de Product-Led Growth, estimulando a adoção espontânea por novos usuários." },
-    ],
-
-    prototipo: {
-        telas: [
-            {
-                titulo: "Tela Inicial",
-                descricao: "Interface construída sobre o Design System da Leads2b, assegurando consistência visual e reduzindo a curva de aprendizado do usuário.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/1.png"]
+    if (!p) {
+        // Fallback to PT-BR hardcoded data
+        return {
+            title: "Transcrições & Insights com IA",
+            category: "Product Design",
+            year: "2024",
+            resumo: <>Redesign do ecossistema de videoconferências focado na centralização de gravações, transcrições e insights de IA.<br />O projeto automatizou a documentação pós-reunião, eliminando trabalho manual e transformando uma ferramenta operacional em um ativo estratégico de vendas, validado por alta adoção espontânea.</>,
+            objetivo: <>Centralizar gravações, transcrições e insights de IA para eliminar a gestão manual e o ruído no compartilhamento de dados.<br />O foco foi transformar registros de reuniões em inteligência acionável para times de Vendas, Suporte e Produto, elevando a competitividade da ferramenta no mercado.</>,
+            desafio: <>Arquitetar a unificação de múltiplas fontes de dados (vídeo, ligações e transcrições) que eram dispostos em diferentes locais, integrando um volume denso de informações em um fluxo único e performático, reduzindo a carga cognitiva do usuário sem comprometer experiência de uso e viabilidade técnica.</>,
+            meuPapel: [
+                { title: "Discovery e Estratégia", desc: "Diagnóstico de fricções e benchmarking competitivo para definição de requisitos." },
+                { title: "Arquitetura e Interação", desc: "Redesign da jornada para integrar vídeo e dados em um fluxo único." },
+                { title: "Viabilidade Técnica", desc: "Alinhamento com engenharia para implementação dos recursos de IA." },
+                { title: "Validação e Refino", desc: "Ajustes de usabilidade baseados em feedback qualitativo." },
+            ],
+            processoPesquisa: [
+                { title: "Auditoria do Legado", desc: "Análise heurística da versão anterior para mapear fricções e dívidas de experiência." },
+                { title: "Dados Internos", desc: "Cruzamento de chamados de Suporte e Vendas para validar dores reais e priorizar correções." },
+                { title: "Benchmarking", desc: "Estudo de padrões de interação em players como Apollo, Fireflies, tl;dv e Bluedot." },
+                { title: "Viabilidade Técnica", desc: "Validação precoce com engenharia para antecipar restrições e evitar retrabalho." },
+            ],
+            descobertas: [
+                { title: "Acesso à Inteligência", desc: "Transformar um simples \"log de reunião\" em um hub de conteúdo pesquisável (transcrição e IA), eliminando a necessidade de assistir ao vídeo completo." },
+                { title: "Centralização da Verdade", desc: "Unificar calls internas e externas em uma visualização única, removendo a fricção de buscar registros dentro de pipelines de vendas." },
+                { title: "Desbloqueio de Colaboração", desc: "Compartilhamento fácil para que a informação flua entre Vendas, Suporte e Produto sem barreiras manuais." },
+                { title: "Estratégia de Viralização", desc: "Envio automático de resumos como alavanca de Product-Led Growth, estimulando a adoção espontânea por novos usuários." },
+            ],
+            prototipo: {
+                telas: [
+                    { titulo: "Tela Inicial", descricao: "Interface construída sobre o Design System da Leads2b, assegurando consistência visual e reduzindo a curva de aprendizado do usuário.", imagens: ["/assets/projects/transcricoes-insights-ia/1.png"] },
+                    { titulo: "Video & Transcrição", descricao: "Visualização imersiva com painel lateral de dados. A estrutura sincroniza a reprodução do vídeo com a transcrição e insights de IA, centralizando todo o contexto da reunião em uma única view.", imagens: ["/assets/projects/transcricoes-insights-ia/2.png"] },
+                    { titulo: "Smart Insights", descricao: "Interface unificada que integra o player de vídeo e os Smart Insights. O layout permite consumo simultâneo de transcrições, comentários e insights de IA, eliminando a troca de abas e mantendo o foco no conteúdo.", imagens: ["/assets/projects/transcricoes-insights-ia/3.png"] },
+                    { titulo: "Compartilhamento Ágil", descricao: "Fluxo de envio otimizado para a inclusão rápida de múltiplos destinatários. A interface garante que o conhecimento gerado na reunião chegue às pessoas certas com poucos cliques, eliminando a necessidade de redigir e-mails.", imagens: ["/assets/projects/transcricoes-insights-ia/4.png"] },
+                    { titulo: "Design = Conversão", descricao: "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade.", imagens: ["/assets/projects/transcricoes-insights-ia/6.png"] },
+                    { titulo: "Insights = Conversão", descricao: "Ferramenta de agendamento de atividades integrada à tela, reduzindo o time-to-action. O usuário pode agendar follow-ups no momento em que identifica uma oportunidade, eliminando a alternância entre abas e ferramentas de calendário externas.", imagens: ["/assets/projects/transcricoes-insights-ia/7.png"] },
+                    { titulo: "Experiência Cross-Media", descricao: "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem.", imagens: ["/assets/projects/transcricoes-insights-ia/8.png"] },
+                    { titulo: "Email Viral de Aquisição", descricao: "E-mail de resumo como uma ferramenta de Product-Led Growth. Ao entregar valor imediato (insights e transcrição) para os clientes dos nossos clientes, utilizamos o acesso ao conteúdo completo como gatilho estratégico para atrair novos cadastros e expandir a base de usuários organicamente.", imagens: ["/assets/projects/transcricoes-insights-ia/10.png"] }
+                ]
             },
-            {
-                titulo: "Video & Transcrição",
-                descricao: "Visualização imersiva com painel lateral de dados. A estrutura sincroniza a reprodução do vídeo com a transcrição e insights de IA, centralizando todo o contexto da reunião em uma única view.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/2.png"]
+            handoff: {
+                titulo: "Design Handoff",
+                descricao: "Seguindo a técnica Shift-Left que preza pelo envolvimento da Engenharia desde a ideação para alinhar escopo, stack e prazos, eliminamos o risco de prototipar soluções inviáveis, garantimos fluidez do desenvolvimento e reduzimos drasticamente o ruído de comunicação durante o handoff.",
+                bullets: [
+                    "Navegação: Frames agrupados por funcionalidade lógica",
+                    "Consistência: Componentes locais isolados para facilitar manutenção",
+                    "Semântica: Sistema de anotações visuais (Info, Atenção, Importante) e fluxogramas integrados para cobrir regras de negócio não visíveis no protótipo, minimizando dúvidas técnicas"
+                ],
+                imagem: "/assets/projects/transcricoes-insights-ia/handoff.gif"
             },
-            {
-                titulo: "Smart Insights",
-                descricao: "Interface unificada que integra o player de vídeo e os Smart Insights. O layout permite consumo simultâneo de transcrições, comentários e insights de IA, eliminando a troca de abas e mantendo o foco no conteúdo.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/3.png"]
-            },
-            {
-                titulo: "Compartilhamento Ágil",
-                descricao: "Fluxo de envio otimizado para a inclusão rápida de múltiplos destinatários. A interface garante que o conhecimento gerado na reunião chegue às pessoas certas com poucos cliques, eliminando a necessidade de redigir e-mails.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/4.png"]
-            },
-            {
-                titulo: "Design = Conversão",
-                descricao: "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/6.png"]
-            },
-            {
-                titulo: "Insights = Conversão",
-                descricao: "Ferramenta de agendamento de atividades integrada à tela, reduzindo o time-to-action. O usuário pode agendar follow-ups no momento em que identifica uma oportunidade, eliminando a alternância entre abas e ferramentas de calendário externas.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/7.png"]
-            },
-            {
-                titulo: "Experiência Cross-Media",
-                descricao: "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/8.png"]
-            },
-            {
-                titulo: "Email Viral de Aquisição",
-                descricao: "E-mail de resumo como uma ferramenta de Product-Led Growth. Ao entregar valor imediato (insights e transcrição) para os clientes dos nossos clientes, utilizamos o acesso ao conteúdo completo como gatilho estratégico para atrair novos cadastros e expandir a base de usuários organicamente.",
-                imagens: ["/assets/projects/transcricoes-insights-ia/10.png"]
-            }
-        ]
-    },
+            resultados: [
+                { title: "Eficiência Operacional", desc: "Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times." },
+                { title: "Impacto Comercial", desc: "A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes." },
+                { title: "Growth e Adoção", desc: "O redirecionamento automático pós-reunião impulsionou a descoberta orgânica da feature, integrando-a naturalmente ao fluxo diário sem custo de marketing." },
+                { title: "Recuperação de Confiança", desc: "Usuários detratores da versão anterior tornaram-se promotores da nova funcionalidade, validando a resolução das fricções críticas de usabilidade." },
+            ],
+            licoes: [
+                { title: "Shift-Left Dev", desc: "A validação técnica na fase de ideação provou-se vital para calibração e eliminação de retrabalho." },
+                { title: "Alavancas de Growth", desc: "O redirecionamento automático evidenciou que pequenas intervenções no fluxo podem gerar mais adoção orgânica do que grandes funcionalidades." },
+                { title: "Dados como Premissa", desc: "A experiência reforçou que a definição de KPIs deve nascer junto com o projeto, garantindo a mensuração de sucesso no rollout." },
+            ]
+        };
+    }
 
-    handoff: {
-        titulo: "Design Handoff",
-        descricao: "Seguindo a técnica Shift-Left que preza pelo envolvimento da Engenharia desde a ideação para alinhar escopo, stack e prazos, eliminamos o risco de prototipar soluções inviáveis, garantimos fluidez do desenvolvimento e reduzimos drasticamente o ruído de comunicação durante o handoff.",
-        bullets: [
-            "Navegação: Frames agrupados por funcionalidade lógica",
-            "Consistência: Componentes locais isolados para facilitar manutenção",
-            "Semântica: Sistema de anotações visuais (Info, Atenção, Importante) e fluxogramas integrados para cobrir regras de negócio não visíveis no protótipo, minimizando dúvidas técnicas"
-        ],
-        imagem: "/assets/projects/transcricoes-insights-ia/handoff.gif"
-    },
+    // Return translated data
+    return {
+        title: p.title,
+        category: p.category,
+        year: p.year,
+        resumo: <span dangerouslySetInnerHTML={{ __html: p.resumo }} />,
+        objetivo: <span dangerouslySetInnerHTML={{ __html: p.objetivo }} />,
+        desafio: <span dangerouslySetInnerHTML={{ __html: p.desafio }} />,
+        meuPapel: p.meuPapel,
+        processoPesquisa: p.processoPesquisa,
+        descobertas: p.descobertas,
+        prototipo: {
+            telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => ({
+                titulo: t.titulo,
+                descricao: t.descricao,
+                imagens: [`/assets/projects/transcricoes-insights-ia/${[1, 2, 3, 4, 6, 7, 8, 10][i]}.png`]
+            }))
+        },
+        handoff: {
+            titulo: p.handoff.titulo,
+            descricao: p.handoff.descricao,
+            bullets: p.handoff.bullets,
+            imagem: "/assets/projects/transcricoes-insights-ia/handoff.gif"
+        },
+        resultados: p.resultados,
+        licoes: p.licoes
+    };
+}
 
-    resultados: [
-        { title: "Eficiência Operacional", desc: "Centralização de assets (gravação, transcrição e IA) em um único hub, eliminando a organização manual de atas e liberando horas produtivas dos times." },
-        { title: "Impacto Comercial", desc: "A nova interface elevou a percepção de valor do produto, sendo adotada pela equipe de Vendas como diferencial competitivo em demonstrações para novos clientes." },
-        { title: "Growth e Adoção", desc: "O redirecionamento automático pós-reunião impulsionou a descoberta orgânica da feature, integrando-a naturalmente ao fluxo diário sem custo de marketing." },
-        { title: "Recuperação de Confiança", desc: "Usuários detratores da versão anterior tornaram-se promotores da nova funcionalidade, validando a resolução das fricções críticas de usabilidade." },
-    ],
-
-    licoes: [
-        { title: "Shift-Left Dev", desc: "A validação técnica na fase de ideação provou-se vital para calibração e eliminação de retrabalho." },
-        { title: "Alavancas de Growth", desc: "O redirecionamento automático evidenciou que pequenas intervenções no fluxo podem gerar mais adoção orgânica do que grandes funcionalidades." },
-        { title: "Dados como Premissa", desc: "A experiência reforçou que a definição de KPIs deve nascer junto com o projeto, garantindo a mensuração de sucesso no rollout." },
-    ]
-};
+// Legacy static data reference (for sections that need it)
+let projectData: ReturnType<typeof useProjectData>;
 
 // ============================================================================
 // SCROLL PROGRESS BAR
@@ -223,6 +222,7 @@ ChapterSection.displayName = 'ChapterSection';
 
 // Hero Section
 function HeroSection() {
+    const { t } = useTranslation();
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -280,7 +280,7 @@ function HeroSection() {
                                     className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-500 transition-colors group"
                                 >
                                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                    <span className="text-sm font-medium uppercase tracking-wider">Voltar</span>
+                                    <span className="text-sm font-medium uppercase tracking-wider">{t('projects.transcricoesIA.ui.backButton')}</span>
                                 </Link>
                             </motion.div>
 
@@ -288,10 +288,10 @@ function HeroSection() {
                             <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
                                 <h1 className="flex flex-col gap-2">
                                     <span className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
-                                        Transcrições &
+                                        {t('projects.transcricoesIA.ui.heroTitle.line1')}
                                     </span>
                                     <span className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#14b8a6] to-[#0d9488] tracking-tight leading-[1.1]">
-                                        Insights com IA
+                                        {t('projects.transcricoesIA.ui.heroTitle.line2')}
                                     </span>
                                 </h1>
                             </div>
@@ -311,7 +311,7 @@ function HeroSection() {
                                 </div>
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
-                                        Inteligência Artificial
+                                        {t('projects.transcricoesIA.ui.aiTag')}
                                     </span>
                                 </div>
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
@@ -336,7 +336,7 @@ function HeroSection() {
                                     />
                                 </div>
                                 <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
-                                    Scroll to explore
+                                    {t('projects.transcricoesIA.ui.scrollToExplore')}
                                 </span>
                             </motion.div>
                         </motion.div>
@@ -354,7 +354,7 @@ function HeroSection() {
                             <div className="w-full h-full bg-black overflow-hidden relative">
                                 <img
                                     src="/assets/projects/transcricoes-insights-ia/cover.png"
-                                    alt="Capa do Projeto: Transcrições & Insights com IA"
+                                    alt={t('projects.transcricoesIA.ui.heroAlt')}
                                     className="w-full h-full object-cover"
                                     loading="eager"
                                 />
@@ -371,6 +371,7 @@ function HeroSection() {
 
 // Overview Section (Resumo, Objetivo, Desafio)
 function OverviewSection() {
+    const { t } = useTranslation();
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -384,7 +385,7 @@ function OverviewSection() {
                     <div className="mb-16 md:mb-24">
                         <RevealText>
                             <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Visão Geral
+                                {t('projects.transcricoesIA.ui.sections.overview.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -392,7 +393,7 @@ function OverviewSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                O Projeto
+                                {t('projects.transcricoesIA.ui.sections.overview.title')}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -426,7 +427,7 @@ function OverviewSection() {
 
                                 {/* Title */}
                                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                    Objetivo
+                                    {t('projects.transcricoesIA.ui.sections.overview.objetivo')}
                                 </h3>
 
                                 {/* Decorative Line */}
@@ -454,7 +455,7 @@ function OverviewSection() {
 
                                 {/* Title */}
                                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                    Desafio
+                                    {t('projects.transcricoesIA.ui.sections.overview.desafio')}
                                 </h3>
 
                                 {/* Decorative Line */}
@@ -475,6 +476,7 @@ function OverviewSection() {
 
 // Role Section (Meu Papel)
 function RoleSection() {
+    const { t } = useTranslation();
     return (
         <ChapterSection id="role" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
@@ -484,7 +486,7 @@ function RoleSection() {
                     <div>
                         <RevealText>
                             <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Contribuição
+                                {t('projects.transcricoesIA.ui.sections.role.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -492,7 +494,7 @@ function RoleSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-8"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Meu Papel
+                                {t('projects.transcricoesIA.ui.sections.role.title')}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -528,6 +530,7 @@ function RoleSection() {
 
 // Research Section
 function ResearchSection() {
+    const { t } = useTranslation();
     return (
         <ChapterSection id="research" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
@@ -537,7 +540,7 @@ function ResearchSection() {
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
                             <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Pesquisa
+                                {t('projects.transcricoesIA.ui.sections.research.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -545,7 +548,7 @@ function ResearchSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Processo de Pesquisa
+                                {t('projects.transcricoesIA.ui.sections.research.title')}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -578,6 +581,7 @@ function ResearchSection() {
 
 // Discoveries Section
 function DiscoveriesSection() {
+    const { t } = useTranslation();
     return (
         <ChapterSection id="discoveries" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
@@ -587,7 +591,7 @@ function DiscoveriesSection() {
                     <div className="text-center mb-10">
                         <RevealText>
                             <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Descobertas
+                                {t('projects.transcricoesIA.ui.sections.discoveries.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -595,7 +599,7 @@ function DiscoveriesSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Principais Insights
+                                {t('projects.transcricoesIA.ui.sections.discoveries.title')}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -628,6 +632,7 @@ function DiscoveriesSection() {
 
 // Prototype Section - Alternating Layout
 function PrototypeSection() {
+    const { t } = useTranslation();
     const telas = projectData.prototipo.telas;
 
     return (
@@ -640,7 +645,7 @@ function PrototypeSection() {
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
                             <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Protótipo
+                                {t('projects.transcricoesIA.ui.sections.prototype.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -648,7 +653,7 @@ function PrototypeSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Interface do Projeto
+                                {t('projects.transcricoesIA.ui.sections.prototype.title')}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -720,6 +725,7 @@ function PrototypeSection() {
 
 // Handoff Section
 function HandoffSection() {
+    const { t } = useTranslation();
     return (
         <ChapterSection id="handoff" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
@@ -730,7 +736,7 @@ function HandoffSection() {
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
                             <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Handoff
+                                {t('projects.transcricoesIA.ui.sections.handoff.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -799,6 +805,7 @@ function HandoffSection() {
 
 // Results Section
 function ResultsSection() {
+    const { t } = useTranslation();
     return (
         <ChapterSection id="results" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
@@ -808,7 +815,7 @@ function ResultsSection() {
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
                             <span className="text-emerald-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Resultados
+                                {t('projects.transcricoesIA.ui.sections.results.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -816,7 +823,7 @@ function ResultsSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Impacto do Projeto
+                                {t('projects.transcricoesIA.ui.sections.results.title')}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -849,6 +856,7 @@ function ResultsSection() {
 
 // Lessons Section
 function LessonsSection() {
+    const { t } = useTranslation();
     return (
         <ChapterSection id="lessons" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
@@ -858,7 +866,7 @@ function LessonsSection() {
                     <div className="text-center mb-10">
                         <RevealText>
                             <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Análise Crítica
+                                {t('projects.transcricoesIA.ui.sections.lessons.label')}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -866,7 +874,7 @@ function LessonsSection() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Insights e Reflexões
+                                {t('projects.transcricoesIA.ui.sections.lessons.title')}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -902,6 +910,9 @@ function LessonsSection() {
 // ============================================================================
 
 export function TranscricoesInsightsIA() {
+    // Assign translated data to module-level variable for use by section components
+    projectData = useProjectData();
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

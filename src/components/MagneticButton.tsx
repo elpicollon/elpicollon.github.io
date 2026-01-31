@@ -2,9 +2,11 @@ import { motion } from 'motion/react';
 import { Mail } from 'lucide-react';
 import { HeroParticleGrid } from './HeroParticleGrid';
 import { useContactModal } from '../contexts/ContactModalContext';
+import { useTranslation } from '../hooks/useTranslation';
 
 export function MagneticButton() {
   const { openModal } = useContactModal();
+  const { t } = useTranslation();
 
   return (
     <section id="contato" className="py-32 px-6 md:px-12 bg-[#f2f4f7] relative overflow-hidden">
@@ -26,10 +28,10 @@ export function MagneticButton() {
             <motion.h2
               className="text-6xl md:text-8xl font-medium text-black mb-8"
             >
-              Let's Create
+              {String(t('magneticButton.title.line1'))}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 animate-gradient-x bg-[length:200%_auto]">
-                Together
+                {String(t('magneticButton.title.line2'))}
               </span>
             </motion.h2>
 
@@ -40,7 +42,7 @@ export function MagneticButton() {
               viewport={{ once: true }}
               className="text-xl text-zinc-600 mb-6"
             >
-              Transformo ideias complexas em experiências digitais completas, de ponta a ponta.
+              {t('magneticButton.description')}
             </motion.p>
           </motion.div>
 
@@ -78,10 +80,10 @@ export function MagneticButton() {
                   <Mail size={28} className="text-white mb-2 opacity-80" />
 
                   <span className="text-[10px] font-bold text-white/60 tracking-[0.2em] uppercase mb-1">
-                    FALE COMIGO
+                    {t('magneticButton.buttonLabel')}
                   </span>
-                  <span className="text-xl font-bold text-white leading-none text-center">
-                    ENTRE EM<br />CONTATO
+                  <span className="text-xl font-bold text-white leading-none text-center whitespace-pre-line">
+                    {t('magneticButton.buttonText')}
                   </span>
                 </motion.div>
               </motion.div>

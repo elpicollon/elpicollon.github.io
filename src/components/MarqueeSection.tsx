@@ -1,11 +1,10 @@
 import { motion } from 'motion/react';
-
-const skills = [
-  'Product Design', 'Prototyping', 'AI First Design', 'Wireframing',
-  'User Research', 'Design Systems', 'UI/UX Design', 'Brand Identity'
-];
+import { useTranslation } from '../hooks/useTranslation';
 
 export function MarqueeSection() {
+  const { t } = useTranslation();
+  const skills = (t<string[]>('marquee.skills')) || [];
+
   return (
     <section className="py-20 bg-[#f2f4f7] overflow-hidden relative">
       {/* Marquee */}
@@ -25,7 +24,7 @@ export function MarqueeSection() {
           {[...skills, ...skills, ...skills].map((skill, index) => (
             <span
               key={index}
-              className="text-6xl md:text-8xl font-medium leading-tight cursor-pointer inline-block relative text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 animate-gradient-x bg-[length:200%_auto]"
+              className="text-6xl md:text-8xl font-medium leading-tight inline-block"
               style={{
                 fontFamily: 'var(--font-display)',
                 lineHeight: '1.2',
@@ -34,7 +33,7 @@ export function MarqueeSection() {
               {skill.split('').map((letter, letterIndex) => (
                 <motion.span
                   key={letterIndex}
-                  className="inline-block"
+                  className="inline-block cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600"
                   whileHover={{
                     y: -8,
                     opacity: 0.3,

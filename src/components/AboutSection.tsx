@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Linkedin, ArrowRight } from 'lucide-react';
 import imgEu1 from "../assets/image-rp.png";
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useTranslation } from '../hooks/useTranslation';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Logo images from assets/logos with company names
 import logo1 from '../assets/logos/1.png';
@@ -46,12 +48,19 @@ const logoImages = [
 
 export function AboutSection() {
   const containerRef = useRef(null);
+  const { t } = useTranslation();
+  const { translations, language } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+
+  // Dynamic LinkedIn URL based on language
+  const linkedinUrl = language === 'en-US'
+    ? 'https://www.linkedin.com/in/picolodesign/?locale=en_US'
+    : 'https://www.linkedin.com/in/picolodesign/';
 
   return (
     <section id="sobre" ref={containerRef} className="relative pt-16 pb-0 bg-[#f2f4f7] overflow-hidden z-40">
@@ -78,7 +87,7 @@ export function AboutSection() {
             viewport={{ once: true }}
             className="text-6xl md:text-8xl font-medium text-black mb-6"
           >
-            Sobre
+            {t('about.sectionTitle')}
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}
@@ -100,20 +109,9 @@ export function AboutSection() {
               viewport={{ once: true }}
             >
               <div className="space-y-6 text-zinc-600 text-lg leading-relaxed w-full">
-                <p>
-                  Product Designer com mais de <strong className="text-zinc-900">12 anos em tecnologia</strong> e <strong className="text-zinc-900">7 anos em UX</strong>, unindo design centrado no usuário com uma base sólida em sistemas de informação para criar experiências digitais que impulsionam resultados de negócio.
-                </p>
+                <p dangerouslySetInnerHTML={{ __html: t('about.description') }} />
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8">
-                  {[
-                    "Especialista em Design Digital",
-                    "Bacharel em Sistemas de Informação",
-                    "Experiência com ERP, SaaS, CRM & PLG",
-                    "Professor Universitário",
-                    "Palestrante",
-                    "Aprimoramento Contínuo",
-                    "Inteligência Artificial como aliada",
-                    "Decisões baseadas em dados"
-                  ].map((item, index) => (
+                  {translations.about.skills.map((item: string, index: number) => (
                     <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -15 }}
@@ -144,7 +142,7 @@ export function AboutSection() {
                     to="/sobre"
                     className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 text-white font-medium rounded-full hover:from-purple-700 hover:to-violet-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 group"
                   >
-                    Conheça minha trajetória
+                    {t('about.cta')}
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>
                 </motion.div>
@@ -188,7 +186,7 @@ export function AboutSection() {
                 {/* Glass Badge on Image */}
                 <div className="absolute bottom-6 left-6 right-6 bg-white/20 backdrop-blur-md rounded-[14px] z-20 border border-white/30">
                   <motion.a
-                    href="https://www.linkedin.com/in/picolodesign/"
+                    href={linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-[14px] p-4 flex items-center justify-between hover:bg-[#0077b5]/90 transition-colors cursor-pointer group/link"
@@ -197,7 +195,7 @@ export function AboutSection() {
                   >
                     <div>
                       <p className="text-white font-bold text-lg leading-tight">Rodrigo Picolo</p>
-                      <p className="text-white/80 text-xs uppercase tracking-wider mt-0.5 group-hover/link:text-white">Conecte-se no Linkedin</p>
+                      <p className="text-white/80 text-xs uppercase tracking-wider mt-0.5 group-hover/link:text-white">{t('about.linkedinCta')}</p>
                     </div>
                     <div className="h-8 w-8 rounded-full bg-[#0077b5] border border-white/20 flex items-center justify-center text-white shrink-0">
                       <Linkedin size={16} fill="currentColor" strokeWidth={0} />
@@ -248,7 +246,7 @@ export function AboutSection() {
           </motion.div>
         </div>
 
-      </div>
-    </section>
+      </div >
+    </section >
   );
 }

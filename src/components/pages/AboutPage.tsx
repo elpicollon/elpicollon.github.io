@@ -8,13 +8,7 @@ import {
     Award,
     MapPin,
     Building2,
-    Sparkles,
-    Lightbulb,
-    Users,
-    Target,
-    Layers,
-    Code,
-    Mic
+    Sparkles
 } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
@@ -24,136 +18,7 @@ import { HeroParticleGrid } from '../HeroParticleGrid';
 import { useContactModal } from '../../contexts/ContactModalContext';
 import imgEu1 from "../../assets/image-rp.png";
 import { ImageWithFallback } from '../figma/ImageWithFallback';
-
-// ============================================================================
-// DATA
-// ============================================================================
-
-const experienceData = [
-    {
-        period: "Fev 2014 – Atual",
-        role: "Fundador",
-        company: "Picolo Design Digital",
-        location: "Remoto",
-        type: "work" as const,
-        current: true
-    },
-    {
-        period: "Ago 2025 – Atual",
-        role: "Product Designer",
-        company: "Sisand",
-        location: "Remoto",
-        type: "work" as const,
-        current: true
-    },
-    {
-        period: "Jul 2025 – Atual",
-        role: "Professor Universitário",
-        company: "Centro Universitário Mater Dei (Unimater)",
-        location: "Pato Branco, PR",
-        type: "work" as const,
-        current: true
-    },
-    {
-        period: "Ago 2022 – Abr 2025",
-        role: "Senior Product Designer",
-        company: "Leads2b",
-        location: "Remoto",
-        type: "work" as const
-    },
-    {
-        period: "Mai 2021 – Ago 2022",
-        role: "Product Designer",
-        company: "INDT - Instituto de Desenvolvimento Tecnológico",
-        location: "Remoto",
-        type: "work" as const
-    },
-    {
-        period: "Fev 2020 – Jun 2021",
-        role: "Analista UX",
-        company: "Sponte - Software de Gestão Escolar",
-        location: "Pato Branco, PR",
-        type: "work" as const
-    },
-    {
-        period: "Out 2016 – Jan 2020",
-        role: "Analista de Requisitos",
-        company: "VIASOFT",
-        location: "Pato Branco, PR",
-        type: "work" as const
-    },
-    {
-        period: "Fev 2014 – Set 2016",
-        role: "Analista de Suporte",
-        company: "VIASOFT",
-        location: "Pato Branco, PR",
-        type: "work" as const
-    }
-];
-
-const educationData = [
-    {
-        period: "2018 – 2020",
-        degree: "Pós-graduação em Design Digital e Multimídia",
-        institution: "Estácio",
-        type: "education" as const
-    },
-    {
-        period: "2014 – 2017",
-        degree: "Bacharelado em Sistemas de Informação",
-        institution: "Faculdade Mater Dei (Unimater)",
-        type: "education" as const
-    },
-    {
-        period: "2012 – 2013",
-        degree: "Curso Técnico em Informática",
-        institution: "SENAI Paraná",
-        type: "education" as const
-    }
-];
-
-const certifications = [
-    { name: "Product Delivery & Scrum", org: "Bruna Fonseca", year: "2025" },
-    { name: "IA/UX Lab Workshop", org: "UX Unicórnio", year: "2025" },
-    { name: "UX Metrics", org: "PunkMetrics", year: "2025" },
-    { name: "Product Design 4.0", org: "BTX Consultoria", year: "2025" },
-    { name: "Liderança em Design", org: "BTX Consultoria", year: "2025" },
-    { name: "Formação em Liderança", org: "Escola Conquer", year: "2023" },
-    { name: "Métricas de Negócios Digitais", org: "PM3", year: "2023" },
-    { name: "Product Design 2.0 - PLG", org: "BTX Consultoria", year: "2022" },
-    { name: "Design System Specialist", org: "Meiuca", year: "2022" },
-    { name: "Certified Lean Inception Facilitator", org: "Caroli.org", year: "2021" },
-    { name: "Avaliação de Usabilidade", org: "UFRGS", year: "2021" },
-    { name: "Scrum Foundation & DevOps", org: "Certiprof", year: "2020" }
-];
-
-const eventsData = [
-    {
-        title: "Processo de Redesign Petroshow PDV",
-        subtitle: "DevConference - 2018",
-        image: "/assets/about/evento-1.png"
-    },
-    {
-        title: "Workshop Fundamentos de Prototipagem",
-        subtitle: "Sponte/Medplus - 2020",
-        image: "/assets/about/evento-2.png"
-    },
-    {
-        title: "UX Design: Na Prática, a Teoria é Outra!",
-        subtitle: "Unimater - 2022",
-        image: "/assets/about/evento-3.png"
-    },
-    {
-        title: "Design Thinking: MeetUp",
-        subtitle: "Viasoft - 2019",
-        image: "/assets/about/evento-4.jpg"
-    },
-    {
-        title: "Design Thinking: Seu aliado no desenvolvimento",
-        subtitle: "Viasoft Connect - 2019",
-        image: "/assets/about/evento-5.jpg"
-    }
-];
+import { useAboutPageData, ExperienceItem, EducationItem, HighlightCardItem, CertificationItem, EventItem, AboutPageData } from '../../hooks/useAboutPageData';
 
 // ============================================================================
 // ANIMATED COMPONENTS
@@ -202,18 +67,9 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
 // TIMELINE COMPONENT
 // ============================================================================
 
-interface TimelineItem {
-    period: string;
-    role?: string;
-    degree?: string;
-    company?: string;
-    institution?: string;
-    location?: string;
-    type: 'work' | 'education';
-    current?: boolean;
-}
+type TimelineItem = (ExperienceItem | EducationItem);
 
-function TimelineCard({ item, index, isLeft }: { item: TimelineItem; index: number; isLeft: boolean }) {
+function TimelineCard({ item, index, isLeft, currentLabel }: { item: TimelineItem; index: number; isLeft: boolean; currentLabel: string }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -265,15 +121,15 @@ function TimelineCard({ item, index, isLeft }: { item: TimelineItem; index: numb
                 `}>
                                     {item.period}
                                 </span>
-                                {item.current && (
+                                {'current' in item && item.current && (
                                     <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 text-green-700 flex items-center gap-1">
                                         <Sparkles size={10} />
-                                        Atual
+                                        {currentLabel}
                                     </span>
                                 )}
                             </div>
                             <h3 className="text-lg md:text-xl font-bold text-slate-900 leading-tight">
-                                {item.role || item.degree}
+                                {'role' in item ? item.role : item.degree}
                             </h3>
                         </div>
                     </div>
@@ -282,9 +138,9 @@ function TimelineCard({ item, index, isLeft }: { item: TimelineItem; index: numb
                     <div className={`space-y-1 text-sm text-slate-600 ${isLeft ? 'md:text-right' : ''}`}>
                         <div className={`flex items-center gap-2 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
                             <Building2 size={14} className={`${isWork ? 'text-purple-500' : 'text-violet-500'} flex-shrink-0`} />
-                            <span className="font-medium">{item.company || item.institution}</span>
+                            <span className="font-medium">{'company' in item ? item.company : item.institution}</span>
                         </div>
-                        {item.location && (
+                        {'location' in item && item.location && (
                             <div className={`flex items-center gap-2 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
                                 <MapPin size={14} className="text-slate-400 flex-shrink-0" />
                                 <span>{item.location}</span>
@@ -297,7 +153,7 @@ function TimelineCard({ item, index, isLeft }: { item: TimelineItem; index: numb
     );
 }
 
-function Timeline({ items }: { items: TimelineItem[] }) {
+function Timeline({ items, currentLabel }: { items: TimelineItem[]; currentLabel: string }) {
     return (
         <div className="relative max-w-4xl mx-auto">
             {/* Vertical Line */}
@@ -311,6 +167,7 @@ function Timeline({ items }: { items: TimelineItem[] }) {
                         item={item}
                         index={index}
                         isLeft={index % 2 === 0}
+                        currentLabel={currentLabel}
                     />
                 ))}
             </div>
@@ -322,46 +179,7 @@ function Timeline({ items }: { items: TimelineItem[] }) {
 // QUEM SOU SECTION
 // ============================================================================
 
-const highlightCards = [
-    {
-        icon: Target,
-        title: "Foco em Resultados",
-        description: "Design centrado no usuário que impulsiona métricas de negócio tangíveis",
-        color: "purple"
-    },
-    {
-        icon: Layers,
-        title: "Sistemas Complexos",
-        description: "Especialista em ERP, SaaS, CRM e estratégias de Product-Led Growth",
-        color: "violet"
-    },
-    {
-        icon: Users,
-        title: "Liderança & Colaboração",
-        description: "Facilitação de workshops, gestão de times e comunicação com stakeholders",
-        color: "purple"
-    },
-    {
-        icon: Code,
-        title: "Base Técnica Sólida",
-        description: "Conhecimento em linguagens de programação, HTML/CSS e banco de dados para entregas viáveis",
-        color: "violet"
-    },
-    {
-        icon: Lightbulb,
-        title: "Resolução de Problemas",
-        description: "Transformo requisitos densos em experiências funcionais e escaláveis",
-        color: "purple"
-    },
-    {
-        icon: Mic,
-        title: "Educador & Palestrante",
-        description: "Professor universitário e palestrante em eventos de tecnologia",
-        color: "violet"
-    }
-];
-
-function HighlightCard({ item, index }: { item: typeof highlightCards[0]; index: number }) {
+function HighlightCard({ item, index }: { item: HighlightCardItem; index: number }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-30px" });
     const Icon = item.icon;
@@ -390,7 +208,7 @@ function HighlightCard({ item, index }: { item: typeof highlightCards[0]; index:
     );
 }
 
-function QuemSouSection() {
+function QuemSouSection({ data }: { data: AboutPageData }) {
     return (
         <section className="py-20 md:py-32 bg-white px-6 md:px-12">
             <div>
@@ -398,7 +216,7 @@ function QuemSouSection() {
                 <div className="mb-16">
                     <RevealText>
                         <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                            Quem Sou
+                            {data.quemSou.label}
                         </span>
                     </RevealText>
                     <RevealText delay={0.1}>
@@ -406,9 +224,9 @@ function QuemSouSection() {
                             className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
                             style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                         >
-                            Design que conecta <br className="hidden md:block" />
+                            {data.quemSou.title1} <br className="hidden md:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500">
-                                tecnologia e negócios
+                                {data.quemSou.title2}
                             </span>
                         </h2>
                     </RevealText>
@@ -422,15 +240,9 @@ function QuemSouSection() {
                     {/* Left: Introduction Text */}
                     <RevealText delay={0.3}>
                         <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
-                            <p>
-                                Com mais de <strong className="text-slate-900">12 anos em tecnologia</strong> e <strong className="text-slate-900">7 anos como Product Designer</strong>, sou especialista em Design Digital para plataformas web, mobile e aplicativos. Minha paixão é criar experiências digitais impactantes que atendam às necessidades dos usuários e impulsionem resultados de negócio.
-                            </p>
-                            <p>
-                                Meu perfil é <strong className="text-slate-900">analítico, proativo e orientado a resultados</strong>, com domínio em pesquisa de usuário, prototipagem de alta fidelidade e Design Systems. Atuo em ambientes ágeis com Scrum e Kanban, e sou <strong className="text-slate-900">facilitador certificado em Lean Inception</strong>.
-                            </p>
-                            <p>
-                                Meu diferencial está na capacidade de resolver problemas complexos e atuar como <strong className="text-slate-900">elo facilitador entre equipes</strong>, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos.
-                            </p>
+                            {data.quemSou.intro.map((paragraph, index) => (
+                                <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                            ))}
                         </div>
                     </RevealText>
 
@@ -438,16 +250,10 @@ function QuemSouSection() {
                     <RevealText delay={0.4}>
                         <div className="bg-gradient-to-br from-purple-50 via-white to-violet-50 rounded-3xl p-8 border border-purple-100">
                             <h3 className="text-xl font-bold text-slate-900 mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                Destaques da Trajetória
+                                {data.quemSou.highlightsTitle}
                             </h3>
                             <ul className="space-y-4">
-                                {[
-                                    "🏆 1º lugar no Hackathon da Educação - Feira Inventum 2019",
-                                    "🎓 Professor Universitário em UX/UI Design",
-                                    "🎤 Palestrante em eventos como DevConference e Viasoft Connect",
-                                    "📜 16 certificações em Design, Liderança e Produto",
-                                    "🚀 Experiência com ERPs, SaaS, CRM e PLG"
-                                ].map((item, index) => (
+                                {data.quemSou.highlights.map((item, index) => (
                                     <motion.li
                                         key={index}
                                         initial={{ opacity: 0, x: -10 }}
@@ -468,11 +274,11 @@ function QuemSouSection() {
                 {/* Competency Cards */}
                 <RevealText delay={0.5}>
                     <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                        O que me define
+                        {data.quemSou.definesMe}
                     </h3>
                 </RevealText>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {highlightCards.map((item, index) => (
+                    {data.highlightCards.map((item, index) => (
                         <HighlightCard key={index} item={item} index={index} />
                     ))}
                 </div>
@@ -485,7 +291,7 @@ function QuemSouSection() {
 // CERTIFICATION BADGE
 // ============================================================================
 
-function CertificationBadge({ cert, index }: { cert: typeof certifications[0]; index: number }) {
+function CertificationBadge({ cert, index }: { cert: CertificationItem; index: number }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-30px" });
 
@@ -525,7 +331,7 @@ function CertificationBadge({ cert, index }: { cert: typeof certifications[0]; i
 // EVENT CARD
 // ============================================================================
 
-function EventCard({ event, index }: { event: typeof eventsData[0]; index: number }) {
+function EventCard({ event, index }: { event: EventItem; index: number }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-30px" });
 
@@ -568,7 +374,7 @@ function EventCard({ event, index }: { event: typeof eventsData[0]; index: numbe
 // CTA BUTTONS
 // ============================================================================
 
-function CTAButtons() {
+function CTAButtons({ data }: { data: AboutPageData }) {
     const { openModal } = useContactModal();
     const navigate = useNavigate();
 
@@ -580,7 +386,7 @@ function CTAButtons() {
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-all font-medium shadow-lg shadow-purple-300/50 whitespace-nowrap cursor-pointer"
             >
-                Entre em Contato
+                {data.cta.contactButton}
             </motion.button>
             <motion.button
                 onClick={() => navigate(-1)}
@@ -589,7 +395,7 @@ function CTAButtons() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 text-purple-600 hover:text-purple-700 font-medium whitespace-nowrap cursor-pointer"
             >
                 <ArrowLeft size={18} />
-                Voltar
+                {data.cta.backButton}
             </motion.button>
         </div>
     );
@@ -599,7 +405,7 @@ function CTAButtons() {
 // HERO SECTION
 // ============================================================================
 
-function HeroSection() {
+function HeroSection({ data }: { data: AboutPageData }) {
     const containerRef = useRef(null);
     const navigate = useNavigate();
     const { scrollYProgress } = useScroll({
@@ -640,7 +446,7 @@ function HeroSection() {
                                 className="inline-flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group mb-6 cursor-pointer"
                             >
                                 <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                <span className="text-sm font-medium uppercase tracking-wider">Voltar</span>
+                                <span className="text-sm font-medium uppercase tracking-wider">{data.common.back}</span>
                             </motion.button>
 
                             {/* Title */}
@@ -652,7 +458,7 @@ function HeroSection() {
                                     className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-4"
                                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                                 >
-                                    Minha
+                                    {data.hero.title1}
                                 </motion.h1>
                                 <motion.h1
                                     initial={{ opacity: 0, y: 30 }}
@@ -661,7 +467,7 @@ function HeroSection() {
                                     className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500 tracking-tight leading-[1.1]"
                                     style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                                 >
-                                    Trajetória
+                                    {data.hero.title2}
                                 </motion.h1>
                             </div>
 
@@ -672,7 +478,7 @@ function HeroSection() {
                                 transition={{ duration: 0.8, delay: 0.4 }}
                                 className="text-lg md:text-xl text-slate-600 max-w-xl mb-8"
                             >
-                                Conheça minha jornada profissional, formação acadêmica e as certificações que moldam minha atuação.
+                                {data.hero.subtitle}
                             </motion.p>
                         </motion.div>
                     </motion.div>
@@ -716,7 +522,7 @@ function HeroSection() {
                         className="w-1 h-1 bg-slate-500 rounded-full"
                     />
                 </div>
-                <span className="text-xs font-medium text-slate-400 uppercase tracking-widest">Scroll</span>
+                <span className="text-xs font-medium text-slate-400 uppercase tracking-widest">{data.common.scroll}</span>
             </motion.div>
         </section >
     );
@@ -727,8 +533,7 @@ function HeroSection() {
 // ============================================================================
 
 export function AboutPage() {
-    // Combine experience and education for timeline
-    const allTimelineItems: TimelineItem[] = [...experienceData];
+    const data = useAboutPageData();
 
     // Scroll to top on page load
     useEffect(() => {
@@ -740,17 +545,17 @@ export function AboutPage() {
             <MinimalNav />
 
             {/* Hero */}
-            <HeroSection />
+            <HeroSection data={data} />
 
             {/* Quem Sou */}
-            <QuemSouSection />
+            <QuemSouSection data={data} />
 
             {/* Palestras & Eventos */}
             <section className="py-20 md:py-32 bg-slate-50 px-6 md:px-12">
                 <div>
-                    <SectionHeader label="Conhecimento Aplicado" title="Palestras & Eventos" />
+                    <SectionHeader label={data.sections.eventsLabel} title={data.sections.eventsTitle} />
                     <div className="flex flex-wrap justify-center gap-6">
-                        {eventsData.map((event, index) => (
+                        {data.events.map((event, index) => (
                             <div key={index} className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
                                 <EventCard event={event} index={index} />
                             </div>
@@ -762,25 +567,25 @@ export function AboutPage() {
             {/* Professional Experience Timeline */}
             <section className="py-20 md:py-32 bg-white px-6 md:px-12">
                 <div>
-                    <SectionHeader label="Experiência" title="Carreira Profissional" />
-                    <Timeline items={allTimelineItems} />
+                    <SectionHeader label={data.sections.experienceLabel} title={data.sections.experienceTitle} />
+                    <Timeline items={data.experience} currentLabel={data.common.current} />
                 </div>
             </section>
 
             {/* Education */}
             <section className="py-20 md:py-32 bg-slate-50 px-6 md:px-12">
                 <div>
-                    <SectionHeader label="Educação" title="Formação Acadêmica" />
-                    <Timeline items={educationData} />
+                    <SectionHeader label={data.sections.educationLabel} title={data.sections.educationTitle} />
+                    <Timeline items={data.education} currentLabel={data.common.current} />
                 </div>
             </section>
 
             {/* Certifications */}
             <section className="py-20 md:py-32 bg-white px-6 md:px-12">
                 <div>
-                    <SectionHeader label="Certificações" title="Desenvolvimento Contínuo" />
+                    <SectionHeader label={data.sections.certificationsLabel} title={data.sections.certificationsTitle} />
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {certifications.map((cert, index) => (
+                        {data.certifications.map((cert, index) => (
                             <CertificationBadge key={index} cert={cert} index={index} />
                         ))}
                     </div>
@@ -804,14 +609,14 @@ export function AboutPage() {
                     >
                         <div className="max-w-2xl">
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                Vamos criar algo incrível juntos?
+                                {data.cta.title}
                             </h2>
                             <p className="text-lg text-slate-600 leading-relaxed">
-                                Se você gostou da minha trajetória e quer discutir como posso ajudar sua equipe, entre em contato!
+                                {data.cta.description}
                             </p>
                         </div>
 
-                        <CTAButtons />
+                        <CTAButtons data={data} />
                     </motion.div>
                 </div>
             </section>

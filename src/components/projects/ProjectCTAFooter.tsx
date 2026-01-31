@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { HeroParticleGrid } from '../HeroParticleGrid';
 import { useContactModal } from '../../contexts/ContactModalContext';
+import { useTranslation } from '../../hooks/useTranslation';
 
 /**
  * ProjectCTAFooter - Reusable component containing copyright disclaimer and CTA section
@@ -10,6 +11,7 @@ import { useContactModal } from '../../contexts/ContactModalContext';
  */
 export function ProjectCTAFooter() {
     const { openModal } = useContactModal();
+    const { t } = useTranslation();
 
     return (
         <>
@@ -17,10 +19,10 @@ export function ProjectCTAFooter() {
             <div className="bg-slate-100 border-t border-slate-200 py-8 px-6 md:px-12">
                 <div className="max-w-4xl mx-auto text-center">
                     <p className="text-sm text-slate-500 font-medium mb-1">
-                        © Picolo Design Digital - Todos os direitos reservados.
+                        {t('projectCTA.copyright')}
                     </p>
                     <p className="text-xs text-slate-400">
-                        É proibida qualquer reprodução, total ou parcial, cópia ou divulgação deste conteúdo sem expressa autorização do autor.
+                        {t('projectCTA.disclaimer')}
                     </p>
                 </div>
             </div>
@@ -46,10 +48,10 @@ export function ProjectCTAFooter() {
                                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight"
                                 style={{ fontFamily: 'Space Grotesk, sans-serif' }}
                             >
-                                Vamos criar algo incrível juntos?
+                                {t('projectCTA.title')}
                             </h2>
                             <p className="text-lg text-slate-600 leading-relaxed">
-                                Se você gostou deste projeto e quer discutir como posso ajudar sua equipe, entre em contato!
+                                {t('projectCTA.description')}
                             </p>
                         </div>
 
@@ -60,7 +62,7 @@ export function ProjectCTAFooter() {
                                 whileTap={{ scale: 0.95 }}
                                 className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-all font-medium shadow-lg shadow-purple-300/50 whitespace-nowrap cursor-pointer"
                             >
-                                Entre em Contato
+                                {t('projectCTA.contactButton')}
                             </motion.button>
                             <motion.div
                                 whileHover={{ scale: 1.05 }}
@@ -71,7 +73,7 @@ export function ProjectCTAFooter() {
                                     className="inline-flex items-center justify-center gap-2 px-6 py-3 text-purple-600 hover:text-purple-700 font-medium whitespace-nowrap"
                                 >
                                     <ArrowLeft size={18} />
-                                    Voltar
+                                    {t('projectCTA.backButton')}
                                 </Link>
                             </motion.div>
                         </div>
@@ -81,3 +83,4 @@ export function ProjectCTAFooter() {
         </>
     );
 }
+

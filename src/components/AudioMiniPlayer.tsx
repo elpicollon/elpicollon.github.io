@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, Pause } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from '../hooks/useTranslation';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface AudioMiniPlayerProps {
     /** Override the default audio path detection */
@@ -16,6 +18,8 @@ interface AudioMiniPlayerProps {
 export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
     const location = useLocation();
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const { t } = useTranslation();
+    const { language } = useLanguage();
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
@@ -29,15 +33,18 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
         return match ? match[1] : null;
     }, [location.pathname]);
 
-    // Build audio path from slug
+    // Build audio path from slug with language prefix
     const getAudioPath = useCallback(() => {
         if (audioSrc) return audioSrc;
 
         const slug = getProjectSlug();
         if (!slug) return null;
 
-        return `/assets/projects/${slug}/${slug}.m4a`;
-    }, [audioSrc, getProjectSlug]);
+        // Determine language prefix: PT for pt-BR, EN for en-US
+        const langPrefix = language === 'pt-BR' ? 'PT' : 'EN';
+
+        return `/assets/projects/${slug}/[${langPrefix}]${slug}.m4a`;
+    }, [audioSrc, getProjectSlug, language]);
 
     // Check if audio file exists and set up audio element
     useEffect(() => {
@@ -149,7 +156,7 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
                 <button
                     onClick={togglePlayPause}
                     className="audio-mini-player-button"
-                    aria-label={isPlaying ? 'Pausar áudio' : 'Reproduzir áudio'}
+                    aria-label={isPlaying ? t('audioPlayer.pause') : t('audioPlayer.play')}
                 >
                     {isPlaying ? <Pause size={16} /> : <Play size={16} />}
                 </button>
@@ -163,8 +170,8 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
 
                 {/* Label */}
                 <div className="audio-mini-player-label">
-                    <span className="audio-label-desktop">Ouça aqui um breve resumo deste case!</span>
-                    <span className="audio-label-mobile">Ouça um breve resumo!</span>
+                    <span className="audio-label-desktop">{t('audioPlayer.labelDesktop')}</span>
+                    <span className="audio-label-mobile">{t('audioPlayer.labelMobile')}</span>
                 </div>
             </motion.div>
         </AnimatePresence>

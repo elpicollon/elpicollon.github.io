@@ -9,112 +9,119 @@ import { ParticleBackground } from '../ParticleBackground';
 import { RealisticMacBook } from '../RealisticMacBook';
 import { ProjectCTAFooter } from './ProjectCTAFooter';
 import { AudioMiniPlayer } from '../AudioMiniPlayer';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 // ============================================================================
-// PROJECT DATA
+// PROJECT DATA - using translations
 // ============================================================================
 
-const projectData = {
-    title: "Redesign Medical Office",
-    category: "UX Design",
-    year: "2021",
+function useProjectData() {
+    const { translations } = useLanguage();
+    const p = translations.projects?.medicalOffice;
 
-    resumo: <>Redesign UI/UX da plataforma web Medical Office, que conecta profissionais de saúde sem espaço próprio a clínicas com capacidade ociosa.<br />O objetivo principal foi redesenhar a interface, torná-la responsiva e aprimorar a usabilidade, mantendo uma experiência familiar para os usuários já existentes. O processo incluiu um workshop de Lean Inception, definição de visão do produto, criação de personas e mapeamento de jornadas do usuário.</>,
-
-    objetivo: <>A Medical Office é uma plataforma web que conecta profissionais de saúde iniciantes que não possuem espaço físico para atuação, com proprietários de consultórios que possuem espaços ociosos.<br />Dessa forma, busca suprir a demanda de múltiplos profissionais, viabilizando a geração de renda aos proprietários através do aluguel, ao mesmo tempo que permite aos profissionais iniciantes atuarem em um espaço totalmente equipado.</>,
-
-    desafio: <>Redesenhar a ferramenta tornando-a mais moderna e responsiva, facilitando o uso e mantendo o feeling já adquirido pelos usuários. O redesign precisava equilibrar inovação com familiaridade, garantindo que a transição fosse suave para a base de usuários existente.</>,
-
-    meuPapel: [
-        { title: "Lean Inception", desc: "Participação no workshop colaborativo para alinhar o MVP com stakeholders e equipe de desenvolvimento." },
-        { title: "Pesquisa & Discovery", desc: "Criação de Matriz CSD, personas e mapeamento de jornadas do usuário." },
-        { title: "Design de Interface", desc: "Atuação como designer único após a inception, criando protótipos de alta fidelidade." },
-        { title: "Handoff Colaborativo", desc: "Trabalho integrado com a equipe de desenvolvimento desde a concepção." },
-    ],
-
-    processoPesquisa: [
-        { title: "Lean Inception", desc: "Workshop colaborativo com 2 Designers, 2 Desenvolvedores, COO, CTO e 3 fundadores para definir o MVP." },
-        { title: "Matriz CSD", desc: "Levantamento de Certezas, Suposições e Dúvidas para alinhamento da equipe sobre o produto." },
-        { title: "Visão Atual", desc: "Documentação da plataforma existente para entender pontos de fricção e identificar oportunidades de melhoria." },
-        { title: "Visão do Produto", desc: "Definição do que o produto é, não é, faz e não faz para evitar ambiguidades e definir escopo." },
-        { title: "Personas", desc: "Criação de três perfis de usuário: Administrador, Locador e Locatário, com suas necessidades específicas." },
-        { title: "Sequenciamento", desc: "Priorização de funcionalidades por importância, valor de negócio e viabilidade técnica para criar uma sequência lógica de desenvolvimento." },
-    ],
-
-    descobertas: [
-        { title: "Benchmarking", desc: "Análise de plataformas como Airbnb, Booking e QuintoAndar para identificar padrões de mercado e reduzir fricções." },
-        { title: "Fluxos de Usuário", desc: "Criação de fluxogramas detalhados indicando o caminho desde o ponto inicial até o objetivo final de cada jornada." },
-        { title: "Débito Técnico", desc: "Identificação de limitações técnicas que impactaram o redesign, exigindo ajustes no escopo de algumas rotinas." },
-        { title: "Cadastro Problemático", desc: "O fluxo anterior era moroso com formulário extenso; implementamos processo passo a passo mais intuitivo." },
-    ],
-
-    prototipo: {
-        intro: "O protótipo final foi desenvolvido considerando a responsividade, os anseios dos stakeholders, os insights obtidos a partir de um benchmarking detalhado e o atendimento às principais heurísticas de usabilidade.",
-        telas: [
-            {
-                titulo: "Landing Page",
-                descricao: "A landing page foi reformulada com base nas diretrizes definidas pelos stakeholders, mantendo o estilo visual desejado pelos fundadores sem comprometer os padrões do style guide nem os critérios de usabilidade.",
-                imagens: ["/assets/projects/medical-office/1.png"]
+    if (!p) {
+        // Fallback to PT-BR hardcoded data
+        return {
+            title: "Redesign Medical Office",
+            category: "UX Design",
+            year: "2021",
+            resumo: <>Redesign UI/UX da plataforma web Medical Office, que conecta profissionais de saúde sem espaço próprio a clínicas com capacidade ociosa.<br />O objetivo principal foi redesenhar a interface, torná-la responsiva e aprimorar a usabilidade, mantendo uma experiência familiar para os usuários já existentes.</>,
+            objetivo: <>A Medical Office é uma plataforma web que conecta profissionais de saúde iniciantes que não possuem espaço físico para atuação, com proprietários de consultórios que possuem espaços ociosos.<br />Dessa forma, busca suprir a demanda de múltiplos profissionais, viabilizando a geração de renda aos proprietários através do aluguel.</>,
+            desafio: <>Redesenhar a ferramenta tornando-a mais moderna e responsiva, facilitando o uso e mantendo o feeling já adquirido pelos usuários. O redesign precisava equilibrar inovação com familiaridade, garantindo que a transição fosse suave para a base de usuários existente.</>,
+            meuPapel: [
+                { title: "Lean Inception", desc: "Participação no workshop colaborativo para alinhar o MVP com stakeholders e equipe de desenvolvimento." },
+                { title: "Pesquisa & Discovery", desc: "Criação de Matriz CSD, personas e mapeamento de jornadas do usuário." },
+                { title: "Design de Interface", desc: "Atuação como designer único após a inception, criando protótipos de alta fidelidade." },
+                { title: "Handoff Colaborativo", desc: "Trabalho integrado com a equipe de desenvolvimento desde a concepção." },
+            ],
+            processoPesquisa: [
+                { title: "Lean Inception", desc: "Workshop colaborativo com 2 Designers, 2 Desenvolvedores, COO, CTO e 3 fundadores para definir o MVP." },
+                { title: "Matriz CSD", desc: "Levantamento de Certezas, Suposições e Dúvidas para alinhamento da equipe sobre o produto." },
+                { title: "Visão Atual", desc: "Documentação da plataforma existente para entender pontos de fricção e identificar oportunidades de melhoria." },
+                { title: "Visão do Produto", desc: "Definição do que o produto é, não é, faz e não faz para evitar ambiguidades e definir escopo." },
+                { title: "Personas", desc: "Criação de três perfis de usuário: Administrador, Locador e Locatário, com suas necessidades específicas." },
+                { title: "Sequenciamento", desc: "Priorização de funcionalidades por importância, valor de negócio e viabilidade técnica para criar uma sequência lógica de desenvolvimento." },
+            ],
+            descobertas: [
+                { title: "Benchmarking", desc: "Análise de plataformas como Airbnb, Booking e QuintoAndar para identificar padrões de mercado e reduzir fricções." },
+                { title: "Fluxos de Usuário", desc: "Criação de fluxogramas detalhados indicando o caminho desde o ponto inicial até o objetivo final de cada jornada." },
+                { title: "Débito Técnico", desc: "Identificação de limitações técnicas que impactaram o redesign, exigindo ajustes no escopo de algumas rotinas." },
+                { title: "Cadastro Problemático", desc: "O fluxo anterior era moroso com formulário extenso; implementamos processo passo a passo mais intuitivo." },
+            ],
+            prototipo: {
+                intro: "O protótipo final foi desenvolvido considerando a responsividade, os anseios dos stakeholders, os insights obtidos a partir de um benchmarking detalhado e o atendimento às principais heurísticas de usabilidade.",
+                telas: [
+                    { titulo: "Landing Page", descricao: "A landing page foi reformulada com base nas diretrizes definidas pelos stakeholders.", imagens: ["/assets/projects/medical-office/1.png"] },
+                    { titulo: "Plataforma Web", descricao: "Algumas limitações de débito técnico impactaram o redesign.", imagens: ["/assets/projects/medical-office/2.png"] },
+                    { titulo: "Cadastro de Espaços", descricao: "Implementamos um fluxo de cadastro passo a passo, mais intuitivo.", imagens: ["/assets/projects/medical-office/3.png"] },
+                    { titulo: "Templates de Email", descricao: "Desenvolvemos templates de e-mail personalizados para os três tipos de usuários.", imagens: ["/assets/projects/medical-office/4.png"] },
+                    { titulo: "Plataforma Mobile", descricao: "Todo o layout foi projetado com foco na responsividade.", imagens: ["/assets/projects/medical-office/5.png"] },
+                    { titulo: "Style Guide", descricao: "Foi criado um style guide componentizado.", imagens: ["/assets/projects/medical-office/6.png"] }
+                ]
             },
-            {
-                titulo: "Plataforma Web",
-                descricao: "Algumas limitações de débito técnico impactaram o redesign. Por isso, determinadas rotinas passaram por ajustes visuais para alinhar com o novo padrão, enquanto outras puderam ser totalmente reconstruídas.",
-                imagens: ["/assets/projects/medical-office/2.png"]
+            handoff: {
+                titulo: "Handoff Design-Dev",
+                descricao: "Atuamos de forma colaborativa desde as etapas iniciais de prototipação.",
+                bullets: [
+                    "Colaboração: Envolvimento da engenharia desde a fase de ideação",
+                    "Viabilidade: Apenas rotinas viáveis e refinadas encaminhadas para desenvolvimento",
+                    "Comunicação: Processo promove integração fluida entre designers e desenvolvedores"
+                ],
+                imagem: "/assets/projects/medical-office/handoff.png"
             },
-            {
-                titulo: "Cadastro de Espaços",
-                descricao: "Implementamos um fluxo de cadastro passo a passo, mais intuitivo e visualmente agradável. Essa abordagem trouxe leveza a uma etapa naturalmente mais densa, tornando o processo mais claro para o usuário.",
-                imagens: ["/assets/projects/medical-office/3.png"]
-            },
-            {
-                titulo: "Templates de Email",
-                descricao: "Desenvolvemos templates de e-mail personalizados para os três tipos de usuários. Todos os eventos que demandam interação passaram a seguir um padrão de comunicação, fortalecendo a identidade da marca.",
-                imagens: ["/assets/projects/medical-office/4.png"]
-            },
-            {
-                titulo: "Plataforma Mobile",
-                descricao: "Grande parte da versão anterior não era responsiva. Com o redesign, todo o layout foi projetado com foco na responsividade, garantindo experiência consistente independentemente do dispositivo.",
-                imagens: ["/assets/projects/medical-office/5.png"]
-            },
-            {
-                titulo: "Style Guide",
-                descricao: "Foi criado um style guide componentizado, pensado para facilitar tanto a criação quanto a manutenção futura da interface, seguindo diretrizes definidas com o time de marketing.",
-                imagens: ["/assets/projects/medical-office/6.png"]
-            }
-        ]
-    },
+            resultados: [
+                { title: "Responsividade Total", desc: "Toda a plataforma passou a funcionar perfeitamente em dispositivos móveis." },
+                { title: "Experiência Otimizada", desc: "O novo fluxo de cadastro passo a passo reduziu significativamente a fricção." },
+                { title: "Identidade Visual", desc: "Templates de email e style guide criaram um padrão de comunicação consistente." },
+                { title: "Longevidade do Design", desc: "A plataforma segue em funcionamento até hoje com o mesmo visual de 2021." },
+            ],
+            licoes: [
+                { title: "Design Adaptável", desc: "Considerar futuras modificações e expansões faz parte do planejamento de qualquer redesign." },
+                { title: "Colaboração Early", desc: "O envolvimento precoce da engenharia garantiu que apenas soluções viáveis fossem prototipadas." },
+                { title: "Concessões Estratégicas", desc: "Algumas concessões de design foram necessárias para atender aos stakeholders." },
+            ],
+            ferramentas: [
+                { name: "Figma", desc: "Prototipagem em alta fidelidade" },
+                { name: "Photoshop", desc: "Manipulação de imagens" },
+                { name: "Miro", desc: "Lean Inception e fluxogramas" },
+                { name: "Jira", desc: "Gerenciamento e handoff" },
+            ]
+        };
+    }
 
-    handoff: {
-        titulo: "Handoff Design-Dev",
-        descricao: "Atuamos de forma colaborativa desde as etapas iniciais de prototipação, definindo um escopo viável com base na stack tecnológica e no tempo disponível para o projeto. Eventuais limitações técnicas eram identificadas e ajustadas ainda na fase de prototipação.",
-        bullets: [
-            "Colaboração: Envolvimento da engenharia desde a fase de ideação",
-            "Viabilidade: Apenas rotinas viáveis e refinadas encaminhadas para desenvolvimento",
-            "Comunicação: Processo promove integração fluida entre designers e desenvolvedores"
-        ],
-        imagem: "/assets/projects/medical-office/handoff.png"
-    },
+    // Return translated data
+    return {
+        title: p.title,
+        category: p.category,
+        year: p.year,
+        resumo: <span dangerouslySetInnerHTML={{ __html: p.resumo }} />,
+        objetivo: <span dangerouslySetInnerHTML={{ __html: p.objetivo }} />,
+        desafio: <span dangerouslySetInnerHTML={{ __html: p.desafio }} />,
+        meuPapel: p.meuPapel,
+        processoPesquisa: p.processoPesquisa,
+        descobertas: p.descobertas,
+        prototipo: {
+            intro: p.prototipo.intro,
+            telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => ({
+                titulo: t.titulo,
+                descricao: t.descricao,
+                imagens: [`/assets/projects/medical-office/${i + 1}.png`]
+            }))
+        },
+        handoff: {
+            titulo: p.handoff.titulo,
+            descricao: p.handoff.descricao,
+            bullets: p.handoff.bullets,
+            imagem: "/assets/projects/medical-office/handoff.png"
+        },
+        resultados: p.resultados,
+        licoes: p.licoes,
+        ferramentas: p.ferramentas
+    };
+}
 
-    resultados: [
-        { title: "Responsividade Total", desc: "Toda a plataforma passou a funcionar perfeitamente em dispositivos móveis, resolvendo uma das principais limitações da versão anterior." },
-        { title: "Experiência Otimizada", desc: "O novo fluxo de cadastro passo a passo reduziu significativamente a fricção e abandono durante o registro de consultórios." },
-        { title: "Identidade Visual", desc: "Templates de email e style guide criaram um padrão de comunicação consistente, fortalecendo a marca." },
-        { title: "Longevidade do Design", desc: "A plataforma segue em funcionamento até hoje com o mesmo visual de 2021, validando a robustez do design implementado." },
-    ],
-
-    licoes: [
-        { title: "Design Adaptável", desc: "Considerar futuras modificações e expansões faz parte do planejamento de qualquer redesign - o design deve ser um organismo vivo." },
-        { title: "Colaboração Early", desc: "O envolvimento precoce da engenharia garantiu que apenas soluções viáveis fossem prototipadas, eliminando retrabalho." },
-        { title: "Concessões Estratégicas", desc: "Algumas concessões de design foram necessárias para atender aos stakeholders, sem comprometer usabilidade." },
-    ],
-
-    ferramentas: [
-        { name: "Figma", desc: "Prototipagem em alta fidelidade" },
-        { name: "Photoshop", desc: "Manipulação de imagens" },
-        { name: "Miro", desc: "Lean Inception e fluxogramas" },
-        { name: "Jira", desc: "Gerenciamento e handoff" },
-    ]
-};
+// Legacy static data reference (for sections that need it)
+let projectData: ReturnType<typeof useProjectData>;
 
 // ============================================================================
 // SCROLL PROGRESS BAR
@@ -961,6 +968,9 @@ function ToolsSection() {
 // ============================================================================
 
 export function MedicalOffice() {
+    // Assign translated data to module-level variable for use by section components
+    projectData = useProjectData();
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

@@ -9,97 +9,107 @@ import { ParticleBackground } from '../ParticleBackground';
 import { RealisticMacBook } from '../RealisticMacBook';
 import { ProjectCTAFooter } from './ProjectCTAFooter';
 import { AudioMiniPlayer } from '../AudioMiniPlayer';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 // ============================================================================
-// PROJECT DATA
+// PROJECT DATA - using translations
 // ============================================================================
 
-const projectData = {
-    title: "Importação de Empresas",
-    category: "UX Design",
-    year: "2024",
+function useProjectData() {
+    const { translations } = useLanguage();
+    const p = translations.projects?.importacaoEmpresas;
 
-    resumo: <>Este projeto busca aprimorar a funcionalidade de "Sinalização de Empresas" dentro da plataforma Econodata, um trabalho realizado como parte de um teste técnico para Product Designer.<br />O objetivo central é otimizar a experiência do usuário, lidando com desafios significativos que impactavam diretamente a eficiência operacional. Abordei problemas como a perda de tempo com limpeza e validação manual de listas, dados duplicados ou desatualizados, e um processo de mapeamento de colunas CSV confuso e propenso a erros.</>,
-
-    objetivo: <>Evoluir a plataforma melhorando a experiência do usuário na funcionalidade de "Sinalização de empresas", como parte de um teste técnico para Product Designer na Econodata.<br />A proposta visa uma rotina mais fluida e intuitiva, que não só atenda às necessidades dos usuários, mas também supere as limitações técnicas existentes, resultando em maior produtividade e precisão nos dados.</>,
-
-    desafio: <>Melhorar a experiência do usuário na funcionalidade de Sinalização de Empresas, com foco em suprir dores recorrentes que impactam diretamente a eficiência do processo.<br />Os principais problemas identificados incluem: perda de tempo com limpeza e validação manual de listas, dados duplicados ou desatualizados que geram retrabalho, ausência de sinalização clara sobre empresas já clientes, e processo de mapeamento de colunas CSV confuso e propenso a erros.</>,
-
-    meuPapel: [
-        { title: "Levantamento de Problemas", desc: "Identificação das dores da funcionalidade atual através de análise heurística e testes na plataforma." },
-        { title: "Benchmarking", desc: "Estudo de concorrentes e players de mercado para mapear boas práticas e oportunidades de melhoria." },
-        { title: "Análise Técnica", desc: "Avaliação das limitações técnicas da rotina atual e propostas para superá-las." },
-        { title: "Design da Solução", desc: "Proposição de nova rotina contemplando objetivos do negócio e solicitações dos usuários." },
-    ],
-
-    processoPesquisa: [
-        { title: "Visão Anterior", desc: "Teste e documentação do produto atual para análise aprofundada da experiência existente e identificação de pontos de fricção." },
-        { title: "Matriz CSD", desc: "Aplicação da ferramenta para identificar Certezas, Suposições e Dúvidas, assegurando visão unificada da equipe." },
-        { title: "Benchmarking", desc: "Análise comparativa detalhada com concorrentes para mapear oportunidades de melhoria significativas." },
-        { title: "Wireframes", desc: "Desenvolvimento de wireframes para validar a solução antes do protótipo de alta fidelidade." },
-    ],
-
-    descobertas: [
-        { title: "Validação de Listas", desc: "Necessidade de detecção automática de duplicados e enriquecimento de dados com base em CNPJ, domínio ou e-mail." },
-        { title: "Dados Inconsistentes", desc: "Pré-validação necessária antes da importação, mostrando dados incorretos e duplicados para ação do usuário." },
-        { title: "Sinalização de Duplicados", desc: "Integração para marcar automaticamente empresas já abordadas ou clientes com tags e alertas visuais." },
-        { title: "Mapeamento de Colunas", desc: "Preview automático com sugestão inteligente de colunas e validação visual antes da confirmação." },
-    ],
-
-    prototipo: {
-        telas: [
-            {
-                titulo: "Tela Inicial",
-                descricao: "Modernização mantendo o padrão visual da plataforma, com adição de histórico de ações para maior transparência, exibindo quem realizou cada importação e quando.",
-                imagens: ["/assets/projects/importacao-empresas/1.png"]
+    if (!p) {
+        // Fallback to PT-BR hardcoded data
+        return {
+            title: "Importação de Empresas",
+            category: "UX Design",
+            year: "2024",
+            resumo: <>Este projeto busca aprimorar a funcionalidade de "Sinalização de Empresas" dentro da plataforma Econodata.<br />O objetivo central é otimizar a experiência do usuário, lidando com desafios significativos que impactavam diretamente a eficiência operacional.</>,
+            objetivo: <>Evoluir a plataforma melhorando a experiência do usuário na funcionalidade de "Sinalização de empresas", como parte de um teste técnico para Product Designer na Econodata.</>,
+            desafio: <>Melhorar a experiência do usuário na funcionalidade de Sinalização de Empresas, com foco em suprir dores recorrentes que impactam diretamente a eficiência do processo.</>,
+            meuPapel: [
+                { title: "Levantamento de Problemas", desc: "Identificação das dores da funcionalidade atual através de análise heurística e testes na plataforma." },
+                { title: "Benchmarking", desc: "Estudo de concorrentes e players de mercado para mapear boas práticas e oportunidades de melhoria." },
+                { title: "Análise Técnica", desc: "Avaliação das limitações técnicas da rotina atual e propostas para superá-las." },
+                { title: "Design da Solução", desc: "Proposição de nova rotina contemplando objetivos do negócio e solicitações dos usuários." },
+            ],
+            processoPesquisa: [
+                { title: "Visão Anterior", desc: "Teste e documentação do produto atual para análise aprofundada." },
+                { title: "Matriz CSD", desc: "Aplicação da ferramenta para identificar Certezas, Suposições e Dúvidas." },
+                { title: "Benchmarking", desc: "Análise comparativa detalhada com concorrentes." },
+                { title: "Wireframes", desc: "Desenvolvimento de wireframes para validar a solução." },
+            ],
+            descobertas: [
+                { title: "Validação de Listas", desc: "Necessidade de detecção automática de duplicados." },
+                { title: "Dados Inconsistentes", desc: "Pré-validação necessária antes da importação." },
+                { title: "Sinalização de Duplicados", desc: "Integração para marcar automaticamente empresas já abordadas." },
+                { title: "Mapeamento de Colunas", desc: "Preview automático com sugestão inteligente de colunas." },
+            ],
+            prototipo: {
+                telas: [
+                    { titulo: "Tela Inicial", descricao: "Modernização mantendo o padrão visual da plataforma.", imagens: ["/assets/projects/importacao-empresas/1.png"] },
+                    { titulo: "Seleção do Arquivo", descricao: "Processo de importação reformulado para ocorrer em modal.", imagens: ["/assets/projects/importacao-empresas/2.png"] },
+                    { titulo: "Configurações", descricao: "Mapeamento automático das colunas com base nos títulos.", imagens: ["/assets/projects/importacao-empresas/3.png"] },
+                    { titulo: "Validação", descricao: "Totalizadores de linhas e erros.", imagens: ["/assets/projects/importacao-empresas/4.png"] },
+                    { titulo: "Flexibilidade", descricao: "Modal permite execução do processo a partir de outras telas.", imagens: ["/assets/projects/importacao-empresas/5.png"] }
+                ]
             },
-            {
-                titulo: "Seleção do Arquivo",
-                descricao: "Processo de importação reformulado para ocorrer em modal, concentrando a atenção do usuário e dividido em três etapas para um fluxo mais didático e guiado.",
-                imagens: ["/assets/projects/importacao-empresas/2.png"]
+            handoff: {
+                titulo: "Design Handoff",
+                descricao: "O arquivo foi estruturado para garantir entendimento coeso e acessível a todos os perfis envolvidos.",
+                bullets: [
+                    "Organização: Frames agrupados em seções conforme suas funcionalidades",
+                    "Componentização: Elementos reutilizados organizados na lateral esquerda",
+                    "Comunicação: Estrutura que contribui para eficiência entre equipes"
+                ],
+                imagem: "/assets/projects/importacao-empresas/handoff.png"
             },
-            {
-                titulo: "Configurações",
-                descricao: "Mapeamento automático das colunas com base nos títulos ou padrão dos dados, reduzindo erros e adicionando opção de sinalizar empresas já clientes.",
-                imagens: ["/assets/projects/importacao-empresas/3.png"]
-            },
-            {
-                titulo: "Validação",
-                descricao: "Totalizadores de linhas e erros permitindo visualizar quantidade de registros a serem importados, com pré-visualização das inconsistências.",
-                imagens: ["/assets/projects/importacao-empresas/4.png"]
-            },
-            {
-                titulo: "Flexibilidade",
-                descricao: "Modal permite execução do processo a partir de outras telas como Empresas, facilitando a operação e aplicação de filtros por tag no mesmo contexto.",
-                imagens: ["/assets/projects/importacao-empresas/5.png"]
-            }
-        ]
-    },
+            resultados: [
+                { title: "Fluxo Otimizado", desc: "Modal de importação dividido em etapas claras." },
+                { title: "Redução de Erros", desc: "Mapeamento automático de colunas e validação prévia." },
+                { title: "Maior Transparência", desc: "Histórico de ações permite rastrear cada importação." },
+                { title: "Experiência Unificada", desc: "Possibilidade de executar importação a partir de diferentes contextos." },
+            ],
+            licoes: [
+                { title: "Processo de UX", desc: "Com mais tempo, poderiam ser incluídas personas e jornadas de usuário." },
+                { title: "Métricas de Sucesso", desc: "Definir métricas claras como redução do tempo de tarefa." },
+                { title: "Validação com Usuários", desc: "Ideal seria disponibilizar o projeto para testes de usabilidade." },
+            ]
+        };
+    }
 
-    handoff: {
-        titulo: "Design Handoff",
-        descricao: "O arquivo foi estruturado para garantir entendimento coeso e acessível a todos os perfis envolvidos. Dentro do Figma, as etapas foram divididas em páginas: Pesquisa, Benchmarking, Fluxo, Wireframes e Protótipo.",
-        bullets: [
-            "Organização: Frames agrupados em seções conforme suas funcionalidades",
-            "Componentização: Elementos reutilizados organizados na lateral esquerda do arquivo",
-            "Comunicação: Estrutura que contribui para eficiência entre equipes e minimiza dúvidas"
-        ],
-        imagem: "/assets/projects/importacao-empresas/handoff.png"
-    },
+    // Return translated data
+    return {
+        title: p.title,
+        category: p.category,
+        year: p.year,
+        resumo: <span dangerouslySetInnerHTML={{ __html: p.resumo }} />,
+        objetivo: <span dangerouslySetInnerHTML={{ __html: p.objetivo }} />,
+        desafio: <span dangerouslySetInnerHTML={{ __html: p.desafio }} />,
+        meuPapel: p.meuPapel,
+        processoPesquisa: p.processoPesquisa,
+        descobertas: p.descobertas,
+        prototipo: {
+            telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => ({
+                titulo: t.titulo,
+                descricao: t.descricao,
+                imagens: [`/assets/projects/importacao-empresas/${i + 1}.png`]
+            }))
+        },
+        handoff: {
+            titulo: p.handoff.titulo,
+            descricao: p.handoff.descricao,
+            bullets: p.handoff.bullets,
+            imagem: "/assets/projects/importacao-empresas/handoff.png"
+        },
+        resultados: p.resultados,
+        licoes: p.licoes
+    };
+}
 
-    resultados: [
-        { title: "Fluxo Otimizado", desc: "Modal de importação dividido em etapas claras, tornando o processo mais intuitivo e reduzindo a curva de aprendizado." },
-        { title: "Redução de Erros", desc: "Mapeamento automático de colunas e validação prévia eliminam erros comuns no processo de importação." },
-        { title: "Maior Transparência", desc: "Histórico de ações permite rastrear quem realizou cada importação e quando, aumentando a accountability." },
-        { title: "Experiência Unificada", desc: "Possibilidade de executar importação a partir de diferentes contextos da plataforma sem perder o foco." },
-    ],
-
-    licoes: [
-        { title: "Processo de UX", desc: "Com mais tempo, poderiam ser incluídas personas, jornadas de usuário e pesquisas diretas com usuários reais." },
-        { title: "Métricas de Sucesso", desc: "Definir métricas claras como redução do tempo de tarefa, satisfação do usuário e diminuição da taxa de erros." },
-        { title: "Validação com Usuários", desc: "Ideal seria disponibilizar o projeto para testes de usabilidade e obter feedback da equipe de produto." },
-    ]
-};
+// Legacy static data reference (for sections that need it)
+let projectData: ReturnType<typeof useProjectData>;
 
 // ============================================================================
 // SCROLL PROGRESS BAR
@@ -845,6 +855,9 @@ function LessonsSection() {
 // ============================================================================
 
 export function ImportacaoEmpresas() {
+    // Assign translated data to module-level variable for use by section components
+    projectData = useProjectData();
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

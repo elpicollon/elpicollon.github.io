@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, ReactNode, useCallback, useMemo } from 're
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import { RealisticMacBook } from './RealisticMacBook';
-import { TealParticleBackground } from './TealParticleBackground';
+import { ParticleBackground } from './ParticleBackground';
+import { useTranslation } from '../hooks/useTranslation';
 
 export interface ProjectSection {
     id: string;
@@ -30,6 +31,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const lastScrollTime = useRef<number>(0);
     const SCROLL_COOLDOWN = 1200; // ms between scroll navigations (covers full trackpad gesture with momentum)
+    const { t } = useTranslation();
 
     // Calculate section groups for timeline
     const groups = useMemo(() => {
@@ -188,7 +190,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
         >
             {/* Teal Background with Particles */}
             <div className="fixed inset-0 z-0">
-                <TealParticleBackground />
+                <ParticleBackground color="teal" />
             </div>
 
             {/* Optional Header (Nav, etc.) */}
@@ -505,9 +507,8 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                             } else {
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
                             }
-                        }}
-                        className="fixed bottom-7 right-6 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-white hover:text-teal-600 hover:border-teal-200 transition-all cursor-pointer"
-                        aria-label="Voltar ao topo"
+                        }} className="fixed bottom-7 right-6 z-50 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-white hover:text-teal-600 hover:border-teal-200 transition-all cursor-pointer"
+                        aria-label={t('accessibility.backToTop')}
                     >
                         <ArrowUp size={20} />
                     </motion.button>

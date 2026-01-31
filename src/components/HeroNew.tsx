@@ -2,10 +2,12 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useRef, useState, useCallback } from 'react';
 import { HeroParticleGrid } from './HeroParticleGrid';
 import { GeometricCarousel, carouselItems } from './GeometricCarousel';
+import { useTranslation } from '../hooks/useTranslation';
 
 export function HeroNew() {
   const containerRef = useRef(null);
   const [currentGradient, setCurrentGradient] = useState(carouselItems[0].gradient);
+  const { t } = useTranslation();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -68,10 +70,10 @@ export function HeroNew() {
             <div className="hero-title-container mt-24 mb-6 md:mb-10 overflow-hidden">
               <h1 className="flex flex-col gap-2">
                 <span className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
-                  Experiências digitais
+                  {t('hero.title1')}
                 </span>
                 <span className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#a855f7] tracking-tight leading-[1.1]">
-                  de ponta a ponta!
+                  {t('hero.title2')}
                 </span>
               </h1>
             </div>
@@ -85,17 +87,17 @@ export function HeroNew() {
             >
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                 <span className="text-sm md:text-base font-medium text-slate-600">
-                  Product Designer
+                  {t('hero.tags.productDesigner')}
                 </span>
               </div>
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                 <span className="text-sm md:text-base font-medium text-slate-600">
-                  Professor
+                  {t('hero.tags.professor')}
                 </span>
               </div>
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                 <span className="text-sm md:text-base font-medium text-slate-600">
-                  Especialista em Design Digital
+                  {t('hero.tags.specialist')}
                 </span>
               </div>
             </motion.div>
@@ -115,7 +117,7 @@ export function HeroNew() {
                 />
               </div>
               <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
-                Scroll to explore
+                {t('hero.scrollIndicator')}
               </span>
             </motion.div>
           </motion.div>
