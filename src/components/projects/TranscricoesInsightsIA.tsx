@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate } from 'motion/react';
+import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate, AnimatePresence } from 'motion/react';
 import { useRef, useEffect, ReactNode, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, LayoutGrid, Settings, Brain, Database, Share2, TrendingUp, Gauge, BadgeDollarSign, Rocket, ShieldCheck, Code, BarChart3 } from 'lucide-react';
@@ -246,6 +246,24 @@ function HeroSection() {
             ref={containerRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] z-50 isolate mobile-tiny-fix pt-24 lg:pt-0"
         >
+            {/* Geometric Gradient Background - matches home page */}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key="transcricoes-gradient"
+                    className="hero-gradient-bg"
+                    initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
+                    animate={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
+                    exit={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                    style={{
+                        background: `linear-gradient(135deg, #2A645E 0%, #55CABE 100%)`,
+                    }}
+                >
+                    {/* Inner shadow overlay - inside the animated container */}
+                    <div className="hero-diagonal-shadow" />
+                </motion.div>
+            </AnimatePresence>
+
             {/* Background with particle effect */}
             <div className="absolute inset-0 z-0">
                 <ParticleBackground color="teal" />

@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useInView } from 'motion/react';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'motion/react';
 import { useRef, ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -419,6 +419,24 @@ function HeroSection({ data }: { data: AboutPageData }) {
             ref={containerRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] isolate pt-24 lg:pt-0"
         >
+            {/* Geometric Gradient Background - matches home page */}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key="about-gradient"
+                    className="hero-gradient-bg"
+                    initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
+                    animate={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
+                    exit={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                    style={{
+                        background: `linear-gradient(135deg, #22143C 0%, #4A208A 100%)`,
+                    }}
+                >
+                    {/* Inner shadow overlay - inside the animated container */}
+                    <div className="hero-diagonal-shadow" />
+                </motion.div>
+            </AnimatePresence>
+
             {/* Background */}
             <div className="absolute inset-0 z-0">
                 <ParticleBackground color="purple" />
