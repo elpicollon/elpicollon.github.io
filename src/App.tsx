@@ -5,7 +5,7 @@ import { MinimalNav } from './components/MinimalNav';
 import { HeroNew } from './components/HeroNew';
 import { AboutSection } from './components/AboutSection';
 import { BentoGrid } from './components/BentoGrid';
-import { MarqueeSection } from './components/MarqueeSection';
+
 import { HorizontalScroll } from './components/HorizontalScroll';
 import { MagneticButton } from './components/MagneticButton';
 import { FooterNew } from './components/FooterNew';
@@ -38,7 +38,6 @@ function HomePage() {
       <MinimalNav />
       <main>
         <HeroNew />
-        <MarqueeSection />
         <HorizontalScroll />
         <AboutSection />
         <BentoGrid />

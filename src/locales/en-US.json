@@ -73,7 +73,7 @@
             "yearsUX": "Years in UX",
             "yearsTech": "Years Tech",
             "projects": "Projects",
-            "satisfaction": "Satisfaction"
+            "satisfaction": "Certifications"
         },
         "features": {
             "innovativeDesign": {
@@ -212,12 +212,12 @@
         },
         "quemSou": {
             "label": "About Me",
-            "title1": "Design that connects",
-            "title2": "technology and business",
+            "title1": "Technical",
+            "title2": "Product Designer",
             "intro": [
-                "With over <strong class=\"text-slate-900\">12 years in technology</strong> and <strong class=\"text-slate-900\">7 years as a Product Designer</strong>, I specialize in Digital Design for web, mobile, and application platforms. My passion is creating impactful digital experiences that meet user needs and drive business results.",
-                "Analytical, proactive, and results-oriented, with expertise in user research, high-fidelity prototyping, and Design Systems. Experienced in agile environments (Scrum, Kanban) and certified as a Lean Inception facilitator.",
-                "I solve complex problems and serve as a strategic bridge between teams, aligning everyone around a clear and actionable design strategy."
+                "With over <strong class=\"text-slate-900\">12 years in technology</strong> and <strong class=\"text-slate-900\">7 years as a Product Designer</strong>, I hold a Bachelor's in Information Systems and am a Digital Design Specialist, dedicated to designing scalable web and mobile experiences that merge technical rigor with UX strategy.",
+                "My profile is <strong class=\"text-slate-900\">analytical and results-oriented</strong>, with expertise in user research, prototyping, and Design Systems. I actively integrate Artificial Intelligence tools into my creative workflow to optimize ideation and delivery. I work in agile environments with Scrum and Kanban, and am a <strong class=\"text-slate-900\">certified Lean Inception facilitator</strong>.",
+                "My differentiator lies in the ability to solve complex problems and act as a <strong class=\"text-slate-900\">facilitating link between teams</strong>, ensuring that the design strategy is understood and applied clearly by everyone."
             ],
             "highlightsTitle": "Career Highlights",
             "highlights": [

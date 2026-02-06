@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useRef, useState, useCallback } from 'react';
 import { HeroParticleGrid } from './HeroParticleGrid';
 import { GeometricCarousel, carouselItems } from './GeometricCarousel';
+import { MarqueeSection } from './MarqueeSection';
 import { useTranslation } from '../hooks/useTranslation';
 
 export function HeroNew() {
@@ -54,9 +55,17 @@ export function HeroNew() {
         <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
       </div>
 
+      {/* MarqueeSection - Fixed at bottom, behind all content */}
       <motion.div
-        style={{ y, opacity, scale }}
-        className="relative z-10 w-full px-6 md:px-12"
+        style={{ y, opacity, scale, transform: 'translateZ(0)' }}
+        className="absolute bottom-0 left-0 right-0 z-0 will-change-transform"
+      >
+        <MarqueeSection />
+      </motion.div>
+
+      <motion.div
+        style={{ y, opacity, scale, transform: 'translateZ(0)' }}
+        className="relative z-10 w-full px-6 md:px-12 will-change-transform"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-[5%] items-center">
           {/* Left - Text */}
@@ -69,10 +78,10 @@ export function HeroNew() {
             {/* Title */}
             <div className="hero-title-container mt-24 mb-6 md:mb-10 overflow-hidden">
               <h1 className="flex flex-col gap-2">
-                <span className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
+                <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
                   {t('hero.title1')}
                 </span>
-                <span className="hero-title-mobile text-[3.25rem] sm:text-[4rem] md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#a855f7] tracking-tight leading-[1.1]">
+                <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
                   {t('hero.title2')}
                 </span>
               </h1>
@@ -86,40 +95,23 @@ export function HeroNew() {
               className="flex flex-wrap gap-4 items-center mb-16"
             >
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                <span className="text-sm md:text-base font-medium text-slate-600">
+                <span className="text-sm md:text-base [@media(min-width:2560px)]:text-lg [@media(min-width:3840px)]:text-xl font-medium text-slate-600">
                   {t('hero.tags.productDesigner')}
                 </span>
               </div>
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                <span className="text-sm md:text-base font-medium text-slate-600">
+                <span className="text-sm md:text-base [@media(min-width:2560px)]:text-lg [@media(min-width:3840px)]:text-xl font-medium text-slate-600">
                   {t('hero.tags.professor')}
                 </span>
               </div>
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                <span className="text-sm md:text-base font-medium text-slate-600">
+                <span className="text-sm md:text-base [@media(min-width:2560px)]:text-lg [@media(min-width:3840px)]:text-xl font-medium text-slate-600">
                   {t('hero.tags.specialist')}
                 </span>
               </div>
             </motion.div>
 
-            {/* Scroll Indicator - Matches reference */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 1 }}
-              className="flex items-center gap-4"
-            >
-              <div className="scroll-indicator w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
-                <motion.div
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-1.5 h-1.5 bg-slate-600 rounded-full"
-                />
-              </div>
-              <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
-                {t('hero.scrollIndicator')}
-              </span>
-            </motion.div>
+
           </motion.div>
 
           {/* Right - Geometric Image Carousel */}
@@ -132,6 +124,22 @@ export function HeroNew() {
           >
             <GeometricCarousel onGradientChange={handleGradientChange} />
           </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Scroll Indicator - Absolute positioned at bottom center */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+      >
+        <div className="w-[26px] h-[42px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1 h-1 bg-slate-500 rounded-full"
+          />
         </div>
       </motion.div>
     </section>

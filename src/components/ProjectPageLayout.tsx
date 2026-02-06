@@ -327,7 +327,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                                 {activeSection.subtitle}
                                             </span>
                                         )}
-                                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f172a] mb-2 leading-tight">
+                                        <h2 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-2">
                                             {activeSection?.title}
                                         </h2>
                                         {activeSection?.leftSubtitle && (
@@ -419,7 +419,7 @@ export function ProjectPageLayout({ sections, headerContent, footerContent }: Pr
                                     justifyContent: 'center',
                                 }}
                             >
-                                <h2 className="text-3xl font-bold text-[#0f172a] mb-4">
+                                <h2 className="text-[2.75rem] sm:text-[3.5rem] font-medium text-slate-900 tracking-tight leading-[1.1] mb-4">
                                     {section.title}
                                 </h2>
 

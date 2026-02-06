@@ -135,7 +135,7 @@ export function ParticleBackground({ color = 'purple' }: ParticleBackgroundProps
 
             if (isMobile) {
                 targetX = width / 2 + Math.sin(time * 0.5) * (width * 0.15);
-                targetY = height / 2 + Math.cos(time * 0.3) * (height * 0.15);
+                targetY = height * 0.85 + Math.cos(time * 0.3) * (height * 0.1);
             }
 
             particles.forEach((p) => {

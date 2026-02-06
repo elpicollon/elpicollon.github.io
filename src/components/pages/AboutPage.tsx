@@ -50,8 +50,7 @@ function SectionHeader({ label, title }: { label: string; title: string }) {
             </RevealText>
             <RevealText delay={0.1}>
                 <h2
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                    className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                 >
                     {title}
                 </h2>
@@ -221,8 +220,7 @@ function QuemSouSection({ data }: { data: AboutPageData }) {
                     </RevealText>
                     <RevealText delay={0.1}>
                         <h2
-                            className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                            className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                         >
                             {data.quemSou.title1} <br className="hidden md:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500">
@@ -419,7 +417,7 @@ function HeroSection({ data }: { data: AboutPageData }) {
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] pt-24"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] isolate pt-24 lg:pt-0"
         >
             {/* Background */}
             <div className="absolute inset-0 z-0">
@@ -427,10 +425,10 @@ function HeroSection({ data }: { data: AboutPageData }) {
                 <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
             </div>
 
-            <div className="relative z-10 w-full px-6 md:px-12 py-16">
+            <div className="relative z-10 w-full px-6 md:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
                     {/* Left Content */}
-                    <motion.div style={{ y, opacity }}>
+                    <motion.div style={{ y, opacity }} className="relative">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -438,25 +436,29 @@ function HeroSection({ data }: { data: AboutPageData }) {
                             className="flex flex-col items-start"
                         >
                             {/* Back Button */}
-                            <motion.button
+                            <motion.div
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6 }}
-                                onClick={() => navigate(-1)}
-                                className="inline-flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group mb-6 cursor-pointer"
+                                className="relative lg:absolute lg:top-0 lg:left-0 z-20 mb-2 lg:mb-0"
                             >
-                                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                <span className="text-sm font-medium uppercase tracking-wider">{data.common.back}</span>
-                            </motion.button>
+                                <button
+                                    onClick={() => navigate(-1)}
+                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group cursor-pointer"
+                                    type="button"
+                                >
+                                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                                    <span className="text-sm font-medium uppercase tracking-wider">{data.common.back}</span>
+                                </button>
+                            </motion.div>
 
                             {/* Title */}
-                            <div className="mb-8">
+                            <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
                                 <motion.h1
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 0.2 }}
-                                    className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-4"
-                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                    className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-2"
                                 >
                                     {data.hero.title1}
                                 </motion.h1>
@@ -464,8 +466,7 @@ function HeroSection({ data }: { data: AboutPageData }) {
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 0.3 }}
-                                    className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500 tracking-tight leading-[1.1]"
-                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                    className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]"
                                 >
                                     {data.hero.title2}
                                 </motion.h1>
@@ -522,7 +523,6 @@ function HeroSection({ data }: { data: AboutPageData }) {
                         className="w-1 h-1 bg-slate-500 rounded-full"
                     />
                 </div>
-                <span className="text-xs font-medium text-slate-400 uppercase tracking-widest">{data.common.scroll}</span>
             </motion.div>
         </section >
     );

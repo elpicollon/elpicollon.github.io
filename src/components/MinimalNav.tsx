@@ -62,7 +62,7 @@ export function MinimalNav() {
           }}
           className="mx-auto rounded-full border border-white/40 shadow-lg shadow-black/5 ring-1 ring-white/50"
         >
-          <div className="flex items-center justify-between px-4 py-2 md:px-6 md:py-4">
+          <div className="flex items-center justify-between px-4 py-3">
             {/* Logo */}
             <motion.button
               onClick={() => handleNavClick('inicio')}

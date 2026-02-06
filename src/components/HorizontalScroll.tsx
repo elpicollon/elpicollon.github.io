@@ -145,7 +145,7 @@ export function HorizontalScroll() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-6xl md:text-8xl font-medium text-black"
+            className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]"
           >
             {t('horizontalScroll.sectionTitle')}
           </motion.h2>

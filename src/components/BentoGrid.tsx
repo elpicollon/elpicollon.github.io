@@ -1,6 +1,6 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import { Sparkles, Zap, Target, Layers, Palette, Mic, Award, Briefcase, Heart, Settings2, PenTool } from 'lucide-react';
+import { Sparkles, Zap, Target, Layers, Palette, Mic, Award, Briefcase, GraduationCap, Settings2, PenTool } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 
 export function BentoGrid() {
@@ -29,9 +29,9 @@ export function BentoGrid() {
     },
     {
       id: 4,
-      number: "100%",
+      number: "16+",
       label: t('expertise.stats.satisfaction'),
-      icon: Heart,
+      icon: GraduationCap,
     }
   ];
 
@@ -95,7 +95,7 @@ export function BentoGrid() {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl md:text-8xl font-medium text-black mb-6"
+            className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
           >
             {t('expertise.sectionTitle')}
           </motion.h2>

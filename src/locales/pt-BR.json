@@ -73,7 +73,7 @@
             "yearsUX": "Anos em UX",
             "yearsTech": "Anos Tech",
             "projects": "Projetos",
-            "satisfaction": "Satisfação"
+            "satisfaction": "Certificações"
         },
         "features": {
             "innovativeDesign": {
@@ -212,11 +212,11 @@
         },
         "quemSou": {
             "label": "Quem Sou",
-            "title1": "Design que conecta",
-            "title2": "tecnologia e negócios",
+            "title1": "Product Designer com ",
+            "title2": "background técnico",
             "intro": [
-                "Com mais de <strong class=\"text-slate-900\">12 anos em tecnologia</strong> e <strong class=\"text-slate-900\">7 anos como Product Designer</strong>, sou especialista em Design Digital para plataformas web, mobile e aplicativos. Minha paixão é criar experiências digitais impactantes que atendam às necessidades dos usuários e impulsionem resultados de negócio.",
-                "Meu perfil é <strong class=\"text-slate-900\">analítico, proativo e orientado a resultados</strong>, com domínio em pesquisa de usuário, prototipagem de alta fidelidade e Design Systems. Atuo em ambientes ágeis com Scrum e Kanban, e sou <strong class=\"text-slate-900\">facilitador certificado em Lean Inception</strong>.",
+                "Com mais de <strong class=\"text-slate-900\">12 anos em tecnologia</strong> e <strong class=\"text-slate-900\">7 anos como Product Designer</strong>, sou Bacharel em Sistemas de Informação e Especialista em Design Digital, dedicado a projetar experiências web e mobile escaláveis que unem rigor técnico à estratégia de UX.",
+                "Meu perfil é <strong class=\"text-slate-900\">analítico e orientado a resultados</strong>, com domínio em pesquisa de usuário, prototipagem e Design Systems. Integro ativamente ferramentas de Inteligência Artificial ao meu fluxo criativo para otimizar a ideação e a entrega. Atuo em ambientes ágeis com Scrum e Kanban, e sou <strong class=\"text-slate-900\">facilitador certificado em Lean Inception</strong>.",
                 "Meu diferencial está na capacidade de resolver problemas complexos e atuar como <strong class=\"text-slate-900\">elo facilitador entre equipes</strong>, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos."
             ],
             "highlightsTitle": "Destaques da Trajetória",
@@ -629,9 +629,9 @@
             "title": "Redesign Medical Office",
             "category": "UX Design",
             "year": "2021",
-            "resumo": "Redesign UI/UX da plataforma web Medical Office, que conecta profissionais de saúde sem espaço próprio a clínicas com capacidade ociosa.<br />O objetivo principal foi redesenhar a interface, torná-la responsiva e aprimorar a usabilidade, mantendo uma experiência familiar para os usuários já existentes. O processo incluiu um workshop de Lean Inception, definição de visão do produto, criação de personas e mapeamento de jornadas do usuário.",
-            "objetivo": "A Medical Office é uma plataforma web que conecta profissionais de saúde iniciantes que não possuem espaço físico para atuação, com proprietários de consultórios que possuem espaços ociosos.<br />Dessa forma, busca suprir a demanda de múltiplos profissionais, viabilizando a geração de renda aos proprietários através do aluguel, ao mesmo tempo que permite aos profissionais iniciantes atuarem em um espaço totalmente equipado.",
-            "desafio": "Redesenhar a ferramenta tornando-a mais moderna e responsiva, facilitando o uso e mantendo o feeling já adquirido pelos usuários. O redesign precisava equilibrar inovação com familiaridade, garantindo que a transição fosse suave para a base de usuários existente.",
+            "resumo": "Redesign do Medical Office (nome fictício), um marketplace B2B que conecta profissionais de saúde a consultórios ociosos. O projeto transformou a plataforma em uma experiência responsiva, focada na agilidade de reserva. A estratégia, definida via Lean Inception, equilibrou a modernização da interface com a manutenção da familiaridade para a base de usuários legada.",
+            "objetivo": "Evoluir a plataforma para uma interface responsiva e intuitiva. O foco foi modernizar a usabilidade e otimizar fluxos de agendamento, preservando a familiaridade de navegação para evitar rejeição da base de usuários ativa.",
+            "desafio": "Redesenhar o ecossistema para eliminar barreiras de acesso em desktop e dispositivos móveis. O objetivo foi reduzir a fricção no agendamento de espaços, garantindo que a monetização de consultórios ociosos e a reserva por profissionais ocorressem com agilidade, sem perder a identidade funcional já conhecida pelo público.",
             "meuPapel": [
                 {
                     "title": "Lean Inception",

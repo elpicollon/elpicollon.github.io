@@ -294,10 +294,10 @@ function HeroSection() {
                             {/* Title */}
                             <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
                                 <h1 className="flex flex-col gap-2">
-                                    <span className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-[#0f172a] tracking-tight leading-[1.1]">
+                                    <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
                                         Redesign
                                     </span>
-                                    <span className="hero-title-mobile text-5xl sm:text-6xl md:text-8xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#4088FF] to-[#2563eb] tracking-tight leading-[1.1]">
+                                    <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
                                         Medical Office
                                     </span>
                                 </h1>
@@ -328,24 +328,7 @@ function HeroSection() {
                                 </div>
                             </motion.div>
 
-                            {/* Scroll Indicator */}
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 1, duration: 1 }}
-                                className="flex items-center gap-4"
-                            >
-                                <div className="scroll-indicator w-[30px] h-[48px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
-                                    <motion.div
-                                        animate={{ y: [0, 12, 0] }}
-                                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                                        className="w-1.5 h-1.5 bg-slate-600 rounded-full"
-                                    />
-                                </div>
-                                <span className="text-sm font-medium text-slate-500 tracking-widest uppercase">
-                                    Scroll to explore
-                                </span>
-                            </motion.div>
+
                         </motion.div>
                     </motion.div>
 
@@ -372,6 +355,21 @@ function HeroSection() {
                     </motion.div>
                 </div>
             </div>
+            {/* Scroll Indicator - Absolute positioned at bottom center */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+            >
+                <div className="w-[26px] h-[42px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
+                    <motion.div
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        className="w-1 h-1 bg-slate-500 rounded-full"
+                    />
+                </div>
+            </motion.div>
         </section>
     );
 }
@@ -391,13 +389,12 @@ function OverviewSection() {
                     <div className="mb-16 md:mb-24">
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Visão Geral
+                                Objetivo
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 O Projeto
                             </h2>
@@ -496,8 +493,7 @@ function RoleSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-8"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-8"
                             >
                                 Meu Papel
                             </h2>
@@ -549,8 +545,7 @@ function ResearchSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 Processo de Pesquisa
                             </h2>
@@ -599,8 +594,7 @@ function DiscoveriesSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 Principais Insights
                             </h2>
@@ -652,8 +646,7 @@ function PrototypeSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 Interface do Projeto
                             </h2>
@@ -747,8 +740,7 @@ function HandoffSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 {projectData.handoff.titulo}
                             </h2>
@@ -825,8 +817,7 @@ function ResultsSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 Impacto do Projeto
                             </h2>
@@ -875,8 +866,7 @@ function LessonsSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 Insights e Reflexões
                             </h2>
@@ -930,8 +920,7 @@ function ToolsSection() {
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 Softwares Utilizados
                             </h2>
