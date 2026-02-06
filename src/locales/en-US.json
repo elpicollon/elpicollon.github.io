@@ -189,7 +189,7 @@
     "audioPlayer": {
         "pause": "Pause audio",
         "play": "Play audio",
-        "labelDesktop": "Listen to a brief summary of this case!",
+        "labelDesktop": "Listen to a brief summary of this project!",
         "labelMobile": "Listen to a brief summary!"
     },
     "marquee": {
