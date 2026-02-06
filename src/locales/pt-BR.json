@@ -78,35 +78,35 @@
         "features": {
             "innovativeDesign": {
                 "title": "Design Inovador",
-                "description": "Soluções visuais que quebram paradigmas"
+                "description": "Soluções estratégicas que resolvem problemas complexos e geram vantagem competitiva."
             },
             "uxDesign": {
                 "title": "UX Design",
-                "description": "Decisões baseadas em dados"
+                "description": "Pesquisa e análise de dados para criar jornadas centradas nas necessidades do usuário e do negócio."
             },
             "uiDesign": {
                 "title": "UI Design",
-                "description": "Interfaces que encantam"
+                "description": "Interfaces acessíveis e intuitivas que aliam estética à usabilidade, tecnologia e conversão."
             },
             "prototyping": {
                 "title": "Prototipagem",
-                "description": "Validação rápida de conceitos"
+                "description": "Validação rápida de hipóteses para reduzir riscos e alinhar expectativas antes do desenvolvimento."
             },
             "designSystems": {
                 "title": "Design Systems",
-                "description": "Escalabilidade e consistência"
+                "description": "Criação de padrões e componentes para acelerar a entrega e garantir a consistência do produto."
             },
             "designOps": {
                 "title": "DesignOps",
-                "description": "Processos e ferramentas de design"
+                "description": "Otimização de processos e ferramentas para aumentar a eficiência e a colaboração entre times."
             },
             "visualIdentity": {
                 "title": "Identidades Visuais",
-                "description": "Marcas memoráveis e consistentes"
+                "description": "Sistemas visuais estratégicos que traduzem o posicionamento da marca em todos os pontos de contato."
             },
             "speaking": {
                 "title": "Palestras & Eventos",
-                "description": "Compartilhando conhecimento"
+                "description": "Disseminação de conhecimento técnico e metodológico para fortalecer a comunidade de design."
             }
         }
     },

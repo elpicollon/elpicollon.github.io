@@ -78,35 +78,35 @@
         "features": {
             "innovativeDesign": {
                 "title": "Innovative Design",
-                "description": "Visual solutions that break paradigms"
+                "description": "Strategic solutions solving complex problems to drive competitive advantage."
             },
             "uxDesign": {
                 "title": "UX Design",
-                "description": "Data-driven decisions"
+                "description": "Data-driven research to craft user journeys aligning user needs with business goals."
             },
             "uiDesign": {
                 "title": "UI Design",
-                "description": "Interfaces that delight"
+                "description": "Accessible, intuitive interfaces blending aesthetics with usability and conversion."
             },
             "prototyping": {
                 "title": "Prototyping",
-                "description": "Rapid concept validation"
+                "description": "Rapid hypothesis validation to mitigate risks and align expectations before development."
             },
             "designSystems": {
                 "title": "Design Systems",
-                "description": "Scalability and consistency"
+                "description": "Standardized patterns and components to accelerate delivery and ensure consistency."
             },
             "designOps": {
                 "title": "DesignOps",
-                "description": "Design processes and tools"
+                "description": "Optimizing workflows and tools to boost efficiency and cross-team collaboration."
             },
             "visualIdentity": {
                 "title": "Visual Identities",
-                "description": "Memorable and consistent brands"
+                "description": "Strategic visual systems translating brand positioning across all touchpoints."
             },
             "speaking": {
                 "title": "Speaking & Events",
-                "description": "Sharing knowledge"
+                "description": "Sharing technical and methodological insights to empower the design community."
             }
         }
     },
