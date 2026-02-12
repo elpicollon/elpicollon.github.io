@@ -126,12 +126,14 @@ export function FooterNew() {
                   },
                   { label: "Email", href: "mailto:contato@picolodesign.com.br", icon: Mail },
                   { label: "Linkedin", href: linkedinUrl, icon: Linkedin },
-                  ...(language === 'pt-BR' ? [{
+                  {
                     label: t('footer.downloadCV'),
-                    href: "/assets/CV/Curriculo-Rodrigo-Picolo-PT.pdf",
+                    href: language === 'en-US'
+                      ? "/assets/CV/Resume-Rodrigo-Picolo-EN.pdf"
+                      : "/assets/CV/Curriculo-Rodrigo-Picolo-PT.pdf",
                     icon: FileText,
                     download: true
-                  }] : [])
+                  }
                 ].map((social) => (
                   <li key={social.label}>
                     <motion.a
