@@ -1,15 +1,25 @@
 import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate, AnimatePresence } from 'motion/react';
-import { useRef, useEffect, ReactNode, forwardRef } from 'react';
+import { useRef, useEffect, useState, ReactNode, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, Settings, Share2, Gauge, ShieldCheck, Code, Palette, Layout, Smartphone, FileCheck, Layers, Compass, ClipboardList, PenTool } from 'lucide-react';
+import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, Settings, Share2, Gauge, ShieldCheck, Code, Palette, Layout, Smartphone, FileCheck, Layers, Compass, ClipboardList, PenTool, XCircle, Ban } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
 import { FooterNew } from '../FooterNew';
 import { ScrollToTop } from '../ScrollToTop';
 import { ParticleBackground } from '../ParticleBackground';
 import { RealisticMacBook } from '../RealisticMacBook';
+import { RealisticIphone } from '../RealisticIphone';
 import { ProjectCTAFooter } from './ProjectCTAFooter';
 import { AudioMiniPlayer } from '../AudioMiniPlayer';
 import { useLanguage } from '../../contexts/LanguageContext';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+    type CarouselApi,
+} from "../ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 // ============================================================================
 // PROJECT DATA - using translations
@@ -52,7 +62,7 @@ function useProjectData() {
                 intro: "O protótipo final foi desenvolvido considerando a responsividade, os anseios dos stakeholders, os insights obtidos a partir de um benchmarking detalhado e o atendimento às principais heurísticas de usabilidade.",
                 telas: [
                     { titulo: "Landing Page", descricao: "A landing page foi reformulada com base nas diretrizes definidas pelos stakeholders.", imagens: ["/assets/projects/medical-office/1.png"] },
-                    { titulo: "Plataforma Web", descricao: "Algumas limitações de débito técnico impactaram o redesign.", imagens: ["/assets/projects/medical-office/2.png"] },
+                    { titulo: "Plataforma Web", descricao: "Algumas limitações de débito técnico impactaram o redesign.", imagens: ["/assets/projects/medical-office/prototipo/2-1.png", "/assets/projects/medical-office/prototipo/2-2.png", "/assets/projects/medical-office/prototipo/2-3.png", "/assets/projects/medical-office/prototipo/2-4.png"] },
                     { titulo: "Cadastro de Espaços", descricao: "Implementamos um fluxo de cadastro passo a passo, mais intuitivo.", imagens: ["/assets/projects/medical-office/3.png"] },
                     { titulo: "Templates de Email", descricao: "Desenvolvemos templates de e-mail personalizados para os três tipos de usuários.", imagens: ["/assets/projects/medical-office/4.png"] },
                     { titulo: "Plataforma Mobile", descricao: "Todo o layout foi projetado com foco na responsividade.", imagens: ["/assets/projects/medical-office/5.png"] },
@@ -85,7 +95,34 @@ function useProjectData() {
                 { name: "Photoshop", desc: "Manipulação de imagens" },
                 { name: "Miro", desc: "Lean Inception e fluxogramas" },
                 { name: "Jira", desc: "Gerenciamento e handoff" },
-            ]
+            ],
+            productVision: {
+                whatItIs: { title: "O que É", items: ["Uma plataforma de conexão entre profissionais de saúde e proprietários de consultórios", "Um marketplace para locação de espaços médicos ociosos", "Uma solução digital para otimizar a ocupação de consultórios"] },
+                whatItIsNot: { title: "O que NÃO É", items: ["Uma clínica ou consultório próprio", "Um sistema de gestão de prontuários médicos", "Uma plataforma de telemedicina"] },
+                whatItDoes: { title: "O que FAZ", items: ["Conecta profissionais iniciantes a espaços disponíveis", "Facilita a geração de renda para proprietários", "Gerencia reservas e disponibilidade de espaços"] },
+                whatItDoesNot: { title: "O que NÃO FAZ", items: ["Não oferece serviços médicos diretamente", "Não gerencia agenda de pacientes", "Não processa pagamentos de consultas"] },
+            },
+            previousView: {
+                desc: "Veja como a plataforma era antes do processo de redesign. As imagens abaixo mostram o estado anterior da interface que foi completamente repensada.",
+            },
+            ui: {
+                backButton: "Voltar",
+                heroTitle: { line1: "Redesign", line2: "Medical Office" },
+                heroAlt: "Capa do Projeto: Redesign Medical Office",
+                heroMobileAlt: "Medical Office - Versão Mobile",
+                sections: {
+                    overview: { label: "Objetivo", title: "O Projeto", objetivo: "Visão Geral", desafio: "Desafio" },
+                    role: { label: "Contribuição", title: "Meu Papel" },
+                    research: { label: "Descoberta & Definição", title: "Processo de Pesquisa" },
+                    discoveries: { label: "Descobertas", title: "Principais Insights" },
+                    previousView: { label: "Antes do Redesign", title: "Visão Prévia" },
+                    productVision: { label: "Descoberta & Definição", title: "Visão de Produto", desc: "Registros da etapa de descoberta e definição das características do produto para evitar ambiguidades e manter o foco durante o desenvolvimento." },
+                    prototype: { label: "Protótipo", title: "Interface do Projeto" },
+                    handoff: { label: "Handoff" },
+                    results: { label: "Resultados", title: "Impacto do Projeto" },
+                    lessons: { label: "Análise Crítica", title: "Insights e Reflexões" },
+                },
+            },
         };
     }
 
@@ -105,7 +142,41 @@ function useProjectData() {
             telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => ({
                 titulo: t.titulo,
                 descricao: t.descricao,
-                imagens: [`/assets/projects/medical-office/${i + 1}.png`]
+                imagens: i === 1
+                    ? ["/assets/projects/medical-office/prototipo/2-1.png", "/assets/projects/medical-office/prototipo/2-2.png", "/assets/projects/medical-office/prototipo/2-3.png", "/assets/projects/medical-office/prototipo/2-4.png"]
+                    : i === 2
+                        ? [
+                            "/assets/projects/medical-office/prototipo/3-0.png",
+                            "/assets/projects/medical-office/prototipo/3-1.png",
+                            "/assets/projects/medical-office/prototipo/3-2.png",
+                            "/assets/projects/medical-office/prototipo/3-3.png",
+                            "/assets/projects/medical-office/prototipo/3-4.png",
+                            "/assets/projects/medical-office/prototipo/3-5.png",
+                            "/assets/projects/medical-office/prototipo/3-6.png",
+                            "/assets/projects/medical-office/prototipo/3-7.png",
+                            "/assets/projects/medical-office/prototipo/3-8.png",
+                            "/assets/projects/medical-office/prototipo/3-9.png"
+                        ]
+                        : i === 3
+                            ? [
+                                "/assets/projects/medical-office/prototipo/4-1.png",
+                                "/assets/projects/medical-office/prototipo/4-2.png",
+                                "/assets/projects/medical-office/prototipo/4-3.png",
+                                "/assets/projects/medical-office/prototipo/4-4.png",
+                                "/assets/projects/medical-office/prototipo/4-5.png",
+                                "/assets/projects/medical-office/prototipo/4-6.png"
+                            ]
+                            : i === 4
+                                ? [
+                                    "/assets/projects/medical-office/prototipo/5-1.png",
+                                    "/assets/projects/medical-office/prototipo/5-2.png",
+                                    "/assets/projects/medical-office/prototipo/5-4.png",
+                                    "/assets/projects/medical-office/prototipo/5-5.png",
+                                    "/assets/projects/medical-office/prototipo/5-6.png"
+                                ]
+                                : i === 5
+                                    ? ["/assets/projects/medical-office/prototipo/style-guide.png"]
+                                    : [`/assets/projects/medical-office/${i + 1}.png`]
             }))
         },
         handoff: {
@@ -116,7 +187,10 @@ function useProjectData() {
         },
         resultados: p.resultados,
         licoes: p.licoes,
-        ferramentas: p.ferramentas
+        ferramentas: p.ferramentas,
+        productVision: p.productVision,
+        previousView: p.previousView,
+        ui: p.ui,
     };
 }
 
@@ -167,7 +241,8 @@ function BigNumber({ number, className = "" }: { number: string; className?: str
 }
 
 // Animated text reveal
-function RevealText({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
+// Animated text reveal
+function RevealText({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -177,6 +252,7 @@ function RevealText({ children, delay = 0 }: { children: ReactNode; delay?: numb
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className={className}
         >
             {children}
         </motion.div>
@@ -305,7 +381,7 @@ function HeroSection() {
                                     className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group"
                                 >
                                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                    <span className="text-sm font-medium uppercase tracking-wider">Voltar</span>
+                                    <span className="text-sm font-medium uppercase tracking-wider">{projectData.ui.backButton}</span>
                                 </Link>
                             </motion.div>
 
@@ -313,10 +389,10 @@ function HeroSection() {
                             <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
                                 <h1 className="flex flex-col gap-2">
                                     <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
-                                        Redesign
+                                        {projectData.ui.heroTitle.line1}
                                     </span>
                                     <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
-                                        Medical Office
+                                        {projectData.ui.heroTitle.line2}
                                     </span>
                                 </h1>
                             </div>
@@ -350,7 +426,7 @@ function HeroSection() {
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Side - MacBook Mockup (extends beyond screen) */}
+                    {/* Right Side - Device Mockups (MacBook + iPhone) */}
                     <motion.div
                         initial={{ opacity: 0, x: 100 }}
                         animate={{ opacity: 1 }}
@@ -358,11 +434,12 @@ function HeroSection() {
                         className="hidden lg:flex items-center relative"
                         style={{ marginRight: '-15%', x: mockupX }}
                     >
+                        {/* MacBook Mockup - Same as TranscricoesInsightsIA */}
                         <RealisticMacBook className="w-[110%] max-w-none">
                             <div className="w-full h-full bg-black overflow-hidden relative">
                                 <img
                                     src="/assets/projects/medical-office/cover.png"
-                                    alt="Capa do Projeto: Redesign Medical Office"
+                                    alt={projectData.ui.heroAlt}
                                     className="w-full h-full object-cover"
                                     loading="eager"
                                 />
@@ -370,6 +447,28 @@ function HeroSection() {
                                 <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay pointer-events-none" />
                             </div>
                         </RealisticMacBook>
+
+                        {/* iPhone Mockup - positioned to the left bottom */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: 0.6 }}
+                            className="absolute -left-[8%] bottom-[-15%] z-10"
+                            style={{ width: '28%' }}
+                        >
+                            <RealisticIphone className="w-full">
+                                <div className="w-full h-full bg-black overflow-hidden relative">
+                                    <img
+                                        src="/assets/projects/medical-office/cover-mobile.png"
+                                        alt={projectData.ui.heroMobileAlt}
+                                        className="w-full h-full object-cover object-top"
+                                        loading="eager"
+                                    />
+                                    {/* Overlay to match the design vibe */}
+                                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay pointer-events-none" />
+                                </div>
+                            </RealisticIphone>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>
@@ -407,14 +506,14 @@ function OverviewSection() {
                     <div className="mb-16 md:mb-24">
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Objetivo
+                                {projectData.ui.sections.overview.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                O Projeto
+                                {projectData.ui.sections.overview.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -448,7 +547,7 @@ function OverviewSection() {
 
                                 {/* Title */}
                                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                    Visão Geral
+                                    {projectData.ui.sections.overview.objetivo}
                                 </h3>
 
                                 {/* Decorative Line */}
@@ -476,7 +575,7 @@ function OverviewSection() {
 
                                 {/* Title */}
                                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                    Desafio
+                                    {projectData.ui.sections.overview.desafio}
                                 </h3>
 
                                 {/* Decorative Line */}
@@ -506,14 +605,14 @@ function RoleSection() {
                     <div>
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Contribuição
+                                {projectData.ui.sections.role.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-8"
                             >
-                                Meu Papel
+                                {projectData.ui.sections.role.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -558,14 +657,14 @@ function ResearchSection() {
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Descoberta & Definição
+                                {projectData.ui.sections.research.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Processo de Pesquisa
+                                {projectData.ui.sections.research.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -607,14 +706,14 @@ function DiscoveriesSection() {
                     <div className="text-center mb-10">
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Descobertas
+                                {projectData.ui.sections.discoveries.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Principais Insights
+                                {projectData.ui.sections.discoveries.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -645,6 +744,55 @@ function DiscoveriesSection() {
     );
 }
 
+
+// Custom carousel for MacBook mockup to ensure robust rendering and animations
+function SimpleMacbookCarousel({ images }: { images: string[] }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        if (!images || images.length <= 1) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [images]);
+
+    if (!images || images.length === 0) return null;
+
+    return (
+        <div className="w-full h-full relative bg-gray-900 overflow-hidden">
+            <AnimatePresence mode="popLayout">
+                <motion.img
+                    key={currentIndex}
+                    src={images[currentIndex]}
+                    alt={`Project Screen ${currentIndex + 1}`}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.8 }}
+                    onError={(e) => console.error(`Failed to load image: ${images[currentIndex]}`, e)}
+                />
+            </AnimatePresence>
+
+            {/* Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                {images.map((_, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className={`w-2 h-2 rounded-full transition-all shadow-sm ${idx === currentIndex ? "bg-white w-4 scale-110" : "bg-white/40 hover:bg-white/60"
+                            }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+
 // Prototype Section - Alternating Layout
 function PrototypeSection() {
     const telas = projectData.prototipo.telas;
@@ -652,21 +800,21 @@ function PrototypeSection() {
     return (
         <ChapterSection id="prototype" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
-                <BigNumber number="05" className="-top-20 -right-10 md:-right-20" />
+                <BigNumber number="07" className="-top-20 -right-10 md:-right-20" />
 
                 <div className="relative z-10">
                     {/* Section Header */}
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Protótipo
+                                {projectData.ui.sections.prototype.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Interface do Projeto
+                                {projectData.ui.sections.prototype.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -713,22 +861,165 @@ function PrototypeSection() {
                                             </div>
                                         </div>
 
-                                        {/* Image - Shows second on mobile */}
                                         <div className={`w-full md:w-[70%] flex-shrink-0 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
-                                            <motion.div
-                                                whileHover={{ scale: 1.02 }}
-                                                transition={{ duration: 0.4, ease: "easeOut" }}
-                                                className="group"
-                                            >
-                                                <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
-                                                    <img
-                                                        src={tela.imagens[0]}
-                                                        alt={tela.titulo}
-                                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                                                        loading="lazy"
-                                                    />
-                                                </div>
-                                            </motion.div>
+                                            {index === 0 ? (
+                                                <motion.div
+                                                    whileHover={{ scale: 1.02 }}
+                                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                                    className="group"
+                                                >
+                                                    {/* MacBook */}
+                                                    <RealisticMacBook>
+                                                        <motion.div
+                                                            className="w-full h-full bg-top"
+                                                            style={{
+                                                                backgroundImage: `url(/assets/projects/medical-office/Home.png)`,
+                                                                backgroundSize: '100% auto',
+                                                            }}
+                                                            animate={{
+                                                                backgroundPosition: ["50% 0%", "50% 100%"]
+                                                            }}
+                                                            transition={{
+                                                                duration: 15,
+                                                                ease: "linear",
+                                                                repeat: Infinity,
+                                                                repeatType: "reverse",
+                                                                repeatDelay: 2
+                                                            }}
+                                                        />
+                                                    </RealisticMacBook>
+                                                </motion.div>
+                                            ) : index === 1 || index === 2 ? (
+                                                <motion.div
+                                                    whileHover={{ scale: 1.02 }}
+                                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                                    className="group"
+                                                >
+                                                    <RealisticMacBook>
+                                                        <SimpleMacbookCarousel images={tela.imagens} />
+                                                    </RealisticMacBook>
+                                                </motion.div>
+                                            ) : index === 3 ? (
+                                                <motion.div
+                                                    whileHover={{ scale: 1.02 }}
+                                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                                    className="group"
+                                                >
+                                                    <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white relative">
+                                                        <Carousel
+                                                            opts={{
+                                                                align: "start",
+                                                                loop: true,
+                                                            }}
+                                                            plugins={[
+                                                                Autoplay({
+                                                                    delay: 4000,
+                                                                }),
+                                                            ]}
+                                                            className="w-full"
+                                                        >
+                                                            <CarouselContent>
+                                                                {tela.imagens.map((img, idx) => (
+                                                                    <CarouselItem key={idx}>
+                                                                        <div className="relative h-[600px] w-full overflow-hidden bg-slate-100 flex items-center justify-center">
+                                                                            <img
+                                                                                src={img}
+                                                                                alt={`${tela.titulo} - ${idx + 1}`}
+                                                                                className="w-full h-full object-contain object-center"
+                                                                                loading="lazy"
+                                                                            />
+                                                                        </div>
+                                                                    </CarouselItem>
+                                                                ))}
+                                                            </CarouselContent>
+                                                            <div className="hidden md:block">
+                                                                <CarouselPrevious className="left-4 bg-white/80 hover:bg-white text-slate-800 border-slate-200" />
+                                                                <CarouselNext className="right-4 bg-white/80 hover:bg-white text-slate-800 border-slate-200" />
+                                                            </div>
+                                                        </Carousel>
+                                                    </div>
+                                                </motion.div>
+                                            ) : index === 4 ? (
+
+                                                <motion.div
+                                                    whileHover={{ scale: 1.02 }}
+                                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                                    className="group flex flex-col md:flex-row gap-8 justify-center items-center"
+                                                >
+                                                    {/* Original Home-mobile Mockup */}
+                                                    <div className="w-[80%] md:w-[45%] lg:w-[40%]">
+                                                        <RealisticIphone>
+                                                            <motion.div
+                                                                className="w-full h-full bg-top"
+                                                                style={{
+                                                                    backgroundImage: `url(/assets/projects/medical-office/Home-mobile.png)`,
+                                                                    backgroundSize: '100% auto',
+                                                                }}
+                                                                animate={{
+                                                                    backgroundPosition: ["50% 0%", "50% 100%"]
+                                                                }}
+                                                                transition={{
+                                                                    duration: 15,
+                                                                    ease: "linear",
+                                                                    repeat: Infinity,
+                                                                    repeatType: "reverse",
+                                                                    repeatDelay: 2
+                                                                }}
+                                                            />
+                                                        </RealisticIphone>
+                                                    </div>
+
+                                                    {/* New Carousel Mockup */}
+                                                    <div className="w-[80%] md:w-[45%] lg:w-[40%]">
+                                                        <RealisticIphone>
+                                                            <div className="w-full h-full bg-slate-900 relative overflow-hidden">
+                                                                <Carousel
+                                                                    opts={{
+                                                                        align: "start",
+                                                                        loop: true,
+                                                                    }}
+                                                                    plugins={[
+                                                                        Autoplay({
+                                                                            delay: 3000,
+                                                                        }),
+                                                                    ]}
+                                                                    className="w-full h-full"
+                                                                >
+                                                                    <CarouselContent className="h-full ml-0">
+                                                                        {tela.imagens.map((img, idx) => (
+                                                                            <CarouselItem key={idx} className="pl-0 h-full w-full">
+                                                                                <div className="relative w-full h-full">
+                                                                                    <img
+                                                                                        src={img}
+                                                                                        alt={`${tela.titulo} - Carousel - Image ${idx + 1}`}
+                                                                                        className="w-full h-full object-cover object-top"
+                                                                                        loading="lazy"
+                                                                                    />
+                                                                                </div>
+                                                                            </CarouselItem>
+                                                                        ))}
+                                                                    </CarouselContent>
+                                                                </Carousel>
+                                                            </div>
+                                                        </RealisticIphone>
+                                                    </div>
+                                                </motion.div>
+                                            ) : (
+                                                <motion.div
+                                                    whileHover={{ scale: 1.02 }}
+                                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                                    className="group"
+                                                >
+                                                    <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
+                                                        <img
+                                                            src={tela.imagens[0]}
+                                                            alt={tela.titulo}
+                                                            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                </motion.div>
+                                            )}
                                         </div>
                                     </div>
                                 </RevealText>
@@ -736,8 +1027,8 @@ function PrototypeSection() {
                         })}
                     </div>
                 </div>
-            </div>
-        </ChapterSection>
+            </div >
+        </ChapterSection >
     );
 }
 
@@ -746,72 +1037,63 @@ function HandoffSection() {
     return (
         <ChapterSection id="handoff" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
-                <BigNumber number="06" className="-top-20 -right-10 md:-right-20" />
+                <BigNumber number="08" className="-top-20 -right-10 md:-right-20" />
 
                 <div className="relative z-10">
                     {/* Section Header */}
-                    <div className="lg:max-w-xl mb-16 md:mb-24">
+                    <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Handoff
+                                {projectData.ui.sections.handoff.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
-                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
                                 {projectData.handoff.titulo}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto" />
+                        </RevealText>
+                        <RevealText delay={0.3}>
+                            <p className="text-lg text-slate-600 leading-relaxed mt-8">
+                                {projectData.handoff.descricao}
+                            </p>
                         </RevealText>
                     </div>
 
-                    {/* Content - Text + Image */}
-                    <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-stretch">
-                        {/* Text */}
-                        <div className="w-full md:w-[35%] flex-shrink-0">
-                            <RevealText delay={0.3}>
-                                <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                                    {projectData.handoff.descricao}
-                                </p>
-                                <ul className="space-y-3">
-                                    {projectData.handoff.bullets.map((bullet, index) => {
-                                        const [title, ...rest] = bullet.split(': ');
-                                        const description = rest.join(': ');
-                                        return (
-                                            <li key={index} className="flex items-start gap-3">
-                                                <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                                                <span className="text-base text-slate-600">
-                                                    <strong className="font-semibold text-slate-700">{title}:</strong> {description}
-                                                </span>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            </RevealText>
-                        </div>
+                    {/* Content - 3 Column Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        {projectData.handoff.bullets.map((bullet, index) => {
+                            const [title, ...rest] = bullet.split(': ');
+                            const description = rest.join(': ');
 
-                        {/* Image */}
-                        <div className="w-full md:w-[65%] flex-shrink-0">
-                            <RevealText delay={0.4}>
-                                <motion.div
-                                    whileHover={{ scale: 1.02 }}
-                                    transition={{ duration: 0.4, ease: "easeOut" }}
-                                    className="group"
-                                >
-                                    <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
-                                        <img
-                                            src={projectData.handoff.imagem}
-                                            alt={projectData.handoff.titulo}
-                                            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                </motion.div>
-                            </RevealText>
-                        </div>
+                            // Map index to icon
+                            const icons = [Users, Code, Share2];
+                            const Icon = icons[index] || CheckCircle2;
+
+                            return (
+                                <RevealText key={index} delay={0.4 + (index * 0.1)}>
+                                    <motion.div
+                                        whileHover={{ y: -5 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 h-full flex flex-col items-center text-center group"
+                                    >
+                                        <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors duration-300">
+                                            <Icon className="w-8 h-8 text-blue-600" />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-4">
+                                            {title}
+                                        </h3>
+                                        <p className="text-slate-600 leading-relaxed">
+                                            {description}
+                                        </p>
+                                    </motion.div>
+                                </RevealText>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -824,20 +1106,20 @@ function ResultsSection() {
     return (
         <ChapterSection id="results" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
-                <BigNumber number="07" className="-top-20 -right-10 md:-right-20" />
+                <BigNumber number="09" className="-top-20 -right-10 md:-right-20" />
 
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
                             <span className="text-emerald-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Resultados
+                                {projectData.ui.sections.results.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Impacto do Projeto
+                                {projectData.ui.sections.results.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -873,20 +1155,20 @@ function LessonsSection() {
     return (
         <ChapterSection id="lessons" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
-                <BigNumber number="08" className="-top-20 -left-10 md:-left-20" />
+                <BigNumber number="10" className="-top-20 -left-10 md:-left-20" />
 
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <RevealText>
                             <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Análise Crítica
+                                {projectData.ui.sections.lessons.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Insights e Reflexões
+                                {projectData.ui.sections.lessons.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
@@ -917,53 +1199,318 @@ function LessonsSection() {
     );
 }
 
-// Tools Section
-function ToolsSection() {
-    const toolIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
-        'Figma': PenTool,
-        'Photoshop': Palette,
-        'Miro': Layout,
-        'Jira': ClipboardList
-    };
+// Previous View Section (Visão Prévia - before redesign)
+function PreviousViewSection() {
+    // Placeholder images for before redesign - update paths as needed
+    const beforeImages = [
+        { src: "/assets/projects/medical-office/before-1.png", alt: "Tela anterior 1" },
+        { src: "/assets/projects/medical-office/before-2.png", alt: "Tela anterior 2" },
+        { src: "/assets/projects/medical-office/before-3.png", alt: "Tela anterior 3" },
+    ];
 
     return (
-        <ChapterSection id="tools" className="bg-white">
+        <ChapterSection id="previous-view" className="bg-white">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="05" className="-top-20 -right-10 md:-right-20" />
+
                 <div className="relative z-10">
+                    {/* Section Header */}
                     <div className="text-center mb-12">
                         <RevealText>
                             <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Ferramentas
+                                {projectData.ui.sections.previousView.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Softwares Utilizados
+                                {projectData.ui.sections.previousView.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto mb-6" />
+                        </RevealText>
+                        <RevealText delay={0.3}>
+                            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                                {projectData.previousView.desc}
+                            </p>
                         </RevealText>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {projectData.ferramentas.map((tool, index) => {
-                            const IconComponent = toolIcons[tool.name] || Settings;
-                            return (
-                                <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors group text-center h-full">
-                                        <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition-colors">
-                                            <IconComponent className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
+                    {/* Image Gallery */}
+                    {/* Image Gallery */}
+                    <div className="flex flex-col gap-8 lg:gap-10">
+                        {/* First Image - Full Width */}
+                        <RevealText delay={0.2}>
+                            <motion.div
+                                whileHover={{ scale: 1.01 }}
+                                transition={{ duration: 0.4, ease: "easeOut" }}
+                                className="group w-full"
+                            >
+                                <div className="rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/20 border border-slate-200 bg-white p-2 md:p-3">
+                                    <img
+                                        src={beforeImages[0].src}
+                                        alt={beforeImages[0].alt}
+                                        className="w-full h-auto object-cover rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </motion.div>
+                        </RevealText>
+
+                        {/* Second Row - Flexbox for equal height */}
+                        <div className="flex flex-col md:flex-row gap-8 lg:gap-10">
+                            {/* Image 2 - AR ~1.395 */}
+                            <div className="md:flex-[1.395] min-w-0">
+                                <RevealText delay={0.3} className="h-full">
+                                    <motion.div
+                                        whileHover={{ scale: 1.02 }}
+                                        transition={{ duration: 0.4, ease: "easeOut" }}
+                                        className="group h-full"
+                                    >
+                                        <div className="rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/20 border border-slate-200 bg-white p-2 md:p-3 h-full">
+                                            <img
+                                                src={beforeImages[1].src}
+                                                alt={beforeImages[1].alt}
+                                                className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
+                                                loading="lazy"
+                                            />
                                         </div>
-                                        <h3 className="font-semibold text-slate-900 text-lg mb-1">{tool.name}</h3>
-                                        <p className="text-sm text-slate-500">{tool.desc}</p>
-                                    </div>
+                                    </motion.div>
                                 </RevealText>
-                            );
-                        })}
+                            </div>
+
+                            {/* Image 3 - AR ~2.097 */}
+                            <div className="md:flex-[2.097] min-w-0">
+                                <RevealText delay={0.4} className="h-full">
+                                    <motion.div
+                                        whileHover={{ scale: 1.02 }}
+                                        transition={{ duration: 0.4, ease: "easeOut" }}
+                                        className="group h-full"
+                                    >
+                                        <div className="rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/20 border border-slate-200 bg-white p-2 md:p-3 h-full">
+                                            <img
+                                                src={beforeImages[2].src}
+                                                alt={beforeImages[2].alt}
+                                                className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                    </motion.div>
+                                </RevealText>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </ChapterSection>
+    );
+}
+
+// Product Vision Section (Visão de Produto)
+function ProductVisionSection() {
+    const [api, setApi] = useState<CarouselApi>();
+    const [current, setCurrent] = useState(0);
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!api) {
+            return;
+        }
+
+        setCount(api.scrollSnapList().length);
+        setCurrent(api.selectedScrollSnap() + 1);
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap() + 1);
+        });
+    }, [api]);
+
+
+    return (
+        <ChapterSection id="product-vision" className="bg-slate-50">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+                <BigNumber number="06" className="-top-20 -left-10 md:-left-20" />
+
+                <div className="relative z-10">
+                    {/* Section Header */}
+                    <div className="text-center mb-12 md:mb-16">
+                        <RevealText>
+                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.productVision.label}
+                            </span>
+                        </RevealText>
+                        <RevealText delay={0.1}>
+                            <h2
+                                className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
+                            >
+                                {projectData.ui.sections.productVision.title}
+                            </h2>
+                        </RevealText>
+                        <RevealText delay={0.2}>
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto mb-6" />
+                        </RevealText>
+                        <RevealText delay={0.3}>
+                            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                                {projectData.ui.sections.productVision.desc}
+                            </p>
+                        </RevealText>
+                    </div>
+
+                    {/* Image Carousel */}
+                    <div className="mt-16 md:mt-24 relative">
+                        <RevealText delay={0.6}>
+                            <Carousel
+                                setApi={setApi}
+                                opts={{
+                                    align: "start",
+                                    loop: true,
+                                }}
+                                plugins={[
+                                    Autoplay({
+                                        delay: 4000,
+                                    }),
+                                ]}
+                                className="w-full"
+                            >
+                                <CarouselContent className="-ml-4">
+                                    {[
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 182.png",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 183.png",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 185.png",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 189.png",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 190.png",
+                                        "/assets/projects/medical-office/visao-de-produto/flow.png", // Added flow image
+                                        "/assets/projects/medical-office/visao-de-produto/image 11.png",
+                                        "/assets/projects/medical-office/visao-de-produto/image 14.png",
+                                        "/assets/projects/medical-office/visao-de-produto/image 18.png",
+                                        "/assets/projects/medical-office/visao-de-produto/image 20.png"
+                                    ].map((img, index) => (
+                                        <CarouselItem key={index} className="pl-4 md:basis-1/2">
+                                            <div className="p-1">
+                                                <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg shadow-slate-200/50 aspect-video bg-slate-100 relative group">
+                                                    <img
+                                                        src={img}
+                                                        alt={`Carousel Image ${index + 1}`}
+                                                        className={`w-full h-full ${img.includes('flow.png') ? 'object-contain p-2' : 'object-cover'} transition-transform duration-500 group-hover:scale-105`}
+                                                    />
+                                                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors duration-300" />
+                                                </div>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                                <div className="hidden md:block">
+                                    <CarouselPrevious />
+                                    <CarouselNext />
+                                </div>
+                            </Carousel>
+
+                            {/* Pagination Dots (Mobile Only) */}
+                            <div className="flex justify-center gap-2 mt-6 md:hidden">
+                                {Array.from({ length: count }).map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className={`h-2 rounded-full transition-all duration-300 ${index + 1 === current ? "bg-blue-600 w-6" : "bg-slate-300 w-2"
+                                            }`}
+                                    />
+                                ))}
+                            </div>
+                        </RevealText>
+                    </div>
+
+                    {/* 2x2 Grid */}
+                    <div className="grid md:grid-cols-2 gap-6 md:gap-8 relative mt-16 md:mt-24">
+                        {/* O que É */}
+                        <RevealText delay={0.2}>
+                            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-50 via-white to-blue-50/30 border border-blue-200 h-full">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center">
+                                        <CheckCircle2 className="w-6 h-6 text-white" />
+                                    </div>
+                                    <h3 className="text-xl md:text-2xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        {projectData.productVision.whatItIs.title}
+                                    </h3>
+                                </div>
+                                <ul className="space-y-3">
+                                    {projectData.productVision.whatItIs.items.map((item: string, index: number) => (
+                                        <li key={index} className="flex items-start gap-3">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                                            <span className="text-base text-slate-600">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </RevealText>
+
+                        {/* O que NÃO É */}
+                        <RevealText delay={0.3}>
+                            <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 via-white to-slate-50/30 border border-slate-200 h-full">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-slate-400 flex items-center justify-center">
+                                        <XCircle className="w-6 h-6 text-white" />
+                                    </div>
+                                    <h3 className="text-xl md:text-2xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        {projectData.productVision.whatItIsNot.title}
+                                    </h3>
+                                </div>
+                                <ul className="space-y-3">
+                                    {projectData.productVision.whatItIsNot.items.map((item: string, index: number) => (
+                                        <li key={index} className="flex items-start gap-3">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 flex-shrink-0" />
+                                            <span className="text-base text-slate-600">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </RevealText>
+
+                        {/* O que FAZ */}
+                        <RevealText delay={0.4}>
+                            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-50 via-white to-blue-50/30 border border-blue-200 h-full">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center">
+                                        <Zap className="w-6 h-6 text-white" />
+                                    </div>
+                                    <h3 className="text-xl md:text-2xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        {projectData.productVision.whatItDoes.title}
+                                    </h3>
+                                </div>
+                                <ul className="space-y-3">
+                                    {projectData.productVision.whatItDoes.items.map((item: string, index: number) => (
+                                        <li key={index} className="flex items-start gap-3">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                                            <span className="text-base text-slate-600">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </RevealText>
+
+                        {/* O que NÃO FAZ */}
+                        <RevealText delay={0.5}>
+                            <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 via-white to-slate-50/30 border border-slate-200 h-full">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-slate-400 flex items-center justify-center">
+                                        <Ban className="w-6 h-6 text-white" />
+                                    </div>
+                                    <h3 className="text-xl md:text-2xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        {projectData.productVision.whatItDoesNot.title}
+                                    </h3>
+                                </div>
+                                <ul className="space-y-3">
+                                    {projectData.productVision.whatItDoesNot.items.map((item: string, index: number) => (
+                                        <li key={index} className="flex items-start gap-3">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 flex-shrink-0" />
+                                            <span className="text-base text-slate-600">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </RevealText>
+                    </div>
+
                 </div>
             </div>
         </ChapterSection>
@@ -993,7 +1540,8 @@ export function MedicalOffice() {
                 <RoleSection />
                 <ResearchSection />
                 <DiscoveriesSection />
-                <ToolsSection />
+                <PreviousViewSection />
+                <ProductVisionSection />
                 <PrototypeSection />
                 <HandoffSection />
                 <ResultsSection />

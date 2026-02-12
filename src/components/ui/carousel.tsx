@@ -3,8 +3,8 @@
 import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
-} from "embla-carousel-react@8.6.0";
-import { ArrowLeft, ArrowRight } from "lucide-react@0.487.0";
+} from "embla-carousel-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "./utils";
 import { Button } from "./button";
@@ -132,13 +132,13 @@ function Carousel({
   );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
+function CarouselContent({ className, viewportClassName, ...props }: React.ComponentProps<"div"> & { viewportClassName?: string }) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
+      className={cn("overflow-hidden", viewportClassName)}
       data-slot="carousel-content"
     >
       <div

@@ -12,6 +12,7 @@ import { FooterNew } from './components/FooterNew';
 import { ContactModal } from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 // Lazy load project pages for code-splitting
 const TranscricoesInsightsIA = lazy(() => import('./components/projects/TranscricoesInsightsIA').then(m => ({ default: m.TranscricoesInsightsIA })));
@@ -75,9 +76,21 @@ function AppContent() {
       }>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/projeto/transcricoes-insights-ia" element={<TranscricoesInsightsIA />} />
-          <Route path="/projeto/medical-office" element={<MedicalOffice />} />
-          <Route path="/projeto/importacao-empresas" element={<ImportacaoEmpresas />} />
+          <Route path="/projeto/transcricoes-insights-ia" element={
+            <ProtectedRoute>
+              <TranscricoesInsightsIA />
+            </ProtectedRoute>
+          } />
+          <Route path="/projeto/medical-office" element={
+            <ProtectedRoute>
+              <MedicalOffice />
+            </ProtectedRoute>
+          } />
+          <Route path="/projeto/importacao-empresas" element={
+            <ProtectedRoute>
+              <ImportacaoEmpresas />
+            </ProtectedRoute>
+          } />
           <Route path="/sobre" element={<AboutPage />} />
         </Routes>
       </Suspense>

@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Linkedin, Mail } from 'lucide-react';
+import { Linkedin, Mail, FileText } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Logo1 from '../imports/Logo';
 import { useContactModal } from '../contexts/ContactModalContext';
@@ -125,13 +125,20 @@ export function FooterNew() {
                     )
                   },
                   { label: "Email", href: "mailto:contato@picolodesign.com.br", icon: Mail },
-                  { label: "Linkedin", href: linkedinUrl, icon: Linkedin }
+                  { label: "Linkedin", href: linkedinUrl, icon: Linkedin },
+                  ...(language === 'pt-BR' ? [{
+                    label: t('footer.downloadCV'),
+                    href: "/assets/CV/Curriculo-Rodrigo-Picolo-PT.pdf",
+                    icon: FileText,
+                    download: true
+                  }] : [])
                 ].map((social) => (
                   <li key={social.label}>
                     <motion.a
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      download={social.download}
                       whileHover={{ x: 5 }}
                       className="text-zinc-600 hover:text-purple-600 transition-colors inline-flex items-center gap-2"
                     >

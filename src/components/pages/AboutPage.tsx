@@ -17,7 +17,7 @@ import { ParticleBackground } from '../ParticleBackground';
 import { HeroParticleGrid } from '../HeroParticleGrid';
 import { useContactModal } from '../../contexts/ContactModalContext';
 import imgEu1 from "../../assets/image-rp.png";
-import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { ImageWithFallback } from '../ui/ImageWithFallback';
 import { useAboutPageData, ExperienceItem, EducationItem, HighlightCardItem, CertificationItem, EventItem, AboutPageData } from '../../hooks/useAboutPageData';
 
 // ============================================================================

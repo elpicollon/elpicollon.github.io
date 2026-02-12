@@ -1,10 +1,11 @@
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useRef, useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './ui/ImageWithFallback';
 import { ExternalLink } from 'lucide-react';
 import { useContactModal } from '../contexts/ContactModalContext';
 import { useTranslation } from '../hooks/useTranslation';
+import { getPublishedProjects, PROJECTS } from '../config/projects';
 
 export function HorizontalScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -20,32 +21,37 @@ export function HorizontalScroll() {
   const { t } = useTranslation();
 
   // Visual data that doesn't need translation
-  const projectVisuals = useMemo(() => [
-    {
-      id: 1,
-      comingSoon: false,
-      image: '/assets/projects/transcricoes-insights-ia/card-home.png',
-      gradient: 'linear-gradient(to bottom, #2F968C, #00463F)',
-      link: '/projeto/transcricoes-insights-ia'
-    },
-    {
-      id: 2,
-      comingSoon: true,
-    },
-    {
-      id: 3,
-      comingSoon: true,
-    },
-  ], []);
+  const projectVisuals = useMemo(() => {
+    return getPublishedProjects().map(project => ({
+      ...project,
+      // Ensure we have a link property for the component logic
+      link: project.route
+    }));
+  }, []);
 
   const translatedCards = t<any[]>('horizontalScroll.projectCards') || [];
-  const projects = useMemo(() =>
-    translatedCards.length > 0 ? translatedCards.map((project, index) => ({
-      ...project,
-      ...projectVisuals[index]
-    })) : projectVisuals,
-    [translatedCards, projectVisuals]
-  );
+
+  const projects = useMemo(() => {
+    return projectVisuals.map(visual => {
+      // Find the index of this project in the main PROJECTS array
+      // This index corresponds to the index in the translation array
+      const originalIndex = PROJECTS.findIndex(p => p.id === visual.id);
+
+      // Get translation using the original index
+      const translation = translatedCards[originalIndex] || {};
+
+      return {
+        ...visual,
+        ...translation
+      };
+    });
+  }, [translatedCards, projectVisuals]);
+
+  // WAIT. I don't see `PROJECTS` imported here to find the index.
+  // I should import `PROJECTS` too.
+
+  // Let's refine the replacement.
+
 
   useEffect(() => {
     const updateConstraints = () => {

@@ -146,6 +146,7 @@
             "expertise": "Expertise",
             "contact": "Contact"
         },
+        "downloadCV": "Download CV",
         "madeWith": "Made with 😡 by me. All rights reserved.",
         "copyright": "© {year} - Picolo Design Digital & Consultancy | CNPJ: 42.054.838/0001-08"
     },
@@ -155,7 +156,10 @@
         "title": "Ready to create something amazing together?",
         "description": "If you liked this project and want to discuss how I can help your team, get in touch!",
         "contactButton": "Get in Touch",
-        "backButton": "Back"
+        "backButton": "Back",
+        "previousProject": "Previous Project",
+        "nextProject": "Next Project",
+        "viewProject": "View Project"
     },
     "contact": {
         "title": "Let's talk?",
@@ -781,7 +785,97 @@
                     "name": "Jira",
                     "desc": "Management and handoff"
                 }
-            ]
+            ],
+            "productVision": {
+                "whatItIs": {
+                    "title": "What It Is",
+                    "items": [
+                        "A platform connecting healthcare professionals with clinic owners",
+                        "A marketplace for renting idle medical office spaces",
+                        "A digital solution to optimize clinic occupancy"
+                    ]
+                },
+                "whatItIsNot": {
+                    "title": "What It Is NOT",
+                    "items": [
+                        "A clinic or medical office itself",
+                        "A medical records management system",
+                        "A telemedicine platform"
+                    ]
+                },
+                "whatItDoes": {
+                    "title": "What It DOES",
+                    "items": [
+                        "Connects early-career professionals with available spaces",
+                        "Facilitates income generation for clinic owners",
+                        "Manages bookings and space availability"
+                    ]
+                },
+                "whatItDoesNot": {
+                    "title": "What It Does NOT",
+                    "items": [
+                        "Does not offer medical services directly",
+                        "Does not manage patient schedules",
+                        "Does not process consultation payments"
+                    ]
+                }
+            },
+            "previousView": {
+                "desc": "See how the platform looked before the redesign process. The images below show the previous state of the interface that was completely rethought."
+            },
+            "ui": {
+                "backButton": "Back",
+                "heroTitle": {
+                    "line1": "Redesign",
+                    "line2": "Medical Office"
+                },
+                "heroAlt": "Project Cover: Redesign Medical Office",
+                "heroMobileAlt": "Medical Office - Mobile Version",
+                "sections": {
+                    "overview": {
+                        "label": "Objective",
+                        "title": "The Project",
+                        "objetivo": "Overview",
+                        "desafio": "Challenge"
+                    },
+                    "role": {
+                        "label": "Contribution",
+                        "title": "My Role"
+                    },
+                    "research": {
+                        "label": "Discovery & Definition",
+                        "title": "Research Process"
+                    },
+                    "discoveries": {
+                        "label": "Discoveries",
+                        "title": "Key Insights"
+                    },
+                    "previousView": {
+                        "label": "Before Redesign",
+                        "title": "Previous View"
+                    },
+                    "productVision": {
+                        "label": "Discovery & Definition",
+                        "title": "Product Vision",
+                        "desc": "Records from the discovery and definition stages of the product's characteristics to avoid ambiguities and maintain focus during development."
+                    },
+                    "prototype": {
+                        "label": "Prototype",
+                        "title": "Project Interface"
+                    },
+                    "handoff": {
+                        "label": "Handoff"
+                    },
+                    "results": {
+                        "label": "Results",
+                        "title": "Project Impact"
+                    },
+                    "lessons": {
+                        "label": "Critical Analysis",
+                        "title": "Insights & Reflections"
+                    }
+                }
+            }
         },
         "importacaoEmpresas": {
             "title": "Company Import",

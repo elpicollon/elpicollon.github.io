@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, ArrowRight } from 'lucide-react';
 import imgEu1 from "../assets/image-rp.png";
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './ui/ImageWithFallback';
 import { useTranslation } from '../hooks/useTranslation';
 import { useLanguage } from '../contexts/LanguageContext';
 

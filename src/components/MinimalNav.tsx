@@ -52,7 +52,7 @@ export function MinimalNav() {
   return (
     <>
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-[100] px-3 pt-3 md:px-6 md:pt-6"
+        className="fixed top-0 left-0 right-0 z-[100] px-3 pt-4 md:px-6 md:pt-4"
       >
         <motion.div
           style={{
