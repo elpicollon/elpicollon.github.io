@@ -62,7 +62,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
               className="absolute inset-0"
               style={{ background: project.gradient }}
             />
-            <div className="absolute inset-x-[5%] bottom-0 top-0 md:top-[10%] flex justify-center items-end pointer-events-none project-card__gradient-image origin-bottom">
+            <div className="absolute inset-x-1 md:inset-x-[5%] bottom-0 top-[5%] md:top-[10%] flex justify-center items-end pointer-events-none project-card__gradient-image origin-bottom">
               <ImageWithFallback
                 src={project.image!}
                 alt={project.title}

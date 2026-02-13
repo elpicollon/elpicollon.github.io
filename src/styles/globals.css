@@ -355,10 +355,11 @@
   .project-card__gradient-image {
     will-change: transform;
     transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+    transform-origin: bottom center;
   }
 
   .project-card__inner:hover .project-card__gradient-image {
-    transform: scale(1.05) translateY(-4%);
+    transform: scale(1.08);
   }
 
   /* Mouse-glow effect */
