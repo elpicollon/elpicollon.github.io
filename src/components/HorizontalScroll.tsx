@@ -1,319 +1,363 @@
-import { motion, useMotionValue, useSpring } from 'motion/react';
-import { useRef, useEffect, useState, useMemo } from 'react';
+import {
+  motion,
+  useInView,
+  AnimatePresence,
+} from 'motion/react';
+import { useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './ui/ImageWithFallback';
-import { ExternalLink } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useContactModal } from '../contexts/ContactModalContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { getPublishedProjects, PROJECTS } from '../config/projects';
 
+/** Mix a hex colour toward white to create a softer tint (0 = original, 1 = white) */
+function lightenHex(hex: string, amount = 0.55): string {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  const lr = Math.round(r + (255 - r) * amount);
+  const lg = Math.round(g + (255 - g) * amount);
+  const lb = Math.round(b + (255 - b) * amount);
+  return `rgb(${lr}, ${lg}, ${lb})`;
+}
+
+/* ────────────────────────────────────────────
+   ProjectCard — Individual card with 3D tilt
+   ──────────────────────────────────────────── */
+
+interface ProjectCardProps {
+  project: Record<string, any>;
+  index: number;
+  total: number;
+}
+
+function ProjectCard({ project, index }: ProjectCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const hasGradient = 'gradient' in project && project.gradient;
+  const isComingSoon = 'comingSoon' in project && project.comingSoon;
+
+  const cardContent = (
+    <div
+      ref={cardRef}
+      className="project-card w-full h-full"
+    >
+      <div
+        className="project-card__inner relative w-full h-full rounded-3xl overflow-hidden"
+      >
+        {/* ── background ── */}
+        {isComingSoon ? (
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-400 via-slate-500 to-slate-600">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-6xl md:text-8xl font-bold text-white/10 tracking-tight select-none">
+                {project.comingSoonLabel}
+              </span>
+            </div>
+          </div>
+        ) : hasGradient ? (
+          <>
+            <div
+              className="absolute inset-0"
+              style={{ background: project.gradient }}
+            />
+            <div className="absolute inset-x-[5%] bottom-0 top-0 md:top-[10%] flex justify-center items-end pointer-events-none project-card__gradient-image origin-bottom">
+              <ImageWithFallback
+                src={project.image!}
+                alt={project.title}
+                className="w-full h-full object-contain object-bottom"
+              />
+            </div>
+          </>
+        ) : (
+          <div className="absolute inset-0">
+            <ImageWithFallback
+              src={project.image!}
+              alt={project.title}
+              className="w-full h-full object-cover project-card__image"
+            />
+          </div>
+        )}
+
+        {/* ── gradient overlay ── */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-500 ${hasGradient
+            ? 'bg-gradient-to-t from-black/70 via-black/20 to-transparent'
+            : 'bg-gradient-to-t from-black/80 via-black/40 to-transparent'
+            }`}
+        />
+
+        {/* ── content ── */}
+        <div className="absolute inset-0 p-8 md:p-12 flex flex-col-reverse md:flex-col justify-between z-10">
+          {/* arrow button — bottom on mobile, top-right on desktop */}
+          <div className="flex justify-end md:justify-between items-start">
+            <span className="hidden md:block text-[7rem] font-bold leading-none text-white/[0.07] select-none">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+
+            <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-[360deg] group-hover:bg-white/20">
+              <ArrowRight className="text-white" size={18} />
+            </div>
+          </div>
+
+          {/* text info — top on mobile, bottom on desktop */}
+          <div>
+            <p
+              className="mb-3 tracking-widest text-xs md:text-sm uppercase font-medium"
+              style={{ color: hasGradient ? lightenHex(project.primaryColor) : undefined }}
+            >
+              <span className={hasGradient ? '' : 'text-purple-300/90'}>
+                {project.category} · {project.year}
+              </span>
+            </p>
+
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.1] tracking-tight">
+              {project.title}
+            </h3>
+          </div>
+        </div>
+
+        {/* ── hover border ── */}
+        <div
+          className="absolute inset-0 rounded-3xl border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border-white/20"
+        />
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="group h-full">
+      {'link' in project && project.link ? (
+        <Link to={project.link} className="block w-full h-full">
+          {cardContent}
+        </Link>
+      ) : (
+        <div className="w-full h-full">
+          {cardContent}
+        </div>
+      )}
+    </div>
+  );
+
+}
+
+/* ────────────────────────────────────────────
+   HorizontalScroll — Cinematic Gallery
+   ──────────────────────────────────────────── */
+
 export function HorizontalScroll() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const smoothX = useSpring(x, {
-    stiffness: 100,
-    damping: 30,
-    mass: 0.5
-  });
-  const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const { openModal } = useContactModal();
   const { t } = useTranslation();
 
-  // Visual data that doesn't need translation
-  const projectVisuals = useMemo(() => {
-    return getPublishedProjects().map(project => ({
-      ...project,
-      // Ensure we have a link property for the component logic
-      link: project.route
-    }));
-  }, []);
+  /* ── project data ── */
+  const projectVisuals = useMemo(
+    () =>
+      getPublishedProjects().map((project) => ({
+        ...project,
+        link: project.route,
+      })),
+    [],
+  );
 
   const translatedCards = t<any[]>('horizontalScroll.projectCards') || [];
 
   const projects = useMemo(() => {
-    return projectVisuals.map(visual => {
-      // Find the index of this project in the main PROJECTS array
-      // This index corresponds to the index in the translation array
-      const originalIndex = PROJECTS.findIndex(p => p.id === visual.id);
-
-      // Get translation using the original index
+    return projectVisuals.map((visual) => {
+      const originalIndex = PROJECTS.findIndex((p) => p.id === visual.id);
       const translation = translatedCards[originalIndex] || {};
-
       return {
         ...visual,
-        ...translation
+        ...translation,
+        comingSoonLabel: t('horizontalScroll.comingSoon'),
       };
     });
-  }, [translatedCards, projectVisuals]);
+  }, [translatedCards, projectVisuals, t]);
 
-  // WAIT. I don't see `PROJECTS` imported here to find the index.
-  // I should import `PROJECTS` too.
+  const totalSlides = projects.length; // only project cards, exclude CTA
 
-  // Let's refine the replacement.
-
-
+  /* ── observe active slide via IntersectionObserver ── */
   useEffect(() => {
-    const updateConstraints = () => {
-      if (scrollContainerRef.current) {
-        const scrollWidth = scrollContainerRef.current.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        // Constraints: right is 0 (start), left is negative (scroll distance)
-        setDragConstraints({ left: -(scrollWidth - viewportWidth), right: 0 });
-      }
-    };
+    const gallery = galleryRef.current;
+    if (!gallery) return;
 
-    updateConstraints();
-    window.addEventListener('resize', updateConstraints);
-    return () => window.removeEventListener('resize', updateConstraints);
+    const slides = gallery.querySelectorAll<HTMLElement>(
+      '.project-gallery__slide',
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(
+              (entry.target as HTMLElement).dataset.slideIndex,
+            );
+            if (!isNaN(idx)) setActiveIndex(idx);
+          }
+        });
+      },
+      { root: null, threshold: 0.5 },
+    );
+
+    slides.forEach((slide) => observer.observe(slide));
+    return () => observer.disconnect();
   }, [projects]);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const scrollContainer = scrollContainerRef.current;
+  /* ── scroll to slide ── */
+  const scrollToSlide = useCallback(
+    (idx: number) => {
+      const gallery = galleryRef.current;
+      if (!gallery) return;
+      const slide = gallery.querySelector<HTMLElement>(
+        `[data-slide-index="${idx}"]`,
+      );
+      slide?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    },
+    [],
+  );
 
-    if (!section || !scrollContainer) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      const rect = section.getBoundingClientRect();
-      const sectionHeight = rect.height;
-      const viewportHeight = window.innerHeight;
-
-      // Check if section is visible (at least 50% in viewport)
-      const visibleTop = Math.max(0, rect.top);
-      const visibleBottom = Math.min(viewportHeight, rect.bottom);
-      const visibleHeight = visibleBottom - visibleTop;
-      const isVisible = visibleHeight > sectionHeight * 0.3;
-
-      if (!isVisible) return;
-
-      const scrollWidth = scrollContainer.scrollWidth;
-      const viewportWidth = window.innerWidth;
-      const maxScroll = -(scrollWidth - viewportWidth + 48); // Account for padding
-      const currentX = x.get();
-
-      // Calculate new position
-      let newX = currentX - e.deltaY * 1.5;
-
-      // Clamp the value
-      newX = Math.max(maxScroll, Math.min(0, newX));
-
-      // If we're at the limits and trying to scroll further, allow vertical scroll
-      if ((currentX >= -1 && e.deltaY < 0) || (currentX <= maxScroll + 1 && e.deltaY > 0)) {
-        return;
-      }
-
-      // Otherwise prevent default and scroll horizontally
-      e.preventDefault();
-      x.set(newX);
-    };
-
-    section.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => {
-      section.removeEventListener('wheel', handleWheel);
-    };
-  }, [x]);
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      const current = x.get();
-      const target = current - 300;
-      x.set(Math.max(dragConstraints.left, target));
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      const current = x.get();
-      const target = current + 300;
-      x.set(Math.min(dragConstraints.right, target));
-    }
-  };
+  /* ── section in-view for progress indicator visibility ── */
+  const sectionInView = useInView(sectionRef, { amount: 0.1 });
 
   return (
     <section
       id="projetos"
       ref={sectionRef}
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      className="relative py-16 md:py-20 bg-[#f2f4f7] z-0 isolate mb-32 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+      className="relative bg-[#f2f4f7] z-0 isolate"
       aria-label={t('accessibility.projectGallery')}
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#f2f4f7] via-purple-100/40 to-[#f2f4f7] -z-10" />
+      {/* ── subtle background ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f2f4f7] via-purple-50/30 to-[#f2f4f7] -z-10" />
 
-      {/* Content wrapper */}
-      <div className="relative flex flex-col overflow-hidden">
-        {/* Title */}
-        <div className="px-6 md:px-12 mb-6 md:mb-8">
-          <motion.h2
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]"
+      {/* ── title ── */}
+      <div className="px-6 md:px-12 pt-20 md:pt-28 pb-8 md:pb-12">
+        <motion.h2
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]"
+        >
+          {t('horizontalScroll.sectionTitle')}
+        </motion.h2>
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: '300px' }}
+          transition={{ duration: 1, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="h-[2px] bg-gradient-to-r from-purple-500 to-transparent mt-4"
+        />
+      </div>
+
+      {/* ── scroll gallery ── */}
+      <div
+        ref={galleryRef}
+        className="project-gallery px-6 md:px-12"
+        style={{ maxHeight: 'none' }}
+      >
+        {/* Project slides */}
+        {projects.map((project, index) => (
+          <div
+            key={project.id}
+            data-slide-index={index}
+            className="project-gallery__slide pb-8 md:pb-12"
           >
-            {t('horizontalScroll.sectionTitle')}
-          </motion.h2>
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: '300px' }}
-            transition={{ duration: 1, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="h-[2px] bg-gradient-to-r from-purple-500 to-transparent mt-4"
-          />
-        </div>
-
-        {/* Projects horizontal scroll */}
-        <div className="flex items-center overflow-visible pt-16">
-          <motion.div
-            ref={scrollContainerRef}
-            style={{ x: smoothX }}
-            drag="x"
-            dragConstraints={dragConstraints}
-            className="flex gap-6 md:gap-8 px-6 md:px-12 will-change-transform cursor-grab active:cursor-grabbing"
-          >
-            {projects.map((project, index) => {
-              const hasGradient = 'gradient' in project && project.gradient;
-              const isComingSoon = 'comingSoon' in project && project.comingSoon;
-
-              const cardContent = (
-                <div className={`relative w-full h-full rounded-3xl ${hasGradient ? '' : 'overflow-hidden'}`}>
-                  {/* Background - Gradient, Coming Soon, or Image */}
-                  {isComingSoon ? (
-                    <>
-                      {/* Coming Soon Background - subtle colors */}
-                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-slate-400 via-slate-500 to-slate-600" />
-                      {/* Coming Soon Badge */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <span className="text-6xl md:text-7xl lg:text-8xl font-bold text-white/15 tracking-tight">
-                            {t('horizontalScroll.comingSoon')}
-                          </span>
-                        </div>
-                      </div>
-                    </>
-                  ) : hasGradient ? (
-                    <>
-                      {/* Gradient Background - with overflow hidden */}
-                      <div
-                        className="absolute inset-0 rounded-3xl overflow-hidden"
-                        style={{ background: project.gradient }}
-                      />
-                      {/* Centered image at bottom - can overflow the card on hover */}
-                      <div
-                        className="absolute inset-x-[5%] bottom-0 top-0 md:top-[10%] flex justify-center items-end pointer-events-none transition-all duration-500 ease-out group-hover:inset-x-[-10%] group-hover:top-[-15%] group-hover:scale-[1.05] origin-bottom"
-                      >
-                        <ImageWithFallback
-                          src={project.image!}
-                          alt={project.title}
-                          className="w-full h-full object-contain object-bottom"
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      {/* Regular Image */}
-                      <ImageWithFallback
-                        src={project.image!}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </>
-                  )}
-
-                  {/* Gradient overlay - Keep dark for text readability over images */}
-                  <div className={`absolute inset-0 rounded-b-3xl ${hasGradient ? 'bg-gradient-to-t from-black/60 via-transparent to-transparent' : 'bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80'} transition-opacity duration-300`} />
-
-                  {/* Content */}
-                  <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
-                    {/* Top - Number */}
-                    <div className="flex justify-between items-start">
-                      <span
-                        className="text-5xl md:text-6xl font-medium text-white/30"
-                        style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
-                      >
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 45 }}
-                        className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-xl border border-white/20 flex items-center justify-center"
-                      >
-                        <ExternalLink className="text-white" size={20} />
-                      </motion.div>
-                    </div>
-
-                    {/* Bottom - Info */}
-                    <div style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
-                      <p className={`${hasGradient ? 'text-teal-200' : 'text-purple-300'} mb-2 tracking-wider text-sm md:text-base`}>
-                        {project.category} • {project.year}
-                      </p>
-                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white">
-                        {project.title}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Hover effect border */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className={`absolute inset-0 border-2 ${hasGradient ? 'border-teal-400/50' : 'border-purple-500/50'} rounded-3xl pointer-events-none`}
-                  />
-                </div>
-              );
-
-              return (
-                <motion.div
-                  key={project.id}
-                  className={`relative flex-shrink-0 group cursor-pointer ${hasGradient ? 'overflow-visible' : ''}`}
-                  style={{
-                    width: 'clamp(300px, 70vw, 600px)',
-                    height: 'clamp(220px, 35vh, 380px)'
-                  }}
-                  whileHover={{ scale: 0.98 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {'link' in project && project.link ? (
-                    <Link to={project.link} className="block w-full h-full">
-                      {cardContent}
-                    </Link>
-                  ) : (
-                    cardContent
-                  )}
-                </motion.div>
-              );
-            })}
-
-            {/* End card */}
             <div
-              className="flex-shrink-0 rounded-3xl bg-gradient-to-br from-purple-50 to-white backdrop-blur-xl border border-purple-100 flex items-center justify-center shadow-lg"
               style={{
-                width: 'clamp(300px, 70vw, 600px)',
-                height: 'clamp(220px, 35vh, 380px)'
+                height: 'clamp(360px, 60vh, 700px)',
               }}
             >
-              <div className="text-center p-8">
-                <motion.h3
-                  whileHover={{ scale: 1.05 }}
-                  className="text-3xl md:text-5xl lg:text-6xl font-medium text-purple-900 mb-6"
-                >
-                  {t('horizontalScroll.ctaTitle')}
-                </motion.h3>
-                <motion.button
-                  onClick={openModal}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-colors cursor-pointer"
-                >
-                  {t('nav.getInTouch')}
-                </motion.button>
-              </div>
+              <ProjectCard
+                project={project}
+                index={index}
+                total={projects.length}
+              />
             </div>
+          </div>
+        ))}
+
+        {/* CTA — horizontal footer-style bar */}
+        <div
+          data-slide-index={projects.length}
+          className="project-gallery__slide pt-4 pb-20 md:pb-28"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.5 }}
+            className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-slate-200"
+          >
+            <h3 className="text-xl md:text-2xl font-medium text-slate-800 tracking-tight text-center sm:text-left">
+              {t('horizontalScroll.ctaTitle')}
+            </h3>
+
+            <motion.button
+              onClick={openModal}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 text-white font-medium rounded-full hover:from-purple-700 hover:to-violet-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 group/btn"
+            >
+              <span className="inline-flex items-center gap-3">
+                {t('nav.getInTouch')}
+                <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform duration-300" />
+              </span>
+            </motion.button>
           </motion.div>
         </div>
       </div>
+
+      {/* ── progress indicator (desktop) ── */}
+      <AnimatePresence>
+        {sectionInView && (
+          <motion.nav
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+            className="project-progress"
+            aria-label="Project navigation"
+          >
+            <span className="project-progress__counter">
+              {String(Math.min(activeIndex + 1, totalSlides)).padStart(2, '0')}
+            </span>
+
+            {Array.from({ length: totalSlides }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToSlide(i)}
+                className={`project-progress__dot ${i === activeIndex ? 'project-progress__dot--active' : ''
+                  }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+
+            <span className="project-progress__counter">
+              {String(totalSlides).padStart(2, '0')}
+            </span>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* ── scroll hint (shows only at first slide) ── */}
+      <AnimatePresence>
+        {activeIndex === 0 && sectionInView && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-slate-400"
+          >
+            <span className="text-xs tracking-widest uppercase">
+              {t('hero.scrollIndicator')}
+            </span>
+            <ChevronDown size={16} className="animate-scroll-hint" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
