@@ -50,7 +50,7 @@
             {
                 "id": 1,
                 "title": "Transcrições & Insights com IA",
-                "category": "UX Design",
+                "category": "Product Design",
                 "year": "2024"
             },
             {
@@ -829,6 +829,12 @@
                     "line1": "Redesign",
                     "line2": "Medical Office"
                 },
+                "heroTags": [
+                    "2021",
+                    "Product Design",
+                    "Web",
+                    "Mobile"
+                ],
                 "heroAlt": "Capa do Projeto: Redesign Medical Office",
                 "heroMobileAlt": "Medical Office - Versão Mobile",
                 "sections": {
@@ -920,6 +926,40 @@
                     "desc": "Desenvolvimento de wireframes para validar a solução antes do protótipo de alta fidelidade."
                 }
             ],
+            "productVision": {
+                "whatItIs": {
+                    "title": "O que É",
+                    "items": [
+                        "Uma ferramenta para validação e enriquecimento de dados",
+                        "Um otimizador de processos de importação",
+                        "Uma solução para gestão de qualidade de dados"
+                    ]
+                },
+                "whatItIsNot": {
+                    "title": "O que NÃO É",
+                    "items": [
+                        "Um sistema de CRM completo",
+                        "Uma ferramenta de prospecção fria",
+                        "Um software de gestão financeira"
+                    ]
+                },
+                "whatItDoes": {
+                    "title": "O que FAZ",
+                    "items": [
+                        "Detecta e remove duplicatas automaticamente",
+                        "Valida dados antes da importação final",
+                        "Permite mapeamento inteligente de colunas"
+                    ]
+                },
+                "whatItDoesNot": {
+                    "title": "O que NÃO FAZ",
+                    "items": [
+                        "Não realiza vendas diretas",
+                        "Não substitui a equipe comercial",
+                        "Não gerencia contratos"
+                    ]
+                }
+            },
             "descobertas": [
                 {
                     "title": "Validação de Listas",
@@ -968,8 +1008,10 @@
                 "bullets": [
                     "Organização: Frames agrupados em seções conforme suas funcionalidades",
                     "Componentização: Elementos reutilizados organizados na lateral esquerda do arquivo",
-                    "Comunicação: Estrutura que contribui para eficiência entre equipes e minimiza dúvidas"
-                ]
+                    "Comunicação: Estrutura que contribui para eficiência entre equipes e minimiza dúvidas",
+                    "Processo: Transparência nas regras de negócio e fluxos lógicos"
+                ],
+                "imagem": "/assets/projects/importacao-empresas/handoff.png"
             },
             "resultados": [
                 {
@@ -1002,7 +1044,73 @@
                     "title": "Validação com Usuários",
                     "desc": "Ideal seria disponibilizar o projeto para testes de usabilidade e obter feedback da equipe de produto."
                 }
-            ]
+            ],
+            "ui": {
+                "backButton": "Voltar",
+                "heroTitle": {
+                    "line1": "Importação de",
+                    "line2": "Empresas"
+                },
+                "heroTags": [
+                    "2025",
+                    "Product Design",
+                    "Teste Técnico"
+                ],
+                "tags": {
+                    "ux": "UX Design",
+                    "product": "Product Design",
+                    "year": "2024"
+                },
+                "sections": {
+                    "overview": {
+                        "label": "Visão Geral",
+                        "title": "O Projeto",
+                        "objetivo": "Objetivo",
+                        "desafio": "Desafio"
+                    },
+                    "role": {
+                        "label": "Contribuição",
+                        "title": "Meu Papel"
+                    },
+                    "research": {
+                        "label": "Pesquisa",
+                        "title": "Processo de Pesquisa"
+                    },
+                    "productVision": {
+                        "label": "Descoberta & Definição",
+                        "title": "Visão de Produto",
+                        "desc": "Na fase de discovery, conduzi uma análise estruturada da experiência atual, combinando Matriz CSD e benchmarking estratégico para identificar fricções críticas, validar hipóteses e direcionar decisões de produto alinhadas às melhores práticas de mercado.",
+                        "carousels": {
+                            "previousView": "Visão Anterior",
+                            "research": "Matriz CSD & Benchmarking"
+                        }
+                    },
+                    "discoveries": {
+                        "label": "Descobertas",
+                        "title": "Principais Insights"
+                    },
+                    "userFlow": {
+                        "label": "Fluxos",
+                        "title": "Fluxo de Usuários",
+                        "description": "Nesta fase, transformei objetivos do usuário em um fluxo claro e contínuo, guiando cada etapa da experiência até a conclusão do processo de forma simples e intuitiva."
+                    },
+                    "prototype": {
+                        "label": "Protótipo",
+                        "title": "Interface do Projeto"
+                    },
+                    "handoff": {
+                        "label": "Handoff"
+                    },
+                    "results": {
+                        "label": "Resultados",
+                        "title": "Impacto do Projeto"
+                    },
+                    "lessons": {
+                        "label": "Análise Crítica",
+                        "title": "Insights e Reflexões"
+                    }
+                }
+            }
         }
     }
 }

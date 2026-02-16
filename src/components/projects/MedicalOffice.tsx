@@ -108,6 +108,7 @@ function useProjectData() {
             ui: {
                 backButton: "Voltar",
                 heroTitle: { line1: "Redesign", line2: "Medical Office" },
+                heroTags: ["2021", "Product Design", "Web", "Mobile"],
                 heroAlt: "Capa do Projeto: Redesign Medical Office",
                 heroMobileAlt: "Medical Office - Versão Mobile",
                 sections: {
@@ -211,7 +212,7 @@ function ScrollProgress() {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-300 origin-left z-50"
+            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-medical-dark to-medical-light origin-left z-50"
             style={{ scaleX }}
         />
     );
@@ -333,14 +334,11 @@ function HeroSection() {
             <AnimatePresence mode="wait">
                 <motion.div
                     key="medical-gradient"
-                    className="hero-gradient-bg"
+                    className="hero-gradient-bg bg-gradient-to-br from-medical-dark to-medical-light"
                     initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
                     animate={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
                     exit={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
                     transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                    style={{
-                        background: `linear-gradient(135deg, #3066BF 0%, #4088FF 100%)`,
-                    }}
                 >
                     {/* Inner shadow overlay - inside the animated container */}
                     <div className="hero-diagonal-shadow" />
@@ -349,9 +347,9 @@ function HeroSection() {
 
             {/* Background with particle effect */}
             <div className="absolute inset-0 z-0">
-                <ParticleBackground color="blue" />
+                <ParticleBackground color="medical" />
                 {/* Soft gradient for depth */}
-                <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-radial from-medical-primary/5 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Content Container - Matching Home Structure */}
@@ -378,7 +376,7 @@ function HeroSection() {
                             >
                                 <Link
                                     to="/"
-                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group"
+                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-medical-primary transition-colors group"
                                 >
                                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                                     <span className="text-sm font-medium uppercase tracking-wider">{projectData.ui.backButton}</span>
@@ -405,21 +403,13 @@ function HeroSection() {
                                 viewport={{ once: true }}
                                 className="flex flex-wrap gap-4 items-center mb-16"
                             >
-                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                                    <span className="text-sm md:text-base font-medium text-slate-600">
-                                        UX/UI Design
-                                    </span>
-                                </div>
-                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                                    <span className="text-sm md:text-base font-medium text-slate-600">
-                                        Web & Mobile
-                                    </span>
-                                </div>
-                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                                    <span className="text-sm md:text-base font-medium text-slate-600">
-                                        2021
-                                    </span>
-                                </div>
+                                {projectData.ui.heroTags?.map((tag: string, index: number) => (
+                                    <div key={index} className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                                        <span className="text-sm md:text-base font-medium text-slate-600">
+                                            {tag}
+                                        </span>
+                                    </div>
+                                ))}
                             </motion.div>
 
 
@@ -444,7 +434,7 @@ function HeroSection() {
                                     loading="eager"
                                 />
                                 {/* Overlay to match the design vibe */}
-                                <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay pointer-events-none" />
+                                <div className="absolute inset-0 bg-medical-primary/10 mix-blend-overlay pointer-events-none" />
                             </div>
                         </RealisticMacBook>
 
@@ -465,7 +455,7 @@ function HeroSection() {
                                         loading="eager"
                                     />
                                     {/* Overlay to match the design vibe */}
-                                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay pointer-events-none" />
+                                    <div className="absolute inset-0 bg-medical-primary/10 mix-blend-overlay pointer-events-none" />
                                 </div>
                             </RealisticIphone>
                         </motion.div>
@@ -505,7 +495,7 @@ function OverviewSection() {
                     {/* Section Header */}
                     <div className="mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.overview.label}
                             </span>
                         </RevealText>
@@ -517,7 +507,7 @@ function OverviewSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full" />
                         </RevealText>
                     </div>
 
@@ -539,9 +529,9 @@ function OverviewSection() {
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="group"
                         >
-                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-blue-50 via-white to-blue-50/30 border border-blue-100 hover:border-blue-200 transition-all duration-500 hover:shadow-xl hover:shadow-blue-100/50">
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-medical-primary/5 via-white to-medical-primary/10 border border-medical-primary/20 hover:border-medical-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-medical-primary/20">
                                 {/* Icon */}
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-blue-500/25">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-medical-primary to-medical-dark flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-medical-primary/25">
                                     <Target className="w-7 h-7 text-white" />
                                 </div>
 
@@ -551,7 +541,7 @@ function OverviewSection() {
                                 </h3>
 
                                 {/* Decorative Line */}
-                                <div className="w-12 h-0.5 bg-gradient-to-r from-blue-400 to-transparent rounded-full mb-6" />
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-medical-light to-transparent rounded-full mb-6" />
 
                                 {/* Content */}
                                 <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
@@ -567,9 +557,9 @@ function OverviewSection() {
                             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="md:mt-12 group"
                         >
-                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-purple-50 via-white to-violet-50/30 border border-purple-100 hover:border-purple-200 transition-all duration-500 hover:shadow-xl hover:shadow-purple-100/50">
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-medical-primary/5 via-white to-medical-primary/10 border border-medical-primary/20 hover:border-medical-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-medical-primary/20">
                                 {/* Icon */}
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-purple-500/25">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-medical-primary to-medical-dark flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-medical-primary/25">
                                     <Zap className="w-7 h-7 text-white" />
                                 </div>
 
@@ -579,7 +569,7 @@ function OverviewSection() {
                                 </h3>
 
                                 {/* Decorative Line */}
-                                <div className="w-12 h-0.5 bg-gradient-to-r from-purple-400 to-transparent rounded-full mb-6" />
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-medical-light to-transparent rounded-full mb-6" />
 
                                 {/* Content */}
                                 <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
@@ -604,7 +594,7 @@ function RoleSection() {
                 <div className="relative z-10 grid lg:grid-cols-2 gap-16 lg:gap-24">
                     <div>
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.role.label}
                             </span>
                         </RevealText>
@@ -616,7 +606,7 @@ function RoleSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full" />
                         </RevealText>
                     </div>
 
@@ -628,8 +618,8 @@ function RoleSection() {
                                 const IconComponent = icons[index] || Users;
                                 return (
                                     <div className="flex gap-6 items-start group">
-                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center group-hover:bg-blue-500 transition-colors">
-                                            <IconComponent className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
+                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-medical-primary/10 flex items-center justify-center group-hover:bg-medical-primary transition-colors">
+                                            <IconComponent className="w-5 h-5 text-medical-primary group-hover:text-white transition-colors" />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-1">{item.title}</h3>
@@ -656,7 +646,7 @@ function ResearchSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.research.label}
                             </span>
                         </RevealText>
@@ -668,16 +658,16 @@ function ResearchSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full" />
                         </RevealText>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
                         {projectData.processoPesquisa.map((item, index) => (
                             <RevealText key={index} delay={0.2 + index * 0.1}>
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-blue-300 transition-colors group">
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-medical-light transition-colors group">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-blue-200 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-medical-primary/40 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <div className="pt-2">
@@ -705,7 +695,7 @@ function DiscoveriesSection() {
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.discoveries.label}
                             </span>
                         </RevealText>
@@ -717,7 +707,7 @@ function DiscoveriesSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full mx-auto" />
                         </RevealText>
                     </div>
 
@@ -727,9 +717,9 @@ function DiscoveriesSection() {
                             const IconComponent = icons[index] || Lightbulb;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-blue-300 transition-all group h-full shadow-sm hover:shadow-md">
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-medical-light transition-all group h-full shadow-sm hover:shadow-md">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-blue-600" />
+                                            <IconComponent className="w-6 h-6 text-medical-primary" />
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
                                         </div>
                                         <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
@@ -806,7 +796,7 @@ function PrototypeSection() {
                     {/* Section Header */}
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.prototype.label}
                             </span>
                         </RevealText>
@@ -818,7 +808,7 @@ function PrototypeSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mb-6" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full mb-6" />
                         </RevealText>
                         <RevealText delay={0.3}>
                             <p className="text-lg text-slate-600 leading-relaxed">
@@ -839,7 +829,7 @@ function PrototypeSection() {
                                         <div className={`w-full md:w-[30%] flex-shrink-0 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
                                             <div className="space-y-3 md:space-y-4">
                                                 {/* Number Badge */}
-                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white font-bold text-base md:text-lg shadow-lg shadow-blue-500/25">
+                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-medical-primary to-medical-dark text-white font-bold text-base md:text-lg shadow-lg shadow-medical-primary/25">
                                                     {String(index + 1).padStart(2, '0')}
                                                 </div>
 
@@ -852,7 +842,7 @@ function PrototypeSection() {
                                                 </h3>
 
                                                 {/* Decorative Line */}
-                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-blue-400 to-transparent rounded-full" />
+                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-medical-light to-transparent rounded-full" />
 
                                                 {/* Description */}
                                                 <p className="text-sm md:text-lg text-slate-600 leading-relaxed">
@@ -1043,7 +1033,7 @@ function HandoffSection() {
                     {/* Section Header */}
                     <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.handoff.label}
                             </span>
                         </RevealText>
@@ -1055,7 +1045,7 @@ function HandoffSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full mx-auto" />
                         </RevealText>
                         <RevealText delay={0.3}>
                             <p className="text-lg text-slate-600 leading-relaxed mt-8">
@@ -1081,8 +1071,8 @@ function HandoffSection() {
                                         transition={{ duration: 0.3 }}
                                         className="bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 h-full flex flex-col items-center text-center group"
                                     >
-                                        <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors duration-300">
-                                            <Icon className="w-8 h-8 text-blue-600" />
+                                        <div className="w-16 h-16 rounded-full bg-medical-primary/5 flex items-center justify-center mb-6 group-hover:bg-medical-primary/10 transition-colors duration-300">
+                                            <Icon className="w-8 h-8 text-medical-primary" />
                                         </div>
                                         <h3 className="text-xl font-bold text-slate-900 mb-4">
                                             {title}
@@ -1111,7 +1101,7 @@ function ResultsSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
-                            <span className="text-emerald-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.results.label}
                             </span>
                         </RevealText>
@@ -1123,7 +1113,7 @@ function ResultsSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full" />
                         </RevealText>
                     </div>
 
@@ -1133,9 +1123,9 @@ function ResultsSection() {
                             const IconComponent = icons[index] || CheckCircle2;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-emerald-300 hover:bg-gradient-to-br hover:from-emerald-50 hover:to-white transition-all group h-full">
+                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-medical-light hover:bg-gradient-to-br hover:from-medical-primary/5 hover:to-white transition-all group h-full">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+                                            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-medical-primary transition-colors" />
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
                                         </div>
                                         <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
@@ -1160,7 +1150,7 @@ function LessonsSection() {
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <RevealText>
-                            <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.lessons.label}
                             </span>
                         </RevealText>
@@ -1172,7 +1162,7 @@ function LessonsSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full mx-auto" />
                         </RevealText>
                     </div>
 
@@ -1182,9 +1172,9 @@ function LessonsSection() {
                             const IconComponent = icons[index] || Sparkles;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-purple-300 transition-colors group text-center h-full">
-                                        <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 transition-colors">
-                                            <IconComponent className="w-7 h-7 text-purple-600 group-hover:text-white transition-colors" />
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-medical-light transition-colors group text-center h-full">
+                                        <div className="w-16 h-16 rounded-2xl bg-medical-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-medical-primary transition-colors">
+                                            <IconComponent className="w-7 h-7 text-medical-primary group-hover:text-white transition-colors" />
                                         </div>
                                         <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-3">{item.title}</h3>
                                         <p className="text-base md:text-lg text-slate-600">{item.desc}</p>
@@ -1217,7 +1207,7 @@ function PreviousViewSection() {
                     {/* Section Header */}
                     <div className="text-center mb-12">
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.previousView.label}
                             </span>
                         </RevealText>
@@ -1229,7 +1219,7 @@ function PreviousViewSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto mb-6" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full mx-auto mb-6" />
                         </RevealText>
                         <RevealText delay={0.3}>
                             <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
@@ -1337,7 +1327,7 @@ function ProductVisionSection() {
                     {/* Section Header */}
                     <div className="text-center mb-12 md:mb-16">
                         <RevealText>
-                            <span className="text-blue-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-medical-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {projectData.ui.sections.productVision.label}
                             </span>
                         </RevealText>
@@ -1349,7 +1339,7 @@ function ProductVisionSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mx-auto mb-6" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-medical-dark to-medical-light rounded-full mx-auto mb-6" />
                         </RevealText>
                         <RevealText delay={0.3}>
                             <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
@@ -1395,7 +1385,7 @@ function ProductVisionSection() {
                                                         alt={`Carousel Image ${index + 1}`}
                                                         className={`w-full h-full ${img.includes('flow.png') ? 'object-contain p-2' : 'object-cover'} transition-transform duration-500 group-hover:scale-105`}
                                                     />
-                                                    <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors duration-300" />
+                                                    <div className="absolute inset-0 bg-medical-dark/0 group-hover:bg-medical-dark/10 transition-colors duration-300" />
                                                 </div>
                                             </div>
                                         </CarouselItem>
@@ -1412,7 +1402,7 @@ function ProductVisionSection() {
                                 {Array.from({ length: count }).map((_, index) => (
                                     <div
                                         key={index}
-                                        className={`h-2 rounded-full transition-all duration-300 ${index + 1 === current ? "bg-blue-600 w-6" : "bg-slate-300 w-2"
+                                        className={`h-2 rounded-full transition-all duration-300 ${index + 1 === current ? "bg-medical-primary w-6" : "bg-slate-300 w-2"
                                             }`}
                                     />
                                 ))}
@@ -1424,9 +1414,9 @@ function ProductVisionSection() {
                     <div className="grid md:grid-cols-2 gap-6 md:gap-8 relative mt-16 md:mt-24">
                         {/* O que É */}
                         <RevealText delay={0.2}>
-                            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-50 via-white to-blue-50/30 border border-blue-200 h-full">
+                            <div className="p-8 rounded-3xl bg-gradient-to-br from-medical-primary/5 via-white to-medical-primary/10 border border-medical-primary/30 h-full">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center">
+                                    <div className="w-12 h-12 rounded-xl bg-medical-primary flex items-center justify-center">
                                         <CheckCircle2 className="w-6 h-6 text-white" />
                                     </div>
                                     <h3 className="text-xl md:text-2xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
@@ -1436,7 +1426,7 @@ function ProductVisionSection() {
                                 <ul className="space-y-3">
                                     {projectData.productVision.whatItIs.items.map((item: string, index: number) => (
                                         <li key={index} className="flex items-start gap-3">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-medical-primary mt-2 flex-shrink-0" />
                                             <span className="text-base text-slate-600">{item}</span>
                                         </li>
                                     ))}
@@ -1468,9 +1458,9 @@ function ProductVisionSection() {
 
                         {/* O que FAZ */}
                         <RevealText delay={0.4}>
-                            <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-50 via-white to-blue-50/30 border border-blue-200 h-full">
+                            <div className="p-8 rounded-3xl bg-gradient-to-br from-medical-primary/5 via-white to-medical-primary/10 border border-medical-primary/30 h-full">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center">
+                                    <div className="w-12 h-12 rounded-xl bg-medical-primary flex items-center justify-center">
                                         <Zap className="w-6 h-6 text-white" />
                                     </div>
                                     <h3 className="text-xl md:text-2xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
@@ -1480,7 +1470,7 @@ function ProductVisionSection() {
                                 <ul className="space-y-3">
                                     {projectData.productVision.whatItDoes.items.map((item: string, index: number) => (
                                         <li key={index} className="flex items-start gap-3">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-medical-primary mt-2 flex-shrink-0" />
                                             <span className="text-base text-slate-600">{item}</span>
                                         </li>
                                     ))}

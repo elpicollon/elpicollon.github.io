@@ -26,6 +26,16 @@ const COLOR_PALETTES = {
         { r: 2, g: 55, b: 109 },     // #02376D
         { r: 1, g: 35, b: 70 },      // Darker navy
     ],
+    medical: [
+        { r: 64, g: 136, b: 255 },   // #4088FF (light)
+        { r: 11, g: 115, b: 217 },   // #0B73D9 (primary)
+        { r: 48, g: 102, b: 191 },   // #3066BF (dark)
+    ],
+    transcricoes: [
+        { r: 85, g: 202, b: 190 },   // #55CABE (light)
+        { r: 13, g: 148, b: 136 },   // #0D9488 (primary)
+        { r: 42, g: 100, b: 94 },    // #2A645E (dark)
+    ],
 };
 
 type ColorPreset = keyof typeof COLOR_PALETTES;
@@ -158,7 +168,8 @@ export function ParticleBackground({ color = 'purple' }: ParticleBackgroundProps
                 }
 
                 // Pick color based on position for gradient effect
-                const colorIndex = Math.floor((p.originY / height) * 3.99);
+                // Pick color based on position for gradient effect
+                const colorIndex = Math.min(Math.floor((p.originY / height) * particleColors.length), particleColors.length - 1);
                 const particleColor = particleColors[colorIndex];
 
                 ctx.beginPath();

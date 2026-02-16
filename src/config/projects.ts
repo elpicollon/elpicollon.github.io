@@ -41,10 +41,10 @@ export const PROJECTS: ProjectConfig[] = [
         slug: 'importacao-empresas',
         route: '/projeto/importacao-empresas',
         translationKey: 'importacaoEmpresas',
-        image: '/assets/projects/importacao-empresas/card-home.png',
-        gradient: 'linear-gradient(to bottom, #02376D, #0a4b8a)',
+        image: '/assets/projects/importacao-empresas/capa.png',
+        gradient: 'linear-gradient(to bottom, #0B73D9, #00965E)',
         primaryColor: '#02376D',
-        published: false, // Not published yet
+        published: true,
     },
 ];
 

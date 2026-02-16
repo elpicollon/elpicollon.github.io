@@ -129,7 +129,7 @@ function ScrollProgress() {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-teal-300 origin-left z-50"
+            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-light origin-left z-50"
             style={{ scaleX }}
         />
     );
@@ -250,14 +250,11 @@ function HeroSection() {
             <AnimatePresence mode="wait">
                 <motion.div
                     key="transcricoes-gradient"
-                    className="hero-gradient-bg"
+                    className="hero-gradient-bg bg-gradient-to-br from-transcricoes-dark to-transcricoes-light"
                     initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
                     animate={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
                     exit={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
                     transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                    style={{
-                        background: `linear-gradient(135deg, #2A645E 0%, #55CABE 100%)`,
-                    }}
                 >
                     {/* Inner shadow overlay - inside the animated container */}
                     <div className="hero-diagonal-shadow" />
@@ -266,9 +263,9 @@ function HeroSection() {
 
             {/* Background with particle effect */}
             <div className="absolute inset-0 z-0">
-                <ParticleBackground color="teal" />
+                <ParticleBackground color="transcricoes" />
                 {/* Soft gradient for depth */}
-                <div className="absolute inset-0 bg-gradient-radial from-teal-500/5 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-radial from-transcricoes-primary/5 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Content Container - Matching Home Structure */}
@@ -295,7 +292,7 @@ function HeroSection() {
                             >
                                 <Link
                                     to="/"
-                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-500 transition-colors group"
+                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-transcricoes-primary transition-colors group"
                                 >
                                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                                     <span className="text-sm font-medium uppercase tracking-wider">{t('projects.transcricoesIA.ui.backButton')}</span>
@@ -360,7 +357,7 @@ function HeroSection() {
                                     loading="eager"
                                 />
                                 {/* Overlay to match the design vibe */}
-                                <div className="absolute inset-0 bg-teal-500/10 mix-blend-overlay pointer-events-none" />
+                                <div className="absolute inset-0 bg-transcricoes-primary/10 mix-blend-overlay pointer-events-none" />
                             </div>
                         </RealisticMacBook>
                     </motion.div>
@@ -400,7 +397,7 @@ function OverviewSection() {
                     {/* Section Header */}
                     <div className="mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.overview.label')}
                             </span>
                         </RevealText>
@@ -412,7 +409,7 @@ function OverviewSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-light rounded-full" />
                         </RevealText>
                     </div>
 
@@ -434,9 +431,9 @@ function OverviewSection() {
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="group"
                         >
-                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-teal-50 via-white to-teal-50/30 border border-teal-100 hover:border-teal-200 transition-all duration-500 hover:shadow-xl hover:shadow-teal-100/50">
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-transcricoes-primary/5 via-white to-transcricoes-primary/10 border border-transcricoes-primary/20 hover:border-transcricoes-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-transcricoes-primary/20">
                                 {/* Icon */}
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-teal-500/25">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-transcricoes-primary to-transcricoes-dark flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-transcricoes-primary/25">
                                     <Target className="w-7 h-7 text-white" />
                                 </div>
 
@@ -446,7 +443,7 @@ function OverviewSection() {
                                 </h3>
 
                                 {/* Decorative Line */}
-                                <div className="w-12 h-0.5 bg-gradient-to-r from-teal-400 to-transparent rounded-full mb-6" />
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-transcricoes-light to-transparent rounded-full mb-6" />
 
                                 {/* Content */}
                                 <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
@@ -462,9 +459,9 @@ function OverviewSection() {
                             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="md:mt-12 group"
                         >
-                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-purple-50 via-white to-violet-50/30 border border-purple-100 hover:border-purple-200 transition-all duration-500 hover:shadow-xl hover:shadow-purple-100/50">
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-transcricoes-primary/5 via-white to-transcricoes-primary/10 border border-transcricoes-primary/20 hover:border-transcricoes-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-transcricoes-primary/20">
                                 {/* Icon */}
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-purple-500/25">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-transcricoes-primary to-transcricoes-dark flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-transcricoes-primary/25">
                                     <Zap className="w-7 h-7 text-white" />
                                 </div>
 
@@ -474,7 +471,7 @@ function OverviewSection() {
                                 </h3>
 
                                 {/* Decorative Line */}
-                                <div className="w-12 h-0.5 bg-gradient-to-r from-purple-400 to-transparent rounded-full mb-6" />
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-transcricoes-light to-transparent rounded-full mb-6" />
 
                                 {/* Content */}
                                 <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
@@ -500,7 +497,7 @@ function RoleSection() {
                 <div className="relative z-10 grid lg:grid-cols-2 gap-16 lg:gap-24">
                     <div>
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.role.label')}
                             </span>
                         </RevealText>
@@ -512,7 +509,7 @@ function RoleSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-light rounded-full" />
                         </RevealText>
                     </div>
 
@@ -524,8 +521,8 @@ function RoleSection() {
                                 const IconComponent = icons[index] || Users;
                                 return (
                                     <div className="flex gap-6 items-start group">
-                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center group-hover:bg-teal-500 transition-colors">
-                                            <IconComponent className="w-5 h-5 text-teal-600 group-hover:text-white transition-colors" />
+                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-transcricoes-primary/10 flex items-center justify-center group-hover:bg-transcricoes-primary transition-colors">
+                                            <IconComponent className="w-5 h-5 text-transcricoes-primary group-hover:text-white transition-colors" />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-1">{item.title}</h3>
@@ -553,7 +550,7 @@ function ResearchSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.research.label')}
                             </span>
                         </RevealText>
@@ -565,16 +562,16 @@ function ResearchSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-light rounded-full" />
                         </RevealText>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
                         {projectData.processoPesquisa.map((item, index) => (
                             <RevealText key={index} delay={0.2 + index * 0.1}>
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-teal-300 transition-colors group">
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-transcricoes-light transition-colors group">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-teal-200 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-transcricoes-primary/40 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <div className="pt-2">
@@ -603,7 +600,7 @@ function DiscoveriesSection() {
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.discoveries.label')}
                             </span>
                         </RevealText>
@@ -615,7 +612,7 @@ function DiscoveriesSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-light rounded-full mx-auto" />
                         </RevealText>
                     </div>
 
@@ -625,9 +622,9 @@ function DiscoveriesSection() {
                             const IconComponent = icons[index] || Lightbulb;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-teal-300 transition-all group h-full shadow-sm hover:shadow-md">
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-transcricoes-light transition-all group h-full shadow-sm hover:shadow-md">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-teal-600" />
+                                            <IconComponent className="w-6 h-6 text-transcricoes-primary" />
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
                                         </div>
                                         <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
@@ -656,7 +653,7 @@ function PrototypeSection() {
                     {/* Section Header */}
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.prototype.label')}
                             </span>
                         </RevealText>
@@ -668,7 +665,7 @@ function PrototypeSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-light rounded-full" />
                         </RevealText>
                     </div>
 
@@ -684,7 +681,7 @@ function PrototypeSection() {
                                         <div className={`w-full md:w-[30%] flex-shrink-0 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
                                             <div className="space-y-3 md:space-y-4">
                                                 {/* Number Badge */}
-                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 text-white font-bold text-base md:text-lg shadow-lg shadow-teal-500/25">
+                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-transcricoes-primary to-transcricoes-dark text-white font-bold text-base md:text-lg shadow-lg shadow-transcricoes-primary/25">
                                                     {String(index + 1).padStart(2, '0')}
                                                 </div>
 
@@ -697,7 +694,7 @@ function PrototypeSection() {
                                                 </h3>
 
                                                 {/* Decorative Line */}
-                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-teal-400 to-transparent rounded-full" />
+                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-transcricoes-light to-transparent rounded-full" />
 
                                                 {/* Description */}
                                                 <p className="text-sm md:text-lg text-slate-600 leading-relaxed">
@@ -746,7 +743,7 @@ function HandoffSection() {
                     {/* Section Header */}
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-teal-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.handoff.label')}
                             </span>
                         </RevealText>
@@ -758,7 +755,7 @@ function HandoffSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-teal-500 to-teal-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-light rounded-full" />
                         </RevealText>
                     </div>
 
@@ -776,7 +773,7 @@ function HandoffSection() {
                                         const description = rest.join(': ');
                                         return (
                                             <li key={index} className="flex items-start gap-3">
-                                                <CheckCircle2 className="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" />
+                                                <CheckCircle2 className="w-5 h-5 text-transcricoes-primary flex-shrink-0 mt-0.5" />
                                                 <span className="text-base text-slate-600">
                                                     <strong className="font-semibold text-slate-700">{title}:</strong> {description}
                                                 </span>
@@ -824,7 +821,7 @@ function ResultsSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
-                            <span className="text-emerald-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.results.label')}
                             </span>
                         </RevealText>
@@ -836,7 +833,7 @@ function ResultsSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-primary/60 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -846,9 +843,9 @@ function ResultsSection() {
                             const IconComponent = icons[index] || CheckCircle2;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-emerald-300 hover:bg-gradient-to-br hover:from-emerald-50 hover:to-white transition-all group h-full">
+                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-transcricoes-primary hover:bg-gradient-to-br hover:from-transcricoes-primary/5 hover:to-white transition-all group h-full">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+                                            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-transcricoes-primary transition-colors" />
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
                                         </div>
                                         <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
@@ -874,7 +871,7 @@ function LessonsSection() {
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <RevealText>
-                            <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
+                            <span className="text-transcricoes-primary font-medium text-sm uppercase tracking-widest mb-4 block">
                                 {t('projects.transcricoesIA.ui.sections.lessons.label')}
                             </span>
                         </RevealText>
@@ -886,7 +883,7 @@ function LessonsSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-transcricoes-primary to-transcricoes-primary/60 rounded-full mx-auto" />
                         </RevealText>
                     </div>
 
@@ -896,9 +893,9 @@ function LessonsSection() {
                             const IconComponent = icons[index] || Sparkles;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-purple-300 transition-colors group text-center h-full">
-                                        <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 transition-colors">
-                                            <IconComponent className="w-7 h-7 text-purple-600 group-hover:text-white transition-colors" />
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-transcricoes-primary transition-colors group text-center h-full">
+                                        <div className="w-16 h-16 rounded-2xl bg-transcricoes-primary/20 flex items-center justify-center mx-auto mb-6 group-hover:bg-transcricoes-primary transition-colors">
+                                            <IconComponent className="w-7 h-7 text-transcricoes-primary group-hover:text-white transition-colors" />
                                         </div>
                                         <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-3">{item.title}</h3>
                                         <p className="text-base md:text-lg text-slate-600">{item.desc}</p>

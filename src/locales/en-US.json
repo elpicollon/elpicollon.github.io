@@ -50,7 +50,7 @@
             {
                 "id": 1,
                 "title": "Transcriptions & AI Insights",
-                "category": "UX Design",
+                "category": "Product Design",
                 "year": "2024"
             },
             {
@@ -878,7 +878,7 @@
             }
         },
         "importacaoEmpresas": {
-            "title": "Company Import",
+            "title": "Company Data Import",
             "category": "UX Design",
             "year": "2024",
             "resumo": "This project aims to enhance the \"Company Flagging\" functionality within the Econodata platform, a work done as part of a technical test for Product Designer.<br />The central goal is to optimize user experience, dealing with significant challenges that directly impacted operational efficiency.",
@@ -920,6 +920,40 @@
                     "desc": "Development of wireframes to validate the solution before high-fidelity prototype."
                 }
             ],
+            "productVision": {
+                "whatItIs": {
+                    "title": "What It Is",
+                    "items": [
+                        "A tool for data validation and enrichment",
+                        "An import process optimizer",
+                        "A solution for data quality management"
+                    ]
+                },
+                "whatItIsNot": {
+                    "title": "What It Is Not",
+                    "items": [
+                        "A complete CRM system",
+                        "A cold prospecting tool",
+                        "A financial management software"
+                    ]
+                },
+                "whatItDoes": {
+                    "title": "What It Does",
+                    "items": [
+                        "Detects and removes duplicates automatically",
+                        "Validates data before final import",
+                        "Allows intelligent column mapping"
+                    ]
+                },
+                "whatItDoesNot": {
+                    "title": "What It Does Not",
+                    "items": [
+                        "Does not make direct sales",
+                        "Does not replace sales team",
+                        "Does not manage contracts"
+                    ]
+                }
+            },
             "descobertas": [
                 {
                     "title": "List Validation",
@@ -968,8 +1002,10 @@
                 "bullets": [
                     "Organization: Frames grouped in sections according to their functionalities",
                     "Componentization: Reused elements organized on the left side of the file",
-                    "Communication: Structure that contributes to efficiency between teams and minimizes doubts"
-                ]
+                    "Communication: Structure that contributes to efficiency between teams and minimizes doubts",
+                    "Process: Transparency in business rules and logical flows"
+                ],
+                "imagem": "/assets/projects/importacao-empresas/handoff.png"
             },
             "resultados": [
                 {
@@ -1002,7 +1038,73 @@
                     "title": "User Validation",
                     "desc": "Ideal would be to make the project available for usability testing and obtain product team feedback."
                 }
-            ]
+            ],
+            "ui": {
+                "backButton": "Back",
+                "heroTitle": {
+                    "line1": "Company Data",
+                    "line2": "Import"
+                },
+                "heroTags": [
+                    "2025",
+                    "Product Design",
+                    "Technical Test"
+                ],
+                "tags": {
+                    "ux": "UX Design",
+                    "product": "Product Design",
+                    "year": "2024"
+                },
+                "sections": {
+                    "overview": {
+                        "label": "Overview",
+                        "title": "The Project",
+                        "objetivo": "Goal",
+                        "desafio": "Challenge"
+                    },
+                    "role": {
+                        "label": "Contribution",
+                        "title": "My Role"
+                    },
+                    "research": {
+                        "label": "Research",
+                        "title": "Research Process"
+                    },
+                    "productVision": {
+                        "label": "Discovery & Definition",
+                        "title": "Product Vision",
+                        "desc": "In the discovery phase, I conducted a structured analysis of the current experience, combining CSD Matrix and strategic benchmarking to identify critical frictions, validate hypotheses, and direct product decisions aligned with market best practices.",
+                        "carousels": {
+                            "previousView": "Previous View",
+                            "research": "CSD Matrix & Benchmarking"
+                        }
+                    },
+                    "discoveries": {
+                        "label": "Discoveries",
+                        "title": "Key Insights"
+                    },
+                    "userFlow": {
+                        "label": "Flows",
+                        "title": "User Flow",
+                        "description": "In this phase, I transformed user objectives into a clear and continuous flow, guiding each step of the experience until the process conclusion in a simple and intuitive way."
+                    },
+                    "prototype": {
+                        "label": "Prototype",
+                        "title": "Project Interface"
+                    },
+                    "handoff": {
+                        "label": "Handoff"
+                    },
+                    "results": {
+                        "label": "Results",
+                        "title": "Project Impact"
+                    },
+                    "lessons": {
+                        "label": "Critical Analysis",
+                        "title": "Insights & Reflections"
+                    }
+                }
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate, AnimatePresence } from 'motion/react';
-import { useRef, useEffect, ReactNode, forwardRef } from 'react';
+import { motion, useScroll, useSpring, useTransform, useInView, useMotionTemplate, AnimatePresence, useMotionValue } from 'motion/react';
+import { useRef, useEffect, useState, ReactNode, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Sparkles, Target, Zap, Users, CheckCircle2, Lightbulb, Search, Settings, Gauge, ShieldCheck, Layout, FileCheck, Layers, Compass, PenTool, GitCompare, AlertTriangle, Columns, Workflow } from 'lucide-react';
 import { MinimalNav } from '../MinimalNav';
@@ -10,6 +10,15 @@ import { RealisticMacBook } from '../RealisticMacBook';
 import { ProjectCTAFooter } from './ProjectCTAFooter';
 import { AudioMiniPlayer } from '../AudioMiniPlayer';
 import { useLanguage } from '../../contexts/LanguageContext';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+    type CarouselApi,
+} from "../ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 // ============================================================================
 // PROJECT DATA - using translations
@@ -24,7 +33,7 @@ function useProjectData() {
         return {
             title: "Importação de Empresas",
             category: "UX Design",
-            year: "2024",
+            year: "2025",
             resumo: <>Este projeto busca aprimorar a funcionalidade de "Sinalização de Empresas" dentro da plataforma Econodata.<br />O objetivo central é otimizar a experiência do usuário, lidando com desafios significativos que impactavam diretamente a eficiência operacional.</>,
             objetivo: <>Evoluir a plataforma melhorando a experiência do usuário na funcionalidade de "Sinalização de empresas", como parte de um teste técnico para Product Designer na Econodata.</>,
             desafio: <>Melhorar a experiência do usuário na funcionalidade de Sinalização de Empresas, com foco em suprir dores recorrentes que impactam diretamente a eficiência do processo.</>,
@@ -40,6 +49,40 @@ function useProjectData() {
                 { title: "Benchmarking", desc: "Análise comparativa detalhada com concorrentes." },
                 { title: "Wireframes", desc: "Desenvolvimento de wireframes para validar a solução." },
             ],
+            productVision: {
+                whatItIs: {
+                    title: "O que É",
+                    items: [
+                        "Uma ferramenta para validação e enriquecimento de dados",
+                        "Um otimizador de processos de importação",
+                        "Uma solução para gestão de qualidade de dados"
+                    ]
+                },
+                whatItIsNot: {
+                    title: "O que NÃO É",
+                    items: [
+                        "Um sistema de CRM completo",
+                        "Uma ferramenta de prospecção fria",
+                        "Um software de gestão financeira"
+                    ]
+                },
+                whatItDoes: {
+                    title: "O que FAZ",
+                    items: [
+                        "Detecta e remove duplicatas automaticamente",
+                        "Valida dados antes da importação final",
+                        "Permite mapeamento inteligente de colunas"
+                    ]
+                },
+                whatItDoesNot: {
+                    title: "O que NÃO FAZ",
+                    items: [
+                        "Não realiza vendas diretas",
+                        "Não substitui a equipe comercial",
+                        "Não gerencia contratos"
+                    ]
+                }
+            },
             descobertas: [
                 { title: "Validação de Listas", desc: "Necessidade de detecção automática de duplicados." },
                 { title: "Dados Inconsistentes", desc: "Pré-validação necessária antes da importação." },
@@ -75,7 +118,29 @@ function useProjectData() {
                 { title: "Processo de UX", desc: "Com mais tempo, poderiam ser incluídas personas e jornadas de usuário." },
                 { title: "Métricas de Sucesso", desc: "Definir métricas claras como redução do tempo de tarefa." },
                 { title: "Validação com Usuários", desc: "Ideal seria disponibilizar o projeto para testes de usabilidade." },
-            ]
+            ],
+            ui: {
+                backButton: "Voltar",
+                heroTitle: { line1: "Importação de", line2: "Empresas" },
+                heroTags: ["2025", "Product Design", "Teste Técnico"],
+                tags: { ux: "UX Design", product: "Product Design", year: "2025" },
+                sections: {
+                    overview: { label: "Visão Geral", title: "O Projeto", objetivo: "Objetivo", desafio: "Desafio" },
+                    role: { label: "Contribuição", title: "Meu Papel" },
+                    research: { label: "Pesquisa & Definição", title: "Processo de Pesquisa" },
+                    productVision: {
+                        label: "Descoberta & Definição",
+                        title: "Visão de Produto",
+                        desc: "Registros da etapa de descoberta e definição das características do produto para evitar ambiguidades e manter o foco durante o desenvolvimento."
+                    },
+                    discoveries: { label: "Descobertas", title: "Principais Insights" },
+                    userFlow: { label: "Fluxos", title: "Fluxo de Usuários", description: "Nesta fase, transformei objetivos do usuário em um fluxo claro e contínuo, guiando cada etapa da experiência até a conclusão do processo de forma simples e intuitiva." },
+                    prototype: { label: "Protótipo", title: "Interface do Projeto" },
+                    handoff: { label: "Handoff" },
+                    results: { label: "Resultados", title: "Impacto do Projeto" },
+                    lessons: { label: "Análise Crítica", title: "Insights e Reflexões" }
+                }
+            }
         };
     }
 
@@ -91,11 +156,20 @@ function useProjectData() {
         processoPesquisa: p.processoPesquisa,
         descobertas: p.descobertas,
         prototipo: {
-            telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => ({
-                titulo: t.titulo,
-                descricao: t.descricao,
-                imagens: [`/assets/projects/importacao-empresas/${i + 1}.png`]
-            }))
+            telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => {
+                const filenames = [
+                    "01-inicial.png",
+                    "02-selecao.png",
+                    "03-configuracao.png",
+                    "04-validacao.png",
+                    "05-busca.png"
+                ];
+                return {
+                    titulo: t.titulo,
+                    descricao: t.descricao,
+                    imagens: [`/assets/projects/importacao-empresas/prototipo/${filenames[i]}`]
+                };
+            })
         },
         handoff: {
             titulo: p.handoff.titulo,
@@ -104,7 +178,9 @@ function useProjectData() {
             imagem: "/assets/projects/importacao-empresas/handoff.png"
         },
         resultados: p.resultados,
-        licoes: p.licoes
+        licoes: p.licoes,
+        ui: p.ui,
+        productVision: p.productVision
     };
 }
 
@@ -125,7 +201,7 @@ function ScrollProgress() {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-700 to-indigo-500 origin-left z-50"
+            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/70 origin-left z-50"
             style={{ scaleX }}
         />
     );
@@ -151,6 +227,42 @@ function BigNumber({ number, className = "" }: { number: string; className?: str
         >
             {number}
         </motion.span>
+    );
+}
+
+// Zoomable Image Component with Pan effect
+function ZoomableImage({ src, alt }: { src: string; alt: string }) {
+    const x = useMotionValue(50);
+    const y = useMotionValue(50);
+    const transformOrigin = useMotionTemplate`${x}% ${y}%`;
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const xPos = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPos = ((e.clientY - rect.top) / rect.height) * 100;
+        x.set(xPos);
+        y.set(yPos);
+    };
+
+    return (
+        <motion.div
+            className="overflow-hidden relative w-full rounded-3xl border border-slate-200 shadow-sm bg-white hover:border-[#0B73D9] transition-colors group cursor-zoom-in"
+            onMouseMove={handleMouseMove}
+        >
+            <div className="p-2 md:p-4 bg-white">
+                <motion.img
+                    src={src}
+                    alt={alt}
+                    className="w-full h-auto object-contain"
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 2 }}
+                    style={{
+                        transformOrigin
+                    }}
+                    transition={{ type: 'tween', duration: 0.2 }}
+                />
+            </div>
+        </motion.div>
     );
 }
 
@@ -254,9 +366,9 @@ function HeroSection() {
 
             {/* Background with particle effect */}
             <div className="absolute inset-0 z-0">
-                <ParticleBackground color="navy" />
+                <ParticleBackground color={[{ r: 11, g: 115, b: 217 }, { r: 5, g: 80, b: 160 }, { r: 30, g: 140, b: 240 }]} />
                 {/* Soft gradient for depth */}
-                <div className="absolute inset-0 bg-gradient-radial from-indigo-700/5 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-radial from-[#0B73D9]/5 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Content Container */}
@@ -283,10 +395,10 @@ function HeroSection() {
                             >
                                 <Link
                                     to="/"
-                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-700 transition-colors group"
+                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-[#0B73D9] transition-colors group"
                                 >
                                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                    <span className="text-sm font-medium uppercase tracking-wider">Voltar</span>
+                                    <span className="text-sm font-medium uppercase tracking-wider">{projectData.ui.backButton}</span>
                                 </Link>
                             </motion.div>
 
@@ -294,10 +406,10 @@ function HeroSection() {
                             <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
                                 <h1 className="flex flex-col gap-2">
                                     <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
-                                        Importação de
+                                        {projectData.ui.heroTitle.line1}
                                     </span>
                                     <span className="hero-title-mobile text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]">
-                                        Empresas
+                                        {projectData.ui.heroTitle.line2}
                                     </span>
                                 </h1>
                             </div>
@@ -310,21 +422,13 @@ function HeroSection() {
                                 viewport={{ once: true }}
                                 className="flex flex-wrap gap-4 items-center mb-16"
                             >
-                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                                    <span className="text-sm md:text-base font-medium text-slate-600">
-                                        UX Design
-                                    </span>
-                                </div>
-                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                                    <span className="text-sm md:text-base font-medium text-slate-600">
-                                        Product Design
-                                    </span>
-                                </div>
-                                <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
-                                    <span className="text-sm md:text-base font-medium text-slate-600">
-                                        2024
-                                    </span>
-                                </div>
+                                {projectData.ui.heroTags?.map((tag: string, index: number) => (
+                                    <div key={index} className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                                        <span className="text-sm md:text-base font-medium text-slate-600">
+                                            {tag}
+                                        </span>
+                                    </div>
+                                ))}
                             </motion.div>
 
 
@@ -342,12 +446,12 @@ function HeroSection() {
                         <RealisticMacBook className="w-[110%] max-w-none">
                             <div className="w-full h-full bg-black overflow-hidden relative">
                                 <img
-                                    src="/assets/projects/importacao-empresas/cover.png"
+                                    src="/assets/projects/importacao-empresas/home.png"
                                     alt="Capa do Projeto: Importação de Empresas"
                                     className="w-full h-full object-cover"
                                     loading="eager"
                                 />
-                                <div className="absolute inset-0 bg-indigo-700/10 mix-blend-overlay pointer-events-none" />
+                                <div className="absolute inset-0 bg-[#0B73D9]/10 mix-blend-overlay pointer-events-none" />
                             </div>
                         </RealisticMacBook>
                     </motion.div>
@@ -385,19 +489,19 @@ function OverviewSection() {
                 <div className="relative z-10">
                     <div className="mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-indigo-800 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Visão Geral
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.overview.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                O Projeto
+                                {projectData.ui.sections.overview.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -416,14 +520,14 @@ function OverviewSection() {
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="group"
                         >
-                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-indigo-50 via-white to-indigo-50/30 border border-indigo-200 hover:border-indigo-400 transition-all duration-500 hover:shadow-xl hover:shadow-indigo-200/50">
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-700 to-indigo-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-indigo-700/25">
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#0B73D9]/5 via-white to-[#0B73D9]/10 border border-[#0B73D9]/20 hover:border-[#0B73D9]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#0B73D9]/20">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0B73D9] to-[#054a8c] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-[#0B73D9]/25">
                                     <Target className="w-7 h-7 text-white" />
                                 </div>
                                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                    Objetivo
+                                    {projectData.ui.sections.overview.objetivo}
                                 </h3>
-                                <div className="w-12 h-0.5 bg-gradient-to-r from-indigo-600 to-transparent rounded-full mb-6" />
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-[#0B73D9] to-transparent rounded-full mb-6" />
                                 <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
                                     {projectData.objetivo}
                                 </p>
@@ -436,14 +540,14 @@ function OverviewSection() {
                             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                             className="md:mt-12 group"
                         >
-                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-purple-50 via-white to-violet-50/30 border border-purple-100 hover:border-purple-200 transition-all duration-500 hover:shadow-xl hover:shadow-purple-100/50">
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-purple-500/25">
+                            <div className="h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-[#0B73D9]/5 via-white to-[#0B73D9]/10 border border-[#0B73D9]/20 hover:border-[#0B73D9]/40 transition-all duration-500 hover:shadow-xl hover:shadow-[#0B73D9]/20">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0B73D9] to-[#054a8c] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-[#0B73D9]/25">
                                     <Zap className="w-7 h-7 text-white" />
                                 </div>
                                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                                    Desafio
+                                    {projectData.ui.sections.overview.desafio}
                                 </h3>
-                                <div className="w-12 h-0.5 bg-gradient-to-r from-purple-400 to-transparent rounded-full mb-6" />
+                                <div className="w-12 h-0.5 bg-gradient-to-r from-[#0B73D9] to-transparent rounded-full mb-6" />
                                 <p className="text-slate-600 leading-relaxed text-base md:text-lg text-justify">
                                     {projectData.desafio}
                                 </p>
@@ -466,19 +570,19 @@ function RoleSection() {
                 <div className="relative z-10 grid lg:grid-cols-2 gap-16 lg:gap-24">
                     <div>
                         <RevealText>
-                            <span className="text-indigo-800 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Contribuição
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.role.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-8"
                             >
-                                Meu Papel
+                                {projectData.ui.sections.role.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -490,8 +594,8 @@ function RoleSection() {
                                 const IconComponent = icons[index] || Users;
                                 return (
                                     <div className="flex gap-6 items-start group">
-                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-indigo-200 flex items-center justify-center group-hover:bg-indigo-700 transition-colors">
-                                            <IconComponent className="w-5 h-5 text-indigo-800 group-hover:text-white transition-colors" />
+                                        <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[#0B73D9]/20 flex items-center justify-center group-hover:bg-[#0B73D9] transition-colors">
+                                            <IconComponent className="w-5 h-5 text-[#0B73D9] group-hover:text-white transition-colors" />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-1">{item.title}</h3>
@@ -518,28 +622,28 @@ function ResearchSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
-                            <span className="text-indigo-800 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Pesquisa & Definição
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.research.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Processo de Pesquisa
+                                {projectData.ui.sections.research.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full" />
                         </RevealText>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
                         {projectData.processoPesquisa.map((item, index) => (
                             <RevealText key={index} delay={0.2 + index * 0.1}>
-                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-indigo-500 transition-colors group">
+                                <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-[#0B73D9] transition-colors group">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-indigo-400 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-[#0B73D9]/50 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <div className="pt-2">
@@ -557,54 +661,210 @@ function ResearchSection() {
     );
 }
 
-// Discoveries Section
-function DiscoveriesSection() {
+// Helper Component for Carousels
+function ImageCarousel({ images, title }: { images: string[]; title: string }) {
+    const [api, setApi] = useState<CarouselApi>();
+    const [current, setCurrent] = useState(0);
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!api) {
+            return;
+        }
+
+        setCount(api.scrollSnapList().length);
+        setCurrent(api.selectedScrollSnap() + 1);
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap() + 1);
+        });
+    }, [api]);
+
     return (
-        <ChapterSection id="discoveries" className="bg-slate-50">
+        <div className="mb-24 last:mb-0">
+            <RevealText delay={0.4}>
+                <div className="flex items-center justify-center gap-6 mb-10 md:mb-14 opacity-90">
+                    <div className="w-12 h-1 rounded-full bg-gradient-to-r from-transparent to-[#0B73D9]/50" />
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                        {title}
+                    </h3>
+                    <div className="w-12 h-1 rounded-full bg-gradient-to-l from-transparent to-[#0B73D9]/50" />
+                </div>
+            </RevealText>
+
+            <div className="relative">
+                <RevealText delay={0.6}>
+                    <Carousel
+                        setApi={setApi}
+                        opts={{
+                            align: "start",
+                            loop: true,
+                        }}
+                        plugins={[
+                            Autoplay({
+                                delay: 4000,
+                            }),
+                        ]}
+                        className="w-full"
+                    >
+                        <CarouselContent className="-ml-4">
+                            {images.map((img, index) => (
+                                <CarouselItem key={index} className="pl-4 basis-full">
+                                    <div className="p-1">
+                                        <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg shadow-slate-200/50 aspect-video bg-white relative group flex items-center justify-center">
+                                            <img
+                                                src={img}
+                                                alt={`${title} Image ${index + 1}`}
+                                                className={`w-full h-full object-contain transition-transform duration-500 group-hover:scale-105`}
+                                            />
+                                            <div className="absolute inset-0 bg-[#0B73D9]/0 group-hover:bg-[#0B73D9]/10 transition-colors duration-300" />
+                                        </div>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <div className="hidden md:block">
+                            <CarouselPrevious />
+                            <CarouselNext />
+                        </div>
+                    </Carousel>
+
+                    {/* Pagination Dots (Mobile Only) */}
+                    <div className="flex justify-center gap-2 mt-6 md:hidden">
+                        {Array.from({ length: count }).map((_, index) => (
+                            <div
+                                key={index}
+                                className={`h-2 rounded-full transition-all duration-300 ${index + 1 === current ? "bg-[#0B73D9] w-6" : "bg-slate-300 w-2"
+                                    }`}
+                            />
+                        ))}
+                    </div>
+                </RevealText>
+            </div>
+        </div>
+    );
+}
+
+// Product Vision Section (Visão de Produto)
+function ProductVisionSection() {
+    return (
+        <ChapterSection id="product-vision" className="bg-slate-50">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
-                <BigNumber number="04" className="-top-20 -right-10 md:-right-20" />
+                <BigNumber number="04" className="-top-20 -left-10 md:-left-20" />
 
                 <div className="relative z-10">
-                    <div className="text-center mb-10">
+                    {/* Section Header */}
+                    <div className="text-center mb-12 md:mb-16">
                         <RevealText>
-                            <span className="text-indigo-800 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Descobertas
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.productVision.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Principais Insights
+                                {projectData.ui.sections.productVision.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full mx-auto mb-6" />
+                        </RevealText>
+                        <RevealText delay={0.3}>
+                            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                                {projectData.ui.sections.productVision.desc}
+                            </p>
                         </RevealText>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {projectData.descobertas.map((item, index) => {
-                            const icons = [FileCheck, AlertTriangle, GitCompare, Columns];
-                            const IconComponent = icons[index] || Lightbulb;
-                            return (
-                                <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-indigo-500 transition-all group h-full shadow-sm hover:shadow-md">
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-indigo-800" />
-                                            <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
+                    {/* Image Carousels */}
+                    <div className="mt-16 md:mt-24">
+                        <ImageCarousel
+                            title={(projectData.ui.sections.productVision as any).carousels?.previousView || "Visão Anterior"}
+                            images={[
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Empresas.png",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Empresas-resultados.png",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Importação.png"
+                            ]}
+                        />
+
+                        <ImageCarousel
+                            title={(projectData.ui.sections.productVision as any).carousels?.research || "Matriz CSD & Benchmarking"}
+                            images={[
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Benchmarking-1.png",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Benchmarking-2.png",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Matriz CSD.png"
+                            ]}
+                        />
+                    </div>
+                    {/* Principais Insights (Moved from Discoveries) */}
+                    <div className="mt-24 md:mt-32">
+                        <RevealText delay={0.2}>
+                            <div className="flex items-center justify-center gap-6 mb-10 md:mb-14 opacity-90">
+                                <div className="w-12 h-1 rounded-full bg-gradient-to-r from-transparent to-[#0B73D9]/50" />
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                    {projectData.ui.sections.discoveries.title}
+                                </h3>
+                                <div className="w-12 h-1 rounded-full bg-gradient-to-l from-transparent to-[#0B73D9]/50" />
+                            </div>
+                        </RevealText>
+
+                        <div className="grid md:grid-cols-2 gap-6">
+                            {projectData.descobertas.map((item, index) => {
+                                const icons = [FileCheck, AlertTriangle, GitCompare, Columns];
+                                const IconComponent = icons[index] || Lightbulb;
+                                return (
+                                    <RevealText key={index} delay={0.2 + index * 0.1}>
+                                        <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-[#0B73D9] transition-all group h-full shadow-sm hover:shadow-md">
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <IconComponent className="w-6 h-6 text-[#0B73D9]" />
+                                                <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
+                                            </div>
+                                            <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
                                         </div>
-                                        <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
-                                    </div>
-                                </RevealText>
-                            );
-                        })}
+                                    </RevealText>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Fluxo de Usuários (New Subsection) */}
+                    <div className="mt-24 md:mt-32">
+                        <RevealText delay={0.2}>
+                            <div className="flex items-center justify-center gap-6 mb-10 md:mb-14 opacity-90">
+                                <div className="w-12 h-1 rounded-full bg-gradient-to-r from-transparent to-[#0B73D9]/50" />
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                    {(projectData.ui.sections as any).userFlow?.title || "Fluxo de Usuários"}
+                                </h3>
+                                <div className="w-12 h-1 rounded-full bg-gradient-to-l from-transparent to-[#0B73D9]/50" />
+                            </div>
+                        </RevealText>
+                        <RevealText delay={0.3}>
+                            {(projectData.ui.sections as any).userFlow?.description && (
+                                <p className="text-lg text-slate-600 leading-relaxed text-justify md:text-center max-w-3xl mx-auto mb-12">
+                                    {(projectData.ui.sections as any).userFlow.description}
+                                </p>
+                            )}
+                        </RevealText>
+
+                        <div className="relative">
+                            <RevealText delay={0.2}>
+                                <ZoomableImage
+                                    src="/assets/projects/importacao-empresas/Descoberta-Definicao/Fluxo.png"
+                                    alt="Fluxo de Usuários"
+                                />
+                            </RevealText>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </ChapterSection>
+        </ChapterSection >
     );
 }
+
+// Discoveries Section
+
 
 // Prototype Section
 function PrototypeSection() {
@@ -618,19 +878,19 @@ function PrototypeSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-indigo-800 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Protótipo
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.prototype.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Interface do Projeto
+                                {projectData.ui.sections.prototype.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -643,7 +903,7 @@ function PrototypeSection() {
                                     <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start md:items-center justify-center">
                                         <div className={`w-full md:w-[30%] flex-shrink-0 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
                                             <div className="space-y-3 md:space-y-4">
-                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-indigo-700 to-indigo-800 text-white font-bold text-base md:text-lg shadow-lg shadow-indigo-700/25">
+                                                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br from-[#0B73D9] to-[#054a8c] text-white font-bold text-base md:text-lg shadow-lg shadow-[#0B73D9]/25">
                                                     {String(index + 1).padStart(2, '0')}
                                                 </div>
                                                 <h3
@@ -652,7 +912,7 @@ function PrototypeSection() {
                                                 >
                                                     {tela.titulo}
                                                 </h3>
-                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-indigo-600 to-transparent rounded-full" />
+                                                <div className="w-10 md:w-12 h-0.5 bg-gradient-to-r from-[#0B73D9] to-transparent rounded-full" />
                                                 <p className="text-sm md:text-lg text-slate-600 leading-relaxed">
                                                     {tela.descricao}
                                                 </p>
@@ -660,20 +920,18 @@ function PrototypeSection() {
                                         </div>
 
                                         <div className={`w-full md:w-[70%] flex-shrink-0 ${isEven ? 'md:order-1' : 'md:order-2'}`}>
-                                            <motion.div
-                                                whileHover={{ scale: 1.02 }}
-                                                transition={{ duration: 0.4, ease: "easeOut" }}
-                                                className="group"
-                                            >
-                                                <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
+                                            <div className="relative group p-4 md:p-8">
+                                                {/* Background Glow */}
+                                                <div className="absolute inset-0 bg-[#0B73D9]/5 rounded-[3rem] -z-10 blur-3xl group-hover:bg-[#0B73D9]/10 transition-colors duration-500" />
+
+                                                <RealisticMacBook>
                                                     <img
                                                         src={tela.imagens[0]}
                                                         alt={tela.titulo}
-                                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                                                        loading="lazy"
+                                                        className="w-full h-full object-cover"
                                                     />
-                                                </div>
-                                            </motion.div>
+                                                </RealisticMacBook>
+                                            </div>
                                         </div>
                                     </div>
                                 </RevealText>
@@ -696,8 +954,8 @@ function HandoffSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-16 md:mb-24">
                         <RevealText>
-                            <span className="text-indigo-800 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Handoff
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.handoff.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
@@ -708,12 +966,12 @@ function HandoffSection() {
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full" />
                         </RevealText>
                     </div>
 
-                    <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-stretch">
-                        <div className="w-full md:w-[35%] flex-shrink-0">
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+                        <div className="w-full md:w-[45%] flex-shrink-0">
                             <RevealText delay={0.3}>
                                 <p className="text-lg text-slate-600 leading-relaxed mb-6">
                                     {projectData.handoff.descricao}
@@ -724,7 +982,7 @@ function HandoffSection() {
                                         const description = rest.join(': ');
                                         return (
                                             <li key={index} className="flex items-start gap-3">
-                                                <CheckCircle2 className="w-5 h-5 text-indigo-700 flex-shrink-0 mt-0.5" />
+                                                <CheckCircle2 className="w-5 h-5 text-[#0B73D9] flex-shrink-0 mt-0.5" />
                                                 <span className="text-base text-slate-600">
                                                     <strong className="font-semibold text-slate-700">{title}:</strong> {description}
                                                 </span>
@@ -735,7 +993,7 @@ function HandoffSection() {
                             </RevealText>
                         </div>
 
-                        <div className="w-full md:w-[65%] flex-shrink-0">
+                        <div className="w-full md:w-[55%] flex-shrink-0">
                             <RevealText delay={0.4}>
                                 <motion.div
                                     whileHover={{ scale: 1.02 }}
@@ -770,19 +1028,19 @@ function ResultsSection() {
                 <div className="relative z-10">
                     <div className="lg:max-w-xl mb-10">
                         <RevealText>
-                            <span className="text-emerald-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Resultados
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.results.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Impacto do Projeto
+                                {projectData.ui.sections.results.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full" />
                         </RevealText>
                     </div>
 
@@ -792,9 +1050,9 @@ function ResultsSection() {
                             const IconComponent = icons[index] || CheckCircle2;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-emerald-300 hover:bg-gradient-to-br hover:from-emerald-50 hover:to-white transition-all group h-full">
+                                    <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-[#0B73D9]/60 hover:bg-gradient-to-br hover:from-[#0B73D9]/5 hover:to-white transition-all group h-full">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+                                            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-[#0B73D9] transition-colors" />
                                             <h3 className="font-semibold text-slate-900 text-xl md:text-2xl">{item.title}</h3>
                                         </div>
                                         <p className="text-base md:text-lg text-slate-600 leading-relaxed">{item.desc}</p>
@@ -819,19 +1077,19 @@ function LessonsSection() {
                 <div className="relative z-10">
                     <div className="text-center mb-10">
                         <RevealText>
-                            <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                                Análise Crítica
+                            <span className="text-[#0B73D9] font-medium text-sm uppercase tracking-widest mb-4 block">
+                                {projectData.ui.sections.lessons.label}
                             </span>
                         </RevealText>
                         <RevealText delay={0.1}>
                             <h2
                                 className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
                             >
-                                Lições & Aprendizados
+                                {projectData.ui.sections.lessons.title}
                             </h2>
                         </RevealText>
                         <RevealText delay={0.2}>
-                            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full mx-auto" />
+                            <div className="w-24 h-1 bg-gradient-to-r from-[#0B73D9] to-[#0B73D9]/60 rounded-full mx-auto" />
                         </RevealText>
                     </div>
 
@@ -841,9 +1099,9 @@ function LessonsSection() {
                             const IconComponent = icons[index] || Sparkles;
                             return (
                                 <RevealText key={index} delay={0.2 + index * 0.1}>
-                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-purple-300 transition-colors group text-center h-full">
-                                        <div className="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 transition-colors">
-                                            <IconComponent className="w-7 h-7 text-purple-600 group-hover:text-white transition-colors" />
+                                    <div className="p-8 rounded-3xl bg-white border border-slate-200 hover:border-[#0B73D9]/60 transition-colors group text-center h-full">
+                                        <div className="w-16 h-16 rounded-2xl bg-[#0B73D9]/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-[#0B73D9] transition-colors">
+                                            <IconComponent className="w-7 h-7 text-[#0B73D9] group-hover:text-white transition-colors" />
                                         </div>
                                         <h3 className="font-semibold text-slate-900 text-xl md:text-2xl mb-3">{item.title}</h3>
                                         <p className="text-base md:text-lg text-slate-600">{item.desc}</p>
@@ -880,7 +1138,8 @@ export function ImportacaoEmpresas() {
                 <OverviewSection />
                 <RoleSection />
                 <ResearchSection />
-                <DiscoveriesSection />
+                <ProductVisionSection />
+
                 <PrototypeSection />
                 <HandoffSection />
                 <ResultsSection />
