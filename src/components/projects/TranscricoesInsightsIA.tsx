@@ -710,14 +710,25 @@ function PrototypeSection() {
                                                 transition={{ duration: 0.4, ease: "easeOut" }}
                                                 className="group"
                                             >
-                                                <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
-                                                    <img
-                                                        src={tela.imagens[0]}
-                                                        alt={tela.titulo}
-                                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-                                                        loading="lazy"
-                                                    />
-                                                </div>
+                                                {index === 7 ? (
+                                                    <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl shadow-slate-900/10 border border-slate-200 bg-white">
+                                                        <img
+                                                            src={tela.imagens[0]}
+                                                            alt={tela.titulo}
+                                                            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <RealisticMacBook>
+                                                        <img
+                                                            src={tela.imagens[0]}
+                                                            alt={tela.titulo}
+                                                            className="w-full h-full object-cover"
+                                                            loading="lazy"
+                                                        />
+                                                    </RealisticMacBook>
+                                                )}
                                             </motion.div>
                                         </div>
                                     </div>
