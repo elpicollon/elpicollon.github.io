@@ -92,11 +92,11 @@ function useProjectData() {
             ],
             prototipo: {
                 telas: [
-                    { titulo: "Tela Inicial", descricao: "Modernização mantendo o padrão visual da plataforma.", imagens: ["/assets/projects/importacao-empresas/1.png"] },
-                    { titulo: "Seleção do Arquivo", descricao: "Processo de importação reformulado para ocorrer em modal.", imagens: ["/assets/projects/importacao-empresas/2.png"] },
-                    { titulo: "Configurações", descricao: "Mapeamento automático das colunas com base nos títulos.", imagens: ["/assets/projects/importacao-empresas/3.png"] },
-                    { titulo: "Validação", descricao: "Totalizadores de linhas e erros.", imagens: ["/assets/projects/importacao-empresas/4.png"] },
-                    { titulo: "Flexibilidade", descricao: "Modal permite execução do processo a partir de outras telas.", imagens: ["/assets/projects/importacao-empresas/5.png"] }
+                    { titulo: "Tela Inicial", descricao: "Modernização mantendo o padrão visual da plataforma.", imagens: ["/assets/projects/importacao-empresas/1.webp"] },
+                    { titulo: "Seleção do Arquivo", descricao: "Processo de importação reformulado para ocorrer em modal.", imagens: ["/assets/projects/importacao-empresas/2.webp"] },
+                    { titulo: "Configurações", descricao: "Mapeamento automático das colunas com base nos títulos.", imagens: ["/assets/projects/importacao-empresas/3.webp"] },
+                    { titulo: "Validação", descricao: "Totalizadores de linhas e erros.", imagens: ["/assets/projects/importacao-empresas/4.webp"] },
+                    { titulo: "Flexibilidade", descricao: "Modal permite execução do processo a partir de outras telas.", imagens: ["/assets/projects/importacao-empresas/5.webp"] }
                 ]
             },
             handoff: {
@@ -107,7 +107,7 @@ function useProjectData() {
                     "Componentização: Elementos reutilizados organizados na lateral esquerda",
                     "Comunicação: Estrutura que contribui para eficiência entre equipes"
                 ],
-                imagem: "/assets/projects/importacao-empresas/handoff.png"
+                imagem: "/assets/projects/importacao-empresas/handoff.webp"
             },
             resultados: [
                 { title: "Fluxo Otimizado", desc: "Modal de importação dividido em etapas claras." },
@@ -159,11 +159,11 @@ function useProjectData() {
         prototipo: {
             telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => {
                 const filenames = [
-                    "01-inicial.png",
-                    "02-selecao.png",
-                    "03-configuracao.png",
-                    "04-validacao.png",
-                    "05-busca.png"
+                    "01-inicial.webp",
+                    "02-selecao.webp",
+                    "03-configuracao.webp",
+                    "04-validacao.webp",
+                    "05-busca.webp"
                 ];
                 return {
                     titulo: t.titulo,
@@ -176,7 +176,7 @@ function useProjectData() {
             titulo: p.handoff.titulo,
             descricao: p.handoff.descricao,
             bullets: p.handoff.bullets,
-            imagem: "/assets/projects/importacao-empresas/handoff.png"
+            imagem: "/assets/projects/importacao-empresas/handoff.webp"
         },
         resultados: p.resultados,
         licoes: p.licoes,
@@ -457,7 +457,7 @@ function HeroSection() {
                         <RealisticMacBook className="w-[110%] max-w-none">
                             <div className="w-full h-full bg-black overflow-hidden relative">
                                 <img
-                                    src="/assets/projects/importacao-empresas/home.png"
+                                    src="/assets/projects/importacao-empresas/home.webp"
                                     alt="Capa do Projeto: Importação de Empresas"
                                     className="w-full h-full object-cover"
                                     loading="eager"
@@ -793,18 +793,18 @@ function ProductVisionSection() {
                         <ImageCarousel
                             title={(projectData.ui.sections.productVision as any).carousels?.previousView || "Visão Anterior"}
                             images={[
-                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Empresas.png",
-                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Empresas-resultados.png",
-                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Importação.png"
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Empresas.webp",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Empresas-resultados.webp",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/visao-anterior/Importação.webp"
                             ]}
                         />
 
                         <ImageCarousel
                             title={(projectData.ui.sections.productVision as any).carousels?.research || "Matriz CSD & Benchmarking"}
                             images={[
-                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Benchmarking-1.png",
-                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Benchmarking-2.png",
-                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Matriz CSD.png"
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Benchmarking-1.webp",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Benchmarking-2.webp",
+                                "/assets/projects/importacao-empresas/Descoberta-Definicao/Pesquisa/Matriz CSD.webp"
                             ]}
                         />
                     </div>
@@ -861,7 +861,7 @@ function ProductVisionSection() {
                         <div className="relative">
                             <RevealText delay={0.2}>
                                 <ZoomableImage
-                                    src="/assets/projects/importacao-empresas/Descoberta-Definicao/Fluxo.png"
+                                    src="/assets/projects/importacao-empresas/Descoberta-Definicao/Fluxo.webp"
                                     alt="Fluxo de Usuários"
                                 />
                             </RevealText>

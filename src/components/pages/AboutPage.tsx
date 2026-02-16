@@ -16,7 +16,7 @@ import { ScrollToTop } from '../ScrollToTop';
 import { ParticleBackground } from '../ParticleBackground';
 import { HeroParticleGrid } from '../HeroParticleGrid';
 import { useContactModal } from '../../contexts/ContactModalContext';
-import imgEu1 from "../../assets/image-rp.png";
+import imgEu1 from "../../assets/image-rp.webp";
 import { ImageWithFallback } from '../ui/ImageWithFallback';
 import { useAboutPageData, ExperienceItem, EducationItem, HighlightCardItem, CertificationItem, EventItem, AboutPageData } from '../../hooks/useAboutPageData';
 

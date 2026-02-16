@@ -2,29 +2,29 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, ArrowRight } from 'lucide-react';
-import imgEu1 from "../assets/image-rp.png";
+import imgEu1 from "../assets/image-rp.webp";
 import { ImageWithFallback } from './ui/ImageWithFallback';
 import { useTranslation } from '../hooks/useTranslation';
 import { useLanguage } from '../contexts/LanguageContext';
 
 // Logo images from assets/logos with company names
-import logo1 from '../assets/logos/1.png';
-import logo2 from '../assets/logos/2.png';
-import logo3 from '../assets/logos/3.png';
-import logo4 from '../assets/logos/4.png';
-import logo5 from '../assets/logos/5.png';
-import logo6 from '../assets/logos/6.png';
-import logo7 from '../assets/logos/7.png';
-import logo8 from '../assets/logos/8.png';
-import logo9 from '../assets/logos/9.png';
-import logo10 from '../assets/logos/10.png';
-import logo11 from '../assets/logos/11.png';
-import logo12 from '../assets/logos/12.png';
-import logo13 from '../assets/logos/13.png';
-import logo15 from '../assets/logos/15.png';
-import logo16 from '../assets/logos/16.png';
-import logo17 from '../assets/logos/17.png';
-import logo18 from '../assets/logos/18.png';
+import logo1 from '../assets/logos/1.webp';
+import logo2 from '../assets/logos/2.webp';
+import logo3 from '../assets/logos/3.webp';
+import logo4 from '../assets/logos/4.webp';
+import logo5 from '../assets/logos/5.webp';
+import logo6 from '../assets/logos/6.webp';
+import logo7 from '../assets/logos/7.webp';
+import logo8 from '../assets/logos/8.webp';
+import logo9 from '../assets/logos/9.webp';
+import logo10 from '../assets/logos/10.webp';
+import logo11 from '../assets/logos/11.webp';
+import logo12 from '../assets/logos/12.webp';
+import logo13 from '../assets/logos/13.webp';
+import logo15 from '../assets/logos/15.webp';
+import logo16 from '../assets/logos/16.webp';
+import logo17 from '../assets/logos/17.webp';
+import logo18 from '../assets/logos/18.webp';
 
 const logoImages = [
   { src: logo1, alt: 'Logo Lojhan' },

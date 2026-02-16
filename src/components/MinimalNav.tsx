@@ -71,6 +71,7 @@ export function MinimalNav() {
               transition={{ duration: 0.6 }}
               className="h-8 md:h-10 block cursor-pointer"
               style={{ width: 'auto', aspectRatio: '700/273' }}
+              aria-label="inicio"
             >
               <PicoloDesignLogo />
             </motion.button>

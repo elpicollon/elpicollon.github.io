@@ -62,12 +62,12 @@ function useProjectData() {
             prototipo: {
                 intro: "O protótipo final foi desenvolvido considerando a responsividade, os anseios dos stakeholders, os insights obtidos a partir de um benchmarking detalhado e o atendimento às principais heurísticas de usabilidade.",
                 telas: [
-                    { titulo: "Landing Page", descricao: "A landing page foi reformulada com base nas diretrizes definidas pelos stakeholders.", imagens: ["/assets/projects/medical-office/1.png"] },
-                    { titulo: "Plataforma Web", descricao: "Algumas limitações de débito técnico impactaram o redesign.", imagens: ["/assets/projects/medical-office/prototipo/2-1.png", "/assets/projects/medical-office/prototipo/2-2.png", "/assets/projects/medical-office/prototipo/2-3.png", "/assets/projects/medical-office/prototipo/2-4.png"] },
-                    { titulo: "Cadastro de Espaços", descricao: "Implementamos um fluxo de cadastro passo a passo, mais intuitivo.", imagens: ["/assets/projects/medical-office/3.png"] },
-                    { titulo: "Templates de Email", descricao: "Desenvolvemos templates de e-mail personalizados para os três tipos de usuários.", imagens: ["/assets/projects/medical-office/4.png"] },
-                    { titulo: "Plataforma Mobile", descricao: "Todo o layout foi projetado com foco na responsividade.", imagens: ["/assets/projects/medical-office/5.png"] },
-                    { titulo: "Style Guide", descricao: "Foi criado um style guide componentizado.", imagens: ["/assets/projects/medical-office/6.png"] }
+                    { titulo: "Landing Page", descricao: "A landing page foi reformulada com base nas diretrizes definidas pelos stakeholders.", imagens: ["/assets/projects/medical-office/1.webp"] },
+                    { titulo: "Plataforma Web", descricao: "Algumas limitações de débito técnico impactaram o redesign.", imagens: ["/assets/projects/medical-office/prototipo/2-1.webp", "/assets/projects/medical-office/prototipo/2-2.webp", "/assets/projects/medical-office/prototipo/2-3.webp", "/assets/projects/medical-office/prototipo/2-4.webp"] },
+                    { titulo: "Cadastro de Espaços", descricao: "Implementamos um fluxo de cadastro passo a passo, mais intuitivo.", imagens: ["/assets/projects/medical-office/3.webp"] },
+                    { titulo: "Templates de Email", descricao: "Desenvolvemos templates de e-mail personalizados para os três tipos de usuários.", imagens: ["/assets/projects/medical-office/4.webp"] },
+                    { titulo: "Plataforma Mobile", descricao: "Todo o layout foi projetado com foco na responsividade.", imagens: ["/assets/projects/medical-office/5.webp"] },
+                    { titulo: "Style Guide", descricao: "Foi criado um style guide componentizado.", imagens: ["/assets/projects/medical-office/6.webp"] }
                 ]
             },
             handoff: {
@@ -78,7 +78,7 @@ function useProjectData() {
                     "Viabilidade: Apenas rotinas viáveis e refinadas encaminhadas para desenvolvimento",
                     "Comunicação: Processo promove integração fluida entre designers e desenvolvedores"
                 ],
-                imagem: "/assets/projects/medical-office/handoff.png"
+                imagem: "/assets/projects/medical-office/handoff.webp"
             },
             resultados: [
                 { title: "Responsividade Total", desc: "Toda a plataforma passou a funcionar perfeitamente em dispositivos móveis." },
@@ -145,47 +145,47 @@ function useProjectData() {
                 titulo: t.titulo,
                 descricao: t.descricao,
                 imagens: i === 1
-                    ? ["/assets/projects/medical-office/prototipo/2-1.png", "/assets/projects/medical-office/prototipo/2-2.png", "/assets/projects/medical-office/prototipo/2-3.png", "/assets/projects/medical-office/prototipo/2-4.png"]
+                    ? ["/assets/projects/medical-office/prototipo/2-1.webp", "/assets/projects/medical-office/prototipo/2-2.webp", "/assets/projects/medical-office/prototipo/2-3.webp", "/assets/projects/medical-office/prototipo/2-4.webp"]
                     : i === 2
                         ? [
-                            "/assets/projects/medical-office/prototipo/3-0.png",
-                            "/assets/projects/medical-office/prototipo/3-1.png",
-                            "/assets/projects/medical-office/prototipo/3-2.png",
-                            "/assets/projects/medical-office/prototipo/3-3.png",
-                            "/assets/projects/medical-office/prototipo/3-4.png",
-                            "/assets/projects/medical-office/prototipo/3-5.png",
-                            "/assets/projects/medical-office/prototipo/3-6.png",
-                            "/assets/projects/medical-office/prototipo/3-7.png",
-                            "/assets/projects/medical-office/prototipo/3-8.png",
-                            "/assets/projects/medical-office/prototipo/3-9.png"
+                            "/assets/projects/medical-office/prototipo/3-0.webp",
+                            "/assets/projects/medical-office/prototipo/3-1.webp",
+                            "/assets/projects/medical-office/prototipo/3-2.webp",
+                            "/assets/projects/medical-office/prototipo/3-3.webp",
+                            "/assets/projects/medical-office/prototipo/3-4.webp",
+                            "/assets/projects/medical-office/prototipo/3-5.webp",
+                            "/assets/projects/medical-office/prototipo/3-6.webp",
+                            "/assets/projects/medical-office/prototipo/3-7.webp",
+                            "/assets/projects/medical-office/prototipo/3-8.webp",
+                            "/assets/projects/medical-office/prototipo/3-9.webp"
                         ]
                         : i === 3
                             ? [
-                                "/assets/projects/medical-office/prototipo/4-1.png",
-                                "/assets/projects/medical-office/prototipo/4-2.png",
-                                "/assets/projects/medical-office/prototipo/4-3.png",
-                                "/assets/projects/medical-office/prototipo/4-4.png",
-                                "/assets/projects/medical-office/prototipo/4-5.png",
-                                "/assets/projects/medical-office/prototipo/4-6.png"
+                                "/assets/projects/medical-office/prototipo/4-1.webp",
+                                "/assets/projects/medical-office/prototipo/4-2.webp",
+                                "/assets/projects/medical-office/prototipo/4-3.webp",
+                                "/assets/projects/medical-office/prototipo/4-4.webp",
+                                "/assets/projects/medical-office/prototipo/4-5.webp",
+                                "/assets/projects/medical-office/prototipo/4-6.webp"
                             ]
                             : i === 4
                                 ? [
-                                    "/assets/projects/medical-office/prototipo/5-1.png",
-                                    "/assets/projects/medical-office/prototipo/5-2.png",
-                                    "/assets/projects/medical-office/prototipo/5-4.png",
-                                    "/assets/projects/medical-office/prototipo/5-5.png",
-                                    "/assets/projects/medical-office/prototipo/5-6.png"
+                                    "/assets/projects/medical-office/prototipo/5-1.webp",
+                                    "/assets/projects/medical-office/prototipo/5-2.webp",
+                                    "/assets/projects/medical-office/prototipo/5-4.webp",
+                                    "/assets/projects/medical-office/prototipo/5-5.webp",
+                                    "/assets/projects/medical-office/prototipo/5-6.webp"
                                 ]
                                 : i === 5
-                                    ? ["/assets/projects/medical-office/prototipo/style-guide.png"]
-                                    : [`/assets/projects/medical-office/${i + 1}.png`]
+                                    ? ["/assets/projects/medical-office/prototipo/style-guide.webp"]
+                                    : [`/assets/projects/medical-office/${i + 1}.webp`]
             }))
         },
         handoff: {
             titulo: p.handoff.titulo,
             descricao: p.handoff.descricao,
             bullets: p.handoff.bullets,
-            imagem: "/assets/projects/medical-office/handoff.png"
+            imagem: "/assets/projects/medical-office/handoff.webp"
         },
         resultados: p.resultados,
         licoes: p.licoes,
@@ -439,7 +439,7 @@ function HeroSection() {
                         <RealisticMacBook className="w-[110%] max-w-none">
                             <div className="w-full h-full bg-black overflow-hidden relative">
                                 <img
-                                    src="/assets/projects/medical-office/cover.png"
+                                    src="/assets/projects/medical-office/cover.webp"
                                     alt={projectData.ui.heroAlt}
                                     className="w-full h-full object-cover"
                                     loading="eager"
@@ -460,7 +460,7 @@ function HeroSection() {
                             <RealisticIphone className="w-full">
                                 <div className="w-full h-full bg-black overflow-hidden relative">
                                     <img
-                                        src="/assets/projects/medical-office/cover-mobile.png"
+                                        src="/assets/projects/medical-office/cover-mobile.webp"
                                         alt={projectData.ui.heroMobileAlt}
                                         className="w-full h-full object-cover object-top"
                                         loading="eager"
@@ -874,7 +874,7 @@ function PrototypeSection() {
                                                         <motion.div
                                                             className="w-full h-full bg-top"
                                                             style={{
-                                                                backgroundImage: `url(/assets/projects/medical-office/Home.png)`,
+                                                                backgroundImage: `url(/assets/projects/medical-office/Home.webp)`,
                                                                 backgroundSize: '100% auto',
                                                             }}
                                                             animate={{
@@ -953,7 +953,7 @@ function PrototypeSection() {
                                                             <motion.div
                                                                 className="w-full h-full bg-top"
                                                                 style={{
-                                                                    backgroundImage: `url(/assets/projects/medical-office/Home-mobile.png)`,
+                                                                    backgroundImage: `url(/assets/projects/medical-office/Home-mobile.webp)`,
                                                                     backgroundSize: '100% auto',
                                                                 }}
                                                                 animate={{
@@ -1204,9 +1204,9 @@ function LessonsSection() {
 function PreviousViewSection() {
     // Placeholder images for before redesign - update paths as needed
     const beforeImages = [
-        { src: "/assets/projects/medical-office/before-1.png", alt: "Tela anterior 1" },
-        { src: "/assets/projects/medical-office/before-2.png", alt: "Tela anterior 2" },
-        { src: "/assets/projects/medical-office/before-3.png", alt: "Tela anterior 3" },
+        { src: "/assets/projects/medical-office/before-1.webp", alt: "Tela anterior 1" },
+        { src: "/assets/projects/medical-office/before-2.webp", alt: "Tela anterior 2" },
+        { src: "/assets/projects/medical-office/before-3.webp", alt: "Tela anterior 3" },
     ];
 
     return (
@@ -1377,16 +1377,16 @@ function ProductVisionSection() {
                             >
                                 <CarouselContent className="-ml-4">
                                     {[
-                                        "/assets/projects/medical-office/visao-de-produto/Frame 182.png",
-                                        "/assets/projects/medical-office/visao-de-produto/Frame 183.png",
-                                        "/assets/projects/medical-office/visao-de-produto/Frame 185.png",
-                                        "/assets/projects/medical-office/visao-de-produto/Frame 189.png",
-                                        "/assets/projects/medical-office/visao-de-produto/Frame 190.png",
-                                        "/assets/projects/medical-office/visao-de-produto/flow.png", // Added flow image
-                                        "/assets/projects/medical-office/visao-de-produto/image 11.png",
-                                        "/assets/projects/medical-office/visao-de-produto/image 14.png",
-                                        "/assets/projects/medical-office/visao-de-produto/image 18.png",
-                                        "/assets/projects/medical-office/visao-de-produto/image 20.png"
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 182.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 183.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 185.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 189.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/Frame 190.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/flow.webp", // Added flow image
+                                        "/assets/projects/medical-office/visao-de-produto/image 11.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/image 14.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/image 18.webp",
+                                        "/assets/projects/medical-office/visao-de-produto/image 20.webp"
                                     ].map((img, index) => (
                                         <CarouselItem key={index} className="pl-4 md:basis-1/2">
                                             <div className="p-1">
@@ -1394,7 +1394,7 @@ function ProductVisionSection() {
                                                     <img
                                                         src={img}
                                                         alt={`Carousel Image ${index + 1}`}
-                                                        className={`w-full h-full ${img.includes('flow.png') ? 'object-contain p-2' : 'object-cover'} transition-transform duration-500 group-hover:scale-105`}
+                                                        className={`w-full h-full ${img.includes('flow.webp') ? 'object-contain p-2' : 'object-cover'} transition-transform duration-500 group-hover:scale-105`}
                                                     />
                                                     <div className="absolute inset-0 bg-medical-dark/0 group-hover:bg-medical-dark/10 transition-colors duration-300" />
                                                 </div>

@@ -13,11 +13,11 @@ const iconMap: Record<number, LucideIcon> = {
 
 // Event images mapping
 const eventImages = [
-    "/assets/about/evento-1.png",
-    "/assets/about/evento-2.png",
-    "/assets/about/evento-3.png",
-    "/assets/about/evento-4.jpg",
-    "/assets/about/evento-5.jpg"
+    "/assets/about/evento-1.webp",
+    "/assets/about/evento-2.webp",
+    "/assets/about/evento-3.webp",
+    "/assets/about/evento-4.webp",
+    "/assets/about/evento-5.webp"
 ];
 
 export interface ExperienceItem {

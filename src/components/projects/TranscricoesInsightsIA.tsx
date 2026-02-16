@@ -50,14 +50,14 @@ function useProjectData() {
             ],
             prototipo: {
                 telas: [
-                    { titulo: "Tela Inicial", descricao: "Interface construída sobre o Design System da Leads2b, assegurando consistência visual e reduzindo a curva de aprendizado do usuário.", imagens: ["/assets/projects/transcricoes-insights-ia/1.png"] },
-                    { titulo: "Video & Transcrição", descricao: "Visualização imersiva com painel lateral de dados. A estrutura sincroniza a reprodução do vídeo com a transcrição e insights de IA, centralizando todo o contexto da reunião em uma única view.", imagens: ["/assets/projects/transcricoes-insights-ia/2.png"] },
-                    { titulo: "Smart Insights", descricao: "Interface unificada que integra o player de vídeo e os Smart Insights. O layout permite consumo simultâneo de transcrições, comentários e insights de IA, eliminando a troca de abas e mantendo o foco no conteúdo.", imagens: ["/assets/projects/transcricoes-insights-ia/3.png"] },
-                    { titulo: "Compartilhamento Ágil", descricao: "Fluxo de envio otimizado para a inclusão rápida de múltiplos destinatários. A interface garante que o conhecimento gerado na reunião chegue às pessoas certas com poucos cliques, eliminando a necessidade de redigir e-mails.", imagens: ["/assets/projects/transcricoes-insights-ia/4.png"] },
-                    { titulo: "Design = Conversão", descricao: "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade.", imagens: ["/assets/projects/transcricoes-insights-ia/6.png"] },
-                    { titulo: "Insights = Conversão", descricao: "Ferramenta de agendamento de atividades integrada à tela, reduzindo o time-to-action. O usuário pode agendar follow-ups no momento em que identifica uma oportunidade, eliminando a alternância entre abas e ferramentas de calendário externas.", imagens: ["/assets/projects/transcricoes-insights-ia/7.png"] },
-                    { titulo: "Experiência Cross-Media", descricao: "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem.", imagens: ["/assets/projects/transcricoes-insights-ia/8.png"] },
-                    { titulo: "Email Viral de Aquisição", descricao: "E-mail de resumo como uma ferramenta de Product-Led Growth. Ao entregar valor imediato (insights e transcrição) para os clientes dos nossos clientes, utilizamos o acesso ao conteúdo completo como gatilho estratégico para atrair novos cadastros e expandir a base de usuários organicamente.", imagens: ["/assets/projects/transcricoes-insights-ia/10.png"] }
+                    { titulo: "Tela Inicial", descricao: "Interface construída sobre o Design System da Leads2b, assegurando consistência visual e reduzindo a curva de aprendizado do usuário.", imagens: ["/assets/projects/transcricoes-insights-ia/1.webp"] },
+                    { titulo: "Video & Transcrição", descricao: "Visualização imersiva com painel lateral de dados. A estrutura sincroniza a reprodução do vídeo com a transcrição e insights de IA, centralizando todo o contexto da reunião em uma única view.", imagens: ["/assets/projects/transcricoes-insights-ia/2.webp"] },
+                    { titulo: "Smart Insights", descricao: "Interface unificada que integra o player de vídeo e os Smart Insights. O layout permite consumo simultâneo de transcrições, comentários e insights de IA, eliminando a troca de abas e mantendo o foco no conteúdo.", imagens: ["/assets/projects/transcricoes-insights-ia/3.webp"] },
+                    { titulo: "Compartilhamento Ágil", descricao: "Fluxo de envio otimizado para a inclusão rápida de múltiplos destinatários. A interface garante que o conhecimento gerado na reunião chegue às pessoas certas com poucos cliques, eliminando a necessidade de redigir e-mails.", imagens: ["/assets/projects/transcricoes-insights-ia/4.webp"] },
+                    { titulo: "Design = Conversão", descricao: "Utilização do padrão de Teaser(blur) para funcionalidades avançadas. A interface revela a estrutura da informação (Smart Insights), mas restringe o detalhe. Isso mostra a capacidade da ferramenta ao mesmo tempo que gera fricção intencional para incentivar o upgrade.", imagens: ["/assets/projects/transcricoes-insights-ia/6.webp"] },
+                    { titulo: "Insights = Conversão", descricao: "Ferramenta de agendamento de atividades integrada à tela, reduzindo o time-to-action. O usuário pode agendar follow-ups no momento em que identifica uma oportunidade, eliminando a alternância entre abas e ferramentas de calendário externas.", imagens: ["/assets/projects/transcricoes-insights-ia/7.webp"] },
+                    { titulo: "Experiência Cross-Media", descricao: "Aplicação do mesmo modelo visual de videochamadas para gravações de áudio, garantindo que a inteligência de vendas, como transcrição e análise de IA, seja acessível e visualmente coerente, independentemente do canal de origem.", imagens: ["/assets/projects/transcricoes-insights-ia/8.webp"] },
+                    { titulo: "Email Viral de Aquisição", descricao: "E-mail de resumo como uma ferramenta de Product-Led Growth. Ao entregar valor imediato (insights e transcrição) para os clientes dos nossos clientes, utilizamos o acesso ao conteúdo completo como gatilho estratégico para atrair novos cadastros e expandir a base de usuários organicamente.", imagens: ["/assets/projects/transcricoes-insights-ia/10.gif"] }
                 ]
             },
             handoff: {
@@ -96,11 +96,16 @@ function useProjectData() {
         processoPesquisa: p.processoPesquisa,
         descobertas: p.descobertas,
         prototipo: {
-            telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => ({
-                titulo: t.titulo,
-                descricao: t.descricao,
-                imagens: [`/assets/projects/transcricoes-insights-ia/${[1, 2, 3, 4, 6, 7, 8, 10][i]}.png`]
-            }))
+            telas: p.prototipo.telas.map((t: { titulo: string; descricao: string }, i: number) => {
+                const fileNumbers = [1, 2, 3, 4, 6, 7, 8, 10];
+                const num = fileNumbers[i];
+                const ext = num === 10 ? '.gif' : '.webp';
+                return {
+                    titulo: t.titulo,
+                    descricao: t.descricao,
+                    imagens: [`/assets/projects/transcricoes-insights-ia/${num}${ext}`]
+                };
+            })
         },
         handoff: {
             titulo: p.handoff.titulo,
@@ -360,7 +365,7 @@ function HeroSection() {
                         <RealisticMacBook className="w-[110%] max-w-none">
                             <div className="w-full h-full bg-black overflow-hidden relative">
                                 <img
-                                    src="/assets/projects/transcricoes-insights-ia/cover.png"
+                                    src="/assets/projects/transcricoes-insights-ia/cover.webp"
                                     alt={t('projects.transcricoesIA.ui.heroAlt')}
                                     className="w-full h-full object-cover"
                                     loading="eager"
