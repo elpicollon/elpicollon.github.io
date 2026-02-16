@@ -9,6 +9,7 @@ import { ParticleBackground } from '../ParticleBackground';
 import { RealisticMacBook } from '../RealisticMacBook';
 import { ProjectCTAFooter } from './ProjectCTAFooter';
 import { AudioMiniPlayer } from '../AudioMiniPlayer';
+import { ScrollIndicator } from '../ui/ScrollIndicator';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useTranslation } from '../../hooks/useTranslation';
 
@@ -317,7 +318,7 @@ function HeroSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.4 }}
                                 viewport={{ once: true }}
-                                className="flex flex-wrap gap-4 items-center mb-16"
+                                className="flex flex-wrap gap-4 items-center mb-6 md:mb-16"
                             >
                                 <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                                     <span className="text-sm md:text-base font-medium text-slate-600">
@@ -336,7 +337,15 @@ function HeroSection() {
                                 </div>
                             </motion.div>
 
-
+                            {/* Mobile Scroll Indicator - Below Tags */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1, duration: 1 }}
+                                className="flex md:hidden mt-4"
+                            >
+                                <ScrollIndicator className="items-start" />
+                            </motion.div>
                         </motion.div>
                     </motion.div>
 
@@ -363,7 +372,7 @@ function HeroSection() {
                     </motion.div>
                 </div>
             </div>
-            {/* Scroll Indicator - Absolute positioned at bottom center */}
+            {/* Scroll Indicator - Desktop Absolute */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

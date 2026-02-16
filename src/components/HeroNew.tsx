@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useRef, useState, useCallback } from 'react';
 import { HeroParticleGrid } from './HeroParticleGrid';
 import { GeometricCarousel, carouselItems } from './GeometricCarousel';
+import { ScrollIndicator } from './ui/ScrollIndicator';
 import { MarqueeSection } from './MarqueeSection';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -132,15 +133,9 @@ export function HeroNew() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+        className="flex absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <div className="w-[26px] h-[42px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1 h-1 bg-slate-500 rounded-full"
-          />
-        </div>
+        <ScrollIndicator />
       </motion.div>
     </section>
   );
