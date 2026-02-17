@@ -33,7 +33,7 @@ interface ProjectCardProps {
   total: number;
 }
 
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectCard({ project }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const hasGradient = 'gradient' in project && project.gradient;
@@ -62,7 +62,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
               className="absolute inset-0"
               style={{ background: project.gradient }}
             />
-            <div className="absolute inset-x-1 md:inset-x-[5%] bottom-0 top-[5%] md:top-[10%] flex justify-center items-end pointer-events-none project-card__gradient-image origin-bottom">
+            <div className="absolute inset-x-6 md:inset-x-[10%] bottom-0 top-[5%] md:top-[12%] flex justify-center items-end pointer-events-none project-card__gradient-image origin-bottom">
               <ImageWithFallback
                 src={project.image!}
                 alt={project.title}
@@ -82,7 +82,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
         {/* ── gradient overlay ── */}
         <div
-          className={`absolute inset-0 transition-opacity duration-500 ${hasGradient
+          className={`absolute inset-0 transition-opacity duration-500 hidden md:block ${hasGradient
             ? 'bg-gradient-to-t from-black/70 via-black/20 to-transparent'
             : 'bg-gradient-to-t from-black/80 via-black/40 to-transparent'
             }`}
@@ -92,10 +92,6 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="absolute inset-0 p-8 md:p-12 flex flex-col-reverse md:flex-col justify-between z-10">
           {/* arrow button — bottom on mobile, top-right on desktop */}
           <div className="flex justify-end md:justify-between items-start">
-            <span className="hidden md:block text-[7rem] font-bold leading-none text-white/[0.07] select-none">
-              {String(index + 1).padStart(2, '0')}
-            </span>
-
             <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-[360deg] group-hover:bg-white/20">
               <ArrowRight className="text-white" size={18} />
             </div>

@@ -1,10 +1,13 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { useRef, useState, useCallback } from 'react';
-import { HeroParticleGrid } from './HeroParticleGrid';
-import { GeometricCarousel, carouselItems } from './GeometricCarousel';
+import { useRef, useState, useCallback, Suspense, lazy } from 'react';
 import { ScrollIndicator } from './ui/ScrollIndicator';
-import { MarqueeSection } from './MarqueeSection';
 import { useTranslation } from '../hooks/useTranslation';
+import { carouselItems } from '../config/carousel';
+
+// Lazy load heavy components
+const HeroParticleGrid = lazy(() => import('./HeroParticleGrid').then(module => ({ default: module.HeroParticleGrid })));
+const GeometricCarousel = lazy(() => import('./GeometricCarousel').then(module => ({ default: module.GeometricCarousel })));
+const MarqueeSection = lazy(() => import('./MarqueeSection').then(module => ({ default: module.MarqueeSection })));
 
 export function HeroNew() {
   const containerRef = useRef(null);
@@ -50,7 +53,9 @@ export function HeroNew() {
 
       {/* Background Waves - Restored as requested */}
       <div className="absolute inset-0 z-0">
-        <HeroParticleGrid />
+        <Suspense fallback={null}>
+          <HeroParticleGrid />
+        </Suspense>
 
         {/* Soft gradients for depth */}
         <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
@@ -61,7 +66,9 @@ export function HeroNew() {
         style={{ y, opacity, scale, transform: 'translateZ(0)' }}
         className="absolute bottom-0 left-0 right-0 z-0 will-change-transform"
       >
-        <MarqueeSection />
+        <Suspense fallback={null}>
+          <MarqueeSection />
+        </Suspense>
       </motion.div>
 
       <motion.div
@@ -128,7 +135,9 @@ export function HeroNew() {
             viewport={{ once: true }}
             className="hidden lg:flex items-center justify-center relative"
           >
-            <GeometricCarousel onGradientChange={handleGradientChange} />
+            <Suspense fallback={null}>
+              <GeometricCarousel onGradientChange={handleGradientChange} />
+            </Suspense>
           </motion.div>
         </div>
       </motion.div>
@@ -138,7 +147,7 @@ export function HeroNew() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="flex absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="flex absolute bottom-1 md:bottom-8 left-1/2 -translate-x-1/2"
       >
         <ScrollIndicator />
       </motion.div>

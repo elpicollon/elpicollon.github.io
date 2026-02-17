@@ -3,18 +3,20 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { CustomCursor } from './components/CustomCursor';
 import { MinimalNav } from './components/MinimalNav';
 import { HeroNew } from './components/HeroNew';
-import { AboutSection } from './components/AboutSection';
-import { BentoGrid } from './components/BentoGrid';
 import { LazyLoad } from './components/ui/LazyLoad';
 
-import { HorizontalScroll } from './components/HorizontalScroll';
-import { MagneticButton } from './components/MagneticButton';
-import { FooterNew } from './components/FooterNew';
 import { ContactModal } from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Preloader } from './components/ui/Preloader';
+
+// Lazy load heavy homepage sections to reduce initial bundle size
+const HorizontalScroll = lazy(() => import('./components/HorizontalScroll').then(m => ({ default: m.HorizontalScroll })));
+const AboutSection = lazy(() => import('./components/AboutSection').then(m => ({ default: m.AboutSection })));
+const BentoGrid = lazy(() => import('./components/BentoGrid').then(m => ({ default: m.BentoGrid })));
+const MagneticButton = lazy(() => import('./components/MagneticButton').then(m => ({ default: m.MagneticButton })));
+const FooterNew = lazy(() => import('./components/FooterNew').then(m => ({ default: m.FooterNew })));
 
 // Lazy load project pages for code-splitting
 const TranscricoesInsightsIA = lazy(() => import('./components/projects/TranscricoesInsightsIA').then(m => ({ default: m.TranscricoesInsightsIA })));
@@ -43,24 +45,34 @@ function HomePage() {
         <HeroNew />
 
         <LazyLoad rootMargin="100px 0px">
-          <HorizontalScroll />
+          <Suspense fallback={null}>
+            <HorizontalScroll />
+          </Suspense>
         </LazyLoad>
 
         <LazyLoad rootMargin="200px 0px">
-          <AboutSection />
+          <Suspense fallback={null}>
+            <AboutSection />
+          </Suspense>
         </LazyLoad>
 
         <LazyLoad rootMargin="200px 0px">
-          <BentoGrid />
+          <Suspense fallback={null}>
+            <BentoGrid />
+          </Suspense>
         </LazyLoad>
 
         <LazyLoad rootMargin="100px 0px">
-          <MagneticButton />
+          <Suspense fallback={null}>
+            <MagneticButton />
+          </Suspense>
         </LazyLoad>
       </main>
 
       <LazyLoad rootMargin="100px 0px">
-        <FooterNew />
+        <Suspense fallback={null}>
+          <FooterNew />
+        </Suspense>
       </LazyLoad>
 
       <ScrollToTop />
