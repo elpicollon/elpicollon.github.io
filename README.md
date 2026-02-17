@@ -50,4 +50,4 @@ Este projeto é de uso pessoal. Todos os direitos reservados.
 
 ---
 
-Desenvolvido com ☕ por **Rodrigo Picolo**
+Desenvolvido com 😡 por **Rodrigo Picolo**
