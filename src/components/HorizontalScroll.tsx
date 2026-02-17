@@ -262,9 +262,7 @@ export function HorizontalScroll() {
             className="project-gallery__slide pb-8 md:pb-12"
           >
             <div
-              style={{
-                height: 'clamp(360px, 60vh, 700px)',
-              }}
+              className="h-[50vh] md:h-[60vh] min-h-[360px] max-h-[700px]"
             >
               <ProjectCard
                 project={project}
