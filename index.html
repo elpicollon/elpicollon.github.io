@@ -166,7 +166,23 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <style>
+      .initial-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f2f4f7;
+      }
+    </style>
+    <div class="initial-loader">
+      <img src="/assets/logo-picolo.gif" alt="Carregando..."
+        style="width: 128px; height: 128px; object-fit: contain;" />
+    </div>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

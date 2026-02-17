@@ -13,6 +13,7 @@ import { ContactModal } from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { Preloader } from './components/ui/Preloader';
 
 // Lazy load project pages for code-splitting
 const TranscricoesInsightsIA = lazy(() => import('./components/projects/TranscricoesInsightsIA').then(m => ({ default: m.TranscricoesInsightsIA })));
@@ -67,12 +68,7 @@ function AppContent() {
       <CustomCursor />
 
       <Suspense fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600">Carregando...</p>
-          </div>
-        </div>
+        <Preloader />
       }>
         <Routes>
           <Route path="/" element={<HomePage />} />
