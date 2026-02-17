@@ -143,6 +143,7 @@ export function MinimalNav() {
               transition={{ duration: 0.6 }}
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden text-black p-1"
+              aria-label={isOpen ? t('accessibility.closeMenu') : t('accessibility.openMenu')}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </motion.button>

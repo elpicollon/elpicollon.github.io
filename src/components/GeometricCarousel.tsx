@@ -22,6 +22,7 @@ export { carouselItems };
 export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gradient: string[]) => void }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
+    const rectRef = useRef<DOMRect | null>(null);
 
     // Mouse position for parallax
     const mouseX = useMotionValue(0);
@@ -47,9 +48,23 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
         }
     }, [currentIndex, onGradientChange]);
 
+    const updateRect = () => {
+        if (containerRef.current) {
+            rectRef.current = containerRef.current.getBoundingClientRect();
+        }
+    };
+
+    const handleMouseEnter = () => {
+        updateRect();
+    };
+
     const handleMouseMove = (e: React.MouseEvent) => {
-        if (!containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
+        // Fallback if not cached yet
+        if (!rectRef.current) updateRect();
+
+        const rect = rectRef.current;
+        if (!rect) return;
+
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         mouseX.set(e.clientX - centerX);
@@ -61,12 +76,25 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
         mouseY.set(0);
     };
 
+    // Update rect on resize to ensure accuracy
+    useEffect(() => {
+        window.addEventListener('resize', updateRect);
+        return () => window.removeEventListener('resize', updateRect);
+    }, []);
+
+    // Update rect on scroll to handle layout shifts (optional but safer)
+    useEffect(() => {
+        window.addEventListener('scroll', updateRect, { passive: true });
+        return () => window.removeEventListener('scroll', updateRect);
+    }, []);
+
     const currentItem = carouselItems[currentIndex];
 
     return (
         <div
             ref={containerRef}
             className="dynamic-gradient-carousel"
+            onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
@@ -103,6 +131,7 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
                             src={currentItem.src}
                             alt={currentItem.alt}
                             className="carousel-floating-image"
+                            fetchPriority="high"
                         />
                     </motion.div>
                 </AnimatePresence>

@@ -16,6 +16,7 @@ export function Preloader() {
                     src="/assets/logo-picolo.gif"
                     alt="Carregando..."
                     className="w-32 h-32 md:w-48 md:h-48 object-contain"
+                    fetchPriority="high"
                 />
             </motion.div>
         </div>

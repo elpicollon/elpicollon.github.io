@@ -7,13 +7,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EEXLG6QY6S"></script>
+  <!-- Google Analytics (Deferred) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-EEXLG6QY6S');
-  </script>
+
+    // Defer loading of GTM script
+    function loadGTM() {
+      if (window.gtmLoaded) return;
+      window.gtmLoaded = true;
+      var script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-EEXLG6QY6S';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    // Load on user interaction
+    ['mousedown', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+      window.addEventListener(event, loadGTM, { once: true, passive: true });
+    });
+
+    // Fallback after 4 seconds
+    setTimeout(loadGTM, 4000);
+  </script
 
   <!-- SPA GitHub Pages - Script para restaurar URL do redirecionamento 404 -->
   <script type="text/javascript">
@@ -34,13 +52,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <!-- Performance: DNS Prefetch -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
 
   <!-- Favicon & Icons -->
   <link rel="icon" type="image/png" href="/favicon.png" />
@@ -179,7 +191,7 @@
       }
     </style>
     <div class="initial-loader">
-      <img src="/assets/logo-picolo.gif" alt="Carregando..."
+      <img src="/assets/logo-picolo.gif" alt="Carregando..." fetchpriority="high"
         style="width: 128px; height: 128px; object-fit: contain;" />
     </div>
   </div>

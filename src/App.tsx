@@ -5,6 +5,7 @@ import { MinimalNav } from './components/MinimalNav';
 import { HeroNew } from './components/HeroNew';
 import { AboutSection } from './components/AboutSection';
 import { BentoGrid } from './components/BentoGrid';
+import { LazyLoad } from './components/ui/LazyLoad';
 
 import { HorizontalScroll } from './components/HorizontalScroll';
 import { MagneticButton } from './components/MagneticButton';
@@ -40,12 +41,28 @@ function HomePage() {
       <MinimalNav />
       <main>
         <HeroNew />
-        <HorizontalScroll />
-        <AboutSection />
-        <BentoGrid />
-        <MagneticButton />
+
+        <LazyLoad rootMargin="100px 0px">
+          <HorizontalScroll />
+        </LazyLoad>
+
+        <LazyLoad rootMargin="200px 0px">
+          <AboutSection />
+        </LazyLoad>
+
+        <LazyLoad rootMargin="200px 0px">
+          <BentoGrid />
+        </LazyLoad>
+
+        <LazyLoad rootMargin="100px 0px">
+          <MagneticButton />
+        </LazyLoad>
       </main>
-      <FooterNew />
+
+      <LazyLoad rootMargin="100px 0px">
+        <FooterNew />
+      </LazyLoad>
+
       <ScrollToTop />
     </>
   );
