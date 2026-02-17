@@ -97,7 +97,12 @@ export function HeroNew() {
             >
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
                 <span className="text-sm md:text-base [@media(min-width:2560px)]:text-lg [@media(min-width:3840px)]:text-xl font-medium text-slate-600">
-                  {t('hero.tags.productDesigner')}
+                  {t('hero.tags.yearsProduct')}
+                </span>
+              </div>
+              <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
+                <span className="text-sm md:text-base [@media(min-width:2560px)]:text-lg [@media(min-width:3840px)]:text-xl font-medium text-slate-600">
+                  {t('hero.tags.yearsTech')}
                 </span>
               </div>
               <div className="px-6 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm ring-1 ring-white/50">
