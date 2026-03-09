@@ -19,6 +19,7 @@ const MagneticButton = lazy(() => import('./components/MagneticButton').then(m =
 const FooterNew = lazy(() => import('./components/FooterNew').then(m => ({ default: m.FooterNew })));
 
 // Lazy load project pages for code-splitting
+const IANotetakerApp = lazy(() => import('./components/projects/IANotetakerApp').then(m => ({ default: m.IANotetakerApp })));
 const TranscricoesInsightsIA = lazy(() => import('./components/projects/TranscricoesInsightsIA').then(m => ({ default: m.TranscricoesInsightsIA })));
 const MedicalOffice = lazy(() => import('./components/projects/MedicalOffice').then(m => ({ default: m.MedicalOffice })));
 const ImportacaoEmpresas = lazy(() => import('./components/projects/ImportacaoEmpresas').then(m => ({ default: m.ImportacaoEmpresas })));
@@ -101,6 +102,11 @@ function AppContent() {
       }>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/projeto/ia-notetaker-app" element={
+            <ProtectedRoute>
+              <IANotetakerApp />
+            </ProtectedRoute>
+          } />
           <Route path="/projeto/transcricoes-insights-ia" element={
             <ProtectedRoute>
               <TranscricoesInsightsIA />

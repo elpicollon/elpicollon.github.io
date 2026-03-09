@@ -8,22 +8,55 @@ export interface ProjectConfig {
     slug: string;
     route: string;
     translationKey: string;
-    image: string;
-    gradient: string;
-    primaryColor: string;
+    image?: string;
+    video?: string;
+    lottie?: string;
+    gradientClass: string;
+    primaryColorClass: string;
+    hoverBorderClass?: string;
+    hoverTextClass?: string;
+    footerVerticalClass: string;
+    footerHorizontalClass: string;
+    /** Theme key used as data-panel-theme attribute; CSS rules apply the dark background */
+    panelTheme: string;
     comingSoon?: boolean;
-    published?: boolean; // New flag
+    published?: boolean;
+    imagePosition?: 'center' | 'bottom';
 }
 
 export const PROJECTS: ProjectConfig[] = [
+    {
+        id: 'ia-notetaker-app',
+        slug: 'ia-notetaker-app',
+        route: '/projeto/ia-notetaker-app',
+        translationKey: 'iaNotetakerApp',
+        image: '/assets/projects/ia-notetaker-app/card-home.webp',
+        lottie: '/assets/projects/ia-notetaker-app/notetakerIA.json',
+        gradientClass: 'from-notetaker-primary to-notetaker-dark',
+        primaryColorClass: 'text-notetaker-primary',
+        hoverBorderClass: 'group-hover:border-notetaker-primary',
+        hoverTextClass: 'group-hover:text-notetaker-primary',
+        footerVerticalClass: 'from-notetaker-primary to-notetaker-primary/60',
+        footerHorizontalClass: 'from-notetaker-primary via-notetaker-primary/40 to-slate-50',
+        panelTheme: 'notetaker',
+        imagePosition: 'center',
+        comingSoon: true,
+    },
     {
         id: 'transcricoes-insights-ia',
         slug: 'transcricoes-insights-ia',
         route: '/projeto/transcricoes-insights-ia',
         translationKey: 'transcricoesIA',
         image: '/assets/projects/transcricoes-insights-ia/card-home.webp',
-        gradient: 'linear-gradient(to bottom, #2F968C, #00463F)',
-        primaryColor: '#2F968C',
+        lottie: '/assets/projects/transcricoes-insights-ia/transcricoesIA.json',
+        gradientClass: 'from-transcricoes-primary to-transcricoes-dark',
+        primaryColorClass: 'text-transcricoes-primary',
+        hoverBorderClass: 'group-hover:border-transcricoes-primary',
+        hoverTextClass: 'group-hover:text-transcricoes-primary',
+        footerVerticalClass: 'from-transcricoes-primary to-transcricoes-primary/60',
+        footerHorizontalClass: 'from-transcricoes-primary via-transcricoes-primary/40 to-slate-50',
+        panelTheme: 'transcricoes',
+        imagePosition: 'center',
         published: true,
     },
     {
@@ -32,8 +65,15 @@ export const PROJECTS: ProjectConfig[] = [
         route: '/projeto/medical-office',
         translationKey: 'medicalOffice',
         image: '/assets/projects/medical-office/card-home.webp',
-        gradient: 'linear-gradient(to bottom, #3066BF, #4088FF)',
-        primaryColor: '#3066BF',
+        lottie: '/assets/projects/medical-office/medoffice.json',
+        gradientClass: 'from-medical-dark to-medical-light',
+        primaryColorClass: 'text-medical-primary',
+        hoverBorderClass: 'group-hover:border-medical-primary',
+        hoverTextClass: 'group-hover:text-medical-primary',
+        footerVerticalClass: 'from-medical-primary to-medical-primary/60',
+        footerHorizontalClass: 'from-medical-primary via-medical-primary/40 to-slate-50',
+        panelTheme: 'medical',
+        imagePosition: 'center',
         published: true,
     },
     {
@@ -42,8 +82,15 @@ export const PROJECTS: ProjectConfig[] = [
         route: '/projeto/importacao-empresas',
         translationKey: 'importacaoEmpresas',
         image: '/assets/projects/importacao-empresas/capa.webp',
-        gradient: 'linear-gradient(to bottom, #0B73D9, #00965E)',
-        primaryColor: '#02376D',
+        lottie: '/assets/projects/importacao-empresas/importemp.json',
+        gradientClass: 'from-importacao-light to-importacao-dark',
+        primaryColorClass: 'text-importacao-primary',
+        hoverBorderClass: 'group-hover:border-importacao-primary',
+        hoverTextClass: 'group-hover:text-importacao-primary',
+        footerVerticalClass: 'from-importacao-primary to-importacao-primary/60',
+        footerHorizontalClass: 'from-importacao-primary via-importacao-primary/40 to-slate-50',
+        panelTheme: 'importacao',
+        imagePosition: 'center',
         published: true,
     },
 ];

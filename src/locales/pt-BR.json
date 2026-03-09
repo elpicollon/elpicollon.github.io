@@ -42,12 +42,19 @@
     },
     "horizontalScroll": {
         "sectionTitle": "Projetos",
+        "sectionDescription": "Uma seleção de projetos que refletem minha atuação em Product Design — do discovery à entrega, unindo estratégia, pesquisa e execução visual.",
         "viewProject": "Ver projeto",
         "comingSoon": "EM BREVE",
         "ctaTitle": "Vamos criar algo incrível?",
         "ctaDescription": "Vamos conversar sobre como posso ajudar a transformar suas ideias em experiências digitais memoráveis.",
         "ctaButton": "Iniciar conversa",
         "projectCards": [
+            {
+                "id": 0,
+                "title": "IA Notetaker - App Leads2b",
+                "category": "Product Design",
+                "year": "2025"
+            },
             {
                 "id": 1,
                 "title": "Transcrições & Insights com IA",
@@ -178,7 +185,10 @@
         "current": "Atual",
         "scroll": "Scroll",
         "back": "Voltar",
-        "backToTop": "Voltar ao topo"
+        "backToTop": "Voltar ao topo",
+        "animation": "Animação",
+        "video": "Vídeo",
+        "viewProject": "Ver projeto"
     },
     "accessibility": {
         "languageSwitcher": {
@@ -447,6 +457,121 @@
         }
     },
     "projects": {
+        "iaNotetakerApp": {
+            "title": "IA Notetaker - App Leads2b",
+            "category": "Product Design",
+            "year": "2025",
+            "resumo": "Expansão do ecossistema do Meetnotes (IA para transcrição e insights) para o ambiente mobile, focando na captação de áudio e inteligência de vendas para equipes em campo (porta-a-porta e visitas presenciais).",
+            "objetivo": "Descentralizar a captura de dados de reuniões, levando o poder da documentação automatizada para fora das videochamadas. O foco foi transformar o smartphone do vendedor em um assistente de captação ágil, eliminando a dependência de computadores e a perda de informações no trabalho de campo.",
+            "desafio": "Desenhar uma interface de baixa fricção que respeitasse a imprevisibilidade do ambiente externo. Era preciso garantir que a gravação e a vinculação de dados ao CRM fossem quase instantâneas, não interrompendo o fluxo natural de uma conversa presencial, além de lidar com limitações de hardware (bateria, oscilação de rede e interrupções do sistema).",
+            "meuPapel": [
+                {
+                    "title": "Estratégia e Contexto",
+                    "desc": "Redefinição do Job-to-be-Done (de 'consumo denso em vídeo' na web para 'captação ágil em áudio' no mobile)."
+                },
+                {
+                    "title": "Arquitetura de Informação",
+                    "desc": "Desenho de fluxos enxutos para vinculação de gravações a negócios (deals) em andamento ou criação instantânea de novos."
+                },
+                {
+                    "title": "Design de Interação e Edge Cases",
+                    "desc": "Mapeamento de cenários de erro e interrupção (ex: chamadas recebidas durante a gravação, gestão de estado offline/online)."
+                },
+                {
+                    "title": "UI e Carga Cognitiva",
+                    "desc": "Adaptação da leitura de transcrições longas para o modelo mental de aplicativos de mensagens."
+                }
+            ],
+            "processoPesquisa": [],
+            "descobertas": [],
+            "prototipo": {
+                "telas": [
+                    {
+                        "titulo": "Áudio-First: Foco na Captação",
+                        "descricao": "Diferente da versão web, o contexto mobile exigiu a remoção deliberada da interface de vídeo. O app foca exclusivamente em áudio. Essa decisão estratégica não apenas simplificou a interface, reduzindo a carga cognitiva, mas também otimizou o consumo de bateria e processamento do dispositivo do vendedor em campo."
+                    },
+                    {
+                        "titulo": "Criação de Negócios On-the-Fly",
+                        "descricao": "Vendedores porta-a-porta não têm tempo para fluxos complexos. Integramos o acesso ao CRM diretamente na tela de gravação. O usuário pode vincular a conversa a um Deal existente ou criar um novo negócio instantaneamente. A inteligência do sistema permite ainda reconhecer participantes pelo tom de voz, automatizando a ata da reunião antes mesmo do vendedor voltar para o carro."
+                    },
+                    {
+                        "titulo": "Transcrições com Modelo Mental de Chat",
+                        "descricao": "Apresentar blocos densos de texto gerados por IA em uma tela de celular quebra a experiência de leitura. A solução foi refatorar a visualização dos insights e falas utilizando o padrão de design de aplicativos de mensagens (balões, alinhamentos e cores sutis). Isso permitiu diferenciar os falantes rapidamente, garantindo escaneabilidade e conforto visual."
+                    },
+                    {
+                        "titulo": "Resiliência: Lidando com o Caos do Mundo Real",
+                        "descricao": "O design previu as interrupções naturais do mobile. Se o vendedor recebe uma ligação, o app pausa a gravação automaticamente, protegendo o contexto sem perda de dados. Além disso, estruturamos os estados da interface para lidar com oscilações da rede 4G, garantindo que o áudio seja salvo localmente e sincronizado com o processamento da IA na nuvem apenas quando houver estabilidade, mitigando a ansiedade do usuário."
+                    }
+                ]
+            },
+            "handoff": {
+                "titulo": "",
+                "descricao": "",
+                "bullets": []
+            },
+            "resultados": [
+                {
+                    "title": "Captura do 'Funil Invisível'",
+                    "desc": "Reuniões físicas, que antes dependiam da memória do vendedor ou de anotações manuais precárias, passaram a gerar dados estruturados, enriquecendo o CRM com transcrições precisas."
+                },
+                {
+                    "title": "Adoção sem Fricção",
+                    "desc": "A simplicidade do modelo 'gravar e vincular' reduziu a barreira de entrada para vendedores externos, transformando o celular em uma ferramenta de inteligência competitiva em tempo real."
+                }
+            ],
+            "licoes": [
+                {
+                    "title": "Contexto dita a Interface",
+                    "desc": "Tentar espelhar a densidade da versão web no mobile seria um erro crasso. Entender que o vendedor em campo precisa de um 'capturador' (e não de um painel de análise complexo) foi o divisor de águas para o sucesso da usabilidade."
+                },
+                {
+                    "title": "Design para a Imperfeição",
+                    "desc": "Trabalhar com áudio no mobile ensina que o sistema nunca atua em condições ideais. Projetar os estados intermediários (pausas forçadas, ausência de rede, processamento em background) é tão importante quanto desenhar a 'tela feliz'."
+                },
+                {
+                    "title": "Familiaridade Acelera a Adoção",
+                    "desc": "Reutilizar o modelo visual de mensageria (balões de chat) para a leitura de transcrições provou que não precisamos reinventar a roda quando já existe um padrão mental consolidado no dia a dia do usuário."
+                }
+            ],
+            "ui": {
+                "backButton": "Voltar",
+                "mobileAppTag": "Mobile App",
+                "heroTitle": {
+                    "line1": "IA Notetaker",
+                    "line2": "- App Leads2b"
+                },
+                "sections": {
+                    "overview": {
+                        "label": "Visão Geral",
+                        "title": "O Projeto",
+                        "objetivo": "Objetivo",
+                        "desafio": "Desafio"
+                    },
+                    "role": {
+                        "label": "Contribuição",
+                        "title": "Meu Papel"
+                    },
+                    "discovery": {
+                        "label": "Descoberta & Definição",
+                        "title": "Discovery & Definição",
+                        "placeholder": "Conteúdo em breve."
+                    },
+                    "prototype": {
+                        "label": "Estratégia e Solução",
+                        "title": "Protótipo"
+                    },
+                    "results": {
+                        "label": "Resultados",
+                        "title": "Impacto do Projeto"
+                    },
+                    "lessons": {
+                        "label": "Análise Crítica",
+                        "title": "Insights e Reflexões"
+                    }
+                },
+                "heroAlt": "Capa do Projeto: Meetnotes Notetaker IA"
+            }
+        },
         "transcricoesIA": {
             "title": "Transcrições & Insights com IA",
             "category": "Product Design",

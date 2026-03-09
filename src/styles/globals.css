@@ -130,6 +130,14 @@
   --color-transcricoes-primary: #0D9488;
   --color-transcricoes-dark: #2A645E;
   --color-transcricoes-light: #55CABE;
+
+  --color-notetaker-primary: #6BBF80;
+  --color-notetaker-dark: #3D8A52;
+  --color-notetaker-light: #B3E1C2;
+
+  --color-importacao-primary: #02376D;
+  --color-importacao-dark: #00965E;
+  --color-importacao-light: #0B73D9;
 }
 
 @layer utilities {
@@ -312,81 +320,184 @@
   }
 
   /* ========================================
-     Project Gallery — Cinematic Scroll
+     Project Gallery — Snap Scroll (1 per viewport)
      ======================================== */
 
   .project-gallery {
-    scroll-snap-type: y mandatory;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;          /* Firefox */
+    /* Normal page flow — slides stack vertically */
+    overflow: visible;
   }
 
-  .project-gallery::-webkit-scrollbar {
-    display: none;                  /* Chrome / Safari */
-  }
-
+  /* ── Project slide ── */
   .project-gallery__slide {
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Mobile: compact padding for free scroll */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
-  /* Card 3D container */
-  .project-card {
-    perspective: 1200px;
-    transform-style: preserve-3d;
+  @media (min-width: 640px) {
+    .project-gallery__slide {
+      padding-top: 5rem;
+      padding-bottom: 2.5rem;
+    }
   }
 
-  .project-card__inner {
-    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
-    transform-style: preserve-3d;
-    will-change: transform;
+  @media (min-width: 1024px) {
+    .project-gallery__slide {
+      /* Desktop keeps full-height so snap-centering has room */
+      min-height: 100svh;
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+    }
   }
 
-  .project-card__inner:hover {
-    box-shadow:
-      0 25px 50px -12px rgba(0, 0, 0, 0.25),
-      0 0 60px -15px rgba(139, 92, 246, 0.15);
+  .project-card-active {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    /* Height is now strictly determined by the width via aspect-ratio.
+       If it needs to shrink to fit the viewport vertically, 
+       the wrapper's max-width will squeeze the width instead. */
   }
 
-  /* Parallax image layer */
-  .project-card__image {
-    will-change: transform;
-    transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* ========================================
+     Info panel — visually attached below the card
+     Creates a single unified "card + tab" piece
+     ======================================== */
+
+  /* ========================================
+     Wrapper: groups card + info panel
+     The card sits on top (z:2), panel below (z:1)
+     so the panel appears to slide from behind
+     ======================================== */
+
+  .project-card-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    
+    /* 
+      Fit inside 100svh - 224px (mobile):
+      56px(nav) + 24px(top) + 24px(bottom) + ~120px(info panel) = 224px
+    */
+    max-width: calc((100svh - 224px) * 21 / 9);
   }
 
-  .project-card__inner:hover .project-card__image {
-    transform: scale(1.08);
+  @media (min-width: 1024px) {
+    .project-card-wrapper {
+      /* 
+        Fit inside 100svh - 202px (desktop):
+        64px(nav) + 24px(top) + 24px(bottom) + ~90px(info panel) = 202px
+      */
+      max-width: calc((100svh - 202px) * 21 / 9);
+    }
   }
 
-  /* Gradient cards — image overflow on hover */
-  .project-card__gradient-image {
-    will-change: transform;
-    transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
-    transform-origin: bottom center;
+  /* Card visual stays above the panel */
+  .project-card-wrapper .project-card-active {
+    position: relative;
+    z-index: 2;
   }
 
-  .project-card__inner:hover .project-card__gradient-image {
-    transform: scale(1.08);
+  /* Panel wrapper clips the slide-up animation */
+  .project-info-panel {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
   }
 
-  /* Mouse-glow effect */
-  .project-card__glow {
-    pointer-events: none;
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 20;
+  .project-info-panel__inner {
+    /* Background comes from the project's panelColorClass Tailwind utility */
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    /* Fallback background */
+    background-color: #1e293b;
   }
 
-  .project-card__inner:hover .project-card__glow {
-    opacity: 1;
+  /* Per-project dark backgrounds driven by data-panel-theme attribute */
+  .project-info-panel__inner[data-panel-theme="notetaker"] {
+    background-color: var(--color-notetaker-dark);
+  }
+  .project-info-panel__inner[data-panel-theme="transcricoes"] {
+    background-color: var(--color-transcricoes-dark);
+  }
+  .project-info-panel__inner[data-panel-theme="medical"] {
+    background-color: var(--color-medical-dark);
+  }
+  .project-info-panel__inner[data-panel-theme="importacao"] {
+    background-color: var(--color-importacao-dark);
   }
 
-  /* Progress indicator */
+
+  @media (min-width: 640px) {
+    .project-info-panel__inner {
+      padding: 1.125rem 2rem;
+      border-bottom-left-radius: 1.25rem;
+      border-bottom-right-radius: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-info-panel__inner {
+      padding: 1.25rem 2.5rem;
+      border-bottom-left-radius: 1.5rem;
+      border-bottom-right-radius: 1.5rem;
+    }
+  }
+
+  /* Mobile: stack vertically, CTA on the left below meta */
+  @media (max-width: 639px) {
+    .project-info-panel__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.875rem 1.25rem;
+    }
+  }
+
+  /* ========================================
+     Text strip title (reused inside info panel)
+     ======================================== */
+
+  .project-text-strip__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    /* White text over dark panel */
+    color: #f1f5f9;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  /* ========================================
+     CTA slide — auto height
+     ======================================== */
+
+  .project-gallery__cta-slide {
+    /* No snap, no full-height — just flows naturally */
+    display: block;
+  }
+
+  /* ========================================
+     Progress dots — side nav (desktop)
+     ======================================== */
+
   .project-progress {
     position: fixed;
     right: 2rem;
@@ -396,33 +507,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .project-progress__dot {
     width: 3px;
-    height: 24px;
+    height: 18px;
     border-radius: 2px;
-    background: rgba(100, 116, 139, 0.25);
+    background: rgba(100, 116, 139, 0.2);
     transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
     cursor: pointer;
   }
 
   .project-progress__dot--active {
-    height: 40px;
+    height: 36px;
     background: linear-gradient(180deg, #8B5CF6, #A855F7);
     box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
   }
 
-  .project-progress__counter {
-    font-family: var(--font-display);
-    font-variant-numeric: tabular-nums;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    color: #64748b;
-  }
-
-  /* Hide progress indicator on mobile */
+  /* Hide progress dots on mobile — counter in strip handles it */
   @media (max-width: 1023px) {
     .project-progress {
       display: none;

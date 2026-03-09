@@ -42,12 +42,19 @@
     },
     "horizontalScroll": {
         "sectionTitle": "Projects",
+        "sectionDescription": "A curated selection of projects showcasing my work in Product Design — from discovery to delivery, combining strategy, research, and visual execution.",
         "viewProject": "View project",
         "comingSoon": "COMING SOON",
         "ctaTitle": "Ready to create something amazing?",
         "ctaDescription": "Let's talk about how I can help transform your ideas into memorable digital experiences.",
         "ctaButton": "Start conversation",
         "projectCards": [
+            {
+                "id": 0,
+                "title": "AI Notetaker - Leads2b App",
+                "category": "Product Design",
+                "year": "2025"
+            },
             {
                 "id": 1,
                 "title": "Transcriptions & AI Insights",
@@ -178,7 +185,10 @@
         "current": "Current",
         "scroll": "Scroll",
         "back": "Back",
-        "backToTop": "Back to top"
+        "backToTop": "Back to top",
+        "animation": "Animation",
+        "video": "Video",
+        "viewProject": "View project"
     },
     "accessibility": {
         "languageSwitcher": {
@@ -447,6 +457,121 @@
         }
     },
     "projects": {
+        "iaNotetakerApp": {
+            "title": "AI Notetaker - Leads2b App",
+            "category": "Product Design",
+            "year": "2025",
+            "resumo": "Expansion of the Meetnotes ecosystem (AI for transcription and insights) to the mobile environment, focusing on audio capture and sales intelligence for field teams (door-to-door and in-person visits).",
+            "objetivo": "Decentralize meeting data capture, bringing the power of automated documentation beyond video calls. The focus was to transform the salesperson's smartphone into an agile capture assistant, eliminating computer dependency and information loss in fieldwork.",
+            "desafio": "Design a low-friction interface that respected the unpredictability of the external environment. It was necessary to ensure that recording and CRM data linking were nearly instantaneous, not interrupting the natural flow of an in-person conversation, while also handling hardware limitations (battery, network fluctuations, and system interruptions).",
+            "meuPapel": [
+                {
+                    "title": "Strategy & Context",
+                    "desc": "Redefining the Job-to-be-Done (from 'dense video consumption' on web to 'agile audio capture' on mobile)."
+                },
+                {
+                    "title": "Information Architecture",
+                    "desc": "Design of lean flows for linking recordings to ongoing deals or instant creation of new ones."
+                },
+                {
+                    "title": "Interaction Design & Edge Cases",
+                    "desc": "Mapping error and interruption scenarios (e.g., incoming calls during recording, offline/online state management)."
+                },
+                {
+                    "title": "UI & Cognitive Load",
+                    "desc": "Adapting long transcription reading to the mental model of messaging apps."
+                }
+            ],
+            "processoPesquisa": [],
+            "descobertas": [],
+            "prototipo": {
+                "telas": [
+                    {
+                        "titulo": "Audio-First: Focus on Capture",
+                        "descricao": "Unlike the web version, the mobile context required deliberate removal of the video interface. The app focuses exclusively on audio. This strategic decision not only simplified the interface, reducing cognitive load, but also optimized battery consumption and processing on the field salesperson's device."
+                    },
+                    {
+                        "titulo": "On-the-Fly Deal Creation",
+                        "descricao": "Door-to-door salespeople don't have time for complex flows. We integrated CRM access directly into the recording screen. Users can link a conversation to an existing Deal or create a new one instantly. The system's intelligence can even recognize participants by tone of voice, automating the meeting minutes before the salesperson even returns to their car."
+                    },
+                    {
+                        "titulo": "Transcriptions with Chat Mental Model",
+                        "descricao": "Presenting dense blocks of AI-generated text on a phone screen breaks the reading experience. The solution was to refactor the visualization of insights and speakers using the messaging app design pattern (bubbles, alignments, and subtle colors). This allowed quick speaker differentiation, ensuring scannability and visual comfort."
+                    },
+                    {
+                        "titulo": "Resilience: Dealing with Real-World Chaos",
+                        "descricao": "The design anticipated natural mobile interruptions. If the salesperson receives a call, the app automatically pauses recording, protecting context without data loss. Additionally, we structured interface states to handle 4G network fluctuations, ensuring audio is saved locally and synced with cloud AI processing only when stable, mitigating user anxiety."
+                    }
+                ]
+            },
+            "handoff": {
+                "titulo": "",
+                "descricao": "",
+                "bullets": []
+            },
+            "resultados": [
+                {
+                    "title": "Capturing the 'Invisible Funnel'",
+                    "desc": "Physical meetings, which previously relied on the salesperson's memory or poor manual notes, began generating structured data, enriching the CRM with accurate transcriptions."
+                },
+                {
+                    "title": "Frictionless Adoption",
+                    "desc": "The simplicity of the 'record and link' model lowered the entry barrier for field salespeople, transforming the phone into a real-time competitive intelligence tool."
+                }
+            ],
+            "licoes": [
+                {
+                    "title": "Context Dictates the Interface",
+                    "desc": "Trying to mirror the web version's density on mobile would be a grave mistake. Understanding that the field salesperson needs a 'capturer' (not a complex analysis panel) was the turning point for usability success."
+                },
+                {
+                    "title": "Design for Imperfection",
+                    "desc": "Working with mobile audio teaches that the system never operates in ideal conditions. Designing intermediate states (forced pauses, network absence, background processing) is as important as designing the 'happy screen'."
+                },
+                {
+                    "title": "Familiarity Accelerates Adoption",
+                    "desc": "Reusing the messaging visual model (chat bubbles) for transcription reading proved we don't need to reinvent the wheel when a consolidated mental pattern already exists in the user's daily life."
+                }
+            ],
+            "ui": {
+                "backButton": "Back",
+                "mobileAppTag": "Mobile App",
+                "heroTitle": {
+                    "line1": "AI Notetaker",
+                    "line2": "- Leads2b App"
+                },
+                "sections": {
+                    "overview": {
+                        "label": "Overview",
+                        "title": "The Project",
+                        "objetivo": "Goal",
+                        "desafio": "Challenge"
+                    },
+                    "role": {
+                        "label": "Contribution",
+                        "title": "My Role"
+                    },
+                    "discovery": {
+                        "label": "Discovery & Definition",
+                        "title": "Discovery & Definition",
+                        "placeholder": "Content coming soon."
+                    },
+                    "prototype": {
+                        "label": "Strategy & Solution",
+                        "title": "Prototype"
+                    },
+                    "results": {
+                        "label": "Results",
+                        "title": "Project Impact"
+                    },
+                    "lessons": {
+                        "label": "Critical Analysis",
+                        "title": "Insights & Reflections"
+                    }
+                },
+                "heroAlt": "Project Cover: Meetnotes Notetaker AI"
+            }
+        },
         "transcricoesIA": {
             "title": "Transcriptions & Insights with AI",
             "category": "Product Design",

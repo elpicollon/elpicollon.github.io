@@ -45,10 +45,7 @@ export function ProjectCTAFooter() {
             {next && (
                 <Link
                     to={next.route}
-                    className="group block relative overflow-hidden h-auto md:h-[400px]"
-                    style={{
-                        background: `linear-gradient(to bottom, ${next.primaryColor}, ${next.primaryColor}60)`
-                    }}
+                    className={`group block relative overflow-hidden h-auto md:h-[400px] bg-gradient-to-b ${next.footerVerticalClass}`}
                 >
                     {/* Desktop: Image positioned absolutely on left */}
                     <div className="absolute left-0 top-0 w-1/2 h-full hidden md:block">
@@ -61,10 +58,7 @@ export function ProjectCTAFooter() {
 
                     {/* Desktop: Override gradient to horizontal */}
                     <div
-                        className="absolute inset-0 hidden md:block"
-                        style={{
-                            background: `linear-gradient(to right, ${next.primaryColor}, ${next.primaryColor}40, #f8fafc)`
-                        }}
+                        className={`absolute inset-0 hidden md:block bg-gradient-to-r ${next.footerHorizontalClass}`}
                     />
 
                     {/* Desktop: Image on top of gradient */}

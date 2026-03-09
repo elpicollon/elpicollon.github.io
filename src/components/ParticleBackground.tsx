@@ -36,6 +36,11 @@ const COLOR_PALETTES = {
         { r: 13, g: 148, b: 136 },   // #0D9488 (primary)
         { r: 42, g: 100, b: 94 },    // #2A645E (dark)
     ],
+    notetaker: [
+        { r: 179, g: 225, b: 194 },  // #B3E1C2 (light)
+        { r: 107, g: 191, b: 128 },  // #6BBF80 (primary)
+        { r: 61, g: 138, b: 82 },    // #3D8A52 (dark)
+    ],
 };
 
 type ColorPreset = keyof typeof COLOR_PALETTES;
