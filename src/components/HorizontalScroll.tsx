@@ -210,7 +210,7 @@ function ProjectSlide({
             <div className="project-info-panel__inner" data-panel-theme={project.panelTheme}>
               {/* Left: title + meta */}
               <div className="flex-1 min-w-0">
-                <h3 className="project-text-strip__title truncate text-white">
+                <h3 className="project-text-strip__title truncate text-white font-display text-2xl sm:text-3xl md:text-4xl">
                   {project.title}
                 </h3>
                 <div className="flex items-center gap-2 mt-1">
@@ -218,7 +218,7 @@ function ProjectSlide({
                     {project.category}
                   </span>
                   <span className="w-1 h-1 rounded-full bg-white/30 shrink-0" />
-                  <span className="text-xs sm:text-sm font-medium text-white/40 uppercase tracking-wider">
+                  <span className="text-xs sm:text-sm font-medium text-white/60 uppercase tracking-wider">
                     {project.year}
                   </span>
                 </div>
