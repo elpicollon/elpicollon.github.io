@@ -210,7 +210,7 @@ function ProjectSlide({
             <div className="project-info-panel__inner" data-panel-theme={project.panelTheme}>
               {/* Left: title + meta */}
               <div className="flex-1 min-w-0">
-                <h3 className="project-text-strip__title truncate">
+                <h3 className="project-text-strip__title truncate text-white">
                   {project.title}
                 </h3>
                 <div className="flex items-center gap-2 mt-1">
@@ -234,7 +234,7 @@ function ProjectSlide({
                 ) : 'link' in project && project.link ? (
                   <Link
                     to={project.link}
-                    className="group/cta inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm font-medium text-white transition-all duration-300 bg-white/15 hover:bg-white/25 border border-white/20 hover:border-white/40 shadow-md"
+                    className="group/cta inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm font-medium text-white transition-all duration-300 bg-white/25 hover:bg-white/40 border border-white/30 hover:border-white/60 shadow-lg backdrop-blur-sm"
                     aria-label={`${t('common.viewProject')}: ${project.title}`}
                   >
                     <span>{t('common.viewProject')}</span>
