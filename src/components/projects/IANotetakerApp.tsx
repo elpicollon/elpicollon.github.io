@@ -118,8 +118,7 @@ function BigNumber({ number, className = "" }: { number: string; className?: str
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 0.06, scale: 1 } : {}}
             transition={{ duration: 1, ease: "easeOut" }}
-            className={`absolute font-bold text-[12rem] md:text-[18rem] lg:text-[24rem] text-slate-900 select-none pointer-events-none leading-none ${className}`}
-            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+            className={`absolute font-bold text-[12rem] md:text-[18rem] lg:text-[24rem] text-slate-900 select-none pointer-events-none leading-none font-display ${className}`}
         >
             {number}
         </motion.span>
@@ -400,7 +399,7 @@ function OverviewSection() {
                                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-notetaker-primary to-notetaker-dark flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-notetaker-primary/25">
                                     <Target className="w-7 h-7 text-white" />
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 font-display">
                                     {t('projects.iaNotetakerApp.ui.sections.overview.objetivo')}
                                 </h3>
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-notetaker-light to-transparent rounded-full mb-6" />
@@ -420,7 +419,7 @@ function OverviewSection() {
                                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-notetaker-primary to-notetaker-dark flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-notetaker-primary/25">
                                     <Zap className="w-7 h-7 text-white" />
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 font-display">
                                     {t('projects.iaNotetakerApp.ui.sections.overview.desafio')}
                                 </h3>
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-notetaker-light to-transparent rounded-full mb-6" />
@@ -575,8 +574,7 @@ function PrototypeSection() {
 
                                                 {/* Title */}
                                                 <h3
-                                                    className="text-xl md:text-3xl font-bold text-slate-900"
-                                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                                    className="text-xl md:text-3xl font-bold text-slate-900 font-display"
                                                 >
                                                     {tela.titulo}
                                                 </h3>

@@ -118,8 +118,7 @@ export function ProjectCTAFooter() {
                     >
                         <div className="max-w-2xl">
                             <h2
-                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight"
-                                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight font-display"
                             >
                                 {t('projectCTA.title')}
                             </h2>

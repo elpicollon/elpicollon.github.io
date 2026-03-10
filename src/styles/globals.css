@@ -122,6 +122,10 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* Fonts */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+
   /* Project Themes */
   --color-medical-primary: #0B73D9;
   --color-medical-dark: #3066BF;

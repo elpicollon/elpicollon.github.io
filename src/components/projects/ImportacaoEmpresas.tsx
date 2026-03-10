@@ -223,8 +223,7 @@ function BigNumber({ number, className = "" }: { number: string; className?: str
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 0.06, scale: 1 } : {}}
             transition={{ duration: 1, ease: "easeOut" }}
-            className={`absolute font-bold text-[12rem] md:text-[18rem] lg:text-[24rem] text-slate-900 select-none pointer-events-none leading-none ${className}`}
-            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+            className={`absolute font-bold text-[12rem] md:text-[18rem] lg:text-[24rem] text-slate-900 select-none pointer-events-none leading-none font-display ${className}`}
         >
             {number}
         </motion.span>
@@ -535,7 +534,7 @@ function OverviewSection() {
                                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0B73D9] to-[#054a8c] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-[#0B73D9]/25">
                                     <Target className="w-7 h-7 text-white" />
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 font-display">
                                     {projectData.ui.sections.overview.objetivo}
                                 </h3>
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-[#0B73D9] to-transparent rounded-full mb-6" />
@@ -555,7 +554,7 @@ function OverviewSection() {
                                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0B73D9] to-[#054a8c] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-[#0B73D9]/25">
                                     <Zap className="w-7 h-7 text-white" />
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 font-display">
                                     {projectData.ui.sections.overview.desafio}
                                 </h3>
                                 <div className="w-12 h-0.5 bg-gradient-to-r from-[#0B73D9] to-transparent rounded-full mb-6" />
@@ -654,7 +653,7 @@ function ResearchSection() {
                             <RevealText key={index} delay={0.2 + index * 0.1}>
                                 <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-[#0B73D9] transition-colors group">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-[#0B73D9]/50 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-[#0B73D9]/50 transition-colors leading-none font-display">
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <div className="pt-2">
@@ -696,7 +695,7 @@ function ImageCarousel({ images, title }: { images: string[]; title: string }) {
             <RevealText delay={0.4}>
                 <div className="flex items-center justify-center gap-6 mb-10 md:mb-14 opacity-90">
                     <div className="w-12 h-1 rounded-full bg-gradient-to-r from-transparent to-[#0B73D9]/50" />
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight font-display">
                         {title}
                     </h3>
                     <div className="w-12 h-1 rounded-full bg-gradient-to-l from-transparent to-[#0B73D9]/50" />
@@ -813,7 +812,7 @@ function ProductVisionSection() {
                         <RevealText delay={0.2}>
                             <div className="flex items-center justify-center gap-6 mb-10 md:mb-14 opacity-90">
                                 <div className="w-12 h-1 rounded-full bg-gradient-to-r from-transparent to-[#0B73D9]/50" />
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight font-display">
                                     {projectData.ui.sections.discoveries.title}
                                 </h3>
                                 <div className="w-12 h-1 rounded-full bg-gradient-to-l from-transparent to-[#0B73D9]/50" />
@@ -844,7 +843,7 @@ function ProductVisionSection() {
                         <RevealText delay={0.2}>
                             <div className="flex items-center justify-center gap-6 mb-10 md:mb-14 opacity-90">
                                 <div className="w-12 h-1 rounded-full bg-gradient-to-r from-transparent to-[#0B73D9]/50" />
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight font-display">
                                     {(projectData.ui.sections as any).userFlow?.title || "Fluxo de Usuários"}
                                 </h3>
                                 <div className="w-12 h-1 rounded-full bg-gradient-to-l from-transparent to-[#0B73D9]/50" />
@@ -918,8 +917,7 @@ function PrototypeSection() {
                                                     {String(index + 1).padStart(2, '0')}
                                                 </div>
                                                 <h3
-                                                    className="text-xl md:text-3xl font-bold text-slate-900"
-                                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                                    className="text-xl md:text-3xl font-bold text-slate-900 font-display"
                                                 >
                                                     {tela.titulo}
                                                 </h3>

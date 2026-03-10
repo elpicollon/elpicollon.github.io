@@ -197,7 +197,7 @@ function HighlightCard({ item, index }: { item: HighlightCardItem; index: number
             </div>
 
             {/* Content */}
-            <h4 className="text-lg font-bold text-slate-900 mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h4 className="text-lg font-bold text-slate-900 mb-2 font-display">
                 {item.title}
             </h4>
             <p className="text-slate-600 text-sm leading-relaxed">
@@ -247,7 +247,7 @@ function QuemSouSection({ data }: { data: AboutPageData }) {
                     {/* Right: Achievement Highlights */}
                     <RevealText delay={0.4}>
                         <div className="bg-gradient-to-br from-purple-50 via-white to-violet-50 rounded-3xl p-8 border border-purple-100">
-                            <h3 className="text-xl font-bold text-slate-900 mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                            <h3 className="text-xl font-bold text-slate-900 mb-6 font-display">
                                 {data.quemSou.highlightsTitle}
                             </h3>
                             <ul className="space-y-4">
@@ -271,7 +271,7 @@ function QuemSouSection({ data }: { data: AboutPageData }) {
 
                 {/* Competency Cards */}
                 <RevealText delay={0.5}>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center font-display">
                         {data.quemSou.definesMe}
                     </h3>
                 </RevealText>
@@ -626,7 +626,7 @@ export function AboutPage() {
                         className="flex flex-col items-center gap-8"
                     >
                         <div className="max-w-2xl">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight font-display">
                                 {data.cta.title}
                             </h2>
                             <p className="text-lg text-slate-600 leading-relaxed">

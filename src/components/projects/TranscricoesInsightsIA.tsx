@@ -156,8 +156,7 @@ function BigNumber({ number, className = "" }: { number: string; className?: str
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 0.06, scale: 1 } : {}}
             transition={{ duration: 1, ease: "easeOut" }}
-            className={`absolute font-bold text-[12rem] md:text-[18rem] lg:text-[24rem] text-slate-900 select-none pointer-events-none leading-none ${className}`}
-            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+            className={`absolute font-bold text-[12rem] md:text-[18rem] lg:text-[24rem] text-slate-900 select-none pointer-events-none leading-none font-display ${className}`}
         >
             {number}
         </motion.span>
@@ -452,7 +451,7 @@ function OverviewSection() {
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 font-display">
                                     {t('projects.transcricoesIA.ui.sections.overview.objetivo')}
                                 </h3>
 
@@ -480,7 +479,7 @@ function OverviewSection() {
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 font-display">
                                     {t('projects.transcricoesIA.ui.sections.overview.desafio')}
                                 </h3>
 
@@ -585,7 +584,7 @@ function ResearchSection() {
                             <RevealText key={index} delay={0.2 + index * 0.1}>
                                 <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-transcricoes-light transition-colors group">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-transcricoes-primary/40 transition-colors leading-none" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                                        <span className="text-6xl font-bold text-slate-200 group-hover:text-transcricoes-primary/40 transition-colors leading-none font-display">
                                             {String(index + 1).padStart(2, '0')}
                                         </span>
                                         <div className="pt-2">
@@ -701,8 +700,7 @@ function PrototypeSection() {
 
                                                 {/* Title */}
                                                 <h3
-                                                    className="text-xl md:text-3xl font-bold text-slate-900"
-                                                    style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                                                    className="text-xl md:text-3xl font-bold text-slate-900 font-display"
                                                 >
                                                     {tela.titulo}
                                                 </h3>

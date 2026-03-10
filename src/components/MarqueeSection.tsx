@@ -25,9 +25,8 @@ export function MarqueeSection() {
           {[...skills, ...skills].map((skill, index) => (
             <span
               key={index}
-              className="text-3xl md:text-4xl font-medium leading-tight inline-block text-slate-300"
+              className="text-3xl md:text-4xl font-medium leading-tight inline-block text-slate-300 font-display"
               style={{
-                fontFamily: 'var(--font-display)',
                 lineHeight: '1.2',
               }}
             >
@@ -54,8 +53,8 @@ export function MarqueeSection() {
           {[...skills, ...skills].map((skill, index) => (
             <span
               key={index}
-              className="text-3xl md:text-4xl font-medium text-slate-200/50 leading-tight inline-block"
-              style={{ fontFamily: 'var(--font-display)', lineHeight: '1.2' }}
+              className="text-3xl md:text-4xl font-medium text-slate-200/50 leading-tight inline-block font-display"
+              style={{ lineHeight: '1.2' }}
             >
               {skill}
             </span>
