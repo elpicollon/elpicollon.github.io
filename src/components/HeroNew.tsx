@@ -1,13 +1,12 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { useRef, useState, useCallback, Suspense, lazy } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { ScrollIndicator } from './ui/ScrollIndicator';
 import { useTranslation } from '../hooks/useTranslation';
 import { carouselItems } from '../config/carousel';
+import { GeometricCarousel } from './GeometricCarousel';
+import { MarqueeSection } from './MarqueeSection';
 
-// Lazy load heavy components
-const HeroParticleGrid = lazy(() => import('./HeroParticleGrid').then(module => ({ default: module.HeroParticleGrid })));
-const GeometricCarousel = lazy(() => import('./GeometricCarousel').then(module => ({ default: module.GeometricCarousel })));
-const MarqueeSection = lazy(() => import('./MarqueeSection').then(module => ({ default: module.MarqueeSection })));
+import { HeroParticleGrid } from './HeroParticleGrid';
 
 export function HeroNew() {
   const containerRef = useRef(null);
@@ -53,9 +52,7 @@ export function HeroNew() {
 
       {/* Background Waves - Restored as requested */}
       <div className="absolute inset-0 z-0">
-        <Suspense fallback={null}>
-          <HeroParticleGrid />
-        </Suspense>
+        <HeroParticleGrid />
 
         {/* Soft gradients for depth */}
         <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
@@ -66,9 +63,7 @@ export function HeroNew() {
         style={{ y, opacity, scale, transform: 'translateZ(0)' }}
         className="absolute bottom-0 left-0 right-0 z-0 will-change-transform"
       >
-        <Suspense fallback={null}>
-          <MarqueeSection />
-        </Suspense>
+        <MarqueeSection />
       </motion.div>
 
       <motion.div
@@ -78,9 +73,9 @@ export function HeroNew() {
         <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-[5%] items-center">
           {/* Left - Text */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 1, x: -30 }} // Keep opacity essentially visible for LCP immediately
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true }}
           >
             {/* Title */}
@@ -98,7 +93,7 @@ export function HeroNew() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
               className="flex flex-wrap gap-4 items-center mb-16"
             >
@@ -129,15 +124,13 @@ export function HeroNew() {
 
           {/* Right - Geometric Image Carousel */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 1, y: 20 }} // Keep opacity 1 for immediate detection
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true }}
             className="hidden lg:flex items-center justify-center relative"
           >
-            <Suspense fallback={null}>
-              <GeometricCarousel onGradientChange={handleGradientChange} />
-            </Suspense>
+            <GeometricCarousel onGradientChange={handleGradientChange} />
           </motion.div>
         </div>
       </motion.div>

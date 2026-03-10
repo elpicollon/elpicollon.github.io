@@ -20,7 +20,7 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
-        }, 4000);
+        }, 8000);
 
         return () => clearInterval(interval);
     }, []);
@@ -43,8 +43,10 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
     };
 
     const handleMouseMove = (e: React.MouseEvent) => {
-        // Fallback if not cached yet
-        if (!rectRef.current) updateRect();
+        // Fallback se não tivéssemos capturado o onMouseEnter (raro, mas previne quebra)
+        if (!rectRef.current) {
+            updateRect();
+        }
 
         const rect = rectRef.current;
         if (!rect) return;
@@ -58,19 +60,9 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
     const handleMouseLeave = () => {
         mouseX.set(0);
         mouseY.set(0);
+        // Limpamos o rect para forçar o recálculo na próxima entrada
+        rectRef.current = null;
     };
-
-    // Update rect on resize to ensure accuracy
-    useEffect(() => {
-        window.addEventListener('resize', updateRect);
-        return () => window.removeEventListener('resize', updateRect);
-    }, []);
-
-    // Update rect on scroll to handle layout shifts (optional but safer)
-    useEffect(() => {
-        window.addEventListener('scroll', updateRect, { passive: true });
-        return () => window.removeEventListener('scroll', updateRect);
-    }, []);
 
     const currentItem = carouselItems[currentIndex];
 
@@ -115,6 +107,8 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
                             src={currentItem.src}
                             alt={currentItem.alt}
                             className="carousel-floating-image"
+                            width={852}
+                            height={966}
                             // @ts-expect-error - fetchpriority is valid in React 19 / modern browsers but types might be outdated
                             fetchpriority="high"
                         />

@@ -30,7 +30,7 @@ export function MagneticButton() {
             >
               {String(t('magneticButton.title.line1'))}
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600 animate-gradient-x bg-[length:200%_auto]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-500 to-purple-600">
                 {String(t('magneticButton.title.line2'))}
               </span>
             </motion.h2>

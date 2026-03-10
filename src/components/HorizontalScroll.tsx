@@ -61,13 +61,15 @@ function ProjectVisual({ project, isActive }: ProjectVisualProps) {
   }, []);
 
   useEffect(() => {
-    if (project.lottie) {
-      fetch(project.lottie)
-        .then(res => res.json())
-        .then(data => setLottieData(data))
-        .catch(err => console.error('Failed to load lottie animation:', err));
+    if (project.lottie && isInView) {
+      if (!lottieData && !lottieRef.current) {
+        fetch(project.lottie)
+          .then(res => res.json())
+          .then(data => setLottieData(data))
+          .catch(err => console.error('Failed to load lottie animation:', err));
+      }
     }
-  }, [project.lottie]);
+  }, [project.lottie, isInView, lottieData]);
 
   useEffect(() => {
     const video = videoRef.current;

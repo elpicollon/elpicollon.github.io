@@ -234,6 +234,8 @@ export function AboutSection() {
                   src={logo.src}
                   alt={logo.alt}
                   loading="lazy"
+                  width="280"
+                  height="150"
                   style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
