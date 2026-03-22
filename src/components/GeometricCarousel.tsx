@@ -20,7 +20,7 @@ export function GeometricCarousel({ onGradientChange }: { onGradientChange?: (gr
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
-        }, 8000);
+        }, 4000);
 
         return () => clearInterval(interval);
     }, []);
