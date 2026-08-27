@@ -13,6 +13,10 @@
             "contact": "CONTACT"
         }
     },
+    "meta": {
+        "title": "Picolo Design Digital | UX/UI & Product Designer",
+        "description": "Portfolio of Rodrigo Picolo - Product Designer with over 12 years in technology and 7 years in UX. Specializing in high-performance web & mobile interfaces, SaaS, ERP, and AI."
+    },
     "hero": {
         "title1": "End-to-end",
         "title2": "digital experiences!",
@@ -144,7 +148,7 @@
         }
     },
     "footer": {
-        "tagline": "Delivering digital design services since 2014, with creativity and a strong commitment to quality.",
+        "tagline": "Delivering digital design since 2014 with creativity, quality and fair pricing.",
         "navigation": "Navigation",
         "connect": "Connect",
         "navItems": {
@@ -154,8 +158,8 @@
             "expertise": "Expertise",
             "contact": "Contact"
         },
-        "downloadCV": "Download CV",
-        "madeWith": "Made with 😡 by me. All rights reserved.",
+        "downloadCV": "Download Resume",
+        "madeWith": "Made by me with 😡 and ☕. All rights reserved.",
         "copyright": "© {year} - Picolo Design Digital & Consultancy | CNPJ: 42.054.838/0001-08"
     },
     "projectCTA": {
@@ -206,7 +210,7 @@
         "pause": "Pause audio",
         "play": "Play audio",
         "labelDesktop": "Listen to a brief summary of this project!",
-        "labelMobile": "Listen to a brief summary!"
+        "labelMobile": "Listen to summary"
     },
     "marquee": {
         "skills": [
@@ -222,26 +226,47 @@
     },
     "aboutPage": {
         "hero": {
-            "title1": "My",
-            "title2": "Journey",
+            "title1": "Get to know",
+            "title2": "my journey.",
             "subtitle": "Discover my professional journey, academic background, and the certifications that shape my work."
         },
         "quemSou": {
-            "label": "About Me",
-            "title1": "Technical",
-            "title2": "Product Designer",
-            "intro": [
-                "With over <strong class=\"text-slate-900\">12 years in technology</strong> and <strong class=\"text-slate-900\">7 years as a Product Designer</strong>, I hold a Bachelor's in Information Systems and am a Digital Design Specialist, dedicated to designing scalable web and mobile experiences that merge technical rigor with UX strategy.",
-                "My profile is <strong class=\"text-slate-900\">analytical and results-oriented</strong>, with expertise in user research, prototyping, and Design Systems. I actively integrate Artificial Intelligence tools into my creative workflow to optimize ideation and delivery. I work in agile environments with Scrum and Kanban, and am a <strong class=\"text-slate-900\">certified Lean Inception facilitator</strong>.",
-                "My differentiator lies in the ability to solve complex problems and act as a <strong class=\"text-slate-900\">facilitating link between teams</strong>, ensuring that the design strategy is understood and applied clearly by everyone."
+            "label": "About me · my journey",
+            "title1": "Product Designer with",
+            "title2": "technical background",
+            "numbers": [
+                {
+                    "title": "Information Systems",
+                    "subtitle": "Bachelor"
+                },
+                {
+                    "title": "Digital Design",
+                    "subtitle": "Specialist"
+                },
+                {
+                    "title": "AI First",
+                    "subtitle": "Design"
+                }
             ],
-            "highlightsTitle": "Career Highlights",
+            "intro": [
+                "With over <strong class=\"font-semibold text-[#111316]\">12 years in technology</strong> and <strong class=\"font-semibold text-[#111316]\">7 years as a Product Designer</strong>, I have an <strong class=\"font-semibold text-[#111316]\">analytical profile</strong> and am a certified <strong class=\"font-semibold text-[#111316]\">Lean Inception</strong> facilitator with expertise in user research, prototyping, and Design Systems.",
+                "I actively integrate <strong class=\"font-semibold text-[#111316]\">Artificial Intelligence</strong> tools into my creative workflow to optimize the process from ideation to delivery.",
+                "My differentiator is solving complex problems, acting as a <strong class=\"font-semibold text-[#111316]\">facilitating link between teams</strong>, ensuring design strategy is understood and applied clearly by everyone."
+            ],
+            "highlightsTitle": "My Highlights",
             "highlights": [
-                "🏆 1st place at the Education Hackathon - Inventum Fair 2019",
-                "🎓 University Professor in UX/UI Design",
-                "🎤 Speaker at events like DevConference and Viasoft Connect",
-                "📜 16 certifications in Design, Leadership, and Product",
-                "🚀 Experience with ERPs, SaaS, CRM, and PLG"
+                "1st place at Education Hackathon - Inventum Fair 2019",
+                "University Professor",
+                "Speaker at events like DevConference and Viasoft Connect",
+                "16 certifications in Design, Leadership, and Product",
+                "Experience with AI, ERPs, DMS, SaaS, CRM, and PLG"
+            ],
+            "highlightEmojis": [
+                "🏆",
+                "🎓",
+                "🎤",
+                "📜",
+                "🚀"
             ],
             "definesMe": "What defines me"
         },
@@ -272,36 +297,38 @@
             }
         ],
         "sections": {
-            "eventsLabel": "Applied Knowledge",
-            "eventsTitle": "Talks & Events",
-            "experienceLabel": "Experience",
-            "experienceTitle": "Professional Career",
-            "educationLabel": "Education",
-            "educationTitle": "Academic Background",
+            "eventsLabel": "Talks and Events",
+            "eventsTitle": "Talks and Events",
+            "experienceLabel": "Professional · My Experiences",
+            "experienceTitle1": "Professional",
+            "experienceTitle2": "Career",
+            "educationLabel": "Education · Background",
+            "educationTitle1": "Academic",
+            "educationTitle2": "Background",
             "certificationsLabel": "Certifications",
-            "certificationsTitle": "Continuous Development"
+            "certificationsTitle1": "Continuous",
+            "certificationsTitle2": "Development"
         },
         "experience": [
             {
-                "period": "Feb 2014 – Present",
+                "period": "Since Feb 2014",
                 "role": "Founder",
                 "company": "Picolo Design Digital",
                 "location": "Remote",
                 "current": true
             },
             {
-                "period": "Aug 2025 – Present",
+                "period": "Since Aug 2025",
                 "role": "Product Designer",
                 "company": "Sisand",
                 "location": "Remote",
                 "current": true
             },
             {
-                "period": "Jul 2025 – Present",
+                "period": "Jul 2025 – Jul 2026",
                 "role": "University Professor",
                 "company": "Centro Universitário Mater Dei (Unimater)",
-                "location": "Pato Branco, PR",
-                "current": true
+                "location": "Pato Branco, PR"
             },
             {
                 "period": "Aug 2022 – Apr 2025",
@@ -338,7 +365,7 @@
             {
                 "period": "2018 – 2020",
                 "degree": "Postgraduate in Digital Design and Multimedia",
-                "institution": "Estácio"
+                "institution": "Universidade Estácio de Sá"
             },
             {
                 "period": "2014 – 2017",
@@ -415,7 +442,7 @@
         ],
         "events": [
             {
-                "title": "Petroshow PDV Redesign Process",
+                "title": "Petroshow POS Redesign Process",
                 "subtitle": "DevConference - 2018"
             },
             {
@@ -436,10 +463,11 @@
             }
         ],
         "cta": {
-            "title": "Let’s work together!",
-            "description": "I'm available for new projects and collaboration opportunities.",
-            "contactButton": "Get in Touch",
-            "backButton": "Back"
+            "title1": "Let's create something",
+            "title2": "smart",
+            "description": "Turning complex concepts into intuitive, well-structured digital experiences. Talk to me.",
+            "contactButton": "Talk to me",
+            "cvButton": "Download Resume"
         }
     },
     "projectPage": {
@@ -454,6 +482,14 @@
             "handoff": "Design Handoff",
             "results": "Results",
             "lessons": "Lessons Learned"
+        },
+        "copyright": {
+            "title": "© Picolo Design Digital - All rights reserved.",
+            "subtitle": "Any total or partial reproduction, copy or disclosure of this content without express authorization of the author is prohibited."
+        },
+        "nextProject": {
+            "label": "NEXT PROJECT",
+            "button": "View Project"
         }
     },
     "projects": {
@@ -496,7 +532,11 @@
                     },
                     {
                         "titulo": "Transcriptions with Chat Mental Model",
-                        "descricao": "Presenting dense blocks of AI-generated text on a phone screen breaks the reading experience. The solution was to refactor the visualization of insights and speakers using the messaging app design pattern (bubbles, alignments, and subtle colors). This allowed quick speaker differentiation, ensuring scannability and visual comfort."
+                        "descricao": "Presenting dense blocks of meeting text on a smartphone screen compromises readability. The solution was adopting messaging app mental models: stylized message bubbles, clear visual speaker differentiation, timestamps, and timeline bookmarks, making reading fluid and instantly scannable."
+                    },
+                    {
+                        "titulo": "AI-Generated Smart Insights",
+                        "descricao": "Beyond literal transcriptions, the app processes conversations to generate executive summaries and structured analytical call feedback — pinpointing key topics, actionable next steps, and speech habits to continuously coach commercial teams."
                     },
                     {
                         "titulo": "Resilience: Dealing with Real-World Chaos",
@@ -537,8 +577,8 @@
                 "backButton": "Back",
                 "mobileAppTag": "Mobile App",
                 "heroTitle": {
-                    "line1": "AI Notetaker",
-                    "line2": "- Leads2b App"
+                    "line1": "Summaries & Insights",
+                    "line2": "from in-person meetings with Artificial Intelligence"
                 },
                 "sections": {
                     "overview": {
@@ -676,7 +716,8 @@
                     "Navigation: Frames grouped by logical functionality",
                     "Consistency: Isolated local components for easier maintenance",
                     "Semantics: System of visual annotations (Info, Attention, Important) and integrated flowcharts to cover business rules not visible in the prototype, minimizing technical doubts"
-                ]
+                ],
+                "imagem": "/assets/projects/transcricoes-insights-ia/handoff.mp4"
             },
             "resultados": [
                 {
@@ -847,21 +888,18 @@
                     {
                         "titulo": "Mobile Platform",
                         "descricao": "Most of the previous version wasn't responsive. With the redesign, the entire layout was designed with focus on responsiveness, ensuring consistent experience regardless of device."
-                    },
-                    {
-                        "titulo": "Style Guide",
-                        "descricao": "A componentized style guide was created, designed to facilitate both creation and future maintenance of the interface, following guidelines defined with the marketing team."
                     }
                 ]
             },
             "handoff": {
                 "titulo": "Design-Dev Handoff",
-                "descricao": "We worked collaboratively from the early prototyping stages, defining viable scope based on the technology stack and available time for the project. Any technical limitations were identified and adjusted during the prototyping phase.",
+                "descricao": "We worked collaboratively from the early prototyping stages, defining a viable scope based on the technology stack and available time for the project. Any technical limitations were identified and adjusted during the prototyping phase.\n\nTo ensure delivery consistency, a componentized style guide was created, designed to facilitate both creation and future maintenance of the interface, following guidelines defined with the marketing team.",
                 "bullets": [
                     "Collaboration: Engineering involvement from ideation phase",
                     "Feasibility: Only viable and refined routines forwarded to development",
                     "Communication: Process promotes fluid integration between designers and developers"
-                ]
+                ],
+                "imagem": "/assets/projects/medical-office/prototipo/style-guide.webp"
             },
             "resultados": [
                 {
@@ -956,6 +994,12 @@
                     "line1": "Redesign",
                     "line2": "Medical Office"
                 },
+                "heroTags": [
+                    "2021",
+                    "Product Design",
+                    "Web",
+                    "Mobile"
+                ],
                 "heroAlt": "Project Cover: Redesign Medical Office",
                 "heroMobileAlt": "Medical Office - Mobile Version",
                 "sections": {
@@ -1232,6 +1276,66 @@
                     }
                 }
             }
+        }
+    },
+    "homeChannel": {
+        "heroWords": ["intelligence", "strategy", "purpose", "precision", "impact", "vision"],
+        "hero": {
+            "titleLine1": "Product design",
+            "titleLine2": "with",
+            "titleLine3": "end to end.",
+            "ariaLabel": "Product design with intelligence end to end",
+            "yearsTech": "12+ years in Tech",
+            "yearsUX": "7+ years in UX",
+            "professor": "University professor",
+            "speaker": "Speaker"
+        },
+        "featuredProjects": "Featured projects",
+        "viewProject": "View project",
+        "about": {
+            "title": "About me",
+            "yearsTechLabel": "years in tech",
+            "yearsUXLabel": "years in UX",
+            "projectsLabel": "projects",
+            "certsLabel": "certifications",
+            "p1": "With over <b>12 years in technology</b> and <b>7 as a product designer</b>, I hold a bachelor's in Information Systems and a specialization in Digital Design, a foundation that keeps my work technically grounded.",
+            "p2": "My profile is <b>analytical and results-oriented</b>: user research, prototyping and design systems, with AI actively integrated into ideation and delivery. Agile environments, Scrum/Kanban, certified Lean Inception facilitator.",
+            "cta": "Learn more about me",
+            "linkedinCta": "Connect on LinkedIn"
+        },
+        "aiProcess": {
+            "title": "AI integrated into the process",
+            "lead": "AI isn't a feature added at the end. It accelerates exploration so judgment, research and craft stay in the lead.",
+            "steps": [
+                { "number": "01", "title": "Discovery", "desc": "Frame the real problem with stakeholders before a single screen exists." },
+                { "number": "02", "title": "Research", "desc": "Grounded in user data, not opinion — synthesized faster with AI." },
+                { "number": "03", "title": "Exploration", "desc": "Generate and pressure-test directions in hours, converging on the strongest." },
+                { "number": "04", "title": "Systems", "desc": "Standardized patterns and components for consistency at scale." },
+                { "number": "05", "title": "Delivery", "desc": "Prototype, validate, hand off — aligned with engineering from day one." }
+            ]
+        },
+        "expertise": {
+            "title": "Expertise",
+            "lead": "Where product strategy, usability research, and visual craft translate into business results.",
+            "cards": [
+                { "title": "Product strategy", "desc": "Solving complex problems into solutions that drive competitive advantage." },
+                { "title": "Design systems", "desc": "Standardized component libraries focused on accelerating delivery and ensuring consistency." },
+                { "title": "UX research", "desc": "Data-driven journeys that align user needs with business goals." },
+                { "title": "DesignOps", "desc": "Optimized workflows and tooling for cross-team efficiency." },
+                { "title": "UI design", "desc": "Accessible, intuitive interfaces balancing aesthetics, usability, performance, and conversion." },
+                { "title": "Prototyping", "desc": "Rapid validation that mitigates risk and aligns expectations early." }
+            ]
+        },
+        "teaching": {
+            "tag": "TEACHING & SPEAKING",
+            "seg": "ON AIR",
+            "quote": "I share what I know because a stronger community <em>raises the bar for everyone</em>.",
+            "roles": [
+                { "title": "B.Sc. Information Systems", "desc": "DEGREE" },
+                { "title": "Digital Design Specialist", "desc": "SPECIALIZATION" },
+                { "title": "Conference Speaker", "desc": "SPEAKER" },
+                { "title": "University Professor", "desc": "TEACHING" }
+            ]
         }
     }
 }

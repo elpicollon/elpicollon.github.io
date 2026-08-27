@@ -1,41 +1,45 @@
 # Picolo Design Digital
 
-> Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI, Product Design e interfaces que encantam.
+> Portfólio de Rodrigo Picolo — Staff UX/UI & Product Designer especializado em IA, SaaS B2B, Design Systems e interfaces complexas de alta conversão.
 
-## Sobre
+Para uma documentação completa e aprofundada dos cases, acesse: [llms-full.txt](https://picolodesign.com.br/llms-full.txt)
 
-Rodrigo Picolo é um Designer Digital brasileiro com mais de 10 anos de experiência em UX/UI Design, Product Design e consultoria em design. Especializado em criar interfaces intuitivas e experiências digitais memoráveis para empresas inovadoras.
+## Sobre Rodrigo Picolo
 
-## Serviços
+Rodrigo Picolo é Staff UX/UI & Product Designer com mais de 12 anos de experiência em tecnologia e 7 anos dedicados exclusivamente a Product Design e UX/UI. Possui sólida formação técnica (Bacharel em Sistemas de Informação) e especialização em Design Digital. Atua na interseção entre estratégia de negócio, engenharia de software e inteligência artificial para criar produtos digitais escaláveis.
 
-- **UX Design**: Pesquisa, wireframes, protótipos, testes de usabilidade
-- **UI Design**: Design de interfaces, sistemas de design, design responsivo
-- **Product Design**: Estratégia de produto, design de features, iteração
-- **Consultoria**: Auditorias de UX, mentoria, workshops
+- **Website Oficial**: https://picolodesign.com.br/
+- **LinkedIn**: https://www.linkedin.com/in/picolodesign/
+- **Localização**: Brasil (atuação remota global)
+
+---
 
 ## Projetos em Destaque
 
-### Transcrições & Insights com IA
-Redesign de ecossistema de videoconferências focado na centralização de gravações, transcrições e insights de IA. O projeto automatizou a documentação pós-reunião.
+### 1. IA Notetaker App (Mobile B2B / IA)
+- **URL**: https://picolodesign.com.br/projeto/ia-notetaker-app
+- **Resumo**: Aplicativo mobile nativo focado em áudio para capturar o "funil invisível" de reuniões comerciais presenciais. Conta com transcrição com modelo mental de chat, criação de deals no CRM em tempo real e geração de Smart Insights por IA (objeções, pontos-chave, sugestões de próximos passos e análise de vícios de linguagem).
+- **Competências**: Mobile UX, Audio-First Interface, Voice UX, IA Generativa, CRM Integration, Resiliência Offline/4G.
 
-### Medical Office
-Sistema de gestão para consultórios médicos com foco em usabilidade e eficiência operacional.
+### 2. Transcrições & Insights com IA (Web B2B / SaaS)
+- **URL**: https://picolodesign.com.br/projeto/transcricoes-insights-ia
+- **Resumo**: Redesign completo do ecossistema de videoconferências e inteligência comercial da Leads2b. Centralizou reuniões, transcrições automáticas e Smart Insights de IA em uma interface unificada, alavancando Product-Led Growth (PLG) por meio de resumos virais por e-mail e teasers de upgrade.
+- **Competências**: Web SaaS, AI First Design, Design System Escalável, PLG, Design Handoff (Shift-Left).
 
-### Importação de Empresas
-Plataforma de importação de dados empresariais com interface intuitiva e fluxos otimizados.
+### 3. Medical Office (Healthcare / Desktop & Web)
+- **URL**: https://picolodesign.com.br/projeto/medical-office
+- **Resumo**: Redesign completo de software médico legado com mais de 20 anos de mercado. Modernização de fluxos de prontuário eletrônico, agendamento e faturamento para mais de 30 mil profissionais de saúde, reduzindo a carga cognitiva e aumentando a produtividade clínica diária.
+- **Competências**: Legacy Modernization, Healthcare UX, Complex Workflows, Usabilidade Clínica, Design System.
 
-## Contato
+### 4. Importação de Empresas (B2B SaaS / Data Management)
+- **URL**: https://picolodesign.com.br/projeto/importacao-empresas
+- **Resumo**: Solução ponta a ponta para importação e enriquecimento em massa de bases de dados B2B. Interface guiada com preview em tempo real, mapeamento inteligente de colunas e validação instantânea de duplicidades.
+- **Competências**: Data-Dense UX, Error Prevention, Batch Processing, Onboarding de Dados.
 
-- Website: https://picolodesign.com.br/
-- LinkedIn: https://www.linkedin.com/in/picolodesign/
-- Localização: Brasil
+---
 
-## Expertise
+## Especialidades e Competências Técnicas
 
-- UX/UI Design
-- Product Design
-- Design Systems
-- Prototipagem
-- Pesquisa com Usuários
-- Acessibilidade Digital
-- Design Responsivo
+- **Product & UX Design**: User Research, Jornadas de Usuário, Arquitetura de Informação, Prototipagem de Alta Fidelidade, Testes de Usabilidade.
+- **UI & Visual Design**: Design Systems atômicos, Micro-interações, Acessibilidade (WCAG 2.1 AA), Tipografia e Grid responsivo.
+- **Engenharia & IA**: AI First UX/UI, Prompt Design, LLM UI Integration, Shift-Left Handoff, HTML/CSS/React foundations.

@@ -1,21 +1,21 @@
 # Robots.txt for Picolo Design Digital
 # https://picolodesign.com.br/
 
-# Allow all crawlers
+# Allow all standard crawlers
 User-agent: *
 Allow: /
 
-# Allow AI crawlers explicitly
+# Allow AI & Search Engine Crawlers explicitly (GEO - Generative Engine Optimization)
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Google-Extended
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: CCBot
+User-agent: Google-Extended
 Allow: /
 
 User-agent: anthropic-ai
@@ -24,15 +24,27 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 User-agent: Amazonbot
 Allow: /
 
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
 # Sitemap location
 Sitemap: https://picolodesign.com.br/sitemap.xml
 
-# LLMs.txt location
-# See: https://llmstxt.org/
-# LLMs can find additional context at /llms.txt
+# LLMs.txt & Machine-Readable Portfolio for AI Search (llmstxt.org)
+# Standard: /llms.txt
+# Full contextual index: /llms-full.txt

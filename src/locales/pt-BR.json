@@ -13,6 +13,10 @@
             "contact": "CONTATO"
         }
     },
+    "meta": {
+        "title": "Picolo Design Digital | UX/UI & Product Designer",
+        "description": "Portfólio de Rodrigo Picolo - Product Designer com mais de 12 anos em tecnologia e 7 anos em UX. Especializado em interfaces web e mobile de alto desempenho, SaaS, ERP e IA."
+    },
     "hero": {
         "title1": "Experiências digitais",
         "title2": "de ponta a ponta!",
@@ -144,9 +148,9 @@
         }
     },
     "footer": {
-        "tagline": "Desde 2014 oferecendo serviços de design digital com criatividade, qualidade e preço justo.",
+        "tagline": "Entregando design digital desde 2014 com criatividade, qualidade e preço justo.",
         "navigation": "Navegação",
-        "connect": "Conecte-se",
+        "connect": "Conectar",
         "navItems": {
             "home": "Início",
             "projects": "Projetos",
@@ -154,8 +158,8 @@
             "expertise": "Expertise",
             "contact": "Contato"
         },
-        "downloadCV": "Download CV",
-        "madeWith": "Feito com 😡 por mim. Todos os direitos reservados.",
+        "downloadCV": "Baixar Currículo",
+        "madeWith": "Feito por mim com 😡 e ☕. Todos os direitos reservados.",
         "copyright": "© {year} - Picolo Design Digital & Consultoria | CNPJ: 42.054.838/0001-08"
     },
     "projectCTA": {
@@ -206,7 +210,7 @@
         "pause": "Pausar áudio",
         "play": "Reproduzir áudio",
         "labelDesktop": "Ouça aqui um breve resumo deste projeto!",
-        "labelMobile": "Ouça um breve resumo!"
+        "labelMobile": "Ouça o resumo"
     },
     "marquee": {
         "skills": [
@@ -222,26 +226,47 @@
     },
     "aboutPage": {
         "hero": {
-            "title1": "Minha",
-            "title2": "Trajetória",
+            "title1": "Conheça a",
+            "title2": "minha trajetória.",
             "subtitle": "Conheça minha jornada profissional, formação acadêmica e as certificações que moldam minha atuação."
         },
         "quemSou": {
-            "label": "Quem Sou",
-            "title1": "Product Designer com ",
+            "label": "Quem sou eu · minha trajetória",
+            "title1": "Product Designer com",
             "title2": "background técnico",
-            "intro": [
-                "Com mais de <strong class=\"text-slate-900\">12 anos em tecnologia</strong> e <strong class=\"text-slate-900\">7 anos como Product Designer</strong>, sou Bacharel em Sistemas de Informação e Especialista em Design Digital, dedicado a projetar experiências web e mobile escaláveis que unem rigor técnico à estratégia de UX.",
-                "Meu perfil é <strong class=\"text-slate-900\">analítico e orientado a resultados</strong>, com domínio em pesquisa de usuário, prototipagem e Design Systems. Integro ativamente ferramentas de Inteligência Artificial ao meu fluxo criativo para otimizar a ideação e a entrega. Atuo em ambientes ágeis com Scrum e Kanban, e sou <strong class=\"text-slate-900\">facilitador certificado em Lean Inception</strong>.",
-                "Meu diferencial está na capacidade de resolver problemas complexos e atuar como <strong class=\"text-slate-900\">elo facilitador entre equipes</strong>, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos."
+            "numbers": [
+                {
+                    "title": "Sistemas de Informação",
+                    "subtitle": "Bacharel"
+                },
+                {
+                    "title": "Design Digital",
+                    "subtitle": "Especialista"
+                },
+                {
+                    "title": "AI First",
+                    "subtitle": "Design"
+                }
             ],
-            "highlightsTitle": "Destaques da Trajetória",
+            "intro": [
+                "Com mais de <strong class=\"font-semibold text-[#111316]\">12 anos em tecnologia</strong> e <strong class=\"font-semibold text-[#111316]\">7 anos como Product Designer</strong>, tenho <strong class=\"font-semibold text-[#111316]\">perfil analítico</strong> e sou facilitador certificado em <strong class=\"font-semibold text-[#111316]\">Lean Inception</strong> com domínio em pesquisa de usuário, prototipagem e Design Systems.",
+                "Integro ativamente ferramentas de <strong class=\"font-semibold text-[#111316]\">Inteligência Artificial</strong> ao meu fluxo criativo para otimizar o processo desde a ideação até a entrega.",
+                "Meu diferencial é resolver problemas complexos, atuando como <strong class=\"font-semibold text-[#111316]\">elo facilitador entre equipes</strong>, garantindo que a estratégia de design seja compreendida e aplicada com clareza por todos."
+            ],
+            "highlightsTitle": "Meus Destaques",
             "highlights": [
-                "🏆 1º lugar no Hackathon da Educação - Feira Inventum 2019",
-                "🎓 Professor Universitário em UX/UI Design",
-                "🎤 Palestrante em eventos como DevConference e Viasoft Connect",
-                "📜 16 certificações em Design, Liderança e Produto",
-                "🚀 Experiência com ERPs, SaaS, CRM e PLG"
+                "1º lugar no Hackathon da Educação - Feira Inventum 2019",
+                "Professor Universitário",
+                "Palestrante em eventos como DevConference e Viasoft Connect",
+                "16 certificações em Design, Liderança e Produto",
+                "Experiência com IA, ERPs, DMS, SaaS, CRM e PLG"
+            ],
+            "highlightEmojis": [
+                "🏆",
+                "🎓",
+                "🎤",
+                "📜",
+                "🚀"
             ],
             "definesMe": "O que me define"
         },
@@ -272,36 +297,38 @@
             }
         ],
         "sections": {
-            "eventsLabel": "Conhecimento Aplicado",
-            "eventsTitle": "Palestras & Eventos",
-            "experienceLabel": "Experiência",
-            "experienceTitle": "Carreira Profissional",
-            "educationLabel": "Educação",
-            "educationTitle": "Formação Acadêmica",
+            "eventsLabel": "Palestras e Eventos",
+            "eventsTitle": "Palestras e Eventos",
+            "experienceLabel": "Profissional · Minhas Experiências",
+            "experienceTitle1": "Carreira",
+            "experienceTitle2": "Profissional",
+            "educationLabel": "Educação · Formação",
+            "educationTitle1": "Formação",
+            "educationTitle2": "Acadêmica",
             "certificationsLabel": "Certificações",
-            "certificationsTitle": "Desenvolvimento Contínuo"
+            "certificationsTitle1": "Desenvolvimento",
+            "certificationsTitle2": "Contínuo"
         },
         "experience": [
             {
-                "period": "Fev 2014 – Atual",
+                "period": "Desde Fev 2014",
                 "role": "Fundador",
                 "company": "Picolo Design Digital",
                 "location": "Remoto",
                 "current": true
             },
             {
-                "period": "Ago 2025 – Atual",
+                "period": "Desde Ago 2025",
                 "role": "Product Designer",
                 "company": "Sisand",
                 "location": "Remoto",
                 "current": true
             },
             {
-                "period": "Jul 2025 – Atual",
+                "period": "Jul 2025 – Jul 2026",
                 "role": "Professor Universitário",
                 "company": "Centro Universitário Mater Dei (Unimater)",
-                "location": "Pato Branco, PR",
-                "current": true
+                "location": "Pato Branco, PR"
             },
             {
                 "period": "Ago 2022 – Abr 2025",
@@ -338,7 +365,7 @@
             {
                 "period": "2018 – 2020",
                 "degree": "Pós-graduação em Design Digital e Multimídia",
-                "institution": "Estácio"
+                "institution": "Universidade Estácio de Sá"
             },
             {
                 "period": "2014 – 2017",
@@ -436,10 +463,11 @@
             }
         ],
         "cta": {
-            "title": "Vamos trabalhar juntos?",
-            "description": "Estou disponível para novos projetos e oportunidades de colaboração.",
-            "contactButton": "Entre em Contato",
-            "backButton": "Voltar"
+            "title1": "Vamos criar algo",
+            "title2": "inteligente",
+            "description": "Transformando conceitos complexos em experiências digitais intuitivas e bem estruturadas. Fale comigo.",
+            "contactButton": "Fale comigo",
+            "cvButton": "Baixar Currículo"
         }
     },
     "projectPage": {
@@ -454,6 +482,14 @@
             "handoff": "Design Handoff",
             "results": "Resultados",
             "lessons": "Lições Aprendidas"
+        },
+        "copyright": {
+            "title": "© Picolo Design Digital - Todos os direitos reservados.",
+            "subtitle": "É proibida qualquer reprodução, total ou parcial, cópia ou divulgação deste conteúdo sem expressa autorização do autor."
+        },
+        "nextProject": {
+            "label": "PRÓXIMO PROJETO",
+            "button": "Ver Projeto"
         }
     },
     "projects": {
@@ -496,7 +532,11 @@
                     },
                     {
                         "titulo": "Transcrições com Modelo Mental de Chat",
-                        "descricao": "Apresentar blocos densos de texto gerados por IA em uma tela de celular quebra a experiência de leitura. A solução foi refatorar a visualização dos insights e falas utilizando o padrão de design de aplicativos de mensagens (balões, alinhamentos e cores sutis). Isso permitiu diferenciar os falantes rapidamente, garantindo escaneabilidade e conforto visual."
+                        "descricao": "Apresentar blocos densos de texto de uma reunião em uma tela de celular compromete a legibilidade. A solução foi adotar o modelo mental de aplicativos de mensagens: balões estilizados, diferenciação visual clara por participante, marcações temporais e bookmarks na timeline, tornando a leitura fluida e instantaneamente escaneável."
+                    },
+                    {
+                        "titulo": "Smart Insights Gerados por IA",
+                        "descricao": "Além da transcrição literal, o app processa a conversa para gerar resumos executivos e feedbacks analíticos estruturados da ligação — identificando tópicos-chave, direcionamentos práticos e vícios de linguagem dos vendedores para apoiar o aprimoramento contínuo das abordagens comerciais."
                     },
                     {
                         "titulo": "Resiliência: Lidando com o Caos do Mundo Real",
@@ -537,8 +577,8 @@
                 "backButton": "Voltar",
                 "mobileAppTag": "Mobile App",
                 "heroTitle": {
-                    "line1": "IA Notetaker",
-                    "line2": "- App Leads2b"
+                    "line1": "Resumos & Insights",
+                    "line2": "de reuniões presenciais com Inteligência Artificial"
                 },
                 "sections": {
                     "overview": {
@@ -676,7 +716,8 @@
                     "Navegação: Frames agrupados por funcionalidade lógica",
                     "Consistência: Componentes locais isolados para facilitar manutenção",
                     "Semântica: Sistema de anotações visuais (Info, Atenção, Importante) e fluxogramas integrados para cobrir regras de negócio não visíveis no protótipo, minimizando dúvidas técnicas"
-                ]
+                ],
+                "imagem": "/assets/projects/transcricoes-insights-ia/handoff.mp4"
             },
             "resultados": [
                 {
@@ -847,21 +888,18 @@
                     {
                         "titulo": "Plataforma Mobile",
                         "descricao": "Grande parte da versão anterior não era responsiva. Com o redesign, todo o layout foi projetado com foco na responsividade, garantindo experiência consistente independentemente do dispositivo."
-                    },
-                    {
-                        "titulo": "Style Guide",
-                        "descricao": "Foi criado um style guide componentizado, pensado para facilitar tanto a criação quanto a manutenção futura da interface, seguindo diretrizes definidas com o time de marketing."
                     }
                 ]
             },
             "handoff": {
                 "titulo": "Handoff Design-Dev",
-                "descricao": "Atuamos de forma colaborativa desde as etapas iniciais de prototipação, definindo um escopo viável com base na stack tecnológica e no tempo disponível para o projeto. Eventuais limitações técnicas eram identificadas e ajustadas ainda na fase de prototipação.",
+                "descricao": "Atuamos de forma colaborativa desde as etapas iniciais de prototipação, definindo um escopo viável com base na stack tecnológica e no tempo disponível para o projeto. Eventuais limitações técnicas eram identificadas e ajustadas ainda na fase de prototipação.\n\nPara garantir a consistência dessa entrega, foi criado um style guide componentizado, pensado para facilitar tanto a criação quanto a manutenção futura da interface, seguindo diretrizes definidas com o time de marketing.",
                 "bullets": [
                     "Colaboração: Envolvimento da engenharia desde a fase de ideação",
                     "Viabilidade: Apenas rotinas viáveis e refinadas encaminhadas para desenvolvimento",
                     "Comunicação: Processo promove integração fluida entre designers e desenvolvedores"
-                ]
+                ],
+                "imagem": "/assets/projects/medical-office/prototipo/style-guide.webp"
             },
             "resultados": [
                 {
@@ -1238,6 +1276,66 @@
                     }
                 }
             }
+        }
+    },
+    "homeChannel": {
+        "heroWords": ["inteligência", "estratégia", "propósito", "precisão", "impacto", "visão"],
+        "hero": {
+            "titleLine1": "Design de produto",
+            "titleLine2": "com",
+            "titleLine3": "de ponta a ponta.",
+            "ariaLabel": "Design de produto com inteligência de ponta a ponta",
+            "yearsTech": "12+ anos em Tech",
+            "yearsUX": "7+ anos em UX",
+            "professor": "Professor universitário",
+            "speaker": "Palestrante"
+        },
+        "featuredProjects": "Projetos em destaque",
+        "viewProject": "Ver projeto",
+        "about": {
+            "title": "Sobre mim",
+            "yearsTechLabel": "anos em tech",
+            "yearsUXLabel": "anos em UX",
+            "projectsLabel": "projetos",
+            "certsLabel": "certificações",
+            "p1": "Com mais de <b>12 anos em tecnologia</b> e <b>7 como product designer</b>, sou graduado em Sistemas de Informação com especialização em Design Digital, uma base que mantém meu trabalho tecnicamente fundamentado.",
+            "p2": "Meu perfil é <b>analítico e focado em resultados</b>: pesquisa de usuário, prototipagem e design systems, com IA ativamente integrada desde a ideação até a entrega. Ambientes ágeis, Scrum/Kanban, facilitador certificado de Lean Inception.",
+            "cta": "Conheça mais sobre mim",
+            "linkedinCta": "Conecte-se no LinkedIn"
+        },
+        "aiProcess": {
+            "title": "IA integrada ao processo",
+            "lead": "IA não é um recurso adicionado ao final. Ela acelera a exploração para que o julgamento, a pesquisa e a técnica permaneçam na liderança.",
+            "steps": [
+                { "number": "01", "title": "Discovery", "desc": "Mapear o problema real com os stakeholders antes que qualquer tela seja criada." },
+                { "number": "02", "title": "Pesquisa", "desc": "Baseado em dados de uso e comportamento, sintetizados de forma rápida com apoio de IA." },
+                { "number": "03", "title": "Exploração", "desc": "Gerar e validar hipóteses de design em horas, convergindo para as mais promissoras." },
+                { "number": "04", "title": "Sistemas", "desc": "Uso de padrões consolidados e componentes reutilizáveis para consistência em escala." },
+                { "number": "05", "title": "Entrega", "desc": "Prototipar, validar com usuários e handoff alinhado com a engenharia desde o D0." }
+            ]
+        },
+        "expertise": {
+            "title": "Expertise",
+            "lead": "Onde a estratégia de produto, pesquisa de usabilidade e refinamento visual se traduzem em resultados de negócio.",
+            "cards": [
+                { "title": "Estratégia de produto", "desc": "Transformando problemas complexos em soluções viáveis que geram vantagem competitiva de mercado." },
+                { "title": "Design systems", "desc": "Bibliotecas de componentes reutilizáveis focados em acelerar a entrega e garantir padronização." },
+                { "title": "Pesquisa de UX", "desc": "Definição de jornadas com base em pesquisas qualitativas e quantitativas alinhadas a objetivos de negócio." },
+                { "title": "DesignOps", "desc": "Otimização de rotinas de trabalho, ferramentas e comunicação entre design, produto e tecnologia." },
+                { "title": "Design de interface", "desc": "Interfaces modernas e acessíveis focadas em usabilidade, semântica, desempenho e taxas de conversão." },
+                { "title": "Prototipagem", "desc": "Validação ágil de ideias e interações que mitiga riscos de desenvolvimento e valida soluções mais cedo." }
+            ]
+        },
+        "teaching": {
+            "tag": "ENSINO & PALESTRAS",
+            "seg": "TRANSMISSÃO ATIVA",
+            "quote": "Compartilho o que sei porque uma comunidade mais forte <em>eleva o patamar de excelência</em> de todos.",
+            "roles": [
+                { "title": "Bacharel em Sistemas de Informação", "desc": "FORMAÇÃO" },
+                { "title": "Especialista em Design Digital", "desc": "ESPECIALIZAÇÃO" },
+                { "title": "Palestrante em Eventos", "desc": "SPEAKER" },
+                { "title": "Professor Universitário", "desc": "ENSINO" }
+            ]
         }
     }
 }

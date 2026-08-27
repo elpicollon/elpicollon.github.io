@@ -46,57 +46,63 @@
       }
     }(window.location))
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="color-scheme" content="light" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <!-- Performance: DNS Prefetch -->
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-  <!-- Critical Preloads for LCP and Layout Shift (Fonts & Hero Image) -->
-  <link rel="preload" href="/assets/carousel/1-picolo.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Favicon & Icons -->
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" />
 
+  <!-- Multi-language & Canonical SEO -->
+  <link rel="canonical" href="https://picolodesign.com.br/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://picolodesign.com.br/" />
+  <link rel="alternate" hreflang="en" href="https://picolodesign.com.br/" />
+  <link rel="alternate" hreflang="x-default" href="https://picolodesign.com.br/" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
   <!-- SEO Meta Tags -->
-  <title>Picolo Design Digital | UX/UI Designer</title>
+  <title>Picolo Design Digital | Staff UX/UI & Product Designer</title>
   <meta name="description"
-    content="Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI, Product Design e interfaces que encantam. Projetos de design para empresas inovadoras." />
+    content="Portfolio de Rodrigo Picolo - Staff UX/UI & Product Designer com mais de 12 anos em tecnologia e 7 anos em UX. Especialista em interfaces com IA, SaaS B2B e Design Systems." />
   <meta name="keywords"
-    content="UX Design, UI Design, Product Design, Designer Digital, Portfolio, Rodrigo Picolo, Picolo Design" />
+    content="Staff Product Designer, UX Design, UI Design, Product Design, AI Design, B2B SaaS, Design System, Rodrigo Picolo, Picolo Design" />
   <meta name="author" content="Rodrigo Picolo" />
   <meta name="robots" content="index, follow" />
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <link rel="canonical" href="https://picolodesign.com.br/" />
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://picolodesign.com.br/" />
-  <meta property="og:title" content="Picolo Design Digital | UX/UI Designer" />
+  <meta property="og:title" content="Picolo Design Digital | Staff UX/UI & Product Designer" />
   <meta property="og:description"
-    content="Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI, Product Design e interfaces que encantam." />
-  <meta property="og:image" content="https://picolodesign.com.br/og-image.png" />
+    content="Portfolio de Rodrigo Picolo - Staff UX/UI & Product Designer especializado em IA, SaaS B2B e Design Systems complexos." />
+  <meta property="og:image" content="https://picolodesign.com.br/assets/image-rp.webp" />
   <meta property="og:locale" content="pt_BR" />
+  <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:site_name" content="Picolo Design Digital" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://picolodesign.com.br/" />
-  <meta name="twitter:title" content="Picolo Design Digital | UX/UI Designer" />
+  <meta name="twitter:title" content="Picolo Design Digital | Staff UX/UI & Product Designer" />
   <meta name="twitter:description"
-    content="Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI, Product Design e interfaces que encantam." />
-  <meta name="twitter:image" content="https://picolodesign.com.br/og-image.png" />
+    content="Portfolio de Rodrigo Picolo - Staff UX/UI & Product Designer especializado em IA, SaaS B2B e Design Systems complexos." />
+  <meta name="twitter:image" content="https://picolodesign.com.br/assets/image-rp.webp" />
   <meta name="twitter:creator" content="@picolodesign" />
 
   <!-- Theme Color -->
-  <meta name="theme-color" content="#F2F4F7" />
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1a2e" />
-  <meta name="msapplication-TileColor" content="#F2F4F7" />
+  <meta name="theme-color" content="#FCFCFA" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#FCFCFA" />
+  <meta name="msapplication-TileColor" content="#FCFCFA" />
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -107,8 +113,8 @@
         "@type": "Person",
         "@id": "https://picolodesign.com.br/#person",
         "name": "Rodrigo Picolo",
-        "jobTitle": "UX/UI Designer",
-        "description": "Product Designer com mais de 12 anos em tecnologia e 7 anos em UX, especializado em criar experiências digitais que impulsionam resultados de negócio.",
+        "jobTitle": "Staff UX/UI & Product Designer",
+        "description": "Staff Product Designer com mais de 12 anos em tecnologia e 7 anos em UX, especializado em criar experiências digitais orientadas a IA, SaaS B2B e Design Systems que impulsionam resultados de negócio.",
         "url": "https://picolodesign.com.br/",
         "image": "https://picolodesign.com.br/assets/image-rp.webp",
         "sameAs": [
@@ -118,25 +124,38 @@
           "@type": "Organization",
           "name": "Picolo Design Digital"
         },
-        "knowsAbout": ["UX Design", "UI Design", "Product Design", "Design Systems", "User Research"]
+        "knowsAbout": ["UX Design", "UI Design", "Product Design", "AI First Design", "Design Systems", "User Research", "B2B SaaS"]
       },
       {
         "@type": "WebSite",
         "@id": "https://picolodesign.com.br/#website",
         "url": "https://picolodesign.com.br/",
         "name": "Picolo Design Digital",
-        "description": "Portfolio de Rodrigo Picolo - Designer Digital especializado em UX/UI",
+        "description": "Portfolio de Rodrigo Picolo - Staff UX/UI & Product Designer",
         "author": {"@id": "https://picolodesign.com.br/#person"},
-        "inLanguage": "pt-BR"
+        "inLanguage": ["pt-BR", "en-US"]
       },
       {
         "@type": "ItemList",
         "name": "Projetos em Destaque",
-        "description": "Portfólio de projetos de UX/UI Design",
+        "description": "Portfólio de projetos de Product Design e UX/UI",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
+            "item": {
+              "@type": "CreativeWork",
+              "name": "IA Notetaker App",
+              "description": "Aplicativo mobile nativo de IA para captura de reuniões presenciais, transcrição com modelo mental de chat e geração de Smart Insights para times de vendas em campo.",
+              "url": "https://picolodesign.com.br/projeto/ia-notetaker-app",
+              "author": {"@id": "https://picolodesign.com.br/#person"},
+              "dateCreated": "2025",
+              "keywords": ["Mobile App", "IA", "Voice UX", "B2B SaaS", "Smart Insights"]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
             "item": {
               "@type": "CreativeWork",
               "name": "Transcrições & Insights com IA",
@@ -149,7 +168,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 2,
+            "position": 3,
             "item": {
               "@type": "CreativeWork",
               "name": "Medical Office",
@@ -162,7 +181,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 3,
+            "position": 4,
             "item": {
               "@type": "CreativeWork",
               "name": "Importação de Empresas",
@@ -190,7 +209,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #f2f4f7;
+        background-color: #FCFCFA;
       }
     </style>
     <div class="initial-loader">

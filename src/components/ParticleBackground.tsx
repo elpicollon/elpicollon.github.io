@@ -3,16 +3,16 @@ import { useEffect, useRef } from 'react';
 // Predefined color palettes
 const COLOR_PALETTES = {
     purple: [
-        { r: 216, g: 180, b: 254 },  // purple-300
-        { r: 192, g: 132, b: 252 },  // purple-400
-        { r: 168, g: 85, b: 247 },   // purple-500
-        { r: 147, g: 51, b: 234 },   // purple-600
+        { r: 180, g: 145, b: 240 },
+        { r: 160, g: 115, b: 230 },
+        { r: 144, g: 95, b: 218 }, // #905FDA
+        { r: 120, g: 70, b: 200 },
     ],
     teal: [
-        { r: 94, g: 234, b: 212 },   // teal-300
-        { r: 45, g: 212, b: 191 },   // teal-400
-        { r: 20, g: 184, b: 166 },   // teal-500
-        { r: 13, g: 148, b: 136 },   // teal-600
+        { r: 110, g: 220, b: 140 },
+        { r: 80, g: 200, b: 115 },
+        { r: 45, g: 179, b: 84 },  // #2DB354
+        { r: 30, g: 140, b: 65 },
     ],
     blue: [
         { r: 147, g: 197, b: 253 },  // blue-300
@@ -199,12 +199,9 @@ export function ParticleBackground({ color = 'purple' }: ParticleBackgroundProps
     return (
         <>
             {/* Base background */}
-            <div
-                className="absolute inset-0"
-                style={{
-                    background: '#f2f4f7'
-                }}
-            />
+             <div
+                 className="absolute inset-0 bg-[#0A0B0E]"
+             />
             {/* Particle canvas */}
             <canvas
                 ref={canvasRef}

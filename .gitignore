@@ -4,6 +4,7 @@ node_modules
 # Build output
 build
 dist
+scripts
 
 # Arquivos de sistema
 .DS_Store
@@ -13,6 +14,8 @@ src/.DS_Store
 # IDE/Editor
 .vscode
 .idea
+.agents
+
 
 # Logs
 npm-debug.log*

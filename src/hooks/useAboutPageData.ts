@@ -20,6 +20,11 @@ const eventImages = [
     "/assets/about/evento-5.webp"
 ];
 
+export interface CredentialNumberItem {
+    title: string;
+    subtitle: string;
+}
+
 export interface ExperienceItem {
     period: string;
     role: string;
@@ -65,9 +70,11 @@ export interface AboutPageData {
         label: string;
         title1: string;
         title2: string;
+        numbers: CredentialNumberItem[];
         intro: string[];
         highlightsTitle: string;
         highlights: string[];
+        highlightEmojis?: string[];
         definesMe: string;
     };
     highlightCards: HighlightCardItem[];
@@ -75,21 +82,25 @@ export interface AboutPageData {
         eventsLabel: string;
         eventsTitle: string;
         experienceLabel: string;
-        experienceTitle: string;
+        experienceTitle1: string;
+        experienceTitle2: string;
         educationLabel: string;
-        educationTitle: string;
+        educationTitle1: string;
+        educationTitle2: string;
         certificationsLabel: string;
-        certificationsTitle: string;
+        certificationsTitle1: string;
+        certificationsTitle2: string;
     };
     experience: ExperienceItem[];
     education: EducationItem[];
     certifications: CertificationItem[];
     events: EventItem[];
     cta: {
-        title: string;
+        title1: string;
+        title2: string;
         description: string;
         contactButton: string;
-        backButton: string;
+        cvButton: string;
     };
     common: {
         current: string;
@@ -131,39 +142,49 @@ export function useAboutPageData(): AboutPageData {
 
     return {
         hero: t?.hero || {
-            title1: 'Minha',
-            title2: 'Trajetória',
+            title1: 'Conheça a',
+            title2: 'minha trajetória.',
             subtitle: 'Conheça minha jornada profissional, formação acadêmica e as certificações que moldam minha atuação.'
         },
         quemSou: t?.quemSou || {
-            label: 'Quem Sou',
-            title1: 'Design que conecta',
-            title2: 'tecnologia e negócios',
+            label: 'Quem sou eu · minha trajetória',
+            title1: 'Product Designer com',
+            title2: 'background técnico',
+            numbers: [
+                { title: 'Sistemas de Informação', subtitle: 'Bacharel' },
+                { title: 'Design Digital', subtitle: 'Especialista' },
+                { title: 'AI First', subtitle: 'Design' }
+            ],
             intro: [],
-            highlightsTitle: 'Destaques da Trajetória',
+            highlightsTitle: 'Meus Destaques',
             highlights: [],
+            highlightEmojis: ['🏆', '🎓', '🎤', '📜', '🚀'],
             definesMe: 'O que me define'
         },
         highlightCards,
         sections: t?.sections || {
-            eventsLabel: 'Conhecimento Aplicado',
-            eventsTitle: 'Palestras & Eventos',
-            experienceLabel: 'Experiência',
-            experienceTitle: 'Carreira Profissional',
-            educationLabel: 'Educação',
-            educationTitle: 'Formação Acadêmica',
+            eventsLabel: 'Palestras e Eventos',
+            eventsTitle: 'Palestras e Eventos',
+            experienceLabel: 'Profissional · Minhas Experiências',
+            experienceTitle1: 'Carreira',
+            experienceTitle2: 'Profissional',
+            educationLabel: 'Educação · Formação',
+            educationTitle1: 'Formação',
+            educationTitle2: 'Acadêmica',
             certificationsLabel: 'Certificações',
-            certificationsTitle: 'Desenvolvimento Contínuo'
+            certificationsTitle1: 'Desenvolvimento',
+            certificationsTitle2: 'Contínuo'
         },
         experience,
         education,
         certifications: t?.certifications || [],
         events,
         cta: t?.cta || {
-            title: 'Vamos trabalhar juntos?',
-            description: 'Estou disponível para novos projetos e oportunidades de colaboração.',
-            contactButton: 'Entre em Contato',
-            backButton: 'Voltar'
+            title1: 'Vamos criar algo',
+            title2: 'inteligente',
+            description: 'Transformando conceitos complexos em experiências digitais intuitivas e bem estruturadas. Fale comigo.',
+            contactButton: 'Fale comigo',
+            cvButton: 'Baixar Currículo'
         },
         common: {
             current: common?.current || 'Atual',

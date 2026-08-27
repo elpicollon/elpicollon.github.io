@@ -1,9 +1,10 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Linkedin, MessageCircle, Mail, ArrowRight } from 'lucide-react';
+import { X, Linkedin, MessageCircle, Mail } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Frame, Arrow } from './crt/parts';
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -37,7 +38,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         };
     }, [isOpen]);
 
-    const { t } = useTranslation();
+    const { t, isPortuguese } = useTranslation();
     const { language } = useLanguage();
 
     // Dynamic LinkedIn URL based on language
@@ -68,13 +69,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                         onClick={onClose}
-                        className="fixed inset-0"
-                        style={{
-                            zIndex: 999998,
-                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                            backdropFilter: 'blur(20px) saturate(180%)',
-                            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                        }}
+                        className="fixed inset-0 bg-[#0A0B0E]/60 backdrop-blur-xl z-[999998]"
                     />
 
                     {/* Modal */}
@@ -83,35 +78,24 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[400px]"
-                        style={{ zIndex: 999999 }}
+                        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[400px] z-[999999]"
                     >
-                        <div className="bg-white rounded-3xl shadow-2xl border border-zinc-100">
+                        <Frame cut={24} className="crt-modal" faceStyle={{ padding: 0, overflow: 'hidden' }}>
                             {/* Header */}
-                            <div className="p-6 pb-4">
-                                <div className="flex items-start justify-between mb-2">
-                                    <h2 className="text-3xl font-bold text-zinc-900">
-                                        {t('contactModal.title')}
-                                    </h2>
-                                    <motion.button
-                                        onClick={onClose}
-                                        whileHover={{ scale: 1.1 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        className="w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center transition-colors cursor-pointer -mt-1 -mr-1"
-                                    >
-                                        <X size={18} className="text-zinc-500" />
-                                    </motion.button>
-                                </div>
-                                <p className="text-zinc-500 text-sm">
-                                    {t('contactModal.subtitle')}
-                                </p>
-
-                                {/* Gradient line */}
-                                <div className="h-px bg-gradient-to-r from-purple-500 via-violet-400 to-transparent mt-4" />
+                            <div className="m-head">
+                                <span className="tag">{isPortuguese ? "CONEXÕES" : "CONNECT"}</span>
+                                <h2>{t('contactModal.title')}</h2>
+                                <p>{t('contactModal.subtitle')}</p>
+                                <button
+                                    onClick={onClose}
+                                    className="m-close"
+                                >
+                                    <X size={16} />
+                                </button>
                             </div>
 
                             {/* Contact Options */}
-                            <div className="px-6 space-y-3" style={{ paddingBottom: '48px' }}>
+                            <div className="m-body">
                                 {/* LinkedIn */}
                                 <motion.a
                                     href={linkedinUrl}
@@ -120,26 +104,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 }}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="group flex items-center gap-4 p-4 rounded-2xl border border-zinc-200 hover:border-sky-400/40 hover:bg-sky-50 transition-all duration-200 cursor-pointer"
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.99 }}
+                                    className="m-opt"
                                 >
-                                    <div
-                                        className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"
-                                        style={{ background: 'linear-gradient(135deg, #0077b5, #005885)' }}
-                                    >
-                                        <Linkedin size={22} className="text-white" />
+                                    <div className="m-ic">
+                                        <Linkedin size={18} />
                                     </div>
-                                    <div className="flex-1">
-                                        <h3 className="text-base font-semibold text-zinc-900 group-hover:text-sky-600 transition-colors">
-                                            {t('contactModal.linkedin.title')}
-                                        </h3>
-                                        <p className="text-sm text-zinc-500">
-                                            {t('contactModal.linkedin.description')}
-                                        </p>
+                                    <div className="m-info">
+                                        <h3>LinkedIn</h3>
+                                        <p>{t('contactModal.linkedin.description')}</p>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full bg-zinc-100 group-hover:bg-zinc-200 flex items-center justify-center transition-all duration-200 group-hover:translate-x-1">
-                                        <ArrowRight size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+                                    <div className="m-arr">
+                                        <Arrow />
                                     </div>
                                 </motion.a>
 
@@ -151,26 +128,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.15 }}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="group flex items-center gap-4 p-4 rounded-2xl border border-zinc-200 hover:border-emerald-400/40 hover:bg-emerald-50 transition-all duration-200 cursor-pointer"
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.99 }}
+                                    className="m-opt"
                                 >
-                                    <div
-                                        className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"
-                                        style={{ background: 'linear-gradient(135deg, #25d366, #128c7e)' }}
-                                    >
-                                        <MessageCircle size={22} className="text-white" />
+                                    <div className="m-ic">
+                                        <MessageCircle size={18} />
                                     </div>
-                                    <div className="flex-1">
-                                        <h3 className="text-base font-semibold text-zinc-900 group-hover:text-emerald-500 transition-colors">
-                                            {t('contactModal.whatsapp.title')}
-                                        </h3>
-                                        <p className="text-sm text-zinc-500">
-                                            {t('contactModal.whatsapp.description')}
-                                        </p>
+                                    <div className="m-info">
+                                        <h3>WhatsApp</h3>
+                                        <p>{t('contactModal.whatsapp.description')}</p>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full bg-zinc-100 group-hover:bg-zinc-200 flex items-center justify-center transition-all duration-200 group-hover:translate-x-1">
-                                        <ArrowRight size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+                                    <div className="m-arr">
+                                        <Arrow />
                                     </div>
                                 </motion.a>
 
@@ -182,30 +152,23 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2 }}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="group flex items-center gap-4 p-4 rounded-2xl border border-zinc-200 hover:border-violet-400/40 hover:bg-violet-50 transition-all duration-200 cursor-pointer"
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.99 }}
+                                    className="m-opt"
                                 >
-                                    <div
-                                        className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"
-                                        style={{ background: 'linear-gradient(135deg, #9333ea, #7c3aed)' }}
-                                    >
-                                        <Mail size={22} className="text-white" />
+                                    <div className="m-ic">
+                                        <Mail size={18} />
                                     </div>
-                                    <div className="flex-1">
-                                        <h3 className="text-base font-semibold text-zinc-900 group-hover:text-violet-600 transition-colors">
-                                            {t('contactModal.email.title')}
-                                        </h3>
-                                        <p className="text-sm text-zinc-500">
-                                            {t('contactModal.email.description')}
-                                        </p>
+                                    <div className="m-info">
+                                        <h3>Email</h3>
+                                        <p>{t('contactModal.email.description')}</p>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full bg-zinc-100 group-hover:bg-zinc-200 flex items-center justify-center transition-all duration-200 group-hover:translate-x-1">
-                                        <ArrowRight size={16} className="text-zinc-400 group-hover:text-zinc-600" />
+                                    <div className="m-arr">
+                                        <Arrow />
                                     </div>
                                 </motion.a>
                             </div>
-                        </div>
+                        </Frame>
                     </motion.div>
                 </>
             )}

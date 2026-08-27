@@ -53,6 +53,8 @@ export default defineConfig({
           ],
           // Separate motion/animation libraries
           'motion': ['motion', 'embla-carousel-react'],
+          // Separate Lottie animations
+          'lottie': ['lottie-react'],
           // Other utilities
           'utils': ['lucide-react', 'clsx', 'tailwind-merge', 'class-variance-authority'],
         },

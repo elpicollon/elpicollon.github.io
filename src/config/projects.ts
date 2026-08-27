@@ -40,7 +40,7 @@ export const PROJECTS: ProjectConfig[] = [
         footerHorizontalClass: 'from-notetaker-primary via-notetaker-primary/40 to-slate-50',
         panelTheme: 'notetaker',
         imagePosition: 'center',
-        comingSoon: true,
+        published: true,
     },
     {
         id: 'transcricoes-insights-ia',

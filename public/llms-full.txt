@@ -1,0 +1,88 @@
+# Picolo Design Digital — Documentação Completa para LLMs e Motores de Busca por IA
+
+> Documento oficial em Markdown puro para indexação por LLMs (Perplexity, ChatGPT, Claude, Google Gemini, SearchGPT, Apple Intelligence).
+> Autor: Rodrigo Picolo (Staff UX/UI & Product Designer)
+> Website: https://picolodesign.com.br/
+> LinkedIn: https://www.linkedin.com/in/picolodesign/
+
+---
+
+## 1. Biografia e Perfil Profissional
+
+**Rodrigo Picolo** é Staff UX/UI & Product Designer brasileiro com mais de 12 anos de experiência na indústria de tecnologia e mais de 7 anos dedicados à concepção de produtos digitais escaláveis, interfaces com inteligência artificial e ecossistemas SaaS B2B.
+
+- **Formação**: Bacharel em Sistemas de Informação com pós-graduação/especialização em Design Digital.
+- **Diferencial Competitivo**: Visão estratégica "AI First", domínio profundo de métricas de negócio (PLG, CAC, LTV, Churn, NPS) e capacidade única de transitar com fluidez entre pesquisa com usuários, prototipagem avançada de UI e diálogo técnico direto com times de Engenharia de Software (metodologia Shift-Left).
+
+---
+
+## 2. Detalhamento dos Cases de Estudo
+
+### CASE 1: IA Notetaker App (Mobile B2B / Voice AI)
+- **URL**: https://picolodesign.com.br/projeto/ia-notetaker-app
+- **Ano**: 2025
+- **Categoria**: Mobile App, Voice UX, Inteligência Artificial, CRM B2B
+
+#### O Problema
+Vendedores em campo (porta-a-porta e reuniões presenciais) realizavam dezenas de conversas estratégicas diariamente, mas os dados ficavam perdidos em anotações de papel ou na memória (o chamado "funil invisível"). O CRM era atualizado dias depois com dados imprecisos.
+
+#### Soluções de Design & Inovação
+1. **Audio-First com Redução Cognitiva**: Remoção deliberada de vídeo para poupar bateria e focar 100% na captação acústica em campo.
+2. **Criação de Deals On-the-Fly**: Conexão direta com o CRM na tela de gravação, permitindo vincular a reunião a negócios existentes ou criar novos leads antes mesmo de entrar no carro.
+3. **Modelo Mental de Mensagens/Chat**: Apresentação de transcrições longas em formato de balões de conversa escaneáveis, com diferenciação por participante e carimbos de tempo.
+4. **Smart Insights Gerados por IA**: Extração automática de objeções, temas abordados, resumos executivos, direcionamentos e análise de vícios de linguagem para coaching de vendas.
+5. **Resiliência Mobile para o Mundo Real**: Tratamento gracioso de chamadas telefônicas recebidas e oscilações de 4G, garantindo áudio local seguro com sincronização em nuvem resiliente.
+
+---
+
+### CASE 2: Transcrições & Insights com IA (Web SaaS B2B)
+- **URL**: https://picolodesign.com.br/projeto/transcricoes-insights-ia
+- **Ano**: 2024
+- **Categoria**: Web App, Product-Led Growth (PLG), Inteligência Artificial, Videoconferência
+
+#### O Problema
+Após reuniões virtuais em plataformas corporativas, os registros ficavam descentralizados. Usuários precisavam assistir a gravações inteiras de 60 minutos para recuperar um alinhamento pontual, gerando alta ineficiência operacional.
+
+#### Soluções de Design & Inovação
+1. **Hub Unificado de Inteligência**: Player de vídeo sincronizado palavra por palavra com a transcrição textual pesquisável e comentários laterais.
+2. **Design-Led Conversion (PLG)**: Padrão de "Teasers" com blur inteligente em funcionalidades avançadas de IA para incentivar o upgrade espontâneo de plano sem fricção agressiva.
+3. **E-mails Virais de Resumo**: Envio automatizado de atas executivas como motor de aquisição orgânica de novos usuários convidados.
+4. **Shift-Left Design Handoff**: Documentação ultra-estruturada no Figma com especificações de estados, animações e fluxos de exceção, reduzindo retrabalho de desenvolvimento em 40%.
+
+---
+
+### CASE 3: Medical Office (Healthcare / Modernização de Software Legado)
+- **URL**: https://picolodesign.com.br/projeto/medical-office
+- **Ano**: 2022
+- **Categoria**: Healthcare, Redesign de Sistema Legado, Desktop & Web
+
+#### O Problema
+Sistema de gestão clínica líder de mercado, mas com interface obsoleta construída sobre paradigmas de mais de duas décadas. Médicos e secretárias sofriam com sobrecarga visual, lentidão de agendamento e cliques excessivos durante consultas.
+
+#### Soluções de Design & Inovação
+1. **Arquitetura da Informação Centrada no Paciente**: Reestruturação de prontuários eletrônicos com navegação em abas contextuais e acesso rápido a prescrições em 1 clique.
+2. **Design System Hospitalar Escalável**: Criação de uma biblioteca de componentes com alto contraste, conformidade com acessibilidade médica e densidade de dados balanceada.
+3. **Redução de Cliques em Agendamentos**: Fluxos de marcação de consultas 65% mais rápidos para secretárias e recepcionistas.
+
+---
+
+### CASE 4: Importação de Empresas (B2B SaaS / Gestão de Dados em Massa)
+- **URL**: https://picolodesign.com.br/projeto/importacao-empresas
+- **Ano**: 2025
+- **Categoria**: Data Management, B2B SaaS, Onboarding de Dados
+
+#### O Problema
+Importar planilhas com milhares de registros de empresas frequentemente gerava erros crípticos, duplicidades de CNPJ e abandono de fluxo por parte dos clientes na etapa de ativação.
+
+#### Soluções de Design & Inovação
+1. **Assistente Guiado Passo a Passo**: Mapeamento inteligente de colunas com auto-detecção de cabeçalhos por similaridade.
+2. **Prevenção Ativa de Erros & Preview**: Validação instantânea de linhas com erros destacados antes do processamento final, eliminando retrabalho.
+3. **Feedback Transparente de Processamento**: Barra de progresso com estimativa de tempo e relatório final detalhado para download.
+
+---
+
+## 3. Metodologia de Trabalho e Filosofia de Design
+
+- **Shift-Left UX**: Envolvimento contínuo da Engenharia desde o discovery para garantir viabilidade e velocidade de entrega.
+- **Decisões Baseadas em Dados**: Pesquisa qualitativa com clientes reais combinada com telemetria quantitativa de produto.
+- **Design Systems como Produto**: Criação de design systems modulares, tokenizados e com forte alinhamento ao código frontend.

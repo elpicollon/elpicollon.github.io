@@ -1,174 +1,78 @@
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 import { useRef, ReactNode, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Briefcase, GraduationCap, Award, MapPin, Star } from 'lucide-react';
 import {
-    ArrowLeft,
-    Briefcase,
-    GraduationCap,
-    Award,
-    MapPin,
-    Building2,
-    Sparkles
-} from 'lucide-react';
-import { MinimalNav } from '../MinimalNav';
-import { FooterNew } from '../FooterNew';
-import { ScrollToTop } from '../ScrollToTop';
-import { ParticleBackground } from '../ParticleBackground';
-import { HeroParticleGrid } from '../HeroParticleGrid';
-import { useContactModal } from '../../contexts/ContactModalContext';
-import imgEu1 from "../../assets/image-rp.webp";
-import { ImageWithFallback } from '../ui/ImageWithFallback';
-import { useAboutPageData, ExperienceItem, EducationItem, HighlightCardItem, CertificationItem, EventItem, AboutPageData } from '../../hooks/useAboutPageData';
+    useAboutPageData,
+    ExperienceItem,
+    EducationItem,
+    HighlightCardItem,
+    EventItem,
+    AboutPageData
+} from '../../hooks/useAboutPageData';
+import { useTranslation } from '../../hooks/useTranslation';
+import { Arrow } from '../crt/parts';
+import { ScrollIndicator } from '../ui/ScrollIndicator';
+import { SectionHeader } from '../ui/SectionHeader';
+import { ContactSection } from '../ui/ContactSection';
+import { StatCard } from '../ui/StatCard';
 
 // ============================================================================
-// ANIMATED COMPONENTS
+// ANIMATED REVEAL COMPONENT
 // ============================================================================
 
-function RevealText({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
+function RevealText({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
 
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className={className}
         >
             {children}
         </motion.div>
     );
 }
 
-function SectionHeader({ label, title }: { label: string; title: string }) {
-    return (
-        <div className="mb-12 md:mb-16">
-            <RevealText>
-                <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                    {label}
-                </span>
-            </RevealText>
-            <RevealText delay={0.1}>
-                <h2
-                    className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
-                >
-                    {title}
-                </h2>
-            </RevealText>
-            <RevealText delay={0.2}>
-                <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full" />
-            </RevealText>
-        </div>
-    );
-}
-
 // ============================================================================
-// TIMELINE COMPONENT
+// HERO SECTION
 // ============================================================================
 
-type TimelineItem = (ExperienceItem | EducationItem);
-
-function TimelineCard({ item, index, isLeft, currentLabel }: { item: TimelineItem; index: number; isLeft: boolean; currentLabel: string }) {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-    const isWork = item.type === 'work';
-    const Icon = isWork ? Briefcase : GraduationCap;
-
+function AboutHeroSection({ data }: { data: AboutPageData }) {
     return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-            className={`relative flex items-center gap-6 md:gap-8 ${isLeft ? 'md:flex-row-reverse md:text-right' : ''}`}
-        >
-            {/* Timeline dot */}
-            <div className={`
-        absolute left-0 md:left-1/2 md:-translate-x-1/2 
-        w-4 h-4 rounded-full border-4 border-white shadow-lg z-10
-        ${isWork ? 'bg-purple-500' : 'bg-violet-500'}
-      `} />
-
-            {/* Content Card */}
-            <div className={`
-        ml-8 md:ml-0 md:w-[calc(50%-2rem)] 
-        ${isLeft ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}
-      `}>
-                <div className={`
-          p-6 rounded-2xl border transition-all duration-300 group
-          hover:shadow-xl hover:scale-[1.02]
-          ${isWork
-                        ? 'bg-gradient-to-br from-purple-50 via-white to-purple-50/30 border-purple-100 hover:border-purple-300 hover:shadow-purple-100/50'
-                        : 'bg-gradient-to-br from-violet-50 via-white to-violet-50/30 border-violet-100 hover:border-violet-300 hover:shadow-violet-100/50'
-                    }
-        `}>
-                    {/* Header */}
-                    <div className={`flex items-start gap-4 mb-4 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                        <div className={`
-              w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0
-              ${isWork ? 'bg-purple-100 text-purple-600' : 'bg-violet-100 text-violet-600'}
-              group-hover:scale-110 transition-transform duration-300
-            `}>
-                            <Icon size={24} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <div className={`flex items-center gap-2 mb-1 flex-wrap ${isLeft ? 'md:justify-end' : ''}`}>
-                                <span className={`
-                  text-xs font-medium px-2 py-0.5 rounded-full
-                  ${isWork ? 'bg-purple-100 text-purple-700' : 'bg-violet-100 text-violet-700'}
-                `}>
-                                    {item.period}
-                                </span>
-                                {'current' in item && item.current && (
-                                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 text-green-700 flex items-center gap-1">
-                                        <Sparkles size={10} />
-                                        {currentLabel}
-                                    </span>
-                                )}
+        <div className="hero">
+            <div className="wrap">
+                <div className="hero-grid my-auto">
+                    <div className="flex flex-col justify-center items-start w-full">
+                        <RevealText delay={0.05}>
+                            <h1 className="about-hero-title text-[26px] sm:text-[34px] md:text-[40px] lg:text-[48px] xl:text-[54px] font-semibold tracking-tight leading-[1.15]">
+                                {data.hero.title1}<br />
+                                <span className="hl">{data.hero.title2}</span>
+                            </h1>
+                        </RevealText>
+                        <RevealText delay={0.15}>
+                            <div className="cred text-[14px] sm:text-[15px] md:text-[16px] max-w-xl mt-3 sm:mt-4">
+                                {data.hero.subtitle}
                             </div>
-                            <h3 className="text-lg md:text-xl font-bold text-slate-900 leading-tight">
-                                {'role' in item ? item.role : item.degree}
-                            </h3>
-                        </div>
+                        </RevealText>
                     </div>
-
-                    {/* Details */}
-                    <div className={`space-y-1 text-sm text-slate-600 ${isLeft ? 'md:text-right' : ''}`}>
-                        <div className={`flex items-center gap-2 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                            <Building2 size={14} className={`${isWork ? 'text-purple-500' : 'text-violet-500'} flex-shrink-0`} />
-                            <span className="font-medium">{'company' in item ? item.company : item.institution}</span>
-                        </div>
-                        {'location' in item && item.location && (
-                            <div className={`flex items-center gap-2 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                                <MapPin size={14} className="text-slate-400 flex-shrink-0" />
-                                <span>{item.location}</span>
+                    <div className="relative flex justify-center lg:justify-end items-center w-full py-2 lg:py-0 min-h-0">
+                        <RevealText delay={0.25} className="w-full flex justify-center lg:justify-end">
+                            <div className="about-hero-portrait cursor-pointer my-1 sm:my-2 mx-auto lg:ml-auto lg:mr-0 shrink-0">
+                                <figure className="portrait">
+                                    <img src="/assets/image-rp-speaker.jpg" alt="Rodrigo Picolo" />
+                                </figure>
                             </div>
-                        )}
+                        </RevealText>
                     </div>
                 </div>
             </div>
-        </motion.div>
-    );
-}
 
-function Timeline({ items, currentLabel }: { items: TimelineItem[]; currentLabel: string }) {
-    return (
-        <div className="relative max-w-4xl mx-auto">
-            {/* Vertical Line */}
-            <div className="absolute left-[7px] md:left-1/2 md:-translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-300 via-violet-200 to-slate-200" />
-
-            {/* Items */}
-            <div className="space-y-8 md:space-y-12">
-                {items.map((item, index) => (
-                    <TimelineCard
-                        key={index}
-                        item={item}
-                        index={index}
-                        isLeft={index % 2 === 0}
-                        currentLabel={currentLabel}
-                    />
-                ))}
+            <div className="absolute bottom-20 sm:bottom-24 md:bottom-24 lg:bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-20">
+                <ScrollIndicator />
             </div>
         </div>
     );
@@ -178,104 +82,78 @@ function Timeline({ items, currentLabel }: { items: TimelineItem[]; currentLabel
 // QUEM SOU SECTION
 // ============================================================================
 
-function HighlightCard({ item, index }: { item: HighlightCardItem; index: number }) {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-30px" });
-    const Icon = item.icon;
-
-    return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`group relative bg-white rounded-2xl p-6 border border-slate-200 hover:border-${item.color}-300 hover:shadow-xl hover:shadow-${item.color}-100/30 transition-all duration-300`}
-        >
-            {/* Icon */}
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-${item.color}-100 text-${item.color}-600 group-hover:scale-110 transition-transform duration-300`}>
-                <Icon size={24} />
-            </div>
-
-            {/* Content */}
-            <h4 className="text-lg font-bold text-slate-900 mb-2 font-display">
-                {item.title}
-            </h4>
-            <p className="text-slate-600 text-sm leading-relaxed">
-                {item.description}
-            </p>
-        </motion.div>
-    );
-}
-
 function QuemSouSection({ data }: { data: AboutPageData }) {
     return (
-        <section className="py-20 md:py-32 bg-white px-6 md:px-12">
-            <div>
-                {/* Header */}
-                <div className="mb-16">
-                    <RevealText>
-                        <span className="text-purple-600 font-medium text-sm uppercase tracking-widest mb-4 block">
-                            {data.quemSou.label}
-                        </span>
-                    </RevealText>
-                    <RevealText delay={0.1}>
-                        <h2
-                            className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-6"
-                        >
-                            {data.quemSou.title1} <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-500">
-                                {data.quemSou.title2}
-                            </span>
-                        </h2>
-                    </RevealText>
-                    <RevealText delay={0.2}>
-                        <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full" />
-                    </RevealText>
-                </div>
+        <section id="about">
+            <div className="wrap">
+                <SectionHeader
+                    label={data.quemSou.label ? data.quemSou.label.split(' · ')[0] : "Quem sou eu"}
+                    sublabel={data.quemSou.label ? data.quemSou.label.split(' · ')[1] : "minha trajetória"}
+                    title={data.quemSou.title1}
+                    hlTitle={data.quemSou.title2}
+                    showLine={false}
+                />
 
-                {/* Main Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
-                    {/* Left: Introduction Text */}
-                    <RevealText delay={0.3}>
-                        <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
+                <div className="quem-sou-grid">
+                    {/* Left Column: 3 Credential Cards + Intro Paragraphs */}
+                    <div>
+                        {/* 3 Credential cards */}
+                        <div className="quem-sou-cards">
+                            {data.quemSou.numbers.map((num, idx) => (
+                                <StatCard key={idx} value={num.title} label={num.subtitle} variant="credential" />
+                            ))}
+                        </div>
+
+                        {/* Intro paragraphs */}
+                        <div className="quem-sou-txt">
                             {data.quemSou.intro.map((paragraph, index) => (
                                 <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
                             ))}
                         </div>
-                    </RevealText>
+                    </div>
 
-                    {/* Right: Achievement Highlights */}
-                    <RevealText delay={0.4}>
-                        <div className="bg-gradient-to-br from-purple-50 via-white to-violet-50 rounded-3xl p-8 border border-purple-100">
-                            <h3 className="text-xl font-bold text-slate-900 mb-6 font-display">
-                                {data.quemSou.highlightsTitle}
-                            </h3>
-                            <ul className="space-y-4">
-                                {data.quemSou.highlights.map((item, index) => (
-                                    <motion.li
-                                        key={index}
-                                        initial={{ opacity: 0, x: -10 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.5 + index * 0.1 }}
-                                        viewport={{ once: true }}
-                                        className="flex items-start gap-3 text-slate-700"
-                                    >
-                                        <span className="text-lg">{item.substring(0, 2)}</span>
-                                        <span>{item.substring(3)}</span>
-                                    </motion.li>
-                                ))}
-                            </ul>
+                    {/* Right Column: Meus Destaques Card */}
+                    <div>
+                        <div className="exp-wrap highlights-card">
+                            <div className="exp">
+                                <div className="highlights-header">
+                                    <div className="ic cut-icon">
+                                        <Star size={18} />
+                                    </div>
+                                    <h4>
+                                        {data.quemSou.highlightsTitle}
+                                    </h4>
+                                </div>
+                                <ul className="highlights-list">
+                                    {data.quemSou.highlights.map((item, index) => {
+                                        const emoji = data.quemSou.highlightEmojis?.[index] || "🏆";
+                                        return (
+                                            <li key={index}>
+                                                <span className="emoji">{emoji}</span>
+                                                <span className="text">{item}</span>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
                         </div>
-                    </RevealText>
+                    </div>
                 </div>
+            </div>
+        </section>
+    );
+}
 
-                {/* Competency Cards */}
-                <RevealText delay={0.5}>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center font-display">
-                        {data.quemSou.definesMe}
-                    </h3>
-                </RevealText>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+// ============================================================================
+// O QUE ME DEFINE SECTION
+// ============================================================================
+
+function DefinesMeSection({ data }: { data: AboutPageData }) {
+    return (
+        <section id="defines-me">
+            <div className="wrap">
+                <SectionHeader title={data.quemSou.definesMe} />
+                <div className="exp-grid">
                     {data.highlightCards.map((item, index) => (
                         <HighlightCard key={index} item={item} index={index} />
                     ))}
@@ -285,49 +163,50 @@ function QuemSouSection({ data }: { data: AboutPageData }) {
     );
 }
 
-// ============================================================================
-// CERTIFICATION BADGE
-// ============================================================================
-
-function CertificationBadge({ cert, index }: { cert: CertificationItem; index: number }) {
+function HighlightCard({ item, index }: { item: HighlightCardItem; index: number }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-30px" });
+    const Icon = item.icon;
 
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
-            className="group relative bg-zinc-50 border border-zinc-200 rounded-3xl p-8 hover:bg-zinc-100 transition-all duration-500 overflow-hidden cursor-default h-full"
+            transition={{ duration: 0.5, delay: index * 0.06 }}
+            className="exp-wrap"
         >
-            {/* Animated Gradient Blob */}
-            <div className="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-            <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-4 inline-flex p-3 rounded-2xl bg-white border border-zinc-200 group-hover:border-purple-500/30 group-hover:bg-purple-500/10 transition-all duration-500 w-fit">
-                    <Award className="w-6 h-6 text-zinc-500 group-hover:text-purple-600 transition-colors duration-500" />
+            <div className="exp">
+                <div className="ic mb-4">
+                    <Icon size={18} />
                 </div>
-
-                <h4 className="text-xl font-medium text-zinc-900 group-hover:text-black transition-colors duration-500 mb-2">
-                    {cert.name}
-                </h4>
-
-                <p className="text-zinc-600 group-hover:text-zinc-800 transition-colors duration-500 text-base leading-relaxed mb-3">
-                    {cert.org}
-                </p>
-
-                <span className="mt-auto inline-block text-sm font-medium px-3 py-1 rounded-full bg-zinc-200/50 text-zinc-600 w-fit">
-                    {cert.year}
-                </span>
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
             </div>
         </motion.div>
     );
 }
 
 // ============================================================================
-// EVENT CARD
+// EVENTS SECTION (PALESTRAS & EVENTOS)
 // ============================================================================
+
+function EventsSection({ data }: { data: AboutPageData }) {
+    return (
+        <section id="palestras">
+            <div className="wrap">
+                <SectionHeader
+                    title={data.sections.eventsTitle}
+                />
+                <div className="events-grid">
+                    {data.events.map((event, index) => (
+                        <EventCard key={index} event={event} index={index} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
 
 function EventCard({ event, index }: { event: EventItem; index: number }) {
     const ref = useRef(null);
@@ -336,311 +215,228 @@ function EventCard({ event, index }: { event: EventItem; index: number }) {
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative overflow-hidden rounded-3xl aspect-[4/3] cursor-pointer"
+            transition={{ duration: 0.5, delay: index * 0.08 }}
+            className="about-wcard"
         >
-            {/* Image */}
-            <img
-                src={event.image}
-                alt={event.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-
-            {/* Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h4 className="text-2xl font-bold text-white mb-1 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-lg">
-                    {event.title}
-                </h4>
-                <p className="text-sm text-white/80 group-hover:text-white transition-colors duration-300 drop-shadow-md">
-                    {event.subtitle}
-                </p>
+            <div className="media-wrap">
+                <div className="media cut">
+                    <img src={event.image} alt={event.title} />
+                </div>
             </div>
-
-            {/* Hover Border Effect */}
-            <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-purple-500/50 transition-colors duration-300 pointer-events-none" />
+            <div className="rowi">
+                <span className="meta">{event.subtitle}</span>
+                <h3>{event.title}</h3>
+            </div>
         </motion.div>
     );
 }
 
-
 // ============================================================================
-// CTA BUTTONS
+// TIMELINE COMPONENT FOR CAREER & EDUCATION
 // ============================================================================
 
-function CTAButtons({ data }: { data: AboutPageData }) {
-    const { openModal } = useContactModal();
-    const navigate = useNavigate();
-
+function TimelineSection({
+    label,
+    sublabel,
+    title1,
+    title2,
+    items,
+    currentLabel,
+    showLine = true
+}: {
+    label: string;
+    sublabel?: string;
+    title1: string;
+    title2: string;
+    items: (ExperienceItem | EducationItem)[];
+    currentLabel: string;
+    showLine?: boolean;
+}) {
     return (
-        <div className="flex flex-col items-center gap-4 mt-4">
-            <motion.button
-                onClick={openModal}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-all font-medium shadow-lg shadow-purple-300/50 whitespace-nowrap cursor-pointer"
-            >
-                {data.cta.contactButton}
-            </motion.button>
-            <motion.button
-                onClick={() => navigate(-1)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-purple-600 hover:text-purple-700 font-medium whitespace-nowrap cursor-pointer"
-            >
-                <ArrowLeft size={18} />
-                {data.cta.backButton}
-            </motion.button>
-        </div>
+        <section>
+            <div className="wrap">
+                <SectionHeader label={label} sublabel={sublabel} title={title1} hlTitle={title2} showLine={showLine} />
+                <div className="timeline-log max-w-4xl">
+                    {items.map((item, index) => {
+                        const isCurrent = 'current' in item && item.current;
+                        const isWork = item.type === 'work';
+                        const Icon = isWork ? Briefcase : GraduationCap;
+
+                        return (
+                            <div key={index} className={`timeline-item ${isCurrent ? 'current' : ''}`}>
+                                <div className="timeline-header flex items-center gap-3 mb-1">
+                                    <div className="timeline-period">{item.period}</div>
+                                    {isCurrent && <span className="chip timeline-chip">{currentLabel}</span>}
+                                </div>
+                                <div className="timeline-content">
+                                    <h3>{'role' in item ? item.role : item.degree}</h3>
+                                    <div className="timeline-details">
+                                        <span>
+                                            <Icon size={14} className="text-primary" />
+                                            <b>{'company' in item ? item.company : item.institution}</b>
+                                        </span>
+                                        {'location' in item && item.location && (
+                                            <span>
+                                                <MapPin size={13} />
+                                                {item.location}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
     );
 }
 
 // ============================================================================
-// HERO SECTION
+// CERTIFICATIONS SECTION
 // ============================================================================
 
-function HeroSection({ data }: { data: AboutPageData }) {
-    const containerRef = useRef(null);
-    const navigate = useNavigate();
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"]
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
+function CertificationsSection({ data }: { data: AboutPageData }) {
     return (
-        <section
-            ref={containerRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f2f4f7] isolate pt-24 lg:pt-0"
-        >
-            {/* Geometric Gradient Background - matches home page */}
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key="about-gradient"
-                    className="hero-gradient-bg"
-                    initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
-                    animate={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
-                    exit={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 0% 100%)' }}
-                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                    style={{
-                        background: `linear-gradient(135deg, #22143C 0%, #4A208A 100%)`,
-                    }}
-                >
-                    {/* Inner shadow overlay - inside the animated container */}
-                    <div className="hero-diagonal-shadow" />
-                </motion.div>
-            </AnimatePresence>
-
-            {/* Background */}
-            <div className="absolute inset-0 z-0">
-                <ParticleBackground color="purple" />
-                <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent pointer-events-none" />
-            </div>
-
-            <div className="relative z-10 w-full px-6 md:px-12">
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
-                    {/* Left Content */}
-                    <motion.div style={{ y, opacity }} className="relative">
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="flex flex-col items-start"
-                        >
-                            {/* Back Button */}
-                            <motion.div
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="relative lg:absolute lg:top-0 lg:left-0 z-20 mb-2 lg:mb-0"
-                            >
-                                <button
-                                    onClick={() => navigate(-1)}
-                                    className="inline-flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group cursor-pointer"
-                                    type="button"
-                                >
-                                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                    <span className="text-sm font-medium uppercase tracking-wider">{data.common.back}</span>
-                                </button>
-                            </motion.div>
-
-                            {/* Title */}
-                            <div className="hero-title-container mt-0 lg:mt-24 mb-6 md:mb-10 overflow-hidden w-full">
-                                <motion.h1
-                                    initial={{ opacity: 0, y: 30 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.2 }}
-                                    className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1] mb-2"
-                                >
-                                    {data.hero.title1}
-                                </motion.h1>
-                                <motion.h1
-                                    initial={{ opacity: 0, y: 30 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.3 }}
-                                    className="text-[2.75rem] sm:text-[3.5rem] md:text-7xl [@media(min-width:2560px)]:text-8xl [@media(min-width:3840px)]:text-9xl font-medium text-slate-900 tracking-tight leading-[1.1]"
-                                >
-                                    {data.hero.title2}
-                                </motion.h1>
-                            </div>
-
-                            {/* Subtitle */}
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.4 }}
-                                className="text-lg md:text-xl text-slate-600 max-w-xl mb-8"
-                            >
-                                {data.hero.subtitle}
-                            </motion.p>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* Right - Photo */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className="relative hidden lg:block"
-                    >
-                        <div className="relative w-96 h-[480px]">
-                            {/* Decorative blur */}
-                            <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-purple-400/30 to-violet-400/30 rounded-[32px] blur-2xl scale-110" />
-
-                            {/* Image */}
-                            <div className="relative h-full w-full rounded-[32px] overflow-hidden border border-zinc-200 bg-white shadow-2xl group">
-                                <ImageWithFallback
-                                    src={imgEu1}
-                                    alt="Rodrigo Picolo"
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent" />
+        <section id="certifications">
+            <div className="wrap">
+                <SectionHeader
+                    label={data.sections.certificationsLabel ? data.sections.certificationsLabel.split(' · ')[0] : "Certificações"}
+                    sublabel={data.sections.certificationsLabel ? data.sections.certificationsLabel.split(' · ')[1] : "desenvolvimento"}
+                    title={data.sections.certificationsTitle1}
+                    hlTitle={data.sections.certificationsTitle2}
+                    showLine={false}
+                />
+                <div className="exp-grid">
+                    {data.certifications.map((cert, index) => (
+                        <div key={index} className="exp-wrap">
+                            <div className="exp flex flex-col justify-between h-full">
+                                <div>
+                                    <div className="flex items-center justify-between gap-2 mb-3">
+                                        <span className="chip">{cert.year}</span>
+                                        <Award size={16} className="text-primary" />
+                                    </div>
+                                    <h4>{cert.name}</h4>
+                                    <p>{cert.org}</p>
+                                </div>
                             </div>
                         </div>
-                    </motion.div>
+                    ))}
                 </div>
             </div>
-
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
-            >
-                <div className="w-[26px] h-[42px] border-2 border-slate-400 rounded-full flex justify-center pt-2">
-                    <motion.div
-                        animate={{ y: [0, 10, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                        className="w-1 h-1 bg-slate-500 rounded-full"
-                    />
-                </div>
-            </motion.div>
-        </section >
+        </section>
     );
 }
 
 // ============================================================================
-// MAIN PAGE
+// ABOUT PAGE CONTACT SECTION
+// ============================================================================
+
+import { useAppNavigation } from '../../hooks/useAppNavigation';
+import { Button } from '../ui/button';
+
+function AboutContactSection({ data }: { data: AboutPageData }) {
+    const { isPortuguese } = useTranslation();
+    const { navigateToHome, navigateToSection } = useAppNavigation();
+
+    return (
+        <>
+            <div className="wrap mt-16 mb-12">
+                <div className="flex justify-between items-center py-4">
+                    <Button
+                        onClick={navigateToHome}
+                        variant="ghost"
+                        className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors"
+                    >
+                        <span className="rotate-180 inline-block">
+                            <Arrow />
+                        </span>
+                        {isPortuguese ? "Voltar ao Início" : "Back to Home"}
+                    </Button>
+
+                    <Button
+                        onClick={() => navigateToSection("work")}
+                        variant="ghost"
+                        className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors"
+                    >
+                        {isPortuguese ? "Ver Projetos" : "View Projects"}
+                        <Arrow />
+                    </Button>
+                </div>
+                <hr className="gradline mt-2" />
+            </div>
+
+            <ContactSection description={data.cta.description} cardWrapClassName="contact-card-wrap" />
+        </>
+    );
+}
+
+// ============================================================================
+// MAIN ABOUT PAGE
 // ============================================================================
 
 export function AboutPage() {
     const data = useAboutPageData();
 
-    // Scroll to top on page load
+    // Scroll to section if specified or scroll to top on page load
     useEffect(() => {
+        const target = sessionStorage.getItem('scroll_to_section') || (window.location.hash ? window.location.hash.replace('#', '') : null);
+        if (target) {
+            sessionStorage.removeItem('scroll_to_section');
+            const el = document.getElementById(target);
+            if (el) {
+                const timer = setTimeout(() => {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }, 200);
+                return () => clearTimeout(timer);
+            }
+        }
         window.scrollTo(0, 0);
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#f2f4f7]">
-            <MinimalNav />
-
-            {/* Hero */}
-            <HeroSection data={data} />
+        <>
+            {/* Hero Header */}
+            <AboutHeroSection data={data} />
 
             {/* Quem Sou */}
             <QuemSouSection data={data} />
 
+            {/* O que me define */}
+            <DefinesMeSection data={data} />
+
             {/* Palestras & Eventos */}
-            <section className="py-20 md:py-32 bg-slate-50 px-6 md:px-12">
-                <div>
-                    <SectionHeader label={data.sections.eventsLabel} title={data.sections.eventsTitle} />
-                    <div className="flex flex-wrap justify-center gap-6">
-                        {data.events.map((event, index) => (
-                            <div key={index} className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
-                                <EventCard event={event} index={index} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <EventsSection data={data} />
 
             {/* Professional Experience Timeline */}
-            <section className="py-20 md:py-32 bg-white px-6 md:px-12">
-                <div>
-                    <SectionHeader label={data.sections.experienceLabel} title={data.sections.experienceTitle} />
-                    <Timeline items={data.experience} currentLabel={data.common.current} />
-                </div>
-            </section>
+            <TimelineSection
+                label={data.sections.experienceLabel ? data.sections.experienceLabel.split(' · ')[0] : "Profissional"}
+                sublabel={data.sections.experienceLabel ? data.sections.experienceLabel.split(' · ')[1] : "Minhas Experiências"}
+                title1={data.sections.experienceTitle1}
+                title2={data.sections.experienceTitle2}
+                items={data.experience}
+                currentLabel={data.common.current}
+                showLine={false}
+            />
 
-            {/* Education */}
-            <section className="py-20 md:py-32 bg-slate-50 px-6 md:px-12">
-                <div>
-                    <SectionHeader label={data.sections.educationLabel} title={data.sections.educationTitle} />
-                    <Timeline items={data.education} currentLabel={data.common.current} />
-                </div>
-            </section>
+            {/* Education Timeline */}
+            <TimelineSection
+                label={data.sections.educationLabel ? data.sections.educationLabel.split(' · ')[0] : "Educação"}
+                sublabel={data.sections.educationLabel ? data.sections.educationLabel.split(' · ')[1] : "Formação"}
+                title1={data.sections.educationTitle1}
+                title2={data.sections.educationTitle2}
+                items={data.education}
+                currentLabel={data.common.current}
+                showLine={false}
+            />
 
             {/* Certifications */}
-            <section className="py-20 md:py-32 bg-white px-6 md:px-12">
-                <div>
-                    <SectionHeader label={data.sections.certificationsLabel} title={data.sections.certificationsTitle} />
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {data.certifications.map((cert, index) => (
-                            <CertificationBadge key={index} cert={cert} index={index} />
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <CertificationsSection data={data} />
 
-            {/* CTA Section */}
-            <section className="py-32 px-6 md:px-12 bg-[#f8fafc] relative overflow-hidden flex items-center justify-center">
-                <div className="absolute inset-0 z-0">
-                    <HeroParticleGrid />
-                    <div className="absolute inset-0 bg-gradient-radial from-violet-500/5 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                <div className="max-w-4xl mx-auto relative z-10 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                        className="flex flex-col items-center gap-8"
-                    >
-                        <div className="max-w-2xl">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight font-display">
-                                {data.cta.title}
-                            </h2>
-                            <p className="text-lg text-slate-600 leading-relaxed">
-                                {data.cta.description}
-                            </p>
-                        </div>
-
-                        <CTAButtons data={data} />
-                    </motion.div>
-                </div>
-            </section>
-
-            <FooterNew />
-            <ScrollToTop />
-        </div>
+            {/* Closing Contact Call to Action */}
+            <AboutContactSection data={data} />
+        </>
     );
 }

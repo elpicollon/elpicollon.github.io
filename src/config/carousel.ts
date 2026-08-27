@@ -1,5 +1,5 @@
 export const carouselItems = [
-    { src: '/assets/carousel/1-picolo.webp', gradient: ['#22143C', '#4A208A'], alt: 'Projeto de identidade visual Picolo Design' },
+    { src: '/assets/carousel/1-picolo.webp', gradient: ['#4A208A', '#7C3AED'], alt: 'Projeto de identidade visual Picolo Design' },
     { src: '/assets/carousel/2-Leads1.webp', gradient: ['#2A645E', '#55CABE'], alt: 'Projeto Leads2b - Plataforma de vendas B2B' },
     { src: '/assets/carousel/3-Lojhan.webp', gradient: ['#121F2B', '#083968'], alt: 'Projeto Lojhan - Identidade visual' },
     { src: '/assets/carousel/4-MedOfc.webp', gradient: ['#3066BF', '#4088FF'], alt: 'Projeto Medical Office - Locação de clínicas' },

@@ -27,6 +27,18 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
     const [hasAudio, setHasAudio] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
+    const isPlayingRef = useRef(isPlaying);
+    const currentTimeRef = useRef(currentTime);
+
+    // Keep refs updated for async effects
+    useEffect(() => {
+        isPlayingRef.current = isPlaying;
+    }, [isPlaying]);
+
+    useEffect(() => {
+        currentTimeRef.current = currentTime;
+    }, [currentTime]);
+
     // Extract project slug from route (e.g., /projeto/transcricoes-insights-ia -> transcricoes-insights-ia)
     const getProjectSlug = useCallback(() => {
         const match = location.pathname.match(/\/projeto\/([^/]+)/);
@@ -53,10 +65,15 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
         if (!audioPath) {
             setHasAudio(false);
             setIsLoading(false);
+            setIsPlaying(false);
             return;
         }
 
         setIsLoading(true);
+
+        const shouldResumePlay = isPlayingRef.current;
+        const savedTime = currentTimeRef.current;
+        let hasAutoStarted = false;
 
         // Create audio element to test if file exists
         const audio = new Audio(audioPath);
@@ -66,11 +83,34 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
             setHasAudio(true);
             setDuration(audio.duration);
             setIsLoading(false);
+
+            if (!hasAutoStarted) {
+                hasAutoStarted = true;
+
+                // Sync position to the new language audio
+                if (savedTime > 0 && savedTime < audio.duration) {
+                    audio.currentTime = savedTime;
+                    setCurrentTime(savedTime);
+                }
+
+                // If audio was playing before language switch, resume playback automatically
+                if (shouldResumePlay) {
+                    audio.play()
+                        .then(() => {
+                            setIsPlaying(true);
+                        })
+                        .catch((err) => {
+                            console.warn("Audio autoplay blocked or failed:", err);
+                            setIsPlaying(false);
+                        });
+                }
+            }
         };
 
         const handleError = () => {
             setHasAudio(false);
             setIsLoading(false);
+            setIsPlaying(false);
         };
 
         const handleTimeUpdate = () => {
@@ -113,6 +153,7 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
             if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current.currentTime = 0;
+                setIsPlaying(false);
             }
         };
     }, [location.pathname]);
@@ -138,6 +179,18 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
         }
     };
 
+    // Handle seek slider change
+    const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newTime = parseFloat(e.target.value);
+        if (audioRef.current) {
+            audioRef.current.currentTime = newTime;
+            setCurrentTime(newTime);
+        }
+    };
+
+    // Calculate progress percentage for background fill
+    const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
+
     // Don't render if no audio or still loading
     if (isLoading || !hasAudio) {
         return null;
@@ -146,9 +199,9 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
     return (
         <AnimatePresence>
             <motion.div
-                initial={{ opacity: 0, x: 20, scale: 0.9 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 20, scale: 0.9 }}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.95 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 className="audio-mini-player"
             >
@@ -158,7 +211,7 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
                     className="audio-mini-player-button"
                     aria-label={isPlaying ? t('audioPlayer.pause') : t('audioPlayer.play')}
                 >
-                    {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                    {isPlaying ? <Pause size={18} /> : <Play size={18} />}
                 </button>
 
                 {/* Time Display */}
@@ -166,6 +219,23 @@ export function AudioMiniPlayer({ audioSrc }: AudioMiniPlayerProps) {
                     <span>{formatTime(currentTime)}</span>
                     <span className="audio-mini-player-time-separator">/</span>
                     <span>{formatTime(duration)}</span>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="audio-mini-player-progress-wrapper">
+                    <input
+                        type="range"
+                        min={0}
+                        max={duration || 100}
+                        step={0.1}
+                        value={currentTime}
+                        onChange={handleSeek}
+                        className="audio-mini-player-progress"
+                        aria-label="Progresso do áudio"
+                        style={{
+                            background: `linear-gradient(to right, #0E8A4D ${progressPercent}%, rgba(17, 19, 22, 0.12) ${progressPercent}%)`
+                        }}
+                    />
                 </div>
 
                 {/* Label */}
