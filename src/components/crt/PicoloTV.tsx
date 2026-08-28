@@ -79,9 +79,9 @@ function Footer() {
           </div>
           <div className="flex gap-12 md:gap-32 items-start flex-wrap">
             <div className="flex flex-col gap-4 items-start min-w-[70px]">
-              <h5 className="font-semibold text-foreground text-sm">
+              <h4 className="font-semibold text-foreground text-sm">
                 {t("footer.navigation")}
-              </h5>
+              </h4>
               <div className="flex flex-col gap-2 items-start">
                 <button
                   onClick={() => navigateToSection("home")}
@@ -116,9 +116,9 @@ function Footer() {
               </div>
             </div>
             <div className="flex flex-col gap-4 items-start min-w-[75px]">
-              <h5 className="font-semibold text-foreground text-sm">
+              <h4 className="font-semibold text-foreground text-sm">
                 {t("footer.connect")}
-              </h5>
+              </h4>
               <div className="flex flex-col gap-2 items-start">
                 <a
                   className="text-muted hover:text-foreground text-base transition-colors"

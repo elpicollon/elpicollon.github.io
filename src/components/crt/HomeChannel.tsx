@@ -15,10 +15,10 @@ import { carouselItems } from "../../config/carousel";
 import { Link } from "react-router-dom";
 
 import imgEu1 from "../../assets/image-rp.webp";
-import cardTranscricoes from "../../assets/figma-cards/transcricoes.png";
-import cardMedical from "../../assets/figma-cards/medical.png";
-import cardImportacao from "../../assets/figma-cards/importacao.png";
-import cardNotetaker from "../../assets/figma-cards/notetaker.png";
+import cardTranscricoes from "../../assets/figma-cards/transcricoes.webp";
+import cardMedical from "../../assets/figma-cards/medical.webp";
+import cardImportacao from "../../assets/figma-cards/importacao.webp";
+import cardNotetaker from "../../assets/figma-cards/notetaker.webp";
 
 interface WorkItem {
   id: string;
@@ -400,7 +400,7 @@ export default function HomeChannel() {
                 <div className="step-wrap" key={step.number}>
                   <div className="step">
                     <div className="n">{step.number}</div>
-                    <h4>{step.title}</h4>
+                    <h3>{step.title}</h3>
                     <p>{step.desc}</p>
                   </div>
                 </div>
@@ -432,7 +432,7 @@ export default function HomeChannel() {
                       <path d="M2 6h12" stroke="currentColor" strokeWidth="1.4" />
                     </svg>
                   </div>
-                  <h4>{card.title}</h4>
+                  <h3>{card.title}</h3>
                   <p>{card.desc}</p>
                 </div>
               </div>

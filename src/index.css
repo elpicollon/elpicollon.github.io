@@ -33,7 +33,7 @@
   --color-slate-300: #2d3035;
   --color-slate-400: #5E6268; /* muted */
   --color-slate-500: #787d85;
-  --color-slate-600: #9AA0A6; /* faint */
+  --color-slate-600: #596068; /* faint */
   --color-slate-700: #b5babf;
   --color-slate-800: #d1d5d8;
   --color-slate-900: #e8e8e3; /* line */
@@ -61,7 +61,7 @@
   --bg: #FCFCFA;
   --ink: #111316;
   --muted: #5E6268;
-  --faint: #9AA0A6;
+  --faint: #596068;
   --line: #E8E8E3;
   --green: #0E8A4D;
   --green-neon: #5FE08C;
@@ -2396,6 +2396,7 @@ footer .gradline {
   height: 100%;
 }
 
+.exp h3,
 .exp h4 {
   font-family: var(--font-display);
   font-weight: 600;
@@ -2843,6 +2844,7 @@ footer .gradline {
   line-height: 1;
 }
 
+.step h3,
 .step h4 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -3197,5 +3199,33 @@ footer .gradline {
     font-size: 11px !important;
     padding-left: 8px !important;
     white-space: nowrap !important;
+  }
+}
+
+/* Pure CSS Marquee Animation - 0ms Main Thread CPU */
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .marquee-track {
+    gap: 3rem;
+  }
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
   }
 }

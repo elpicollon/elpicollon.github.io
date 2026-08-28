@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import logo1 from "../../assets/logos/1.webp";
 import logo2 from "../../assets/logos/2.webp";
 import logo3 from "../../assets/logos/3.webp";
@@ -37,19 +36,14 @@ export const logoImages = [
 
 interface LogoMarqueeProps {
   className?: string;
-  duration?: number;
 }
 
-export function LogoMarquee({ className = "", duration = 40 }: LogoMarqueeProps) {
+export function LogoMarquee({ className = "" }: LogoMarqueeProps) {
   const marqueeLogos = [...logoImages, ...logoImages];
 
   return (
     <div className={`w-full overflow-hidden pb-8 sm:pb-12 eb-marquee-mask reveal ${className}`}>
-      <motion.div
-        className="flex gap-8 sm:gap-12 items-center w-fit"
-        animate={{ x: "-50%" }}
-        transition={{ duration, ease: "linear", repeat: Infinity }}
-      >
+      <div className="marquee-track items-center">
         {marqueeLogos.map((logo, index) => (
           <div
             key={index}
@@ -65,7 +59,7 @@ export function LogoMarquee({ className = "", duration = 40 }: LogoMarqueeProps)
             />
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

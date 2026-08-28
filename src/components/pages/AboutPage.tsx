@@ -120,9 +120,9 @@ function QuemSouSection({ data }: { data: AboutPageData }) {
                                     <div className="ic cut-icon">
                                         <Star size={18} />
                                     </div>
-                                    <h4>
+                                    <h3>
                                         {data.quemSou.highlightsTitle}
-                                    </h4>
+                                    </h3>
                                 </div>
                                 <ul className="highlights-list">
                                     {data.quemSou.highlights.map((item, index) => {
@@ -180,7 +180,7 @@ function HighlightCard({ item, index }: { item: HighlightCardItem; index: number
                 <div className="ic mb-4">
                     <Icon size={18} />
                 </div>
-                <h4>{item.title}</h4>
+                <h3>{item.title}</h3>
                 <p>{item.description}</p>
             </div>
         </motion.div>
@@ -318,7 +318,7 @@ function CertificationsSection({ data }: { data: AboutPageData }) {
                                         <span className="chip">{cert.year}</span>
                                         <Award size={16} className="text-primary" />
                                     </div>
-                                    <h4>{cert.name}</h4>
+                                    <h3>{cert.name}</h3>
                                     <p>{cert.org}</p>
                                 </div>
                             </div>
