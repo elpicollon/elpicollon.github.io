@@ -36,6 +36,19 @@ interface WorkItem {
 
 const workItems: WorkItem[] = [
   {
+    id: "ia-notetaker-app",
+    title: "AI Notetaker — Leads2b",
+    titlePt: "IA Notetaker — Leads2b",
+    year: "2025",
+    disc: "Product Design",
+    discPt: "Design de Produto",
+    blurbKey: "work.notetakerBlurb",
+    path: "/projeto/ia-notetaker-app",
+    image: cardNotetaker,
+    lottie: "/assets/projects/ia-notetaker-app/notetakerIA.json",
+    gradientClass: "card-bg-notetaker"
+  },
+  {
     id: "transcricoes-insights-ia",
     title: "Transcriptions & AI Insights",
     titlePt: "Transcrições & Insights com IA",
@@ -73,19 +86,6 @@ const workItems: WorkItem[] = [
     image: cardImportacao,
     lottie: "/assets/projects/importacao-empresas/importemp.json",
     gradientClass: "card-bg-importacao"
-  },
-  {
-    id: "ia-notetaker-app",
-    title: "AI Notetaker — Leads2b",
-    titlePt: "IA Notetaker — Leads2b",
-    year: "2025",
-    disc: "Product Design",
-    discPt: "Design de Produto",
-    blurbKey: "work.notetakerBlurb",
-    path: "/projeto/ia-notetaker-app",
-    image: cardNotetaker,
-    lottie: "/assets/projects/ia-notetaker-app/notetakerIA.json",
-    gradientClass: "card-bg-notetaker"
   }
 ];
 

@@ -50,6 +50,23 @@ export const CHANNELS: ChannelConfig[] = [
   },
   {
     n: 5,
+    name: "AI Notetaker — Leads2b",
+    namePt: "IA Notetaker — Leads2b",
+    show: "AI Notetaker — Leads2b",
+    showPt: "IA Notetaker — Leads2b",
+    year: "2025",
+    disc: "Product Design",
+    discPt: "Design de Produto",
+    swatch: "s1",
+    role: "Lead Product Designer",
+    stack: "iOS / Real-time / AI",
+    blurb: "A mobile-first AI notetaker that captures, transcribes and structures sales conversations in real time — turning raw calls into actionable CRM records.",
+    path: "/projeto/ia-notetaker-app",
+    type: "project",
+    image: "/assets/projects/ia-notetaker-app/card-home.webp"
+  },
+  {
+    n: 6,
     name: "Transcriptions & AI Insights",
     namePt: "Transcrições & Insights com IA",
     show: "Transcriptions & AI Insights",
@@ -66,7 +83,7 @@ export const CHANNELS: ChannelConfig[] = [
     image: "/assets/projects/transcricoes-insights-ia/card-home.webp"
   },
   {
-    n: 6,
+    n: 7,
     name: "Medical Office — Web App",
     namePt: "Medical Office — Web App",
     show: "Medical Office — Web App",
@@ -83,7 +100,7 @@ export const CHANNELS: ChannelConfig[] = [
     image: "/assets/projects/medical-office/card-home.webp"
   },
   {
-    n: 7,
+    n: 8,
     name: "Company Import",
     namePt: "Importação de Empresas",
     show: "Company Import",
@@ -98,23 +115,6 @@ export const CHANNELS: ChannelConfig[] = [
     path: "/projeto/importacao-empresas",
     type: "project",
     image: "/assets/projects/importacao-empresas/capa.webp"
-  },
-  {
-    n: 8,
-    name: "AI Notetaker — Leads2b",
-    namePt: "IA Notetaker — Leads2b",
-    show: "AI Notetaker — Leads2b",
-    showPt: "IA Notetaker — Leads2b",
-    year: "2025",
-    disc: "Product Design",
-    discPt: "Design de Produto",
-    swatch: "s1",
-    role: "Lead Product Designer",
-    stack: "iOS / Real-time / AI",
-    blurb: "A mobile-first AI notetaker that captures, transcribes and structures sales conversations in real time — turning raw calls into actionable CRM records.",
-    path: "/projeto/ia-notetaker-app",
-    type: "project",
-    image: "/assets/projects/ia-notetaker-app/card-home.webp"
   }
 ];
 
