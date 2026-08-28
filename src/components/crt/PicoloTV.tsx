@@ -24,7 +24,7 @@ function Header() {
       <div className="wrap">
         <nav>
           <button className="logo cursor-pointer overflow-visible" onClick={() => tune(3)}>
-            <img src={logoWebp} alt="Picolo Design" className="logo-img" />
+            <img src={logoWebp} alt="Picolo Design" className="logo-img" width="79" height="44" />
           </button>
           <div className="nav-r">
             <button 
@@ -72,7 +72,7 @@ function Footer() {
       <div className="wrap">
         <div className="foot flex flex-wrap items-start justify-between py-8 md:pb-10 gap-8">
           <div className="flex flex-col gap-4 items-start max-w-[503px]">
-            <img src={logoWebp} alt="Picolo Design" className="footer-logo-img" />
+            <img src={logoWebp} alt="Picolo Design" className="footer-logo-img" width="280" height="156" loading="lazy" />
             <p className="text-muted text-sm leading-relaxed">
               {t("footer.tagline")}
             </p>

@@ -192,6 +192,8 @@ function TVShowcaseCarousel() {
             <img 
               src={activeItem.src} 
               alt={activeItem.alt} 
+              width="426"
+              height="483"
               className="max-w-full max-h-full object-contain scale-100 sm:scale-115 md:scale-130 lg:scale-130"
               loading="eager"
               {...{ fetchpriority: currentIndex === 0 ? "high" : "auto" }}
