@@ -267,7 +267,7 @@ export default function HomeChannel() {
             <TVShowcaseCarousel />
           </div>
         </div>
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none z-20">
+        <div className="hidden lg:flex absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none z-20">
           <ScrollIndicator />
         </div>
       </div>

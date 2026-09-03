@@ -173,7 +173,7 @@ export function ProjectHeroSection({
                 </div>
             </div>
 
-            <div className="absolute bottom-20 sm:bottom-24 md:bottom-24 lg:bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-20">
+            <div className="hidden lg:flex absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-20">
                 <ScrollIndicator />
             </div>
         </div>
